@@ -2,4 +2,4 @@
 
 $database_name = "smalltown";
 $database_user = "aaa";
-$database_pass = "bbb";
+$database_pass = "bbbqqq";
