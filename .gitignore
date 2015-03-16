@@ -37,4 +37,6 @@ Icon
 .Trashes
 /nbproject/private/
 
+DB_access
+DB_access.php
 /DB_access.php
