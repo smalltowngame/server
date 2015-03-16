@@ -1,0 +1,172 @@
+
+@font-face{
+    font-family: "web-symbols";
+    src: url('../webfonts/WebSymbols-Regular.otf'),
+        url('../webfonts/WebSymbols-Regular.eot?#iefix') format('embedded-opentype'); /* IE */
+}
+
+/*@import url("//hello.myfonts.net/count/2d31ba");*/
+
+symbol{
+    font-family: web-symbols;
+    margin: 0 5px;
+}
+
+html, body{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    background-color: white;   
+    overflow: hidden;
+}
+
+html{
+    background-image: url("../img/background4.jpg");
+}
+
+body{
+    position: relative;
+    left: 0;
+    top: 0;
+    bottom:0;
+    text-shadow: 1px 1px 1px rgba(255,255,255,0.4);
+    box-sizing: border-box;
+    margin: 0 auto;
+    outline: none;
+
+    background: -webkit-radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
+    background: -o-radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
+    background: -moz-radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
+    background: radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
+
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+*:active,
+*:hover {
+    cursor: default;
+}
+
+.title{
+    padding: 10px;
+}
+
+.dialog{
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    text-align: center;
+}
+.dialog form{    
+    width: 90%;
+    height: 60%;
+    margin: auto;
+    margin-top: 5%;
+    background-color: rgba(0,0,0,0.7);
+    border: 1px solid black;
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+    -webkit-box-shadow: 5px 0 20px rgba(0,0,0,0.4),
+        -5px 0 20px rgba(0,0,0,0.4);  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow:    5px 0 20px rgba(0,0,0,0.4),
+        -5px 0 20px rgba(0,0,0,0.4);  /* Firefox 3.5 - 3.6 */
+    box-shadow: 5px 0 20px rgba(0,0,0,0.4),
+        -5px 0 20px rgba(0,0,0,0.4);
+}
+.dialog input{
+    width: 100%;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.absolute{
+    position: absolute;
+    top:0;
+    left:0;
+}
+
+#inputName{
+    width: 100%;
+}
+
+.error{
+    color:red;
+}
+
+.unselect{
+    pointer-events: none;
+}
+
+button, input[type=text], input[type=submit], input[type=button]{ /* not checkbox */
+    padding: 0 10px;
+    margin: 0;
+    line-height: 45px;
+    height: 45px; /*IE*/
+    width: 100%;
+    font-size: 14px;
+    -webkit-box-sizing: border-box;  /*Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;     /*Firefox, other Gecko */
+    box-sizing: border-box;          /*Opera/IE 8+ */
+}
+.dialog input, .dialog button{
+    margin-bottom:15px;
+}
+/*android 2.3*/
+*{
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0); 
+    -webkit-tap-highlight-color: transparent;  /* i.e. Nexus5/Chrome and Kindle Fire HD 7'' */
+}
+-webkit-scrollbar {
+    width: 5px; 
+}
+-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.5);
+}
+
+input{
+    position:relative;
+    top:-10000px;
+    -webkit-transform: translate3d(0, 10000px, 0);
+    moz-transform: translate3d(0, 10000px, 0);
+    transform: translate3d(0, 10000px, 0);
+}
+
+button, input{
+    background-color: white;
+    border: 1px solid grey;
+}
+button:focus{
+    background-color: rgb(225,225,225);
+    -webkit-box-shadow: inset 1px 1px 2px rgb(100,100,100);   /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow: inset 1px 1px 2px rgb(100,100,100);   /* Firefox 3.5 - 3.6 */
+    box-shadow: inset 1px 1px 2px rgb(100,100,100);    
+}
+
+/* Overthrow CSS: Enable overflow: auto on elements with overthrow class when html element has overthrow class too */
+.overthrow-enabled .overthrow {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+::-webkit-scrollbar {
+    max-width: 8px;
+}
+::-webkit-scrollbar-track {
+    /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/ 
+    /*border-radius: 10px;*/
+    background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: rgba(0,0,0,0.15);
+    /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);*/ 
+}
