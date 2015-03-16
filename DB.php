@@ -1,6 +1,14 @@
 <?php
-//ola
-include_once 'DB_access.php';
+
+if ((include_once 'DB_access.php') !== 1) {
+    $myfile = fopen("DB_access.php", "w") or die("Unable to open file!");
+    fwrite($myfile, '<?php\n');
+    fwrite($myfile, '$database_name = "smalltown";\n');
+    fwrite($myfile, '$database_user = "root";\n');
+    fwrite($myfile, '$database_pass = "";\n');
+    fclose($myfile);
+    include_once 'DB_access.php';
+}
 
 try {
     $pdo = new PDO("mysql:host=localhost;dbname=$database_name", $database_user, $database_pass);
