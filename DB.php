@@ -1,11 +1,11 @@
 <?php
 
-if ((include_once 'DB_access.php') !== 1) {
+if (1 !== (include_once 'DB_access.php')) {
     $myfile = fopen("DB_access.php", "w") or die("Unable to open file!");
-    fwrite($myfile, '<?php\n');
-    fwrite($myfile, '$database_name = "smalltown";\n');
-    fwrite($myfile, '$database_user = "root";\n');
-    fwrite($myfile, '$database_pass = "";\n');
+    fwrite($myfile, '<?php');
+    fwrite($myfile, ' $database_name = "smalltown";');
+    fwrite($myfile, ' $database_user = "root";');
+    fwrite($myfile, ' $database_pass = "";');
     fclose($myfile);
     include_once 'DB_access.php';
 }
