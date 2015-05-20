@@ -1,0 +1,111 @@
+#body{
+	/*height: 100%;*/
+	
+}
+.delete{
+    font-size: 12px;
+    color: red;
+}
+table{
+    border-collapse: collapse;
+    width: 100%;
+}
+td{
+    border-bottom:1pt solid rgba(0,0,0,0.5);
+    padding: 10px;
+    text-align: center;
+}
+td:first-child { 
+    width: 65%;
+}
+#connectionCheck{
+    display:none; 
+    color:rgb(170,170,170); 
+    font-size: 12px;
+    margin: 10px;
+}
+#content{
+    height: calc(100% - 45px);
+    overflow-y: scroll;
+}
+#games{
+/*    max-height: 75%;
+    overflow-y: scroll;*/
+}
+#footer{
+    /*height: 20%;*/
+}
+#reload{
+    position: absolute;
+    bottom: 0;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+}
+a{
+    color: blue;
+    text-decoration: underline;
+}
+a:hover{
+    color: purple;
+}
+#games button{
+    font-weight: bold;
+}
+#games > div, .createGame{
+    position: relative;
+    margin: 7px;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px white;
+}
+.game{
+    background-color: rgba(190,255,0,0.25);
+    cursor: pointer;
+    position: relative;
+    height: 35px;
+    padding: 15px;		
+    box-shadow: 1px 1px 1px black, inset 0 0 5px white;
+    font-size: 80%;
+    border: 5px solid rgb(125,200,0);
+    border-radius: 20px;
+}
+.game:active{
+    box-shadow: inset 2px 2px 5px black;
+}
+.game .name{
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    font-size: 16px;
+}
+.game .playersCount{
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+}
+.game .admin{
+    position: absolute;
+    top: 10px;
+    right: 15px;
+}
+.game .symbols{
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+}
+.game small{
+    color: rgba(0,0,0,0.5);
+    font-weight: normal;
+}
+
+.game.local{
+    background-color: rgba(0,0,255,0.3) !important;
+    border: 5px solid rgb(0,0,255);
+}
+
+#newGame{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: inherit;
+}
