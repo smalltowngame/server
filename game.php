@@ -36,6 +36,13 @@ $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 if (!file_exists("lang/$lang.js")) {
     $lang = "en";
 }
+
+
+$smalltownURL = "";
+if(isset($_SESSION['smalltownURL'])){
+   $smalltownURL = $_SESSION['smalltownURL'];
+}
+
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -44,45 +51,17 @@ if (!file_exists("lang/$lang.js")) {
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
-        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+        <link rel="shortcut icon" href="<?php echo $smalltownURL ?>favicon.ico" type="image/x-icon"/>
         <title>Small Town</title>
-        <!--        <link rel='stylesheet' href='css/common.css'>
-                <link rel='stylesheet' href='css/game.css'>-->
+        <link rel='stylesheet' href='<?php echo $smalltownURL ?>css/common.css'>
+        <link rel='stylesheet' href='<?php echo $smalltownURL ?>css/game.css'>
         <!--<link rel='stylesheet' href='css/animations.css'>-->
-        <!--<link rel='stylesheet' href='css/icons.css'>-->
-        <!--<script type="text/javascript" src="libs/errorLog.js"></script>-->
-        <script type="text/javascript" src="libs/jquery-1.11.0.min.js"></script>
+        <link rel='stylesheet' href='<?php echo $smalltownURL ?>css/icons.css'>
+        <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/errorLog.js"></script>
+        <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/jquery-1.11.0.min.js"></script>
         <script>
-
-            var Smalltown = {
-                getUrl: function() {
-                    return "";
-                }
-                ,
-                includeCSS: function(name) {
-                    var headID = document.getElementsByTagName("head")[0];
-                    var cssNode = document.createElement('link');
-                    cssNode.type = 'text/css';
-                    cssNode.rel = 'stylesheet';
-                    cssNode.href = this.getUrl() + name + ".css";
-                    cssNode.media = 'screen';
-                    headID.appendChild(cssNode);
-                }
-                ,
-                includeJS: function(name) {
-                    var headID = document.getElementsByTagName("head")[0];
-                    var newScript = document.createElement('script');
-                    newScript.type = 'text/javascript';
-                    newScript.src = this.getUrl() + name + ".js";
-                    headID.appendChild(newScript);
-                }
-            };
-            Smalltown.includeCSS("css/common");
-            Smalltown.includeCSS("css/game");
-            Smalltown.includeCSS("css/icons");
-            Smalltown.includeJS("libs/errorLog");
-//            Smalltown.insertJS("libs/jquery-1.11.0.min");
             jQuery.fx.interval = 1000;
+
             (function($) { //translate every text() jquery function
                 var old = $.fn.text;
                 $.fn.text = function(text) {
@@ -264,16 +243,6 @@ if (!file_exists("lang/$lang.js")) {
 
         <script>
 
-            Smalltown.includeJS("lang/<?php echo $lang ?>");
-            Smalltown.includeJS("libs/jquery.mobile.events.min");
-            Smalltown.includeJS("libs/modernizr.custom.36644");
-            Smalltown.includeJS("js/events");
-            Smalltown.includeJS("js/util");
-            Smalltown.includeJS("libs/json2");
-            Smalltown.includeJS("js/connection");
-            Smalltown.includeJS("js/requests");
-            Smalltown.includeJS("js/messages");
-
             function reload() {
                 if (!navigator.onLine) {
                     $("#log").text("Connection lost. Try again");
@@ -281,28 +250,28 @@ if (!file_exists("lang/$lang.js")) {
                 window.location.reload(true);
             }
 
-            Smalltown.gameId = <?php echo $gameId ?>;
-            Smalltown.lang = '<?php echo $lang ?>';
-            Smalltown.info = {};
-            Smalltown.players = {};
-            Smalltown.sleep = true;
-            Smalltown.temp = {};
-            Smalltown.url = window.location.host;
-            Smalltown.connection = "ajax";
-            Smalltown.wakeUpTime = 2000;
-            Smalltown.cardLoading = false;
-            Smalltown.ping = 300;
+            //let Game js injection
+            var Game = {};
+            Game.id = <?php echo $gameId ?>;
+            Game.lang = '<?php echo $lang ?>';
+            Game.info = {};
+            Game.players = {};
+            Game.sleep = true;
+            Game.temp = {};
+            Game.url = window.location.host;
+            Game.connection = "ajax";
+            Game.wakeUpTime = 2000;
+            Game.cardLoading = false;
+            Game.ping = 300;
             //check connection type
-
             $(document).ready(function() {
                 if (typeof Device !== "undefined") {
                     Device.onGameLoaded();
                 } else {
-                    Smalltown.loadGame();
+                    loadGame();
                 }
             });
-
-            Smalltown.loadGame = function() {
+            var loadGame = function() {
                 //externalFunctions();
                 documentResize();
                 resizeCard(); //card position
@@ -318,10 +287,11 @@ if (!file_exists("lang/$lang.js")) {
                 });
                 $("#disclaimer").load("./game_disclaimer.html");
                 $("#currentUrl").append("<b>Current URL:</b> <br/><br/> <small>" + window.location.href + "</small>");
-            };
+            }
 
-            //TIME COUNTDOWN, day end            
-            Smalltown.runCountdown = function() {
+            //TIME COUNTDOWN, day end
+            var countdownDiv = $(".countdown")[0];
+            function runCountdown() {
                 if (Game.countdownInterval) {
                     return;
                 }
@@ -339,8 +309,6 @@ if (!file_exists("lang/$lang.js")) {
                     if (Game.countdown < 10) {
                         $("#countdown").addClass("lastSeconds");
                     }
-
-                    var countdownDiv = $(".countdown")[0];
                     if (Game.countdown < 1) {
                         countdownDiv.innerHTML = "";
                         clearCountdown();
@@ -359,21 +327,21 @@ if (!file_exists("lang/$lang.js")) {
                         countdownDiv.innerHTML = parseTime(Game.countdown);
                     }
                 }, 1000); //every second
-
-                var secs;
-                function parseTime(time) {
-                    secs = time % 60;
-                    return ~~(time / 60) + ":" + (secs < 10 ? "0" : "") + secs;
-                }
             }
 
-            Smalltown.clearCountdown = function() {
+            var secs;
+            function parseTime(time) {
+                secs = time % 60;
+                return ~~(time / 60) + ":" + (secs < 10 ? "0" : "") + secs;
+            }
+
+            function clearCountdown() {
                 clearInterval(Game.countdownInterval);
                 clearInterval(Game.countdownCorrector);
                 Game.countdownInterval = false;
             }
 
-            Smalltown.update = function(res) { //response
+            function update(res) { //response
                 console.log(res);
                 if (res.user) {
                     if (typeof res.user.userId != "undefined") {
@@ -479,31 +447,9 @@ if (!file_exists("lang/$lang.js")) {
                     setQuitPlayerButtons();
                 }
                 clearTimeout(Game.temp.wakeUpInterval);
-
-                function setQuitPlayerButtons() {
-                    if ($.isEmptyObject(Game.info)) {
-                        return;
-                    }
-                    if (!Game.info.status) {
-                        $(".extra").html("");
-                        if (Game.user.admin) {
-                            for (id in Game.players) {
-                                if (id != Game.userId) {
-                                    $("#" + id + " .extra").html(
-                                            "<button class='gameOver quit'>quit</button>");
-                                }
-                            }
-                        }
-                    }
-                    $(".player .quit").click(function() {
-                        var id = $(this).closest(".player").attr("id");
-                        $("#" + id).remove();
-                        Game.request.deletePlayer(id);
-                    });
-                }
             }
 
-            Smalltown.setGame = function() {
+            function setGame() {
                 console.log("setGame");
                 //INPUTS
                 $("#header .content").html("");
@@ -620,6 +566,7 @@ if (!file_exists("lang/$lang.js")) {
                         $(".gameOver").addClass("selectable");
                         if ($("body").attr("class") != "wait") {
                             wakeUp("gameRestarted", true);
+
                             $(".extra").empty();
                             $(".extra").css("background-image", "none");
                             for (var id in Game.players) {
@@ -640,8 +587,20 @@ if (!file_exists("lang/$lang.js")) {
                 }
             }
 
-            Smalltown.setPlayers = function() {
-
+            var colors = [
+                "red",
+                "blue",
+                "green",
+                "orange",
+                "purple",
+                "lime",
+                "pink",
+                "brown",
+                "yellow",
+                "yellowgreen",
+                "coral"
+            ];
+            function setPlayers() {
                 var players = Game.players;
                 $(".player").remove();
                 var id;
@@ -709,20 +668,6 @@ if (!file_exists("lang/$lang.js")) {
                         div.find(".playerStatus").text("alive");
                     }
 
-                    var colors = [
-                        "red",
-                        "blue",
-                        "green",
-                        "orange",
-                        "purple",
-                        "lime",
-                        "pink",
-                        "brown",
-                        "yellow",
-                        "yellowgreen",
-                        "coral"
-                    ];
-
                     $('<style>.id' + player.id + ' {color:' + colors[iColor++] + '}</style>').appendTo('head');
                     div.find(".name").addClass("id" + player.id);
                     if (player.admin == 1) {
@@ -748,93 +693,31 @@ if (!file_exists("lang/$lang.js")) {
                 if (Game.user.sel) {
                     $("#" + Game.user.sel).addClass("userCheck");
                 }
+            }
 
-                // SET SELECT EVENTS TO 1 PLAYER
-                function selectEvents(player) {
-                    //set CHECKABLES players
-                    var id = player.id;
-                    player.div.on("tap", function() {
-                        console.log("tap select");
-                        var player = Game.players[id];
-                        if (!Game.info.status && Game.info.status > 2) { //out of game
-                            return;
-                        } else if (!Game.user.status) {
-                            flash("you are a espectator");
-                            return;
-                        } else if (Game.user.status < 1) {
-                            flash("hey!, you are dead");
-                            return;
-                        } else if (!player.status) {
-                            flash("player is a espectator");
-                            return;
-                        } else if (player.status < 1) {
-                            flash("player is dead");
-                            return;
-                        }
-
-                        //alive
-                        var div = $("#" + player.id);
-                        Game.selectFunction;
-                        Game.unselectFunction;
-                        //set day/night functions 
-                        if (Game.info.status == 1 && !Game.info.night) {
-                            if (1 != Game.info.openVoting && Game.time) {
-                                return;
-                            }
-                            Game.selectFunction = Game.request.selectPlayer;
-                            Game.unselectFunction = Game.request.unSelectPlayer;
-                        } else if (Game.info.night && Game.info.night == Game.card) {
-                            Game.selectFunction = Game.night.select;
-                            Game.unselectFunction = Game.night.unselect;
-                        } else if (Game.info.night) {
-                            var array = Game.info.night.split("_");
-                            var cardName = array[array.length - 1];
-                            flash("Wait!, " + cardName + " is plotting something!");
-                        } else {
-                            console.log("nothing to select");
-                            return;
-                        }
-
-                        //select work
-                        if (div.hasClass("userCheck")) { //UNSELECT
-                            if (Game.unselectFunction && Game.unselectFunction(player.id) != false) {
-                                removeVote(div.find(".votes"));
-                                div.removeClass("userCheck");
-                            }
-
-                        } else if (Game.selectFunction && Game.selectFunction(player.id) != false) { //SELECT
-                            if (Game.user.sel) {
-                                removeVote($("#" + Game.user.sel + " .votes"));
-                            }
-                            Game.user.sel = player.id;
-                            addVote(div.find(".votes"));
-                            $(".player").removeClass("userCheck");
-                            div.addClass("userCheck");
-                        } else {
-                            console.log("not select function")
-                        }
-                    });
+            function setQuitPlayerButtons() {
+                if ($.isEmptyObject(Game.info)) {
+                    return;
                 }
-
-                function addVote(span) {
-                    span.append("<span>&#x2718; </span>");
-                    var count = span.find("span").length;
-                    span.closest(".player").find(".extra").text(count);
-                }
-
-                function removeVote(span) {
-                    span.find("span").first().remove();
-                    var count = span.find("span").length;
-                    var extra = span.closest(".player").find(".extra");
-                    if (count) {
-                        extra.text(count);
-                    } else {
-                        extra.text("");
+                if (!Game.info.status) {
+                    $(".extra").html("");
+                    if (Game.user.admin) {
+                        for (id in Game.players) {
+                            if (id != Game.userId) {
+                                $("#" + id + " .extra").html(
+                                        "<button class='gameOver quit'>quit</button>");
+                            }
+                        }
                     }
                 }
-            };
+                $(".player .quit").click(function() {
+                    var id = $(this).closest(".player").attr("id");
+                    $("#" + id).remove();
+                    Game.request.deletePlayer(id);
+                });
+            }
 
-            Smalltown.setUserCard = function() {
+            function setUserCard() {
                 $("#card").removeClass("rotate");
                 if (!$("#cardFront").hasClass(Game.card)) { //only new card
                     $("#cardFront").attr("class", Game.card);
@@ -858,9 +741,93 @@ if (!file_exists("lang/$lang.js")) {
                         $("#card").removeClass("visible");
                     }, 400);
                 }
-            };
+            }
 
-            Smalltown.wakeUp = function(message, instantlyWakeUp) {
+            // SET SELECT EVENTS TO 1 PLAYER
+            function selectEvents(player) {
+                //set CHECKABLES players
+                var id = player.id;
+                player.div.on("tap", function() {
+                    console.log("tap select");
+                    var player = Game.players[id];
+
+                    if (!Game.info.status && Game.info.status > 2) { //out of game
+                        return;
+                    } else if (!Game.user.status) {
+                        flash("you are a espectator");
+                        return;
+                    } else if (Game.user.status < 1) {
+                        flash("hey!, you are dead");
+                        return;
+                    } else if (!player.status) {
+                        flash("player is a espectator");
+                        return;
+                    } else if (player.status < 1) {
+                        flash("player is dead");
+                        return;
+                    }
+
+                    //alive
+                    var div = $("#" + player.id);
+                    Game.selectFunction;
+                    Game.unselectFunction;
+                    //set day/night functions 
+                    if (Game.info.status == 1 && !Game.info.night) {
+                        if (1 != Game.info.openVoting && Game.time) {
+                            return;
+                        }
+                        Game.selectFunction = Game.request.selectPlayer;
+                        Game.unselectFunction = Game.request.unSelectPlayer;
+                    } else if (Game.info.night && Game.info.night == Game.card) {
+                        Game.selectFunction = Game.night.select;
+                        Game.unselectFunction = Game.night.unselect;
+                    } else if (Game.info.night) {
+                        var array = Game.info.night.split("_");
+                        var cardName = array[array.length - 1];
+                        flash("Wait!, " + cardName + " is plotting something!");
+                    } else {
+                        console.log("nothing to select");
+                        return;
+                    }
+
+                    //select work
+                    if (div.hasClass("userCheck")) { //UNSELECT
+                        if (Game.unselectFunction && Game.unselectFunction(player.id) != false) {
+                            removeVote(div.find(".votes"));
+                            div.removeClass("userCheck");
+                        }
+
+                    } else if (Game.selectFunction && Game.selectFunction(player.id) != false) { //SELECT
+                        if (Game.user.sel) {
+                            removeVote($("#" + Game.user.sel + " .votes"));
+                        }
+                        Game.user.sel = player.id;
+                        addVote(div.find(".votes"));
+                        $(".player").removeClass("userCheck");
+                        div.addClass("userCheck");
+                    } else {
+                        console.log("not select function")
+                    }
+                });
+            }
+
+            function addVote(span) {
+                span.append("<span>&#x2718; </span>");
+                var count = span.find("span").length;
+                span.closest(".player").find(".extra").text(count);
+            }
+            function removeVote(span) {
+                span.find("span").first().remove();
+                var count = span.find("span").length;
+                var extra = span.closest(".player").find(".extra");
+                if (count) {
+                    extra.text(count);
+                } else {
+                    extra.text("");
+                }
+            }
+
+            function wakeUp(message, instantlyWakeUp) {
                 if (!message) {
                     notify("");
                     return false; //false
@@ -885,13 +852,13 @@ if (!file_exists("lang/$lang.js")) {
                 }, wait);
             }
 
-            Smalltown.sleep = function() {
+            function sleep() {
                 flash("close your eyes");
                 $("#filter").addClass("sleep");
                 Game.sleep = true;
             }
 
-            Smalltown.endTurn = function() {
+            function endTurn() {
                 Game.info.night = null;
                 $(".votes").html("");
                 $(".userCheck").removeClass("userCheck");
@@ -901,18 +868,18 @@ if (!file_exists("lang/$lang.js")) {
                         $(this).find(".extra").empty();
                     }
                 });
-            };
+            }
 
         </script>
 
-<!--        <script type="text/javascript" src="lang/?php echo $lang ?>.js"></script>       
-        <script type="text/javascript" src="libs/jquery.mobile.events.min.js"></script>
-        <script type="text/javascript" src="libs/modernizr.custom.36644.js"></script>        
-        <script type="text/javascript" src="js/events.js"></script>		 
-        <script type="text/javascript" src="js/util.js"></script>
-        <script type="text/javascript" src="libs/json2.js"></script>
-        <script type="text/javascript" src="js/connection.js"></script>
-        <script type="text/javascript" src="js/requests.js"></script>
-        <script type="text/javascript" src="js/messages.js"></script>  -->
+        <script type="text/javascript" src="<?php echo $smalltownURL ?>lang/<?php echo $lang ?>.js"></script>       
+        <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/jquery.mobile.events.min.js"></script>
+        <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/modernizr.custom.36644.js"></script>        
+        <script type="text/javascript" src="<?php echo $smalltownURL ?>js/events.js"></script>		 
+        <script type="text/javascript" src="<?php echo $smalltownURL ?>js/util.js"></script>
+        <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/json2.js"></script>
+        <script type="text/javascript" src="<?php echo $smalltownURL ?>js/connection.js"></script>
+        <script type="text/javascript" src="<?php echo $smalltownURL ?>js/requests.js"></script>
+        <script type="text/javascript" src="<?php echo $smalltownURL ?>js/messages.js"></script>  
     </body>
 </html>
