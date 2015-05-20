@@ -38,6 +38,7 @@ if (!file_exists("lang/$lang.js")) {
 }
 
 
+session_start();
 $smalltownURL = "";
 if(isset($_SESSION['smalltownURL'])){
    $smalltownURL = $_SESSION['smalltownURL'];
@@ -870,6 +871,7 @@ if(isset($_SESSION['smalltownURL'])){
                 });
             }
 
+            var url = "<?php echo $smalltownURL ?>";
         </script>
 
         <script type="text/javascript" src="<?php echo $smalltownURL ?>lang/<?php echo $lang ?>.js"></script>       
