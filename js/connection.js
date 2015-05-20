@@ -51,7 +51,7 @@ function websocketConnection(callback) {
 function ajaxConnection() {
     console.log("ajaxConnection");
     // AJAX
-    Game.serverUrl = "server_ajax.php";
+    Game.serverUrl = url + "/server_ajax.php";
 
     //ajax request function
 
