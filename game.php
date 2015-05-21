@@ -260,7 +260,8 @@ if(isset($_SESSION['smalltownURL'])){
             Game.players = {};
             Game.sleep = true;
             Game.temp = {};
-            Game.url = window.location.host;
+            Game.path = "<?php echo $smalltownURL;?>"            
+            Game.domain = window.location.host.split(":")[0];
             Game.connection = "ajax";
             Game.wakeUpTime = 2000;
             Game.cardLoading = false;
@@ -872,7 +873,6 @@ if(isset($_SESSION['smalltownURL'])){
                 });
             }
 
-            var url = "<?php echo $smalltownURL ?>";
         </script>
 
         <script type="text/javascript" src="<?php echo $smalltownURL ?>lang/<?php echo $lang ?>.js"></script>       

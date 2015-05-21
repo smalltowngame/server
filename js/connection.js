@@ -5,8 +5,7 @@ function websocketConnection(callback) {
     return;
     // WEBSOCKET
 
-    var domain = Game.url.split(":")[0];
-    var wsUri = "ws://" + domain + ":9000/smalltown/assets/server_websocket.php";
+    var wsUri = "ws://" + Game.domain + ":9000/smalltown/assets/server_websocket.php";
     console.log("connecting to: " + wsUri);
     Game.websocket = new WebSocket(wsUri);
     Game.websocket.onopen = function(ev) {
@@ -51,7 +50,7 @@ function websocketConnection(callback) {
 function ajaxConnection() {
     console.log("ajaxConnection");
     // AJAX
-    Game.serverUrl = url + "server_ajax.php";
+    Game.serverUrl = Game.path + "server_ajax.php";
 
     //ajax request function
 

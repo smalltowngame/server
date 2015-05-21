@@ -189,7 +189,7 @@ function addBackgroundCard(div, filename) {
     var nameArray = filename.split("_");
     var nameCard = nameArray[nameArray.length - 1];
 
-    var url = "cards/" + nameCard + ".png";
+    var url = Game.path + "cards/" + nameCard + ".png";
 
     $('<img/>').attr('src', url).load(function() {
         $(this).remove(); // prevent memory leaks as @benweet suggested
