@@ -20,7 +20,7 @@ if (empty($content)) {
         if(isset($gameId)){
             $petition .= "AND gameId = $gameId"; 
         }
-        $plays = petition("SELECT reply FROM plays WHERE gameId = $gameId AND userId = $userId");
+        $plays = petition($petition);
         if (count($plays) == 0) {
             return;
         }
