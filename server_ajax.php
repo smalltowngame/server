@@ -14,13 +14,8 @@ $obj = json_decode($content);
 
 if (empty($content)) {
     if (null != $userId) {
-        parse_str(parse_url($_SERVER['HTTP_REFERER'], PHP_URL_QUERY), $queries);
-        $petition = "SELECT reply FROM plays WHERE userId = $userId";
-        $gameId = $queries['id'];
-        if(isset($gameId)){
-            $petition .= "AND gameId = $gameId"; 
-        }
-        $plays = petition($petition);
+        $gameId = gameId();
+        $plays = petition("SELECT reply FROM plays WHERE userId = $userId AND gameId = $gameId");
         if (count($plays) == 0) {
             return;
         }
@@ -40,19 +35,26 @@ if (empty($content)) {
 
         $action = $obj->action;
         $obj->userId = $userId;
-        parse_str(parse_url($_SERVER['HTTP_REFERER'], PHP_URL_QUERY), $queries);
-        if (isset($queries['id'])) {
-            $obj->gameId = $queries['id'];
-            if (petition("SELECT count(*) as count FROM games WHERE id = $obj->gameId")[0]->count == 0) {
-                echo "window.history.back()"; //prevent "ghost games" petitions 
-                return;
-            }
+        $obj->gameId = gameId();
+        if (petition("SELECT count(*) as count FROM games WHERE id = $obj->gameId")[0]->count == 0) {
+            echo "window.history.back()"; //prevent "ghost games" petitions 
+            return;
         }
         $action($obj);
     } else {
         echo "error request data. isset:" . isset($obj) .
         ", is_object:" . is_object($obj);
     }
+}
+
+function gameId() {
+    parse_str(parse_url($_SERVER['HTTP_REFERER'], PHP_URL_QUERY), $queries);
+    if (isset($queries['id'])) {
+        $gameId = $queries['id'];
+    } else {        
+        $gameId = " (SELECT id FROM games) ";
+    }
+    return $gameId;
 }
 
 function send_response($json, $gameId, $userId = null) {

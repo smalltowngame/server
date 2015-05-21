@@ -23,13 +23,14 @@ if (!isset($_GET["id"])) { //if not id
         echo "creating id game error";
         die();
     }
-    header("Location: game.php?id=$gameId"); //reload (.PHP if server htaccess not work)
+//    header("Location: game.php?id=$gameId"); //reload (.PHP if server htaccess not work)
+}else{
+   $gameId = $_GET["id"]; 
 }
 
-$gameId = $_GET["id"];
 $countGame = petition("SELECT count(*) as count FROM games WHERE id = $gameId")[0]->count;
 if ($countGame == 0) {
-    header("Location: ./#deleted_game");
+//    header("Location: ./#deleted_game");
 }
 
 $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
@@ -41,7 +42,7 @@ if (!file_exists("lang/$lang.js")) {
 session_start();
 $smalltownURL = "";
 if(isset($_SESSION['smalltownURL'])){
-   $smalltownURL = $_SESSION['smalltownURL'];
+   $smalltownURL = $_SESSION['smalltownURL'] . "/";
 }
 
 ?>

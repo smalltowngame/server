@@ -51,7 +51,7 @@ function websocketConnection(callback) {
 function ajaxConnection() {
     console.log("ajaxConnection");
     // AJAX
-    Game.serverUrl = url + "/server_ajax.php";
+    Game.serverUrl = url + "server_ajax.php";
 
     //ajax request function
 
@@ -119,9 +119,9 @@ function ajaxConnection() {
             Game.load.loaded();
         }
         //next interval
-        setTimeout(function() {
-            Game.pingRequest();
-        }, Game.ping);
+//        setTimeout(function() {
+//            Game.pingRequest();
+//        }, Game.ping);
 //        }, Game.ping += 10);
     };
 
