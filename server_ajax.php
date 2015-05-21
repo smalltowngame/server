@@ -15,7 +15,11 @@ $obj = json_decode($content);
 if (empty($content)) {
     if (null != $userId) {
         parse_str(parse_url($_SERVER['HTTP_REFERER'], PHP_URL_QUERY), $queries);
+        $petition = "SELECT reply FROM plays WHERE userId = $userId";
         $gameId = $queries['id'];
+        if(isset($gameId)){
+            $petition .= "AND gameId = $gameId"; 
+        }
         $plays = petition("SELECT reply FROM plays WHERE gameId = $gameId AND userId = $userId");
         if (count($plays) == 0) {
             return;
