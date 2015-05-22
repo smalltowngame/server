@@ -49,7 +49,9 @@ if (isset($_SESSION['gameId'])) {
         <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/jquery-1.11.0.min.js"></script>
     </head>
 
-    <body id="smltown_html">
+    <body>
+        <!--not in body, in load-->
+        <div id="smltown_html"></div>
     </body>
 
     <script>
