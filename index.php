@@ -40,6 +40,7 @@ if (isset($_SESSION['gameId'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <title>Small Town</title>
         <link rel="shortcut icon" href="<?php echo $smalltownURL ?>favicon.ico" type="image/x-icon"/>
+        <link rel="stylesheet" type="text/css" href="<?php echo $smalltownURL ?>css/index.css">
         <link rel='stylesheet' href='<?php echo $smalltownURL ?>css/common.css'>
         <link rel='stylesheet' href='<?php echo $smalltownURL ?>css/game.css'>
         <!--<link rel='stylesheet' href='css/animations.css'>-->
