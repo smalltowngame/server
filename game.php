@@ -312,7 +312,6 @@ $_SESSION['gameId'] = $gameId;
 
             function update(res) { //response
                 console.log(res);
-                console.log(8)
                 if (res.user) {
                     if (typeof res.user.userId != "undefined") {
                         Game.userId = res.user.userId;
@@ -325,8 +324,7 @@ $_SESSION['gameId'] = $gameId;
                     }
                 }
 
-                if (res.players) { // PLAYERS
-                    console.log(123)
+                if (res.players) { // PLAYERSs
                     if (!Game.userId) {
                         console.log("!NOT USER ERROR, re-loading...");
                         setLog("!NOT USER ERROR, re-loading...");
@@ -572,7 +570,6 @@ $_SESSION['gameId'] = $gameId;
                 "coral"
             ];
             function setPlayers() {
-                console.log(1111)
                 var players = Game.players;
                 $(".smltown_player").remove();
                 var id;

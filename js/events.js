@@ -260,28 +260,28 @@ function events() {
     //back button
     $("#smltown_backButton").click(function() {
 //        window.history.back();
-        $("#html").load("gameList.html", function() {
+        $("#smltown_html").load("gameList.php", function() {
             indexLoad();
         });
     });
 
     $("#smltown_console").on("mouseup", function() {
-        $('#console').toggleClass("extended");
+        $('#smltown_console').toggleClass("extended");
         chatUpdate();
-        if ($("#console").hasClass("extended")) {
-            $("#chat").focus();
+        if ($("#smltown_console").hasClass("extended")) {
+            $("#smltown_chat").focus();
         }
     });
     $("#smltown_chat").on("focusout", function() {
-        if ($("#console").hasClass("extended")) {
+        if ($("#smltown_console").hasClass("extended")) {
             return;
         }
         chatFocusOut();
     });
 
     $("#smltown_chatForm").submit(function() {
-        $('#chat').blur();
-        var text = $('#chat').val();
+        $('#smltown_chat').blur();
+        var text = $('#smltown_chat').val();
         if (text.length) {
             addChat(text);
             Game.request.chat(text);
@@ -336,7 +336,7 @@ function removeAuto(sel) { //remove auto height
 }
 
 function menuInput(id, callback) { //menu cell with input
-    $("#" + id + " form").submit(function() {
+    $("#smltown_" + id + " form").submit(function() {
 //        console.log(222)
         var input = $(this).find("input");
 //        var val = input.val();
@@ -351,7 +351,7 @@ function menuInput(id, callback) { //menu cell with input
 //        callback(val);
         return false;
     });
-    $("#" + id + " input").on('blur', function() {
+    $("#smltown_" + id + " input").on('blur', function() {
 //        $("#" + id + " form").trigger('submit');
 
         var val = $(this).val();

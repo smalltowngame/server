@@ -2,7 +2,7 @@
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Expose-Headers: smalltown, name");
 header('smalltown: 1');
-header('name:4');
+header('name:u');
 
 //set cookie lifetime for 10 days (60sec * 60mins * 24hours * 100days)
 ini_set('session.cookie_lifetime', 864000);
@@ -22,6 +22,7 @@ if (isset($_SESSION['smalltownURL']) && file_exists("game.php") < 1) {
 include_once 'DB.php';
 include_once 'DB_response.php';
 $games = getGamesInfo();
+echo "<script>;var games = JSON.parse('$games');</script>";
 
 $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 if (!file_exists("lang/$lang.js")) {
@@ -58,11 +59,9 @@ if (isset($_SESSION['gameId'])) {
 
         $(window).load(function() { //load to wait images
             if (typeof gameId != "undefined") {
-                console.log(1)
                 $("#smltown_html").load("<?php echo $smalltownURL ?>game.php");
             } else {
-                console.log(2)
-                $("#smltown_html").load("<?php echo $smalltownURL ?>gameList.html", function() {
+                $("#smltown_html").load("<?php echo $smalltownURL ?>gameList.php", function() {
                     indexLoad();
                 });
             }
@@ -125,20 +124,20 @@ if (isset($_SESSION['gameId'])) {
 
         function addGamesRow(game) {
 
-            var classNames = "game";
+            var classNames = "smltown_game";
             if (document.location.hostname == "localhost") {
-                classNames += " local";
+                classNames += " smltown_local";
                 game.name = "Local Game"
             }
             var div = $("<div id='" + game.id + "' class='" + classNames + "'>");
-            div.append("<span class='name'>" + game.name + "</span>");
+            div.append("<span class='smltown_name'>" + game.name + "</span>");
             if (game.password) {
-                div.append("<symbol class='password'>x</symbol>");
+                div.append("<symbol class='smltown_password'>x</symbol>");
             }
 
-            div.append("<span class='playersCount'><small>players: </small> " + game.players + "</span>");
-            div.append("<span class='admin'><small>admin: </small> " + game.admin + "</span>");
-            $("#games").append(div);
+            div.append("<span class='smltown_playersCount'><small>players: </small> " + game.players + "</span>");
+            div.append("<span class='smltown_admin'><small>admin: </small> " + game.admin + "</span>");
+            $("#smltown_games").append(div);
             gameEvents(game.id);
         }
 
@@ -167,7 +166,7 @@ if (isset($_SESSION['gameId'])) {
         function gameEvents(id) {
             $("#" + id).click(function() {
                 var id = $(this).attr("id");
-                if ($(this).closest("tr").hasClass("password")) {
+                if ($(this).closest("tr").hasClass("smltown_password")) {
                     askPassword(id);
                 } else {
                     accessGame(id);
@@ -176,7 +175,7 @@ if (isset($_SESSION['gameId'])) {
         }
 
         function askPassword(id) {
-            $("body").append("<div class='dialog'><form id='passwordForm'>"
+            $("#smltown_body").append("<div class='dialog'><form id='passwordForm'>"
                     + "<input type='text' id='password' gameId='" + id + "' placeholder='password'>"
                     + "<input type='submit' value='Ok'>"
                     + "<input type='button' value='Cancel' onclick='$(\".dialog\").remove();'>"
@@ -197,7 +196,7 @@ if (isset($_SESSION['gameId'])) {
                         $("#smltown_passwordForm .log").html("loading game...");
                         accessGame(gameId);
                     } else {
-                        $("#smltown_passwordForm .log").html("<div class='error'>wrong password</div>");
+                        $("#smltown_passwordForm .log").html("<div class='smltown_error'>wrong password</div>");
                     }
                 });
                 return false;
@@ -206,7 +205,8 @@ if (isset($_SESSION['gameId'])) {
 
         function accessGame(id) {
             stopLocalGameRequests();
-            window.location.href = "./game?id=" + id;
+            //window.location.href = "./game?id=" + id;
+            $("#smltown_html").load("<?php echo $smalltownURL ?>game.php?id=" + id);
         }
 
         window.onbeforeunload = function() {
@@ -220,14 +220,14 @@ if (isset($_SESSION['gameId'])) {
     </script>
     <script type="text/javascript" src="<?php echo $smalltownURL ?>js/ajax.js"></script>
 
-    <script type="text/javascript" src="<?php echo $smalltownURL ?>lang/<?php echo $lang ?>.js"></script>       
+    <script type="text/javascript" src="<?php echo $smalltownURL ?>lang/<?php echo $lang ?>.js"></script>
     <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/jquery.mobile.events.min.js"></script>
-    <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/modernizr.custom.36644.js"></script>        
-    <script type="text/javascript" src="<?php echo $smalltownURL ?>js/events.js"></script>		 
+    <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/modernizr.custom.36644.js"></script>
+    <script type="text/javascript" src="<?php echo $smalltownURL ?>js/events.js"></script>
     <script type="text/javascript" src="<?php echo $smalltownURL ?>js/util.js"></script>
     <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/json2.js"></script>
     <script type="text/javascript" src="<?php echo $smalltownURL ?>js/connection.js"></script>
     <script type="text/javascript" src="<?php echo $smalltownURL ?>js/requests.js"></script>
     <script type="text/javascript" src="<?php echo $smalltownURL ?>js/messages.js"></script>
-    <script type="text/javascript" src="<?php echo $smalltownURL ?>css/images.js"></script>  
+    <script type="text/javascript" src="<?php echo $smalltownURL ?>css/images.js"></script>
 </html>

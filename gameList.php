@@ -1,3 +1,8 @@
+<?php
+session_start();
+$_SESSION['gameId'] = null;
+?>
+
 <!--Local game List mode only-->
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -10,25 +15,25 @@
 
     <body>
 
-        <div id="content">
-            <div class="title">
+        <div id="smltown_content">
+            <div class="smltown_title">
                 Running Games:
             </div>
 
-            <div id="games"></div>
-            <div id="loadingDiv"></div>
+            <div id="smltown_games"></div>
+            <div id="smltown_loadingDiv"></div>
 
-            <div id="footer">
+            <div id="smltown_footer">
                 <br/>                
             </div>
-            <div id="log" class="title" style="color:red"></div>
+            <div id="smltown_log" class="title" style="color:red"></div>
         </div>
 
-        <button id="reload" onclick="reload()">reload</button>
+        <button id="smltown_reload" onclick="reload()">reload</button>
 
         <script>
 
-            window.onunload = function () {
+            window.onunload = function() {
                 stopLocalGameRequests();
             };
 
@@ -64,7 +69,7 @@
 //            ImgPing["localhost"].img.removeAttr("src");
 //            },2000);
 
-                if ($(".game.local").length) {
+                if ($(".smltown_game.smltown_local").length) {
                     XMLHttpPing("", "localhost");
                 }
                 for (var i = 1; i <= 255; i++) {
@@ -83,7 +88,7 @@
 //                    console.log("Timed out!!!");
 //                }
                 gameReq.send();
-                gameReq.onreadystatechange = function () {
+                gameReq.onreadystatechange = function() {
                     if (this.readyState == 4) {
                         if (this.status == 200) {
                             this.smalltownHeader = this.getResponseHeader('smalltown');
@@ -151,10 +156,10 @@
                 div.append("<span class='admin'><small>ip: " + ip + "</small>" + name + "</span>");
 
                 $("#games").prepend(div);
-                div.click(function () {
+                div.click(function() {
                     stopLocalGameRequests();
 //                    window.location.href = href + "game.php";
-                    $("#html").load("game.php");
+                    $("#html").load(Game.path + "game.php");
                 });
             }
 
