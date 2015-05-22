@@ -33,7 +33,7 @@ function websocketConnection(callback) {
     Game.websocket.onclose = function(ev) {
         console.log("websocket close:");
         console.log(ev);
-//                setLog("websocket connection closed");
+        //setLog("websocket connection closed");
         callback(false);
     };
 

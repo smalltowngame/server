@@ -259,7 +259,10 @@ function events() {
     });
     //back button
     $("#backButton").click(function() {
-        window.history.back();
+//        window.history.back();
+        $("#body").load("gameList.html", function() {
+            indexLoad();
+        });
     });
 
     $("#console").on("mouseup", function() {

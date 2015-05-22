@@ -1,14 +1,4 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header("Access-Control-Expose-Headers: smalltown");
-header('smalltown: 2');
-
-//set cookie lifetime for 10 days (60sec * 60mins * 24hours * 100days)
-ini_set('session.cookie_lifetime', 864000);
-ini_set('session.gc_maxlifetime', 864000);
-//maybe you want to precise the save path as well
-//ini_set('session.save_path', "smalltown");
-
 include_once 'DB.php';
 
 if (!isset($_GET["id"])) { //if not id
@@ -24,27 +14,19 @@ if (!isset($_GET["id"])) { //if not id
         die();
     }
 //    header("Location: game.php?id=$gameId"); //reload (.PHP if server htaccess not work)
-}else{
-   $gameId = $_GET["id"]; 
+} else {
+    $gameId = $_GET["id"];
 }
-
-$countGame = petition("SELECT count(*) as count FROM games WHERE id = $gameId")[0]->count;
-if ($countGame == 0) {
-//    header("Location: ./#deleted_game");
-}
-
-$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-if (!file_exists("lang/$lang.js")) {
-    $lang = "en";
-}
-
 
 session_start();
-$smalltownURL = "";
-if(isset($_SESSION['smalltownURL'])){
-   $smalltownURL = $_SESSION['smalltownURL'] . "/";
-}
+$_SESSION['gameId'] = $gameId;
 
+//echo "<script>console.log(" . $_SESSION['gameId'] . ")"</script>";
+
+//$countGame = petition("SELECT count(*) as count FROM games WHERE id = $gameId")[0]->count;
+//if ($countGame == 0) {
+//    header("Location: ./#deleted_game");
+//}
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -53,14 +35,6 @@ if(isset($_SESSION['smalltownURL'])){
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
-        <link rel="shortcut icon" href="<?php echo $smalltownURL ?>favicon.ico" type="image/x-icon"/>
-        <title>Small Town</title>
-        <link rel='stylesheet' href='<?php echo $smalltownURL ?>css/common.css'>
-        <link rel='stylesheet' href='<?php echo $smalltownURL ?>css/game.css'>
-        <!--<link rel='stylesheet' href='css/animations.css'>-->
-        <link rel='stylesheet' href='<?php echo $smalltownURL ?>css/icons.css'>
-        <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/errorLog.js"></script>
-        <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/jquery-1.11.0.min.js"></script>
         <script>
             jQuery.fx.interval = 1000;
 
@@ -253,27 +227,18 @@ if(isset($_SESSION['smalltownURL'])){
             }
 
             //let Game js injection
-            var Game = {};
             Game.id = <?php echo $gameId ?>;
-            Game.lang = '<?php echo $lang ?>';
             Game.info = {};
             Game.players = {};
             Game.sleep = true;
             Game.temp = {};
-            Game.path = "<?php echo $smalltownURL;?>"            
             Game.domain = window.location.host.split(":")[0];
             Game.connection = "ajax";
             Game.wakeUpTime = 2000;
             Game.cardLoading = false;
             Game.ping = 300;
             //check connection type
-            $(document).ready(function() {
-                if (typeof Device !== "undefined") {
-                    Device.onGameLoaded();
-                } else {
-                    loadGame();
-                }
-            });
+
             var loadGame = function() {
                 //externalFunctions();
                 documentResize();
@@ -873,16 +838,15 @@ if(isset($_SESSION['smalltownURL'])){
                 });
             }
 
+            //last position since loads
+            $(document).ready(function() {
+                if (typeof Device !== "undefined") {
+                    Device.onGameLoaded();
+                } else {
+                    loadGame();
+                }
+            });
         </script>
 
-        <script type="text/javascript" src="<?php echo $smalltownURL ?>lang/<?php echo $lang ?>.js"></script>       
-        <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/jquery.mobile.events.min.js"></script>
-        <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/modernizr.custom.36644.js"></script>        
-        <script type="text/javascript" src="<?php echo $smalltownURL ?>js/events.js"></script>		 
-        <script type="text/javascript" src="<?php echo $smalltownURL ?>js/util.js"></script>
-        <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/json2.js"></script>
-        <script type="text/javascript" src="<?php echo $smalltownURL ?>js/connection.js"></script>
-        <script type="text/javascript" src="<?php echo $smalltownURL ?>js/requests.js"></script>
-        <script type="text/javascript" src="<?php echo $smalltownURL ?>js/messages.js"></script>  
     </body>
 </html>

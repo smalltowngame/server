@@ -1,3 +1,5 @@
+<!--Local game List mode only-->
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>  
     <head>
@@ -155,7 +157,8 @@
                 $("#games").prepend(div);
                 div.click(function () {
                     stopLocalGameRequests();
-                    window.location.href = href + "game.php";
+//                    window.location.href = href + "game.php";
+                    $("#body").load("game.php");
                 });
             }
 
