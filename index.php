@@ -12,7 +12,10 @@ ini_set('session.gc_maxlifetime', 864000);
 
 session_start();
 $smalltownURL = "";
-if (isset($_SESSION['smalltownURL']) && file_exists("game.php") < 1) {
+//if (isset($_SESSION['smalltownURL']) && file_exists("game.php") < 1) {
+//    $smalltownURL = $_SESSION['smalltownURL'] . "/";
+//}
+if (isset($_SESSION['smalltownURL'])) {
     $smalltownURL = $_SESSION['smalltownURL'] . "/";
 }
 
