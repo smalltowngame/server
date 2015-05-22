@@ -1,8 +1,8 @@
-#html{
+#smltown_html{
     position: relative;
     overflow: hidden;
 }
-.delete{
+.smltown_delete{
     font-size: 12px;
     color: red;
 }
@@ -18,24 +18,24 @@ td{
 td:first-child { 
     width: 65%;
 }
-#connectionCheck{
+#smltown_connectionCheck{
     display:none; 
     color:rgb(170,170,170); 
     font-size: 12px;
     margin: 10px;
 }
-#content{
+#smltown_content{
     height: calc(100% - 45px);
     overflow-y: scroll;
 }
-#games{
+#smltown_games{
     /*    max-height: 75%;
         overflow-y: scroll;*/
 }
-#footer{
+#smltown_footer{
     /*height: 20%;*/
 }
-#reload{
+#smltown_reload{
     position: absolute;
     bottom: 0;
     border-left: none;
@@ -49,16 +49,16 @@ a{
 a:hover{
     color: purple;
 }
-#games button{
+#smltown_games button{
     font-weight: bold;
 }
-#games > div, .createGame{
+#smltown_games > div, .smltown_createGame{
     position: relative;
     margin: 7px;
     font-weight: bold;
     text-shadow: 1px 1px 1px white;
 }
-.game{
+.smltown_game{
     background-color: rgba(190,255,0,0.25);
     cursor: pointer;
     position: relative;
@@ -69,41 +69,41 @@ a:hover{
     border: 5px solid rgb(125,200,0);
     border-radius: 20px;
 }
-.game:active{
+smltown_.game:active{
     box-shadow: inset 2px 2px 5px black;
 }
-.game .name{
+.smltown_game .smltown_name{
     position: absolute;
     top: 10px;
     left: 15px;
     font-size: 16px;
 }
-.game .playersCount{
+.smltown_game .smltown_playersCount{
     position: absolute;
     bottom: 10px;
     left: 15px;
 }
-.game .admin{
+.smltown_game .smltown_admin{
     position: absolute;
     top: 10px;
     right: 15px;
 }
-.game .symbols{
+.smltown_game .symbols{
     position: absolute;
     bottom: 10px;
     right: 15px;
 }
-.game small{
+.smltown_game small{
     color: rgba(0,0,0,0.5);
     font-weight: normal;
 }
 
-.game.local{
+.smltown_game.local{
     background-color: rgba(0,0,255,0.3) !important;
     border: 5px solid rgb(0,0,255);
 }
 
-#newGame{
+#smltown_newGame{
     position: absolute;
     right: 0;
     top: 0;
