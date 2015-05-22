@@ -53,57 +53,57 @@ $_SESSION['gameId'] = $gameId;
 
         <div id="button"></div>
 
-        <div id="header">
-            <div id="menuIcon"></div>            
-            <div class="content"></div>
-            <div id="consoleTitle">
-                <span id="statusGame"></span>
+        <div id="smltown_header">
+            <div id="smltown_menuIcon"></div>            
+            <div class="smltown_content"></div>
+            <div id="smltown_consoleTitle">
+                <span id="smltown_statusGame"></span>
                 <!--<span class="gameName"></span>-->
             </div>
-            <div id="cardIcon"></div>
+            <div id="smltown_cardIcon"></div>
         </div>
 
-        <div id="menu" class="swipe">
-            <div id="menuContent">
+        <div id="smltown_menu" class="smltown_swipe">
+            <div id="smltown_menuContent">
                 <div>
-                    <div class="selector admin">					
+                    <div class="smltown_selector admin">					
                         <div>
                             <symbol class="icon">R</symbol>
                             <span>Admin</span>
                             <small>adminHelp</small>
                         </div>
 
-                        <div id="restartButton" class="button">
+                        <div id="smltown_restartButton" class="button">
                             <span>NewCards</span> <symbol>R</symbol>
                             <small>newCardsHelp</small>
                         </div>
 
-                        <div id="startButton" class="button">
+                        <div id="smltown_startButton" class="button">
                             <span>StartGame</span> <symbol>R</symbol>
                             <small>startGameHelp</small>
                         </div>
 
-                        <div id="endTurnButton" class="button">
+                        <div id="smltown_endTurnButton" class="button">
                             <span>EndTurn</span> <symbol>R</symbol>
                             <small>endTurnHelp</small>
                         </div>
                     </div>
 
-                    <div class="selector admin">
+                    <div class="smltown_selector admin">
                         <div>
                             <symbol class="icon">S</symbol>
                             <span>Game</span>
                             <small>gameHelp</small>
                         </div>
 
-                        <div id="password" class="input admin">
+                        <div id="smltown_password" class="input admin">
                             <span>Password</span> <symbol>R</symbol>
                             <form>
                                 <input type="text"/>
                             </form>					
                         </div>
 
-                        <div id="dayTime" class="input admin gameOver">
+                        <div id="smltown_dayTime" class="input admin gameOver">
                             <span>DayTime</span> <symbol>R</symbol>
                             <form>
                                 <span>sec/p</span>
@@ -111,60 +111,60 @@ $_SESSION['gameId'] = $gameId;
                             </form>					
                         </div>
 
-                        <div id="openVoting" class="input admin gameOver">
+                        <div id="smltown_openVoting" class="input admin gameOver">
                             <span>OpenVoting</span> <symbol>R</symbol>
                             <input class="" type="checkbox"/>
                         </div>
 
-                        <div id="endTurn" class="input admin gameOver">
+                        <div id="smltown_endTurn" class="input admin gameOver">
                             <span>AdminEndTurn</span> <symbol>R</symbol>
                             <input class="" type="checkbox"/>
                         </div>
                     </div>
 
-                    <div class="selector">
-                        <div class="falseSelector">
+                    <div class="smltown_selector">
+                        <div class="smltown_falseSelector">
                             <symbol class="icon">U</symbol>
                             <span>PlayingCards</span>
                             <small>card list</small>
                         </div>
-                        <p id='playingCards'></p>
+                        <p id='smltown_playingCards'></p>
                     </div>
 
-                    <div class="selector">
+                    <div class="smltown_selector">
                         <div>
                             <symbol class="icon">U</symbol>
                             <span>UserSettings</span>
                             <small>personal options</small>
                         </div>
-                        <div id="updateName" class="input gameOver">                    
+                        <div id="smltown_updateName" class="input gameOver">                    
                             <span>Name</span>
                             <form>
                                 <input type="text"/>
                             </form>					
                         </div>
-                        <div id="cleanErrors" class="single button">
+                        <div id="smltown_cleanErrors" class="single button">
                             <span>CleanErrors</span>
                             <small>reload game</small>
                         </div>
                     </div>
 
-                    <div class="selector">
+                    <div class="smltown_selector">
                         <div>
                             <div class="icon">i</div>
                             <span>Info</span>
                             <small>help and game manual</small>
                         </div>
-                        <div id="currentUrl" class="text">
+                        <div id="smltown_currentUrl" class="text">
                         </div>
 
-                        <div id="disclaimer" class="text">
+                        <div id="smltown_disclaimer" class="text">
                         </div>
                     </div>
 
                 </div>
 
-                <div id="backButton" class="selector">
+                <div id="smltown_backButton" class="selector">
                     <div>
                         <span>Back</span>
                         <small>back to game list</small>
@@ -174,48 +174,48 @@ $_SESSION['gameId'] = $gameId;
             </div>
         </div>
 
-        <div id="body">
-            <div id="list">
+        <div id="smltown_body">
+            <div id="smltown_list">
                 <div>
-                    <div id="user"></div>
-                    <div id="listAlive"></div>
-                    <div id="listDead"></div>
+                    <div id="smltown_user"></div>
+                    <div id="smltown_listAlive"></div>
+                    <div id="smltown_listDead"></div>
                 </div>
             </div>
 
-            <div id="filter" class="absolute">
-                <div id="log" class="absolute">
+            <div id="smltown_filter" class="absolute">
+                <div id="smltown_log" class="absolute">
                     <div class="text"></div>
-                    <button id="logOk">OK</button>
-                    <button id="logCancel">Cancel</button>
-                    <div class="cloud x1"></div>
-                    <div class="cloud x2"></div>
+                    <button id="smltown_logOk">OK</button>
+                    <button id="smltown_logCancel">Cancel</button>
+<!--                    <div class="smltown_cloud x1"></div>
+                    <div class="smltown_cloud x2"></div>-->
                 </div>
-                <div class="countdown"></div>
+                <div class="smltown_countdown"></div>
             </div>
         </div>        
 
-        <div id="console">
+        <div id="smltown_console">
             <!--            <div id="consoleTitle">
                             <span id="statusGame"></span>
                             <span class="gameName"></span>
                         </div>-->
             <div class="text"><br/></div>
-            <form id="chatForm">
+            <form id="smltown_chatForm">
                 <input id="chat"></input>
             </form>
         </div>
 
-        <div id="card" class="swipe">
-            <div id="cardBack" class="cardImage"></div>
-            <div id="cardFront">
-                <div class="cardImage"></div>
+        <div id="smltown_card" class="smltown_swipe">
+            <div id="smltown_cardBack" class="smltown_cardImage"></div>
+            <div id="smltown_cardFront">
+                <div class="smltown_cardImage"></div>
                 <div class="text"><div></div></div>
             </div>
         </div>
 
         <!--visuals card-->
-        <div id='phpCard'></div>
+        <div id='smltown_phpCard'></div>
 
         <script>
 

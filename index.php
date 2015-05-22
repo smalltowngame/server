@@ -49,16 +49,18 @@ if (isset($_SESSION['gameId'])) {
         <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/jquery-1.11.0.min.js"></script>
     </head>
 
-    <body id="html">
+    <body id="smltown_html">
     </body>
 
     <script>
 
         $(window).load(function() { //load to wait images
             if (typeof gameId != "undefined") {
-                $("#html").load("<?php echo $smalltownURL ?>game.php");
+                console.log(1)
+                $("#smltown_html").load("<?php echo $smalltownURL ?>game.php");
             } else {
-                $("#html").load("<?php echo $smalltownURL ?>gameList.html", function() {
+                console.log(2)
+                $("#smltown_html").load("<?php echo $smalltownURL ?>gameList.html", function() {
                     indexLoad();
                 });
             }
@@ -66,17 +68,17 @@ if (isset($_SESSION['gameId'])) {
 
         function indexLoad() {
             if (document.location.hostname != "localhost") {
-                $("#games").before("<div class='createGame'> <input id='nameGame' type='text' placeholder='game name'> <button id='newGame'>create game</button> </div>");
+                $("#smltown_games").before("<div class='createGame'> <input id='nameGame' type='text' placeholder='game name'> <button id='newGame'>create game</button> </div>");
             }
 
-            $("#newGame").click(function() { //CREATE GAME
+            $("#smltown_newGame").click(function() { //CREATE GAME
                 createGame();
             });
-            $("#footer").prepend("<i id='connectionCheck'>This server <span class='allowWebsocket'></span> allows websocket connection.</i>");
+            $("#smltown_footer").prepend("<i id='connectionCheck'>This server <span class='allowWebsocket'></span> allows websocket connection.</i>");
             var url = window.location.href;
             var message = url.split("#")[1];
             if (message) {
-                $("#log").text(message.split("_").join(" "));
+                $("#smltown_log").text(message.split("_").join(" "));
             }
 
 //            if (typeof Device !== "undefined") {
@@ -86,9 +88,9 @@ if (isset($_SESSION['gameId'])) {
 
             websocketConnection(function(done) {
                 if (!done) {
-                    $(".allowWebsocket").text("NOT");
+                    $(".smltown_allowWebsocket").text("NOT");
                 }
-                $("#connectionCheck").show();
+                $("#smltown_connectionCheck").show();
                 listGames(games);
             });
         }
@@ -110,7 +112,7 @@ if (isset($_SESSION['gameId'])) {
         }
 
         function listGames(games) {
-            $(".game").remove();
+            $(".smltown_game").remove();
             for (var i = 0; i < games.length; i++) {
                 addGamesRow(games[i]);
                 if (document.location.hostname == "localhost") {
@@ -140,13 +142,13 @@ if (isset($_SESSION['gameId'])) {
 
         function createGame() {
             stopLocalGameRequests();
-            var name = $("#nameGame").val();
+            var name = $("#smltown_nameGame").val();
             if (!name) {
-                $("#log").text("empty name!");
+                $("#smltown_log").text("empty name!");
                 return;
             }
 
-            $("#log").text("!wait...");
+            $("#smltown_log").text("!wait...");
             var json = JSON.stringify({
                 action: "createGame",
                 name: name
@@ -178,11 +180,11 @@ if (isset($_SESSION['gameId'])) {
                     + "<input type='button' value='Cancel' onclick='$(\".dialog\").remove();'>"
                     + "<div class='log'></div>"
                     + "</form><div>");
-            $("#password").focus();
-            $("#passwordForm").submit(function() {
-                $("#passwordForm .error").text("");
-                var gameId = $("#password").attr("gameId");
-                var password = $("#password").val();
+            $("#smltown_password").focus();
+            $("#smltown_passwordForm").submit(function() {
+                $("#smltown_passwordForm .error").text("");
+                var gameId = $("#smltown_password").attr("gameId");
+                var password = $("#smltown_password").val();
                 var json = JSON.stringify({
                     action: "checkPassword",
                     gameId: gameId,
@@ -190,10 +192,10 @@ if (isset($_SESSION['gameId'])) {
                 });
                 ajax(json, function(res) {
                     if (res > 0) {
-                        $("#passwordForm .log").html("loading game...");
+                        $("#smltown_passwordForm .log").html("loading game...");
                         accessGame(gameId);
                     } else {
-                        $("#passwordForm .log").html("<div class='error'>wrong password</div>");
+                        $("#smltown_passwordForm .log").html("<div class='error'>wrong password</div>");
                     }
                 });
                 return false;

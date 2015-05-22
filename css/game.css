@@ -1,17 +1,17 @@
 
-#list, #menuContent, #console{
+#smltown_list, #menuContent, #console{
     overflow-y: auto;
 }
 
-#filter{
+#smltown_filter{
     height:100%;
 }
 
-#filter.notification{
+#smltown_filter.notification{
     background-color: rgba(255,255,255,0.5);
     transition: 300ms;
 }
-#filter .countdown{
+#smltown_filter .countdown{
     color: rgba(255,255,255,0.5);
     /*text-shadow: none;*/
     font-weight: bold;
@@ -20,7 +20,7 @@
     text-align: center;
 }
 
-#header{
+#smltown_header{
     overflow: hidden;
     position: relative;
     height:55px;
@@ -36,7 +36,7 @@
     -moz-box-shadow: 0 1px 5px black;
     box-shadow: 0 1px 5px black;
 }
-#header:after{
+#smltown_header:after{
     content: "";
     background: url(../img/site_logo.png);
     background: url(../img/site_logo.png);
@@ -54,14 +54,14 @@
     position: absolute;
     z-index: -1;  
 }
-#header.thin{
+#smltown_header.thin{
     height:30px;
 }
-#header.thin #menuIcon, #header.thin #cardIcon{    
+#smltown_header.thin #smltown_menuIcon, #smltown_header.thin #smltown_cardIcon{    
     opacity: 0;
 }
 
-#menuIcon, #cardIcon{
+#smltown_menuIcon, #smltown_cardIcon{
     position: absolute;
     display: inline-block;
     cursor: pointer;
@@ -73,7 +73,7 @@
     transition: opacity 300ms;
 }
 
-#header .content{
+#smltown_header .smltown_content{
     height: 18px;
     position: absolute;
     left: 50px;
@@ -85,22 +85,22 @@
     bottom: 32px;
 }
 
-#header .content div{
+#smltown_header .smltown_content div{
     float: left;
     margin-left: 3px; /* not "0 3px" */
     margin-right: 3px;
 }
-#header .content > div{
+#smltown_header .smltown_content > div{
     font-size: 14px;
     margin-left:15px;
 }
 
-#list{
+#smltown_list{
     /*overflow: hidden;*/
     height: calc(100% - 30px);
 }
 
-#list > div{
+#smltown_list > div{
     position: relative;
 
     -webkit-box-shadow: rgba(0,0,0,0.5) 0 2px 3px, rgba(0,0,0,0.5) 0 -2px 3px;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
@@ -108,18 +108,18 @@
     box-shadow: rgba(0,0,0,0.5) 0 2px 3px, rgba(0,0,0,0.5) 0 -2px 3px;
 }
 
-#listAlive{
+#smltown_listAlive{
     background-color: rgba(255,255,255,0.15);
     background-color: rgba(0,0,150,0.15);
     background-color: rgba(0,0,225,0.15);
 }
 
-#listDead{
+#smltown_listDead{
     background-color: rgba(0,0,0,0.3);
     background-color: transparent;
 }
 
-.player{
+.smltown_player{
     position: relative;
     height: 40px;    
     border: solid rgba(0,0,0,0.35);
@@ -129,39 +129,39 @@
     padding: 5px 0;
 }
 
-.player .name{
+.smltown_player .smltown_name{
     font-weight: bold;
 }
-.player .name symbol{
+.smltown_player .smltown_name symbol{
     font-size: 8px;
     vertical-align: middle;
 }
-.player .status{
+.smltown_player .smltown_status{
     color: rgba(0,0,0,0.35);
 }
-.player .up{
+.smltown_player .smltown_up{
     top: 5px;
     width: 100%;
 }
-.player .down{
+.smltown_player .smltown_down{
     bottom: 5px;
     width: 100%;
     height: 15px;
 }
 
-.player .up > *, .player .down > *{
+.smltown_player .smltown_up > *, .smltown_player .smltown_down > *{
     padding: 0 10px;
 }
 
-.playerStatus{
+.smltown_playerStatus{
     font-size: 12px;
     color: rgba(0,0,0,0.5);
 }
 
-.player > div{
+.smltown_player > div{
     position: absolute;
 }
-.playerSymbol{
+.smltown_playerSymbol{
     position: absolute;
     top: -2px;
     font-size: 40px;
@@ -169,7 +169,7 @@
     /*text-shadow: none;*/
 }
 
-#console{
+#smltown_console{
     border-top: 2px solid rgb(140,210,0);
     width:100%;
     position:absolute;
@@ -195,43 +195,43 @@
     -moz-box-shadow: 0 -1px 3px rgba(0,0,0,0.7), inset 0 0 10px white;  /* Firefox 3.5 - 3.6 */
     box-shadow: 0 -1px 3px rgba(0,0,0,0.7), inset 0 0 10px white;
 }
-#console:hover{
+#smltown_console:hover{
     background-color: rgb(230,250,175);
 }
-#console .text{
+#smltown_console .text{
     padding: 0 10px;
     position: absolute;
     bottom: 0;
 }
 
-#console .time{
+#smltown_console .smltown_time{
     font-size: 10px;
     color: rgb(100,100,100);
 }
 
-#console.extended{
+#smltown_console.extended{
     height:100%; 
 }
-#console.extended .text{
+#smltown_console.extended .text{
     margin-bottom: 25px;
 }
-#console.extended #chatForm{
+#smltown_console.extended #smltown_chatForm{
     display: inherit;  
 }
 
-#user .player{
+#smltown_user .smltown_player{
     background-color:rgba(160,195,60, 0.7);
     background-color: rgba(170,220,0, 0.5);
 }
-#user .name{
+#smltown_user .smltown_name{
     color: black !important;
 }
 
-#console, #consoleTitle{
+#smltown_console, #smltown_consoleTitle{
     /*background-color: rgb(207,225,157);*/
 }
 
-#consoleTitle{
+#smltown_consoleTitle{
     height: 14px; /*firefox hide chat*/
     color: rgb(50,50,50);
     font-size: 14px;
@@ -251,7 +251,7 @@
     overflow: hidden;
 }
 
-.gameName{
+.smltown_gameName{
     float:right;	
     padding: 0 10px;
     font-weight:bold;
@@ -264,48 +264,48 @@ button{
     bottom:0;
 }
 
-#buttons{
+#smltown_buttons{
     width: 100%;
     table-layout: fixed;
     position: absolute;
     bottom: 0;
 }
-#buttons td { 
+#smltown_buttons td { 
     overflow: hidden;
 }
-#buttons button{
+#smltown_buttons button{
     padding: 0 5px;
 }
 
-#filter{
+#smltown_filter{
     width: 100%;
     z-index: 8;
     pointer-events:none;
     font-size: 16px;
 }
 
-#filter.rules > div{
+#smltown_filter.rules > div{
     display: block !important;
 }
 
-#filter .ip{
+#smltown_filter .smltown_ip{
     font-weight: bold;
 }
 
-#menu, #card{
+#smltown_menu, #smltown_card{
     height:100%;
     position: absolute;
     z-index: 10;
     top:0;
 }
 
-.swipe{
+.smltown_swipe{
     -webkit-transition: 0.3s;
     transition: 0.3s;
     z-index: 9;
 }
 
-#card{
+#smltown_card{
     pointer-events: none;
     padding-left: 100%;
     color: white;
@@ -318,18 +318,18 @@ button{
         transform: translateX(0);*/
 }
 
-.visible{
+.smltown_visible{
     background-color: rgba(0,0,0,0.6);
     pointer-events: auto !important;
 }
-#card.visible{
+#smltown_card.visible{
     -webkit-transform: translateX(-50%);
     -moz-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
     -o-transform: translateX(-50%);
     transform: translateX(-50%);
 }
-#menu.visible{
+#smltown_menu.visible{
     -webkit-transform: translateX(50%);
     -moz-transform: translateX(50%);
     -ms-transform: translateX(50%);
@@ -337,7 +337,7 @@ button{
     transform: translateX(50%);
 }
 
-#card > div {
+#smltown_card > div {
     backface-visibility: hidden;
     /*-webkit-transition: 0.4s;
     transition: 0.4s;*/
@@ -346,19 +346,19 @@ button{
     background-color: black;
     cursor: pointer;
 }
-#cardFront .cardImage{
+#smltown_cardFront .smltown_cardImage{
     background-size: 100%;
     padding-bottom: 100%;
 }
 
-#cardFront {
+#smltown_cardFront {
     position: absolute;
     top: 0;
     transform: rotateY( -180deg );    
     height: 100%;
 }
 
-#cardFront .text{
+#smltown_cardFront .text{
     font-size: 42px;
     text-align: center;
     width: 100%;
@@ -370,7 +370,7 @@ button{
     src: url('../webfonts/2D31BA_0_0.eot');
     src: url('../webfonts/2D31BA_0_0.eot?#iefix') format('embedded-opentype'),url('../webfonts/2D31BA_0_0.woff2') format('woff2'),url('../webfonts/2D31BA_0_0.woff') format('woff'),url('../webfonts/2D31BA_0_0.ttf') format('truetype');
 }
-#cardFront .text > div{
+#smltown_cardFront .text > div{
     position: absolute;
     width: 100%;
     top: 50%;
@@ -380,29 +380,29 @@ button{
     transform: translateX(-50%) translateY(-50%);
     font-family: ChineseRocksRg-Regular;
 }
-#cardFront p{ /*description*/
+#smltown_cardFront p{ /*description*/
     margin: 0;
     font-size: 18px;
     color: rgb(150,150,150);
     /*text-shadow: none;*/
 }
 
-#cardBack {
+#smltown_cardBack {
     background: url('../img/unflipped.png');
     background-size: 100% 100%;
 }
 
-#menu{
+#smltown_menu{
     color: black;
     /*text-shadow: 1px 1px 1px white;*/
     margin-left: -100%;
     width:200%;
     pointer-events: none;
 }
-#menuContent, #menuContent > div{
+#smltown_menuContent, #smltown_menuContent > div{
     background-color: rgb(250,250,250);
 }
-#menuContent{
+#smltown_menuContent{
     position: absolute;    
     width: calc(50% - 60px);
     pointer-events: auto;
@@ -412,83 +412,83 @@ button{
         -moz-box-shadow: 1px 0 9px rgba(0,0,0,0.4);   Firefox 3.5 - 3.6 
         box-shadow: 1px 0 9px rgba(0,0,0,0.4);*/
 }
-#menuContent > div{
+#smltown_menuContent > div{
     position: absolute;
     width: 100%;
     z-index: 1;
 }
-#menu .selector, #menu .selector > div{
+#smltown_menu .smltown_selector, #smltown_menu .smltown_selector > div{
     overflow: hidden;
     font-size: 14px;
     position: relative;
     height: 20px;
 }
-#menu .selector > div{
+#smltown_menu .smltown_selector > div{
     padding: 15px 15px 15px 40px;    
     cursor: pointer;
 }
-#menu .selector > div:hover{
+#smltown_menu .smltown_selector > div:hover{
     background-color: rgba(0,0,0,0.03)
 }
 
-#menu .selector > div.active{
+#smltown_menu .smltown_selector > div.active{
     background-color: rgba(0,0,0,0.05);
 }
 
-#menu .text{
+#smltown_menu .text{
     word-wrap: break-word;
     padding-top: 21px !important;
     padding-bottom: 9px !important;
 }
-#menu .text small{
+#smltown_menu .text small{
     color: rgb(50,50,50) !important;
     text-align:left !important;
 }
-#menu hr{
+#smltown_menu hr{
     margin: 0px 10px 0px 40px;
     border-style: none;
     border-top: solid 1px rgba(0,0,0,0.2);
 }
-#menu .button{
+#smltown_menu .button{
     padding-top: 13px;
     padding-bottom: 7px;
     font-weight: bold;
 }
-#menu small{
+#smltown_menu small{
     display: block;
     width: 100%;
     text-align: right;
     font-weight: normal;
     margin-top: -4px;
 }
-#menu small, #menu input, #menu form *, .admin{
+#smltown_menu small, #smltown_menu input, #smltown_menu form *, .admin{
     color: rgba(0,0,0,0.3);
     font-weight: normal;
 }
-#menu input, #menu form *{
+#smltown_menu input, #smltown_menu form *{
     float: right;
 }
 
-#menu input[type=text]{
+#smltown_menu input[type=text]{
     background-color: transparent;
     border-color: transparent;
     width: 100px; /*name*/    
 }
 
-#menu input:focus{
+#smltown_menu input:focus{
     outline: 0;
     background-color: rgba(0,0,0,0.05);
     color: black;
 }
 
-#menu .input input{
+#smltown_menu .input input{
     line-height: inherit !important;
     height: inherit !important;
     text-align: right;
     margin-top: -2px;
 }
 
-#menu .icon{
+#smltown_menu .icon{
     font-size: 20px;
     position: absolute;
     left: 0;
@@ -503,11 +503,11 @@ button{
         text-shadow: -1px -1px rgba(0,0,0,0.4);*/
 }
 
-#menu .auto{
+#smltown_menu .smltown_auto{
     background-color: rgba(0,0,0,0.03);
 }
 
-#menu .selector{
+#smltown_menu .smltown_selector{
     min-height: 50px;
     padding: 0 !important;
     font-weight: bold;
@@ -515,27 +515,27 @@ button{
     transition: height 300ms;
 }
 
-#menu .selector > div:not(:first-child){
+#smltown_menu .smltown_selector > div:not(:first-child){
     padding-left: 55px;
 }
 
-.day .quit, .night .quit{
+.smltown_day .smltown_quit, .smltown_night .smltown_quit{
     display:none;
 }
 
-.selectedMenu{
+.smltown_selectedMenu{
     min-height: 50px;
     height: auto !important;
 }
 
-#cardBack.rotate{
+#smltown_cardBack.rotate{
     transform:rotateY(-180deg);
 }
-#cardFront.rotate{
+#smltown_cardFront.rotate{
     transform:rotateY(0);
 }
 
-body.night #filter{
+body.smltown_night #smltown_filter{
     -webkit-box-shadow: inset 5px 5px 15px rgba(255,0,0,0.4),
         inset -5px -5px 15px rgba(255,0,0,0.4);  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
     -moz-box-shadow:    inset 5px 5px 15px rgba(255,0,0,0.4),
@@ -543,15 +543,15 @@ body.night #filter{
     box-shadow: inset 5px 5px 15px rgba(255,0,0,0.4),
         inset -5px -5px 15px rgba(255,0,0,0.4);
 }
-.userCheck{
+.smltown_userCheck{
     /*background-color: rgb(255,180,180);*/
     background-color: rgba(255,0,0,0.2);
 }
-.lastSeconds{
+.smltown_lastSeconds{
     color: red;
 }
 
-.votes{
+.smltown_votes{
     color:red;
     position: absolute;
     bottom: 0;
@@ -561,10 +561,10 @@ body.night #filter{
     float:right;
     font-size: 30px;
 }
-.votes span{
+.smltown_votes span{
     float: right;
 }
-.extra{
+.smltown_extra{
     width: 46px;
     height: 46px;
     background-color: rgba(0,0,0,0.2);
@@ -586,25 +586,25 @@ body.night #filter{
 }
 
 /*SEPARATED: http://stackoverflow.com/questions/2610497/change-an-inputs-html5-placeholder-color-with-css*/
-.extra::-webkit-input-placeholder {
+.smltown_extra::-webkit-input-placeholder {
     color: rgba(255,255,255, 0.3);
     /*text-shadow: none;*/
     font-size: 30px;
     font-weight: bold;
 }
-.extra:-moz-placeholder { /*FF 4-18*/ 
+.smltown_extra:-moz-placeholder { /*FF 4-18*/ 
     color: rgba(255,255,255, 0.3);
     /*text-shadow: none;*/
     font-size: 30px;
     font-weight: bold;
 }
-.extra::-moz-placeholder { /*FF 19+ */ 
+.smltown_extra::-moz-placeholder { /*FF 19+ */ 
     color: rgba(255,255,255, 0.3);
     /*    text-shadow: none;*/
     font-size: 30px;
     font-weight: bold;
 }
-.extra:-ms-input-placeholder { /*IE 10+ */ 
+.smltown_extra:-ms-input-placeholder { /*IE 10+ */ 
     color: rgba(255,255,255, 0.3);
     /*text-shadow: none;*/
     font-size: 30px;
@@ -612,11 +612,11 @@ body.night #filter{
 }
 
 /*X for not player card*/
-.player.spectator .extra{
+.smltown_player.smltown_spectator .smltown_extra{
     overflow:hidden;
 }
 
-.player.spectator .extra:before,.player.spectator .extra:after{
+.smltown_player.smltown_spectator .smltown_extra:before,.smltown_player.smltown_spectator .smltown_extra:after{
     content:'';
     position:absolute;
     width:64px;
@@ -625,20 +625,20 @@ body.night #filter{
     top:23px;
 }
 
-.player.spectator .extra:before{
+.smltown_player.smltown_spectator .smltown_extra:before{
     -webkit-transform:rotate(45deg);
     -moz-transform:rotate(45deg);
     transform:rotate(45deg);
     left:-8px;
 }
-.player.spectator .extra:after{
+.smltown_player.smltown_spectator .smltown_extra:after{
     -webkit-transform:rotate(-45deg);
     -moz-transform:rotate(-45deg);
     transform:rotate(-45deg);
     right:-8px;
 }
 
-#log{
+#smltown_log{
     display: none;
     z-index: 9;
     margin-top:100px;
@@ -661,50 +661,50 @@ body.night #filter{
     -webkit-box-shadow: 0 8px 5px -5px rgba(0,0,0,0.4), 0 -8px 5px -5px rgba(0,0,0,0.4);
     box-shadow: 0 8px 5px -5px rgba(0,0,0,0.4), 0 -8px 5px -5px rgba(0,0,0,0.4);
 }
-#filter.notification #log{ /*if filter is notification*/
+#smltown_filter.notification #smltown_log{ /*if filter is notification*/
     display: block;
 }
 
-#log .text{
+#smltown_log .text{
     padding-bottom: 10px;
     /*text-shadow: -1px -1px 1px white;*/
 }
 
-#log button{
+#smltown_log button{
     border-radius: 100px;
     width:80%;
 }
 
-.sleep{
+.smltown_sleep{
     background-image: url('../img/zzz.png');
     background-size: 100% 100%;
     pointer-events: inherit !important;
 }
 
-.dead{
+.smltown_dead{
     background-color: rgba(0,0,0,0.15) !important;
 }
-.dead .extra{
+.smltown_dead .smltown_extra{
     color: gainsboro;
     font-size: 40px;
     text-shadow: 3px 3px 4px black, -3px -3px 4px black;
 }
 
-.dead .name{
+.smltown_dead .smltown_name{
     opacity:0.35;
 }
 
-#inputName{
+#smltown_inputName{
     width: 100%;
 }
 
-.enemy{
+.smltown_enemy{
     /*color: red !important;*/
     text-decoration: underline;
     font-weight: bold;
 }
 
-#loading{
+#smltown_loading{
     position: absolute;
     width: 100%;
     height: 100%;
@@ -715,7 +715,7 @@ body.night #filter{
     background-color: rgba(255,255,255,0.5);    
 }
 
-#flash{
+#smltown_flash{
     z-index: 100;
     position:absolute;
     top: 0;	
@@ -729,21 +729,21 @@ body.night #filter{
     -webkit-transition: 200ms;
     transition: 200ms;    
 }
-#flash .text{
+#smltown_flash .text{
     background-color: rgba(0,0,0,0.4);
     padding:10px;
     /*padding:10px 20px;*/
     /*border-radius: 20px;*/
 }
 
-#chatForm{
+#smltown_chatForm{
     display: none;
     margin:0;
     position: fixed;
     bottom: 0;
     background-color: rgb(207,225,157);
 }
-#chat{    
+#smltown_chat{    
     line-height: inherit !important;
     font-size: 16px;
     outline: 0;
@@ -751,10 +751,10 @@ body.night #filter{
     background-color: transparent;
     border-top: 1px solid rgba(0,0,0,0.1);
 }
-#chatForm, #chat{
+#smltown_chatForm, #smltown_chat{
     width:100%;
 }
-#chatForm .send{
+#smltown_chatForm .smltown_send{
     float:right;
     position:absolute;
     top: 0;
@@ -766,21 +766,21 @@ body.night #filter{
     height:20px;
 }
 
-.admin.selector{
+.smltown_admin.selector{
     display:none;
 }
-.admin{
+.smltown_admin{
     pointer-events: none;
 }
 
-.selectable{
+.smltown_selectable{
     display:inherit !important;
     pointer-events: inherit !important;
     color: black !important;
     font-weight: bold;
 }
 
-.device{
+.smltown_device{
     display:none;
 }
 
@@ -788,7 +788,7 @@ textarea {
     resize: none;
 }
 
-.quit{
+.smltown_quit{
     /*line-height: 37px;*/
     height: inherit;
     position: absolute;
@@ -796,10 +796,10 @@ textarea {
     left: 0;
 }
 
-#playingCards > p:before{
+#smltown_playingCards > p:before{
     content:attr(class) " ";
 }
-#playingCards{
+#smltown_playingCards{
     padding-right:15px;
     padding-left: 10px;
     margin-top: 15px;
@@ -807,7 +807,7 @@ textarea {
 
 }
 
-#playingCards .cardGroupName{
+#smltown_playingCards .cardGroupName{
     border-top: 1px solid rgb(100,100,100);
     margin-left: 30px;
     color: grey;
@@ -815,11 +815,11 @@ textarea {
     margin-top: 7px;
 }
 
-#playingCards > table{
+#smltown_playingCards > table{
     width: 100%;
 }
 
-.rulesCard{
+.smltown_rulesCard{
     width:82px;
     height:82px;
     /*display: inline-block;*/    
@@ -841,7 +841,7 @@ textarea {
     font-size: 20px;
 }
 
-.rulesCard > span{
+.smltown_rulesCard > span{
     position:absolute;
     bottom: 5px;
     left: 0;
@@ -851,12 +851,12 @@ textarea {
     line-height: 20px;
 }
 
-.rulesCard form{
+.smltown_rulesCard form{
     position: absolute;
     left: 0;
 }
 
-.rulesCard input, .rulesCard input:focus{
+.smltown_rulesCard input, .smltown_rulesCard input:focus{
     display: none;
     font-size: 30px !important;
     width: 100%;
@@ -873,7 +873,7 @@ textarea {
     margin-top: 48px;
 }
 
-.rulesCard.selected{
+.smltown_rulesCard.selected{
     -webkit-box-shadow: 2px 2px 7px black, 3px 3px 20px yellow, 
         -1px -1px 5px black, -3px -3px 20px yellow !important;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
     -moz-box-shadow:    2px 2px 7px black, 3px 3px 20px yellow, 
@@ -882,32 +882,32 @@ textarea {
         -1px -1px 5px black, -3px -3px 20px yellow !important;
 }
 
-.textCard{    
+.smltown_textCard{    
     line-height: inherit !important;
     display: table;
 }
-.extra.textCard{
+.smltown_extra.smltown_textCard{
     display: table;
     background-color: rgb(200,200,200);
     box-shadow: inset 0 0 3px black, 0 0 1px black;    
     border-radius: 5px;
     color: rgba(255,255,255,0.8);
 }
-.rulesCard.textCard{
+.smltown_rulesCard.smltown_textCard{
     /*height: 100%;*/
     box-shadow: inset 0 0 5px black;
 }
 
-name{
+smltown_name{
     vertical-align: middle;
     display: table-cell;    
 }
 
-.cardOut{
+.smltown_cardOut{
     opacity: 0.2;
 }
 
-#infoSelectedCard{
+#smltown_infoSelectedCard{
     background-color: rgba(0,0,0,0.7);
     position:absolute;
     bottom: 0;
@@ -919,41 +919,41 @@ name{
     padding: 10px;
 }
 
-#backButton{
+#smltown_backButton{
     position: absolute !important;
     top: auto !important;
     bottom: 0 !important;
     z-index: 0 !important;
 }
 
-.static #header{
+.smltown_static #header{
     z-index: 10;
 }
-.static body{
+.smltown_static body{
     width: 100%;
 }
-.static #menu{
+.smltown_static #smltown_menu{
     width: 300px !important;
     margin-left: initial !important;
 }
-.static #menuContent{
+.smltown_static #smltown_menuContent{
     width: 100%;
 }
-.static #menu, .static #body{
+.smltown_static #smltown_menu, .smltown_static #smltown_body{
     float: left;
     position: relative;
 }
-.static #console{
+.smltown_static #smltown_console{
     width: auto !important; 
     position: relative !important;
     border-top: none !important;
     border-radius: 0 !important;
 }
-.static #chatForm{
+.smltown_static #smltown_chatForm{
     display:inherit;
 }
 
-.static #console .text{
+.smltown_static #smltown_console .text{
     margin-bottom: 25px;
 }
 /*.static body{
