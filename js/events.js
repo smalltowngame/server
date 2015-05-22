@@ -260,7 +260,7 @@ function events() {
     //back button
     $("#backButton").click(function() {
 //        window.history.back();
-        $("#body").load("gameList.html", function() {
+        $("#html").load("gameList.html", function() {
             indexLoad();
         });
     });

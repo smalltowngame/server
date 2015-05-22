@@ -49,17 +49,16 @@ if (isset($_SESSION['gameId'])) {
         <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/jquery-1.11.0.min.js"></script>
     </head>
 
-    <body>
-        <div id="body"></div>
+    <body id="html">
     </body>
 
     <script>
 
         $(window).load(function() { //load to wait images
             if (typeof gameId != "undefined") {
-                $("#body").load("<?php echo $smalltownURL ?>game.php");
+                $("#html").load("<?php echo $smalltownURL ?>game.php");
             } else {
-                $("#body").load("<?php echo $smalltownURL ?>gameList.html", function() {
+                $("#html").load("<?php echo $smalltownURL ?>gameList.html", function() {
                     indexLoad();
                 });
             }
