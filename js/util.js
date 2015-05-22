@@ -58,7 +58,7 @@ function message(some, attr) {
 function setGameCards(cards) {
     Game.cards = cards; //all cards
 
-    $("#playingCards").html("");
+    $("#smltown_playingCards").html("");
     for (var cardName in Game.cards) {
         var card = Game.cards[cardName];
 
@@ -86,14 +86,14 @@ function setGameCards(cards) {
         var name = splitName[2];
 
         //mode
-        var divGameMode = $("#playingCards ." + gameMode);
+        var divGameMode = $("#smltown_playingCards ." + gameMode);
         if (!divGameMode.length) { //not exists yet
             divGameMode = $("<table align='right' class='" + gameMode + "'>");
-            $("#playingCards").append(divGameMode);
+            $("#smltown_playingCards").append(divGameMode);
         }
 
         //group
-        var divGroup = $("#playingCards ." + gameMode + " ." + group);
+        var divGroup = $("#smltown_playingCards ." + gameMode + " ." + group);
         if (!divGroup.length) { //not exists yet
             divGroup = $("<tr class='" + group + "'>");
             divGameMode.append(divGroup);
@@ -113,7 +113,7 @@ function setGameCards(cards) {
         }
 
         //card
-        var div = $("<p class = 'rulesCard cardOut' card = '" + cardName + "'>");
+        var div = $("<p class = 'smltown_rulesCard smltown_cardOut' card = '" + cardName + "'>");
 
         var numberCards = card.min + " - " + card.max;
         if (card.min == card.max) {
@@ -122,17 +122,17 @@ function setGameCards(cards) {
 
         addBackgroundCard(div, cardName);
         div.append("<span>" + numberCards + "</span>");
-        div.append("<form class='admin'><input></form>");
+        div.append("<form class='smltown_admin'><input></form>");
         divGroup.append(div);
     }
     rulesEvents();
 }
 
 function setPlayingCards(cards) { //active game cards
-    $(".rulesCard").addClass("cardOut");
+    $(".smltown_rulesCard").addClass("smltown_cardOut");
     for (var cardName in cards) {
         var cardNumber = cards[cardName];
-        var div = $(".rulesCard[card='" + cardName + "']");
+        var div = $(".smltown_rulesCard[card='" + cardName + "']");
         div.removeClass("cardOut");
         if (cardNumber) { //not set
             div.find("input").val(cardNumber).show();
@@ -142,31 +142,31 @@ function setPlayingCards(cards) { //active game cards
 }
 
 function documentResize() {
-    $("html").removeClass("static staticCard");
+    $("#smltown_html").removeClass("static staticCard");
 
-    $("body").width("100%");
-    $("#menu, #card").addClass("swipe");
-    $("#menu").width("200%");
-    $("#card").width("inherit");
+    $("#smltown_body").width("100%");
+    $("#smltown_menu, #smltown_card").addClass("smltown_swipe");
+    $("#smltown_menu").width("200%");
+    $("#smltown_card").width("inherit");
 
     //horizontal /3
 //    if (9 * $(window).width() >= 16 * $(window).height()) {
 //        $("html").addClass("static staticCard");
 //        $("body").width($(window).height() * 3 / 4);
-//        $("#menu, #card").width(($(window).width() - $("body").width()) / 2);
+//        $("#smltown_menu, #card").width(($(window).width() - $("body").width()) / 2);
 //        //horizontal /2
 //    } else 
     if (3 * $(window).width() >= 4 * $(window).height()) {
-        $("html").addClass("static");
+        $("#smltown_html").addClass("static");
 //        $("#body").width($(window).height() * 3 / 4);
-        $("#body").width(450);
-        $("#menu, #body, #console").height($(window).height() - $("#header").height());
-//        $("#menu").width($(window).width() - $("body").width());
+        $("#smltown_body").width(450);
+        $("#smltown_menu, #smltown_body, #smltown_console").height($(window).height() - $("#smltown_header").height());
+//        $("#smltown_menu").width($(window).width() - $("body").width());
         //vertical
     } else {
         //unTouchable
         if (!Modernizr.touch) {
-            $("html").addClass("unTouchable");
+            $("#smltown_html").addClass("unTouchable");
         }
     }
 }
@@ -176,13 +176,13 @@ function isNumber(n) {
 }
 
 function resizeCard() {
-    var height = $("body").height();
-    var width = $("body").width();
+    var height = $("#smltown_body").height();
+    var width = $("#smltown_body").width();
     if (width > height) {
         width = height * 0.8;
-        $("#card > div").width(width);
+        $("#smltown_card > div").width(width);
     }
-    $("#cardFront .text").height(height - width);
+    $("#smltown_cardFront .text").height(height - width);
 }
 
 function addBackgroundCard(div, filename) {
@@ -212,7 +212,7 @@ function addBackgroundCard(div, filename) {
                 return;
             }
         }
-        div.addClass("textCard");
+        div.addClass("smltown_textCard");
     });
 }
 

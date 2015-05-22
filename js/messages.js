@@ -119,8 +119,8 @@ function showNightLog(text, clean) {
 }
 
 function flash(text) {
-    $("#flash").remove();
-    var div = $("<div id='flash'><span class='text'>" + text + "</span></div>");
+    $("#smltown_flash").remove();
+    var div = $("<div id='smltown_flash'><span class='text'>" + text + "</span></div>");
     $("body").append(div);
     setTimeout(function() {
         div.remove();

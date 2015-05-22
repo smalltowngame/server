@@ -1,5 +1,5 @@
 
-#smltown_list, #menuContent, #console{
+#smltown_list, #smltown_menuContent, #smltown_console{
     overflow-y: auto;
 }
 
@@ -322,14 +322,14 @@ button{
     background-color: rgba(0,0,0,0.6);
     pointer-events: auto !important;
 }
-#smltown_card.visible{
+#smltown_card.smltown_visible{
     -webkit-transform: translateX(-50%);
     -moz-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
     -o-transform: translateX(-50%);
     transform: translateX(-50%);
 }
-#smltown_menu.visible{
+#smltown_menu.smltown_visible{
     -webkit-transform: translateX(50%);
     -moz-transform: translateX(50%);
     -ms-transform: translateX(50%);
@@ -461,7 +461,7 @@ button{
     font-weight: normal;
     margin-top: -4px;
 }
-#smltown_menu small, #smltown_menu input, #smltown_menu form *, .admin{
+#smltown_menu small, #smltown_menu input, #smltown_menu form *, .smltown_admin{
     color: rgba(0,0,0,0.3);
     font-weight: normal;
 }
@@ -535,7 +535,7 @@ button{
     transform:rotateY(0);
 }
 
-body.smltown_night #smltown_filter{
+#smltown_body.smltown_night #smltown_filter{
     -webkit-box-shadow: inset 5px 5px 15px rgba(255,0,0,0.4),
         inset -5px -5px 15px rgba(255,0,0,0.4);  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
     -moz-box-shadow:    inset 5px 5px 15px rgba(255,0,0,0.4),
@@ -966,12 +966,12 @@ smltown_name{
 .static #consoleTitle{
     position: inherit;
 }
-.static #menu{
+.static #smltown_menu{
     position: fixed;
     width: auto;
     margin-left: auto;
 }
-.static #menu > div{
+.static #smltown_menu > div{
     width: 100% !important;
     overflow-y: scroll;
 }

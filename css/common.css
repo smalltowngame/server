@@ -12,7 +12,7 @@ symbol{
     margin: 0 5px;
 }
 
-html, body{
+#smltown_html, #smltown_body{
     height: 100%;
     width: 100%;
     margin: 0;
@@ -20,25 +20,16 @@ html, body{
     overflow: hidden;
 }
 
-html{
+#smltown_html{
     background-image: url("../img/background4.jpg");
 }
 
 body{
-    position: relative;
-    left: 0;
-    top: 0;
-    bottom:0;
-    /*text-shadow: 1px 1px 1px rgba(255,255,255,0.4);*/
-    box-sizing: border-box;
     margin: 0 auto;
-    outline: none;
+    overflow: hidden;
+}
 
-    background: -webkit-radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
-    background: -o-radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
-    background: -moz-radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
-    background: radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
-
+#smltown_html{
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
@@ -46,15 +37,30 @@ body{
     user-select: none;
 }
 
-*:active, *:hover {
-    cursor: default;
+#smltown_body{
+    position: relative;
+    left: 0;
+    top: 0;
+    bottom:0;
+    /*text-shadow: 1px 1px 1px rgba(255,255,255,0.4);*/
+    box-sizing: border-box;    
+    outline: none;
+
+    background: -webkit-radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
+    background: -o-radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
+    background: -moz-radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
+    background: radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
 }
 
-.title{
+/*#smltown_html *:active, #smltown_html *:hover {
+    cursor: default;
+}*/
+
+.smltown_title{
     padding: 10px;
 }
 
-.dialog{
+.smltown_dialog{
     display: block;
     position: absolute;
     width: 100%;
@@ -64,7 +70,7 @@ body{
     z-index: 99;
     text-align: center;
 }
-.dialog form{    
+.smltown_dialog form{    
     width: 90%;
     height: 60%;
     margin: auto;
@@ -81,27 +87,27 @@ body{
     box-shadow: 5px 0 20px rgba(0,0,0,0.4),
         -5px 0 20px rgba(0,0,0,0.4);
 }
-.dialog input{
+.smltown_dialog input{
     width: 100%;
     margin-top: 10px;
     text-align: center;
 }
 
-.absolute{
+.smltown_absolute{
     position: absolute;
     top:0;
     left:0;
 }
 
-#inputName{
+#smltown_inputName{
     width: 100%;
 }
 
-.error{
+.smltown_error{
     color:red;
 }
 
-.unselect{
+.smltown_unselect{
     pointer-events: none;
 }
 
@@ -116,7 +122,7 @@ button, input[type=text], input[type=submit], input[type=button]{ /* not checkbo
     -moz-box-sizing: border-box;     /*Firefox, other Gecko */
     box-sizing: border-box;          /*Opera/IE 8+ */
 }
-.dialog input, .dialog button{
+.smltown_dialog input, .smltown_dialog button{
     margin-bottom:15px;
 }
 /*android 2.3*/

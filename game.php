@@ -66,7 +66,7 @@ $_SESSION['gameId'] = $gameId;
         <div id="smltown_menu" class="smltown_swipe">
             <div id="smltown_menuContent">
                 <div>
-                    <div class="smltown_selector admin">					
+                    <div class="smltown_selector smltown_admin">					
                         <div>
                             <symbol class="icon">R</symbol>
                             <span>Admin</span>
@@ -89,21 +89,21 @@ $_SESSION['gameId'] = $gameId;
                         </div>
                     </div>
 
-                    <div class="smltown_selector admin">
+                    <div class="smltown_selector smltown_admin">
                         <div>
                             <symbol class="icon">S</symbol>
                             <span>Game</span>
                             <small>gameHelp</small>
                         </div>
 
-                        <div id="smltown_password" class="input admin">
+                        <div id="smltown_password" class="input smltown_admin">
                             <span>Password</span> <symbol>R</symbol>
                             <form>
                                 <input type="text"/>
                             </form>					
                         </div>
 
-                        <div id="smltown_dayTime" class="input admin gameOver">
+                        <div id="smltown_dayTime" class="input smltown_admin smltown_gameOver">
                             <span>DayTime</span> <symbol>R</symbol>
                             <form>
                                 <span>sec/p</span>
@@ -111,12 +111,12 @@ $_SESSION['gameId'] = $gameId;
                             </form>					
                         </div>
 
-                        <div id="smltown_openVoting" class="input admin gameOver">
+                        <div id="smltown_openVoting" class="input smltown_admin smltown_gameOver">
                             <span>OpenVoting</span> <symbol>R</symbol>
                             <input class="" type="checkbox"/>
                         </div>
 
-                        <div id="smltown_endTurn" class="input admin gameOver">
+                        <div id="smltown_endTurn" class="input smltown_admin smltown_gameOver">
                             <span>AdminEndTurn</span> <symbol>R</symbol>
                             <input class="" type="checkbox"/>
                         </div>
@@ -137,13 +137,13 @@ $_SESSION['gameId'] = $gameId;
                             <span>UserSettings</span>
                             <small>personal options</small>
                         </div>
-                        <div id="smltown_updateName" class="input gameOver">                    
+                        <div id="smltown_updateName" class="input smltown_gameOver">                    
                             <span>Name</span>
                             <form>
                                 <input type="text"/>
                             </form>					
                         </div>
-                        <div id="smltown_cleanErrors" class="single button">
+                        <div id="smltown_cleanErrors" class="smltown_single button">
                             <span>CleanErrors</span>
                             <small>reload game</small>
                         </div>
@@ -164,7 +164,7 @@ $_SESSION['gameId'] = $gameId;
 
                 </div>
 
-                <div id="smltown_backButton" class="selector">
+                <div id="smltown_backButton" class="smltown_selector">
                     <div>
                         <span>Back</span>
                         <small>back to game list</small>
@@ -202,7 +202,7 @@ $_SESSION['gameId'] = $gameId;
                         </div>-->
             <div class="text"><br/></div>
             <form id="smltown_chatForm">
-                <input id="chat"></input>
+                <input id="smltown_chat"></input>
             </form>
         </div>
 
@@ -221,9 +221,10 @@ $_SESSION['gameId'] = $gameId;
 
             function reload() {
                 if (!navigator.onLine) {
-                    $("#log").text("Connection lost. Try again");
+                    $("#smltown_log").text("Connection lost. Try again");
                 }
-                window.location.reload(true);
+//                window.location.reload(true);
+                $("#smltown_html").load(Game.path + "game.php");
             }
 
             //let Game js injection
@@ -253,8 +254,8 @@ $_SESSION['gameId'] = $gameId;
                     Game.request.addUser(); //add this user to game
                     events();
                 });
-                $("#disclaimer").load("./game_disclaimer.html");
-                $("#currentUrl").append("<b>Current URL:</b> <br/><br/> <small>" + window.location.href + "</small>");
+                $("#smltown_disclaimer").load("./game_disclaimer.html");
+                $("#smltown_currentUrl").append("<b>Current URL:</b> <br/><br/> <small>" + window.location.href + "</small>");
             }
 
             //TIME COUNTDOWN, day end
@@ -275,7 +276,7 @@ $_SESSION['gameId'] = $gameId;
                     Game.countdown = (Game.time - (Date.now() / 1000)) | 0; // |0 to remove decimals
 
                     if (Game.countdown < 10) {
-                        $("#countdown").addClass("lastSeconds");
+                        $("#smltown_countdown").addClass("lastSeconds");
                     }
                     if (Game.countdown < 1) {
                         countdownDiv.innerHTML = "";
@@ -287,7 +288,7 @@ $_SESSION['gameId'] = $gameId;
                             console.log("dayEND")
                             Game.request.dayEnd();
                         } else {
-                            $("#statusGame").text("waitPlayersVotes");
+                            $("#smltown_statusGame").text("waitPlayersVotes");
                         }
 //                        Game.countdown = 0;
                         Game.time = null;
@@ -311,6 +312,7 @@ $_SESSION['gameId'] = $gameId;
 
             function update(res) { //response
                 console.log(res);
+                console.log(8)
                 if (res.user) {
                     if (typeof res.user.userId != "undefined") {
                         Game.userId = res.user.userId;
@@ -324,6 +326,7 @@ $_SESSION['gameId'] = $gameId;
                 }
 
                 if (res.players) { // PLAYERS
+                    console.log(123)
                     if (!Game.userId) {
                         console.log("!NOT USER ERROR, re-loading...");
                         setLog("!NOT USER ERROR, re-loading...");
@@ -371,7 +374,7 @@ $_SESSION['gameId'] = $gameId;
                     Game.temp = {}; //restart variables
 
                     Game.cardLoading = true;
-                    $("#phpCard").load("cards/" + Game.card + ".php", function(response) { //card could be changed
+                    $("#smltown_phpCard").load("cards/" + Game.card + ".php", function(response) { //card could be changed
                         Game.cardLoading = false;
                         console.log("card loaded");
                         if (response.indexOf("Fatal error") > -1) {
@@ -406,7 +409,7 @@ $_SESSION['gameId'] = $gameId;
                     for (var key in res.game) {
                         Game.info[key] = res.game[key];
                     }
-                    $(".gameName").text(Game.info.name);
+                    $(".smltown_gameName").text(Game.info.name);
                     Game.info.status = parseInt(Game.info.status);
                     Game.time = (Date.now() + Game.info.time) / 1000;
                     if (!Game.cardLoading) { //not w8 load php card
@@ -420,43 +423,43 @@ $_SESSION['gameId'] = $gameId;
             function setGame() {
                 console.log("setGame");
                 //INPUTS
-                $("#header .content").html("");
+                $("#smltown_header .smltown_content").html("");
                 //password
                 if (Game.info.password) {
-                    $("#password input").attr("placeholder", Game.info.password);
-                    var div = $("<div id='passwordIcon'>");
-                    $("#header .content").append(div);
+                    $("#smltown_password input").attr("placeholder", Game.info.password);
+                    var div = $("<div id='smltown_passwordIcon'>");
+                    $("#smltown_header .smltown_content").append(div);
                     div.click(function() {
                         flash("game with password");
                     });
                 }
                 //day Time by player
                 var div = $("<div>");
-                div.append("<div id='clockIcon'></div>");
+                div.append("<div id='smltown_clockIcon'></div>");
                 if (Game.info.dayTime) {
-                    $("#dayTime input").attr("placeholder", Game.info.dayTime);
+                    $("#smltown_dayTime input").attr("placeholder", Game.info.dayTime);
                     div.append(Game.info.dayTime);
                 } else {
-                    div.append($("#dayTime input").attr("placeholder"));
+                    div.append($("#smltown_dayTime input").attr("placeholder"));
                 }
-                $("#header .content").append(div);
+                $("#smltown_header .smltown_content").append(div);
                 div.click(function() {
                     flash("seconds of day time by player");
                 });
                 //open voting
                 if (Game.info.openVoting == 1) {
-                    $("#openVoting input").attr('checked', true);
-                    var div = $("<div><div id='openVoting'>");
-                    $("#header .content").append(div);
+                    $("#smltown_openVoting input").attr('checked', true);
+                    var div = $("<div><div id='smltown_openVoting'>");
+                    $("#smltown_header .smltown_content").append(div);
                     div.click(function() {
                         flash("let players vote during the day");
                     });
                 }
                 //admin end Turn power
                 if (Game.info.endTurn == 1) {
-                    $("#endTurn input").attr('checked', true);
-                    var div = $("<div><div id='endTurnIcon'>");
-                    $("#header .content").append(div);
+                    $("#smltown_endTurn input").attr('checked', true);
+                    var div = $("<div><div id='smltown_endTurnIcon'>");
+                    $("#smltown_header .smltown_content").append(div);
                     div.click(function() {
                         flash("admin can end turn immediately");
                     });
@@ -464,13 +467,13 @@ $_SESSION['gameId'] = $gameId;
 
                 //hide
                 if (Game.user && Game.user.admin) { // == 1
-                    $(".admin").addClass("selectable");
+                    $(".smltown_admin").addClass("smltown_selectable");
                 }
-                $("#console .night").hide();
-                $(".gameOver").removeClass("selectable");
-                $("#startButton").hide();
-                $("#endTurnButton").hide();
-                $(".countdown").hide();
+                $("#smltown_console .smltown_night").hide();
+                $(".smltown_gameOver").removeClass("smltown_selectable");
+                $("#smltown_startButton").hide();
+                $("#smltown_endTurnButton").hide();
+                $(".smltown_countdown").hide();
                 //show &
                 switch (Game.info.status) {
 
@@ -478,11 +481,11 @@ $_SESSION['gameId'] = $gameId;
                         Game.ping = 300;
                         console.log("town discussion...");
                         runCountdown();
-                        $(".gameOver").addClass("selectable");
-                        $("#endTurnButton").show();
-                        $(".countdown").show();
-                        if ($("body").attr("class") == "night") {
-                            $("body").attr("class", "day");
+                        $(".smltown_gameOver").addClass("selectable");
+                        $("#smltown_endTurnButton").show();
+                        $(".smltown_countdown").show();
+                        if ($("#smltown_body").attr("class") == "night") {
+                            $("#smltown_body").attr("class", "day");
                             wakeUp("Good morning!");
                         }
 
@@ -492,13 +495,13 @@ $_SESSION['gameId'] = $gameId;
                         Game.ping = 300;
                         wakeUp(false); //prevent wake up on other night turn
                         Game.time = null;
-                        if ($("body").attr("class") != "night") { // 1st time
-                            $("body").attr("class", "night");
-                            $(".userCheck").removeClass("userCheck");
-                            $(".votes span").remove();
+                        if ($("#smltown_body").attr("class") != "night") { // 1st time
+                            $("#smltown_body").attr("class", "night");
+                            $(".smltown_userCheck").removeClass("userCheck");
+                            $(".smltown_votes span").remove();
                             sleep();
-                            $("#statusGame").text("nightTime");
-                            $("#console .night").show();
+                            $("#smltown_statusGame").text("nightTime");
+                            $("#smltown_console .night").show();
                         }
                         if (Game.user.status > -1 && Game.card == Game.info.night) {
                             if (Game.night.select) {
@@ -514,11 +517,11 @@ $_SESSION['gameId'] = $gameId;
                     case 3: //end game
 
                         Game.ping = 1000;
-                        if ($("body").attr("class") != "gameover") {
+                        if ($("#smltown_body").attr("class") != "gameover") {
                             wakeUp("GAME OVER", true);
                             endTurn();
-                            $("#statusGame").text("GAME OVER");
-                            $("body").attr("class", "gameover");
+                            $("#smltown_statusGame").text("GAME OVER");
+                            $("#smltown_body").attr("class", "gameover");
                         }
 
                         for (var id in Game.players) {
@@ -531,25 +534,25 @@ $_SESSION['gameId'] = $gameId;
                         break;
                     default: //waiting for new game (0)
                         Game.ping = 1000;
-                        $(".gameOver").addClass("selectable");
-                        if ($("body").attr("class") != "wait") {
+                        $(".smltown_gameOver").addClass("selectable");
+                        if ($("#smltown_body").attr("class") != "wait") {
                             wakeUp("gameRestarted", true);
 
-                            $(".extra").empty();
-                            $(".extra").css("background-image", "none");
+                            $(".smltown_extra").empty();
+                            $(".smltown_extra").css("background-image", "none");
                             for (var id in Game.players) {
                                 Game.players[id].card = "";
                             }
 
                             endTurn();
-                            $("#statusGame").text("waitingNewGame");
-                            $(".playerStatus").text("waiting");
-                            $("body").attr("class", "wait");
+                            $("#smltown_statusGame").text("waitingNewGame");
+                            $(".smltown_playerStatus").text("waiting");
+                            $("#smltown_body").attr("class", "wait");
                         }
 
                         if (Game.user.admin) {
                             if (Game.card) {
-                                $("#startButton").show();
+                                $("#smltown_startButton").show();
                             }
                         }
                 }
@@ -569,8 +572,9 @@ $_SESSION['gameId'] = $gameId;
                 "coral"
             ];
             function setPlayers() {
+                console.log(1111)
                 var players = Game.players;
-                $(".player").remove();
+                $(".smltown_player").remove();
                 var id;
                 //GET USER PLAYER
                 for (var id in players) {
@@ -581,7 +585,7 @@ $_SESSION['gameId'] = $gameId;
                         if (!Game.user.name) {
                             login("noName");
                         } else {
-                            $("#updateName input").attr("placeholder", Game.user.name);
+                            $("#smltown_updateName input").attr("placeholder", Game.user.name);
                         }
                     }
                 }
@@ -591,17 +595,17 @@ $_SESSION['gameId'] = $gameId;
                 for (id in players) {
                     var player = players[id];
                     var div = $("<div>");
-                    var up = $("<div class='up'>");
-                    var down = $("<div class='down'>");
-                    div.append("<symbol class='playerSymbol'>U</symbol>");
+                    var up = $("<div class='smltown_up'>");
+                    var down = $("<div class='smltown_down'>");
+                    div.append("<symbol class='smltown_playerSymbol'>U</symbol>");
                     div.append(up);
                     div.append(down);
-                    up.append($("<span class='name'>" + player.name + "<span>"));
-                    down.append($("<span class='playerStatus'>"));
-                    down.append($("<span class='votes'>"));
-                    div.append($("<div class='extra'>"));
+                    up.append($("<span class='smltown_name'>" + player.name + "<span>"));
+                    down.append($("<span class='smltown_playerStatus'>"));
+                    down.append($("<span class='smltown_votes'>"));
+                    div.append($("<div class='smltown_extra'>"));
                     div.attr("id", player.id);
-                    div.addClass("player");
+                    div.addClass("smltown_player");
                     player.div = div;
                     selectEvents(player);
                     if (!player.name) {
@@ -616,50 +620,50 @@ $_SESSION['gameId'] = $gameId;
                     if (player.card) {
                         var cardName = player.card.split("_")[1];
                         player.cardName = cardName;
-                        div.find(".playerStatus").text(cardName);
-                        addBackgroundCard(div.find(".extra"), player.card);
+                        div.find(".smltown_playerStatus").text(cardName);
+                        addBackgroundCard(div.find(".smltown_extra"), player.card);
                     }
 
                     // SORT divs players
                     player.status = parseInt(player.status);
                     if (!player.status) { //if not playing
-                        $("#listDead").append(div);
-                        div.addClass("spectator");
-                        div.find(".playerStatus").text("spectator");
+                        $("#smltown_listDead").append(div);
+                        div.addClass("smltown_spectator");
+                        div.find(".smltown_playerStatus").text("spectator");
                     } else if (player.status < 1) {
-                        $("#listDead").append(div);
+                        $("#smltown_listDead").append(div);
                         div.addClass("dead");
-                        div.find(".playerStatus").prepend("dead ");
-                        div.find(".extra").text("☠");
+                        div.find(".smltown_playerStatus").prepend("dead ");
+                        div.find(".smltown_extra").text("☠");
                     } else {
-                        $("#listAlive").append(div);
-                        div.find(".playerStatus").text("alive");
+                        $("#smltown_listAlive").append(div);
+                        div.find(".smltown_playerStatus").text("alive");
                     }
 
                     $('<style>.id' + player.id + ' {color:' + colors[iColor++] + '}</style>').appendTo('head');
-                    div.find(".name").addClass("id" + player.id);
+                    div.find(".smltown_name").addClass("id" + player.id);
                     if (player.admin == 1) {
-                        div.find(".name").append("<symbol>R</symbol>");
+                        div.find(".smltown_name").append("<symbol>R</symbol>");
                     }
                     if (Game.userId == player.sel) {
-                        div.find(".name").addClass("enemy");
+                        div.find(".smltown_name").addClass("smltown_enemy");
                     }
                 }
 
-                $("#user").append(Game.players[Game.userId].div);
+                $("#smltown_user").append(Game.players[Game.userId].div);
                 // ADD INTERACTION PLAYERS
                 for (id in players) {
                     var player = players[id];
                     if (player.sel) {
-                        addVote($("#" + player.sel + " .votes"));
-                        player.div.find(".playerStatus").append(" voting to <span class='id" + player.sel + "'></span>");
+                        addVote($("#" + player.sel + " .smltown_votes"));
+                        player.div.find(".smltown_playerStatus").append(" voting to <span class='id" + player.sel + "'></span>");
                     }
                 }
 
                 // OWN PROPERTIES
-                $(".player").removeClass("userCheck");
+                $(".smltown_player").removeClass("smltown_userCheck");
                 if (Game.user.sel) {
-                    $("#" + Game.user.sel).addClass("userCheck");
+                    $("#" + Game.user.sel).addClass("smltown_userCheck");
                 }
             }
 
@@ -668,30 +672,30 @@ $_SESSION['gameId'] = $gameId;
                     return;
                 }
                 if (!Game.info.status) {
-                    $(".extra").html("");
+                    $(".smltown_extra").html("");
                     if (Game.user.admin) {
                         for (id in Game.players) {
                             if (id != Game.userId) {
-                                $("#" + id + " .extra").html(
-                                        "<button class='gameOver quit'>quit</button>");
+                                $("#" + id + " .smltown_extra").html(
+                                        "<button class='smltown_gameOver smltown_quit'>quit</button>");
                             }
                         }
                     }
                 }
-                $(".player .quit").click(function() {
-                    var id = $(this).closest(".player").attr("id");
+                $(".smltown_player .smltown_quit").click(function() {
+                    var id = $(this).closest(".smltown_player").attr("id");
                     $("#" + id).remove();
                     Game.request.deletePlayer(id);
                 });
             }
 
             function setUserCard() {
-                $("#card").removeClass("rotate");
-                if (!$("#cardFront").hasClass(Game.card)) { //only new card
-                    $("#cardFront").attr("class", Game.card);
+                $("#smltown_card").removeClass("rotate");
+                if (!$("#smltown_cardFront").hasClass(Game.card)) { //only new card
+                    $("#smltown_cardFront").attr("class", Game.card);
 //                    var filename = Game.card.split("_")[1];
                     var card = Game.cards[Game.card];
-                    addBackgroundCard($("#cardFront .cardImage"), Game.card);
+                    addBackgroundCard($("#smltown_cardFront .smltown_cardImage"), Game.card);
                     var name, desc;
                     if (card) {
                         name = card.name;
@@ -701,12 +705,12 @@ $_SESSION['gameId'] = $gameId;
                         desc = "no special habilities";
                     }
 
-                    $("#cardFront .text > div").text(name.toUpperCase());
+                    $("#smltown_cardFront .text > div").text(name.toUpperCase());
                     var p = $("<p>" + desc + "</p>");
-                    $("#cardFront .text > div").html(p);
-                    $("#card").addClass("visible");
+                    $("#smltown_cardFront .text > div").html(p);
+                    $("#smltown_card").addClass("smltown_visible");
                     setTimeout(function() {
-                        $("#card").removeClass("visible");
+                        $("#smltown_card").removeClass("smltown_visible");
                     }, 400);
                 }
             }
@@ -759,10 +763,10 @@ $_SESSION['gameId'] = $gameId;
                     }
 
                     //select work
-                    if (div.hasClass("userCheck")) { //UNSELECT
+                    if (div.hasClass("smltown_userCheck")) { //UNSELECT
                         if (Game.unselectFunction && Game.unselectFunction(player.id) != false) {
-                            removeVote(div.find(".votes"));
-                            div.removeClass("userCheck");
+                            removeVote(div.find(".smltown_votes"));
+                            div.removeClass("smltown_userCheck");
                         }
 
                     } else if (Game.selectFunction && Game.selectFunction(player.id) != false) { //SELECT
@@ -770,9 +774,9 @@ $_SESSION['gameId'] = $gameId;
                             removeVote($("#" + Game.user.sel + " .votes"));
                         }
                         Game.user.sel = player.id;
-                        addVote(div.find(".votes"));
-                        $(".player").removeClass("userCheck");
-                        div.addClass("userCheck");
+                        addVote(div.find(".smltown_votes"));
+                        $(".smltown_player").removeClass("smltown_userCheck");
+                        div.addClass("smltown_userCheck");
                     } else {
                         console.log("not select function")
                     }
@@ -782,12 +786,12 @@ $_SESSION['gameId'] = $gameId;
             function addVote(span) {
                 span.append("<span>&#x2718; </span>");
                 var count = span.find("span").length;
-                span.closest(".player").find(".extra").text(count);
+                span.closest(".smltown_player").find(".extra").text(count);
             }
             function removeVote(span) {
                 span.find("span").first().remove();
                 var count = span.find("span").length;
-                var extra = span.closest(".player").find(".extra");
+                var extra = span.closest(".smltown_player").find(".extra");
                 if (count) {
                     extra.text(count);
                 } else {
@@ -812,9 +816,9 @@ $_SESSION['gameId'] = $gameId;
                 setTimeout(function() { // WAIT 2 SECONDS TO ALLOW PLAYERS CLOSE EYES
                     notify(message, function() {
                         if (Game.info.status == 2) { //is night
-                            addBackgroundCard($("#user .extra"), Game.cardName);
+                            addBackgroundCard($("#smltown_user .smltown_extra"), Game.cardName);
                         }
-                        $("#filter").removeClass("sleep");
+                        $("#smltown_filter").removeClass("sleep");
                         Game.sleep = false;
                     }, false);
                 }, wait);
@@ -822,16 +826,16 @@ $_SESSION['gameId'] = $gameId;
 
             function sleep() {
                 flash("close your eyes");
-                $("#filter").addClass("sleep");
+                $("#smltown_filter").addClass("sleep");
                 Game.sleep = true;
             }
 
             function endTurn() {
                 Game.info.night = null;
-                $(".votes").html("");
-                $(".userCheck").removeClass("userCheck");
-                $("#user .extra").css("background-image", "");
-                $(".player").each(function() {
+                $(".smltown_votes").html("");
+                $(".smltown_userCheck").removeClass("smltown_userCheck");
+                $("#smltown_user .smltown_extra").css("background-image", "");
+                $(".smltown_player").each(function() {
                     if (!$(this).hasClass("dead")) {
                         $(this).find(".extra").empty();
                     }

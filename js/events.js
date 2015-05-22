@@ -21,23 +21,23 @@
 //VARIABLES DECLARATION
 var contentHeights = {//android 2.3 bug on height content div
     updateConsole: function() {
-        if ($("#console").hasClass("extended")) {
-            this.console = $("body").height();
+        if ($("#smltown_console").hasClass("extended")) {
+            this.console = $("#smltown_body").height();
             return;
         }
-        this.console = $("body").height() * 0.2;
+        this.console = $("#smltown_body").height() * 0.2;
     }
     ,
-    menuContent: $("body").height(),
-    console: $("body").height() * 0.2,
-    list: $("body").height() * 0.8 - 30,
+    menuContent: $("#smltown_body").height(),
+    console: $("#smltown_body").height() * 0.2,
+    list: $("#smltown_body").height() * 0.8 - 30,
 };
 
 //autorun
 if (Modernizr.touch) {
     console.log("TOUCH");
-    $("#list, #menuContent, #console").css("overflow-y", "hidden");
-    $("#console .text").css("position", "relative");
+    $("#smltown_list, #smltown_menuContent, #smltown_console").css("overflow-y", "hidden");
+    $("#smltown_console .text").css("position", "relative");
 }
 
 $(window).resize(function() {
@@ -47,17 +47,17 @@ $(window).resize(function() {
 //////////////////////////////////////////////////////
 
 function cardSwipeRotate() {
-    $("#card").removeClass("visible");
+    $("#smltown_card").removeClass("visible");
     setTimeout(function() {
         $("#card > div").removeClass("rotate");
     }, 400);
 }
 function cardRotateSwipe() {
-    if ($("#card > div").hasClass("rotate")) {
-        $("#card > div").removeClass("rotate");
+    if ($("#smltown_card > div").hasClass("rotate")) {
+        $("#smltown_card > div").removeClass("rotate");
     }
     setTimeout(function() {
-        $("#card").removeClass("visible");
+        $("#smltown_card").removeClass("visible");
     }, 400);
 }
 
@@ -66,34 +66,34 @@ function cardRotateSwipe() {
 function events() {
 
     //SWIPES ACTIONS GAME
-    $("#menuIcon").on("click", function() {
+    $("#smltown_menuIcon").on("click", function() {
         $(window).trigger("swiperight");
     });
-    $("#cardIcon").on("click", function() {
+    $("#smltown_cardIcon").on("click", function() {
         $(window).trigger("swipeleft");
     });
 
     $(window).on("swiperight", function(e) {
         e.preventDefault();
 
-        if ($("#card").hasClass("visible")) {
+        if ($("#smltown_card").hasClass("smltown_visible")) {
             cardSwipeRotate();
-        } else if ($("#menu").hasClass("swipe")) {
-            $("#menu").addClass("visible");
+        } else if ($("#smltown_menu").hasClass("smltown_swipe")) {
+            $("#smltown_menu").addClass("smltown_visible");
         }
 //        transition = Math.min(100, transition + 100);
 //        $("#card").css({"-webkit-transform": "translateX(" + transition + "%)"}); //best on efficiency
     });
     $(window).on("swipeleft", function(e) {
         e.preventDefault();
-        if ($("#menu").hasClass("visible")) {
-            $("#menu").removeClass("visible");
+        if ($("#smltown_menu").hasClass("smltown_visible")) {
+            $("#smltown_menu").removeClass("smltown_visible");
         } else {
             if (!Game.card) {
                 flash("no card yet");
             }
-            else if ($("#card").hasClass("swipe")) {
-                $("#card").addClass("visible");
+            else if ($("#smltown_card").hasClass("smltown_swipe")) {
+                $("#smltown_card").addClass("smltown_visible");
 //            transition = Math.max(-100, transition - 100);
 //            $("#card").css({"-webkit-transform": "translateX(" + transition + "%)"});
             }
@@ -101,7 +101,7 @@ function events() {
     });
 
     //TAP MENUS
-    $("#card").on("tap", function() {
+    $("#smltown_card").on("tap", function() {
         if ($("#card > div").hasClass("rotate")) {
             cardRotateSwipe();
         } else {
@@ -109,29 +109,29 @@ function events() {
         }
     });
 
-    $("#menu").on("tap", function(e) {
+    $("#smltown_menu").on("tap", function(e) {
         if ($(e.target).attr("id") == "menu") {
             $(this).removeClass("visible");
         }
     });
 
     // MENU NAVIGATION EVENTS
-    $("#startButton").on("tap", function() {
+    $("#smltown_startButton").on("tap", function() {
         Game.end = false;
         Game.sleep = true;
         Game.request.startGame();
-        $(".visible").removeClass("visible");
+        $(".smltown_visible").removeClass("smltown_visible");
     });
 
-    $("#restartButton").on("tap", function() {
+    $("#smltown_restartButton").on("tap", function() {
         Game.end = false;
         Game.request.restartGame();
-        $(".visible").removeClass("visible");
+        $(".smltown_visible").removeClass("smltown_visible");
     });
 
     // ( all this starts cose a IE bug on :active when click text (and android 2.3) )
     var node;
-    $("#menu .selector > div").touchstart(function() {
+    $("#smltown_menu .smltown_selector > div").touchstart(function() {
         node = this.nodeValue;
         var selector = this;
         $(selector).addClass("active");
@@ -194,17 +194,17 @@ function events() {
                 removeAuto(div);
             }
             //return menu at original top position
-            $("#menuContent > div").animate({top: 0}, 300);
+            $("#smltown_menuContent > div").animate({top: 0}, 300);
 
         } else { //add auto (expand)
             var parent = div.parent();
-            parent.not("#menu > div").css("height", "auto");
+            parent.not("#smltown_menu > div").css("height", "auto");
             animation(div, function(height) {
                 if (height > contentHeights.menuContent) {
-                    $("#menuContent > div").animate({top: -div.position().top}, 300);
+                    $("#smltown_menuContent > div").animate({top: -div.position().top}, 300);
                 }
             }); //div auto height
-            removeAuto($("#menu .auto").not(parent));
+            removeAuto($("#smltown_menu .auto").not(parent));
             div.addClass("auto");
         }
 
@@ -228,12 +228,12 @@ function events() {
         Game.request.setDayTime(val);
     });
 
-    $("#openVoting input").change(function() {
+    $("#smltown_openVoting input").change(function() {
         var checked = $(this).is(':checked');
         Game.request.setForcedVotes(checked ? 1 : 0);
     });
 
-    $("#endTurn input").change(function() {
+    $("#smltown_endTurn input").change(function() {
         var checked = $(this).is(':checked');
         Game.request.setEndTurnRule(checked ? 1 : 0);
     });
@@ -244,42 +244,42 @@ function events() {
         flash("name saved");
     });
 
-    $("#cleanErrors").on("touchend mouseup", function() {
+    $("#smltown_cleanErrors").on("touchend mouseup", function() {
         if ($(this).hasClass("active")) {
             Game.load.loading();
             reload();
         }
     });
 
-    $(".gameover").touchstart(function(e) {
+    $(".smltown_gameover").touchstart(function(e) {
         if (Game.info.status == 1 || Game.info.status == 2) {
             e.stopPropagation();
             flash("game must be finished");
         }
     });
     //back button
-    $("#backButton").click(function() {
+    $("#smltown_backButton").click(function() {
 //        window.history.back();
         $("#html").load("gameList.html", function() {
             indexLoad();
         });
     });
 
-    $("#console").on("mouseup", function() {
+    $("#smltown_console").on("mouseup", function() {
         $('#console').toggleClass("extended");
         chatUpdate();
         if ($("#console").hasClass("extended")) {
             $("#chat").focus();
         }
     });
-    $("#chat").on("focusout", function() {
+    $("#smltown_chat").on("focusout", function() {
         if ($("#console").hasClass("extended")) {
             return;
         }
         chatFocusOut();
     });
 
-    $("#chatForm").submit(function() {
+    $("#smltown_chatForm").submit(function() {
         $('#chat').blur();
         var text = $('#chat').val();
         if (text.length) {
@@ -291,9 +291,9 @@ function events() {
     });
 
     // GAME SCROLLS (only touch device)
-    touchScroll($("#list"), "top");
-    touchScroll($("#menu > div"), "top");
-    touchScroll($("#console"), "bottom");
+    touchScroll($("#smltown_list"), "top");
+    touchScroll($("#smltown_menu > div"), "top");
+    touchScroll($("#smltown_console"), "bottom");
 }
 
 function addChats(chats) {
@@ -313,20 +313,20 @@ function addChat(text, userId) {
     if (!userId) {
         userId = Game.user.id;
     }
-    $("#console .text").append("<div><span class='id" + userId + "'></span>" + text + "</div>");
+    $("#smltown_console .text").append("<div><span class='id" + userId + "'></span>" + text + "</div>");
 }
 
 function chatFocusOut() { //DEVICE FUNCTION CALL!!!
-    $('#chat').val("");
-    $("#console").removeClass("extended");
+    $('#smltown_chat').val("");
+    $("#smltown_console").removeClass("extended");
     chatUpdate();
 }
 
 function chatUpdate() {
     contentHeights.updateConsole();
     //if scroll
-    $("#console").animate({
-        scrollTop: $("#console .text").height() + 50
+    $("#smltown_console").animate({
+        scrollTop: $("#smltown_console .text").height() + 50
     }, 500);
 }
 
@@ -376,7 +376,7 @@ function rulesEvents() {
     var card = null;
 
     if (Game.user.admin) {
-        $(".rulesCard").touchstart(function() {
+        $(".smltown_rulesCard").touchstart(function() {
             var $this = $(this);
             if (card != $(this).attr("card")) {
                 tapped = false;
@@ -421,10 +421,10 @@ function rulesEvents() {
             setTimeout(function() { //w8 documents events
                 $(document).one("tap", function() {
                     $this.removeClass("selected");
-                    $("#infoSelectedCard").remove();
+                    $("#smltown_infoSelectedCard").remove();
                 });
                 $this.addClass("selected");
-                $("body").append("<div id='infoSelectedCard'>" + Game.cards[$this.attr("card")].desc);
+                $("#smltown_body").append("<div id='smltown_infoSelectedCard'>" + Game.cards[$this.attr("card")].desc);
             }, 1);
 
         }).on("mouseup", function() {
@@ -454,13 +454,13 @@ function rulesEvents() {
             }
         });
 
-        $(".rulesCard form").submit(function() {
+        $(".smltown_rulesCard form").submit(function() {
             $(this).find("input").blur();
             return false;
         });
     }
 
-    $(".rulesCard").on("tap", function() {
+    $(".smltown_rulesCard").on("tap", function() {
         var $this = $(this);
         setTimeout(function() { //w8 documents events
             $(document).one("tap", function() {
@@ -468,7 +468,7 @@ function rulesEvents() {
                 $("#infoSelectedCard").remove();
             });
             $this.addClass("selected");
-            $("body").append("<div id='infoSelectedCard'>" + Game.cards[$this.attr("card")].desc);
+            $("#smltown_body").append("<div id='infoSelectedCard'>" + Game.cards[$this.attr("card")].desc);
         }, 1);
     })
 }
@@ -508,7 +508,7 @@ function touchScroll(div, side) { //side: top or bottom
             y = e.originalEvent.touches[0].pageY;
 
             if ("console" == element) {
-                $("#chat").blur();
+                $("#smltown_chat").blur();
 
             } else {//prevent scroll on swipe
                 x = e.originalEvent.touches[0].pageX;
@@ -525,7 +525,7 @@ function touchScroll(div, side) { //side: top or bottom
                 finalPosition = maxScroll - 10;
             } else {
                 if ("list" == element) {
-                    $("#console").css("margin-bottom", "-20%");
+                    $("#smltown_console").css("margin-bottom", "-20%");
                 }
             }
             $this.css(side, finalPosition + "px");
@@ -545,7 +545,7 @@ function touchScroll(div, side) { //side: top or bottom
             }
             if ("list" == element) {
                 setTimeout(function() { //let some time to continue scroling
-                    $("#console").css("margin-bottom", "inherit");
+                    $("#smltown_console").css("margin-bottom", "inherit");
                 }, 500);
 
             } else if ("menu" == element) {
@@ -567,14 +567,14 @@ function touchScroll(div, side) { //side: top or bottom
  });
  */
 
-$("#list").scroll(function() {
+$("#smltown_list").scroll(function() {
     onPlayersScroll();
 });
 
 function onPlayersScroll() { //only touch
     if (parseInt($("#list > div").css("top")) < 0) {
-        $("#header").addClass("thin");
+        $("#smltown_header").addClass("thin");
     } else {
-        $("#header").removeClass("thin");
+        $("#smltown_header").removeClass("thin");
     }
 }
