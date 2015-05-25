@@ -12,7 +12,7 @@ ini_set('session.gc_maxlifetime', 864000);
 
 session_start();
 $smalltownURL = "";
-if (isset($_SESSION['smalltownURL']) && file_exists("game.php") < 1) {
+if (isset($_SESSION['smalltownURL']) && file_exists("/game.php") < 1) {
     $smalltownURL = $_SESSION['smalltownURL'] . "/";
 }
 //if (isset($_SESSION['smalltownURL'])) {
@@ -34,7 +34,7 @@ if (isset($_SESSION['gameId'])) {
 }
 
 $session = $_SESSION['smalltownURL'];
-echo "<script>console.log('smalltownURL = $smalltownURL. session = $session. " . file_exists("game.php") . "')</script>";
+echo "<script>console.log('smalltownURL = $smalltownURL. session = $session. " . file_exists("/game.php") . "')</script>";
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
