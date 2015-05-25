@@ -34,7 +34,7 @@ if (isset($_SESSION['gameId'])) {
 }
 
 $session = $_SESSION['smalltownURL'];
-echo "<script>console.log('smalltownURL = $smalltownURL. session = $session')</script>";
+echo "<script>console.log('smalltownURL = $smalltownURL. session = $session. " . file_exists("game.php") . "')</script>";
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
