@@ -2,8 +2,7 @@
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Expose-Headers: smalltown, name");
 header('smalltown: 1');
-header('name:u');
-
+//header('name:u');
 //set cookie lifetime for 10 days (60sec * 60mins * 24hours * 100days)
 ini_set('session.cookie_lifetime', 864000);
 ini_set('session.gc_maxlifetime', 864000);
@@ -15,9 +14,6 @@ $smalltownURL = "";
 if (isset($_SESSION['smalltownURL']) && file_exists("/game.php") < 1) {
     $smalltownURL = $_SESSION['smalltownURL'] . "/";
 }
-//if (isset($_SESSION['smalltownURL'])) {
-//    $smalltownURL = $_SESSION['smalltownURL'] . "/";
-//}
 
 include_once 'DB.php';
 include_once 'DB_response.php';
@@ -33,8 +29,8 @@ if (isset($_SESSION['gameId'])) {
     echo "<script>;var gameId = " . $_SESSION['gameId'] . ";</script>";
 }
 
-$session = $_SESSION['smalltownURL'];
-echo "<script>console.log('smalltownURL = $smalltownURL. session = $session. " . file_exists("/game.php") . "')</script>";
+//$session = $_SESSION['smalltownURL'];
+//echo "<script>console.log('smalltownURL = $smalltownURL. session = $session. " . file_exists("/game.php") . "')</script>";
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -55,12 +51,17 @@ echo "<script>console.log('smalltownURL = $smalltownURL. session = $session. " .
 
     <body>
         <!--not in body, in load-->
-        esto es index.php
+        <!--esto es index.php-->
         <div></div>
         <div id="smltown_html"></div>
     </body>
 
     <script>
+        
+        //4 plugins
+        $(window).resize(function() {
+            $("#smltown_html").attr("max-height", $(window).height() + "px");
+        });
 
         $(window).load(function() { //load to wait images
             if (typeof gameId != "undefined") {
