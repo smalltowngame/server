@@ -63,7 +63,7 @@ if (isset($_SESSION['gameId'])) {
             smltown_resize();
         });        
         function smltown_resize(){
-            $("#smltown_html").attr("max-height", $(window).height() + "px");
+            $("#smltown_html").css("height", $(window).height() + "px");
         }
         smltown_resize();
         //
