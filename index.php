@@ -52,6 +52,7 @@ if (isset($_SESSION['gameId'])) {
 
     <body>
         <!--not in body, in load-->
+        ola
         <div id="smltown_html"></div>
     </body>
 

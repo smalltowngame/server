@@ -158,7 +158,7 @@ $_SESSION['gameId'] = null;
                 $("#games").prepend(div);
                 div.click(function() {
                     stopLocalGameRequests();
-//                    window.location.href = href + "game.php";
+                    //window.location.href = href + "game.php";
                     $("#html").load(Game.path + "game.php");
                 });
             }
