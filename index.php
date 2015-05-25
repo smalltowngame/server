@@ -32,6 +32,8 @@ if (!file_exists("lang/$lang.js")) {
 if (isset($_SESSION['gameId'])) {
     echo "<script>;var gameId = " . $_SESSION['gameId'] . ";</script>";
 }
+
+echo "<script>smalltownURL = $smalltownURL</script>";
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -52,7 +54,8 @@ if (isset($_SESSION['gameId'])) {
 
     <body>
         <!--not in body, in load-->
-        ola
+        esto es index.php
+        <div></div>
         <div id="smltown_html"></div>
     </body>
 
