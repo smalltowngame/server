@@ -1,3 +1,5 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <?php
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Expose-Headers: smalltown, name");
@@ -33,7 +35,6 @@ if (isset($_SESSION['gameId'])) {
 //echo "<script>console.log('smalltownURL = $smalltownURL. session = $session. " . file_exists("/game.php") . "')</script>";
 ?>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -57,13 +58,14 @@ if (isset($_SESSION['gameId'])) {
     </body>
 
     <script>
-        
+
         //for plugins
         $(window).resize(function() {
             smltown_resize();
-        });        
-        function smltown_resize(){
-            $("#smltown_html").css("height", $(window).height() + "px");
+        });
+        function smltown_resize() {
+            var rest = $(window).height() - $("#smltown_html").offset().top;
+            $("#smltown_html").css("height", rest + "px");
         }
         smltown_resize();
         //
