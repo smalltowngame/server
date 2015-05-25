@@ -58,10 +58,15 @@ if (isset($_SESSION['gameId'])) {
 
     <script>
         
-        //4 plugins
+        //for plugins
         $(window).resize(function() {
+            smltown_resize();
+        });        
+        function smltown_resize(){
             $("#smltown_html").attr("max-height", $(window).height() + "px");
-        });
+        }
+        smltown_resize();
+        //
 
         $(window).load(function() { //load to wait images
             if (typeof gameId != "undefined") {
