@@ -257,13 +257,6 @@
     font-weight:bold;
 }
 
-button{
-    height: 50px;
-    font-size: 14px;    
-    width: 100%;
-    bottom:0;
-}
-
 #smltown_buttons{
     width: 100%;
     table-layout: fixed;
@@ -273,7 +266,7 @@ button{
 #smltown_buttons td { 
     overflow: hidden;
 }
-#smltown_buttons button{
+#smltown_buttons .smltown_button{
     padding: 0 5px;
 }
 
@@ -670,7 +663,7 @@ button{
     /*text-shadow: -1px -1px 1px white;*/
 }
 
-#smltown_log button{
+#smltown_log .smltown_button{
     border-radius: 100px;
     width:80%;
 }

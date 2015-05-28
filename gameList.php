@@ -29,7 +29,7 @@ $_SESSION['gameId'] = null;
             <div id="smltown_log" class="title" style="color:red"></div>
         </div>
 
-        <button id="smltown_reload" onclick="reload()">reload</button>
+        <div id="smltown_reload" class="smltown_button" onclick="reload()">reload</div>
 
         <script>
 

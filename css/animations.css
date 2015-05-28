@@ -39,7 +39,7 @@
 }
 
 /*2. button*/
-#log button{
+#log .smltown_button{
     position:relative;
     transition: margin-left 300ms 300ms ease-out
         , left 0s 1000ms
@@ -50,7 +50,7 @@
     margin-left: -200%;
     
 }
-#filter.notification #log button{
+#filter.notification #log .smltown_button{
     transition: left 300ms 600ms ease-in;
     left: 0;
     margin-left: 0;

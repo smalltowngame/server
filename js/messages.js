@@ -7,7 +7,7 @@ function login(log) {
     $("body").append("<div class='dialog'><form id='login'>"
             + "<input type='text' class='name' placeholder='set your name'>"
             + "<input type='submit' value='Ok'>"
-            + "<input type='button' value='Cancel' class='cancel'>"
+            + "<div class='smltown_button cancel'>Cancel</div>"
             + "<div class='log'></div>"
             + "</form><div>");
     if (log) {

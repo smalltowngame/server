@@ -22,7 +22,6 @@ session_start();
 $_SESSION['gameId'] = $gameId;
 
 //echo "<script>console.log(" . $_SESSION['gameId'] . ")"</script>";
-
 //$countGame = petition("SELECT count(*) as count FROM games WHERE id = $gameId")[0]->count;
 //if ($countGame == 0) {
 //    header("Location: ./#deleted_game");
@@ -186,10 +185,10 @@ $_SESSION['gameId'] = $gameId;
             <div id="smltown_filter" class="absolute">
                 <div id="smltown_log" class="absolute">
                     <div class="text"></div>
-                    <button id="smltown_logOk">OK</button>
-                    <button id="smltown_logCancel">Cancel</button>
-<!--                    <div class="smltown_cloud x1"></div>
-                    <div class="smltown_cloud x2"></div>-->
+                    <div id="smltown_logOk" class="smltown_button">OK</button>
+                    <div id="smltown_logCancel" class="smltown_button">Cancel</div>
+                    <!--                    <div class="smltown_cloud x1"></div>
+                                        <div class="smltown_cloud x2"></div>-->
                 </div>
                 <div class="smltown_countdown"></div>
             </div>
@@ -674,7 +673,7 @@ $_SESSION['gameId'] = $gameId;
                         for (id in Game.players) {
                             if (id != Game.userId) {
                                 $("#" + id + " .smltown_extra").html(
-                                        "<button class='smltown_gameOver smltown_quit'>quit</button>");
+                                        "<div class='smltown_gameOver smltown_quit smltown_button'>quit</div>");
                             }
                         }
                     }

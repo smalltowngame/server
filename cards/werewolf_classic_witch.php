@@ -66,7 +66,7 @@ $card['extra'] = function($utils) {
 <!--Accept button-->
 <div id="witchButton">
     <span>End your turn?</span>
-    <button onclick="Game.temp.witchAccept()">Accept</button>
+    <div class="smltown_button" onclick="Game.temp.witchAccept()">Accept</div>
 </div>
 
 <script>

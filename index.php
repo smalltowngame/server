@@ -50,7 +50,8 @@ if (isset($_SESSION['gameId'])) {
         <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/jquery-1.11.0.min.js"></script>
     </head>
 
-    <body>
+    <!--smalltown is class if not plugin-->
+    <body class="smalltown">
         <!--not in body, in load-->
         <!--esto es index.php-->
         <div id="smltown_html"></div>
@@ -66,19 +67,9 @@ if (isset($_SESSION['gameId'])) {
             var rest = $(window).height() - $("#smltown_html").offset().top;
             $("#smltown_html").css("height", rest + "px");
         }
-        smltown_resize();
         //
-        
-        //LOAD AS PLUGIN
-        function init() {
-            if (typeof gameId != "undefined") {
-                $("#smltown_html").load("<?php echo $smalltownURL ?>game.php");
-            } else {
-                $("#smltown_html").load("<?php echo $smalltownURL ?>gameList.php", function() {
-                    indexLoad();
-                });
-            }
-        }
+
+        //WAIT ALL LOADED
         if (document.readyState === "complete") { //if plugin loads later
             init();
         }
@@ -87,9 +78,45 @@ if (isset($_SESSION['gameId'])) {
         });
         //
 
+        //DEFINE WAY TO NAVIGATE
+        if ($("body").hasClass("smalltown")) {
+            window.onhashchange = init;
+            window.location.hash = "gameList";
+        }
+
+        function init() {
+            smltown_resize();
+
+            if (window.onhashchange) {
+                load(window.location.hash + ".php?id=" + gameId);
+                console.log(window.location.hash + ".php?id=" + gameId)
+//                load(window.location.hash + ".php?id=" + gameId);
+//                load(window.location.hash + ".php");
+            } else {
+                if (typeof gameId != "undefined") {
+                    load("game.php?id=" + gameId);
+                } else {
+                    load("gameList.php", function() {
+                        indexLoad();
+                    });
+                }
+            }
+        }
+
+        function load(url, callback) {
+            $("#smltown_html").load("<?php echo $smalltownURL ?>" + url, function() {
+                if (callback) {
+                    callback();
+                }
+            });
+//            if ($("body").hasClass("smalltown")) {
+//                window.location.hash = url.split(".")[0];
+//            }
+        }
+
         function indexLoad() {
             if (document.location.hostname != "localhost") {
-                $("#smltown_games").before("<div class='smltown_createGame'> <input id='smltown_nameGame' type='text' placeholder='game name'> <button id='smltown_newGame'>create game</button> </div>");
+                $("#smltown_games").before("<table class='smltown_createGame'><td id='smltown_nameGame'><input type='text' placeholder='game name'></td> <td id='smltown_newGame' class='smltown_button'>create game</td> </table>");
             }
 
             $("#smltown_newGame").click(function() { //CREATE GAME
@@ -198,7 +225,7 @@ if (isset($_SESSION['gameId'])) {
             $("#smltown_body").append("<div class='dialog'><form id='passwordForm'>"
                     + "<input type='text' id='password' gameId='" + id + "' placeholder='password'>"
                     + "<input type='submit' value='Ok'>"
-                    + "<input type='button' value='Cancel' onclick='$(\".dialog\").remove();'>"
+                    + "<div class='smltown_button' onclick='$(\".dialog\").remove();'>Cancel</div>"
                     + "<div class='log'></div>"
                     + "</form><div>");
             $("#smltown_password").focus();
@@ -226,7 +253,7 @@ if (isset($_SESSION['gameId'])) {
         function accessGame(id) {
             stopLocalGameRequests();
             //window.location.href = "./game?id=" + id;
-            $("#smltown_html").load("<?php echo $smalltownURL ?>game.php?id=" + id);
+            load("game.php?id=" + id);
         }
 
         var Game = {};

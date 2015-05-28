@@ -52,10 +52,6 @@ body{
     background: radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
 }
 
-/*#smltown_html *:active, #smltown_html *:hover {
-    cursor: default;
-}*/
-
 .smltown_title{
     padding: 10px;
 }
@@ -111,7 +107,7 @@ body{
     pointer-events: none;
 }
 
-#smltown_html button, #smltown_html input[type=text], #smltown_html input[type=submit], #smltown_html input[type=button]{ /* not checkbox */
+.smltown_button, #smltown_html input[type=text], #smltown_html input[type=submit], #smltown_html input[type=button]{ /* not checkbox */
     padding: 0 10px;
     margin: 0;
     height: 50px;
@@ -121,39 +117,46 @@ body{
     -moz-box-sizing: border-box;     /*Firefox, other Gecko */
     box-sizing: border-box;          /*Opera/IE 8+ */
 }
-.smltown_dialog input, .smltown_dialog button{
+.smltown_button, #smltown_html input{
+    background-color: white;
+    border: 1px solid grey;
+    color: rgb(50,50,50);
+}
+.smltown_button{
+    cursor: pointer;
+    text-align: center;
+    line-height: 50px;
+}
+.smltown_button:hover{
+    background-color: rgb(225,225,225);
+}
+.smltown_button:active{
+    -webkit-box-shadow: inset 1px 1px 2px rgb(100,100,100);   /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow: inset 1px 1px 2px rgb(100,100,100);   /* Firefox 3.5 - 3.6 */
+    box-shadow: inset 1px 1px 2px rgb(100,100,100);    
+}
+
+.smltown_dialog input, .smltown_dialog .smltown_button{
     margin-bottom:15px;
 }
 /*android 2.3*/
-*{
+#smltown_html *{
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0); 
     -webkit-tap-highlight-color: transparent;  /* i.e. Nexus5/Chrome and Kindle Fire HD 7'' */
 }
--webkit-scrollbar {
+#smltown_html -webkit-scrollbar {
     width: 5px; 
 }
--webkit-scrollbar-track {
+#smltown_html -webkit-scrollbar-track {
     background: rgba(0,0,0,0.5);
 }
 
-input{
+#smltown_html input{
     position:relative;
     top: -10000px;
     -webkit-transform: translate3d(0, 10000px, 0);
     moz-transform: translate3d(0, 10000px, 0);
     transform: translate3d(0, 10000px, 0);
-}
-
-button, input{
-    background-color: white;
-    border: 1px solid grey;
-    color: black;
-}
-button:focus{
-    background-color: rgb(225,225,225);
-    -webkit-box-shadow: inset 1px 1px 2px rgb(100,100,100);   /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-    -moz-box-shadow: inset 1px 1px 2px rgb(100,100,100);   /* Firefox 3.5 - 3.6 */
-    box-shadow: inset 1px 1px 2px rgb(100,100,100);    
 }
 
 /* Overthrow CSS: Enable overflow: auto on elements with overthrow class when html element has overthrow class too */

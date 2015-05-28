@@ -183,7 +183,7 @@ function events() {
         } else if ($(this).is(':first-child')) { //if is selector
             div = $(this).parent();
             animation = animateButtons; //utils function
-        } else if (!$(this).hasClass("button") && !$(this).hasClass("input")) { //selected
+        } else if (!$(this).hasClass("smltown_button") && !$(this).hasClass("input")) { //selected
             animation = animateAuto; //utils function
         }
 
