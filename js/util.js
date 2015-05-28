@@ -222,3 +222,9 @@ function setUserNamesByClass() {
         $(".id" + id + ":empty").append(name + ": "); //not .text() translate
     }
 }
+
+function gameBack() {
+    $("#smltown_html").load(Game.path + "gameList.php", function() {
+        indexLoad();
+    });
+}

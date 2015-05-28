@@ -79,12 +79,10 @@ if (isset($_SESSION['gameId'])) {
                 });
             }
         }
-        if (document.readyState === "complete") {
-            console.log("complete")
-//            init();
+        if (document.readyState === "complete") { //if plugin loads later
+            init();
         }
         $(window).load(function() { //load to wait images
-            console.log("window load")
             init();
         });
         //

@@ -37,7 +37,7 @@ function login(log) {
     });
     $("#smltown_login .cancel").on("tap", function() {
         Game.request.deletePlayer(Game.user.id, function() {
-            window.history.back();
+            gameBack();
         });
     });
 }

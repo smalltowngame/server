@@ -1,5 +1,6 @@
 
 function onBackPressed() {
+    //back button android
 }
 
 function externalFunctions() {

@@ -259,10 +259,7 @@ function events() {
     });
     //back button
     $("#smltown_backButton").click(function() {
-//        window.history.back();
-        $("#smltown_html").load("gameList.php", function() {
-            indexLoad();
-        });
+        gameBack();
     });
 
     $("#smltown_console").on("mouseup", function() {
