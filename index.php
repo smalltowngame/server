@@ -53,7 +53,6 @@ if (isset($_SESSION['gameId'])) {
     <body>
         <!--not in body, in load-->
         <!--esto es index.php-->
-        <div></div>
         <div id="smltown_html"></div>
     </body>
 
@@ -70,7 +69,7 @@ if (isset($_SESSION['gameId'])) {
         smltown_resize();
         //
 
-        $(window).load(function() { //load to wait images
+        function init() {
             if (typeof gameId != "undefined") {
                 $("#smltown_html").load("<?php echo $smalltownURL ?>game.php");
             } else {
@@ -78,6 +77,14 @@ if (isset($_SESSION['gameId'])) {
                     indexLoad();
                 });
             }
+        }
+        if (document.readyState === "complete") {
+            console.log("complete")
+            init();
+        }
+        $(window).load(function() { //load to wait images
+            console.log("window load")
+            init();
         });
 
         function indexLoad() {
