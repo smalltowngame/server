@@ -33,8 +33,13 @@ $_SESSION['gameId'] = null;
 
         <script>
 
-            window.onunload = function() {
+//            window.onunload = function() {
+//                stopLocalGameRequests();
+//            };
+            window.onbeforeunload = function() {
+                console.log("stopLocalGameRequests")
                 stopLocalGameRequests();
+                return null;
             };
 
             var XMLHttpRequestTimeout = 500;

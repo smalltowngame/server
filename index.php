@@ -58,7 +58,7 @@ if (isset($_SESSION['gameId'])) {
 
     <script>
 
-        //for plugins
+        //RESIZE INSIDE PLUGIN
         $(window).resize(function() {
             smltown_resize();
         });
@@ -68,7 +68,8 @@ if (isset($_SESSION['gameId'])) {
         }
         smltown_resize();
         //
-
+        
+        //LOAD AS PLUGIN
         function init() {
             if (typeof gameId != "undefined") {
                 $("#smltown_html").load("<?php echo $smalltownURL ?>game.php");
@@ -80,12 +81,13 @@ if (isset($_SESSION['gameId'])) {
         }
         if (document.readyState === "complete") {
             console.log("complete")
-            init();
+//            init();
         }
         $(window).load(function() { //load to wait images
             console.log("window load")
             init();
         });
+        //
 
         function indexLoad() {
             if (document.location.hostname != "localhost") {
@@ -228,11 +230,6 @@ if (isset($_SESSION['gameId'])) {
             //window.location.href = "./game?id=" + id;
             $("#smltown_html").load("<?php echo $smalltownURL ?>game.php?id=" + id);
         }
-
-        window.onbeforeunload = function() {
-            stopLocalGameRequests();
-            return null;
-        };
 
         var Game = {};
         Game.lang = '<?php echo $lang ?>';
