@@ -73,17 +73,17 @@ $_SESSION['gameId'] = $gameId;
                             <small>adminHelp</small>
                         </div>
 
-                        <div id="smltown_restartButton" class="button">
+                        <div id="smltown_restartButton" class="smltown_button">
                             <span>NewCards</span> <symbol>R</symbol>
                             <small>newCardsHelp</small>
                         </div>
 
-                        <div id="smltown_startButton" class="button">
+                        <div id="smltown_startButton" class="smltown_button">
                             <span>StartGame</span> <symbol>R</symbol>
                             <small>startGameHelp</small>
                         </div>
 
-                        <div id="smltown_endTurnButton" class="button">
+                        <div id="smltown_endTurnButton" class="smltown_button">
                             <span>EndTurn</span> <symbol>R</symbol>
                             <small>endTurnHelp</small>
                         </div>
