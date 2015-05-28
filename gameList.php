@@ -61,7 +61,7 @@ $_SESSION['gameId'] = null;
             }
 
             function ready() {
-                $("#games").html("");
+                $("#smltown_games").html("");
                 loadingGames(); //load visuals
 //                $("#content").append(document.URL);
 
@@ -91,6 +91,7 @@ $_SESSION['gameId'] = null;
                 gameReq.onreadystatechange = function() {
                     if (this.readyState == 4) {
                         if (this.status == 200) {
+                            console.log(222)
                             this.smalltownHeader = this.getResponseHeader('smalltown');
                             var url = this.href;
                             if (isNaN(this.smalltownHeader)) {
@@ -151,15 +152,16 @@ $_SESSION['gameId'] = null;
             }
 
             function addLocalGamesRow(href, ip, name) {
-                var div = $("<div class='game local'>");
+                console.log(111)
+                var div = $("<div class='smltown_game local'>");
                 div.append("<span class='name'>Local Game</span>");
-                div.append("<span class='admin'><small>ip: " + ip + "</small>" + name + "</span>");
+                div.append("<span class='smltown_admin'><small>ip: " + ip + "</small>" + name + "</span>");
 
-                $("#games").prepend(div);
+                $("#smltown_games").prepend(div);
                 div.click(function() {
                     stopLocalGameRequests();
                     //window.location.href = href + "game.php";
-                    $("#html").load(Game.path + "game.php");
+                    $("#smltown_html").load(Game.path + "game.php");
                 });
             }
 

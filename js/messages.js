@@ -3,7 +3,7 @@ function login(log) {
     if (typeof log == "object") {
         log = log.log; //server side
     }
-    $("#login").remove(); //clean
+    $("#smltown_login").remove(); //clean
     $("body").append("<div class='dialog'><form id='login'>"
             + "<input type='text' class='name' placeholder='set your name'>"
             + "<input type='submit' value='Ok'>"
@@ -11,21 +11,21 @@ function login(log) {
             + "<div class='log'></div>"
             + "</form><div>");
     if (log) {
-        $("#login .log").html(log);
+        $("#smltown_login .log").html(log);
     }
-    $("#login .name").focus();
+    $("#smltown_login .name").focus();
 
     //LOGIN EVENTS
-    $("#login").submit(function() {
+    $("#smltown_login").submit(function() {
         var name = $(this).find(".name").val();
         if (!name || !/\S/.test(name)) { //not only whitespaces
-            $("#login .log").text("empty name!");
+            $("#smltown_login .log").text("empty name!");
             return false;
         }
 
         for (var id in Game.players) {
             if (Game.players[id].name == name) {
-                $("#login .log").text("name already exists!");
+                $("#smltown_login .log").text("name already exists!");
                 return false;
             }
         }
@@ -35,7 +35,7 @@ function login(log) {
         $(".dialog").remove();
         return false; //prevent submit
     });
-    $("#login .cancel").on("tap", function() {
+    $("#smltown_login .cancel").on("tap", function() {
         Game.request.deletePlayer(Game.user.id, function() {
             window.history.back();
         });
@@ -54,27 +54,27 @@ function setMessage(data) {
 }
 
 function notify(text, okCallback, cancelCallback) {
-    $("#logOk").off("tap");
-    $("#logCancel").off("tap");
+    $("#smltown_logOk").off("tap");
+    $("#smltown_logCancel").off("tap");
 
     if (text == "") {
-        $("#filter").removeClass("notification");
+        $("#smltown_filter").removeClass("notification");
         return;
     }
 
     text = message(text); //LANG
 
-    $("#log .text").html(text);
+    $("#smltown_log .text").html(text);
     //show
     $("#filter").addClass("notification");
     $("#logOk").hide();
     $("#logCancel").hide();
     if (okCallback) { //!= false
-        $("#logOk").show();
-        $("#logOk").one("tap", function(e) {
+        $("#smltown_logOk").show();
+        $("#smltown_logOk").one("tap", function(e) {
             e.preventDefault(); //prevent player select
             //hide
-            $("#filter").removeClass("notification");
+            $("#smltown_filter").removeClass("notification");
             if (typeof okCallback == "function") {
                 clearTimeout(Game.temp.wakeUpInterval);
                 okCallback();
@@ -83,11 +83,11 @@ function notify(text, okCallback, cancelCallback) {
     }
 
     if (cancelCallback) { //!= false
-        $("#logCancel").show();
-        $("#logCancel").one("tap", function(e) {
+        $("#smltown_logCancel").show();
+        $("#smltown_logCancel").one("tap", function(e) {
             e.preventDefault(); //prevent player select
             //hide
-            $("#filter").removeClass("notification");
+            $("#smltown_filter").removeClass("notification");
             if (typeof cancelCallback == "function") {
                 cancelCallback();
             }
@@ -96,7 +96,7 @@ function notify(text, okCallback, cancelCallback) {
 }
 
 function setLog(text, type) {
-    var log = $("#console .text");
+    var log = $("#smltown_console .text");
     var div = $("<div>");
     if (Game.isNight) {
         div.addClass("night");
@@ -113,9 +113,9 @@ function setLog(text, type) {
 
 function showNightLog(text, clean) {
     if (clean) {
-        $("#console .text").html("");
+        $("#smltown_console .text").html("");
     }
-    $("#console .text").prepend("<div><span class='time'>" + new Date().toLocaleTimeString() + " </span>" + text + "</div>");
+    $("#smltown_console .text").prepend("<div><span class='time'>" + new Date().toLocaleTimeString() + " </span>" + text + "</div>");
 }
 
 function flash(text) {

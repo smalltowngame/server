@@ -254,7 +254,7 @@ $_SESSION['gameId'] = $gameId;
                     Game.request.addUser(); //add this user to game
                     events();
                 });
-                $("#smltown_disclaimer").load("./game_disclaimer.html");
+                $("#smltown_disclaimer").load(Game.path + "./game_disclaimer.html");
                 $("#smltown_currentUrl").append("<b>Current URL:</b> <br/><br/> <small>" + window.location.href + "</small>");
             }
 

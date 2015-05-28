@@ -82,7 +82,7 @@ if (isset($_SESSION['gameId'])) {
 
         function indexLoad() {
             if (document.location.hostname != "localhost") {
-                $("#smltown_games").before("<div class='createGame'> <input id='nameGame' type='text' placeholder='game name'> <button id='newGame'>create game</button> </div>");
+                $("#smltown_games").before("<div class='smltown_createGame'> <input id='smltown_nameGame' type='text' placeholder='game name'> <button id='smltown_newGame'>create game</button> </div>");
             }
 
             $("#smltown_newGame").click(function() { //CREATE GAME

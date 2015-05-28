@@ -111,13 +111,12 @@ body{
     pointer-events: none;
 }
 
-button, input[type=text], input[type=submit], input[type=button]{ /* not checkbox */
+#smltown_html button, #smltown_html input[type=text], #smltown_html input[type=submit], #smltown_html input[type=button]{ /* not checkbox */
     padding: 0 10px;
     margin: 0;
-    line-height: 45px;
-    height: 45px; /*IE*/
+    height: 50px;
     width: 100%;
-    font-size: 14px;
+    font-size: 14px;    
     -webkit-box-sizing: border-box;  /*Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;     /*Firefox, other Gecko */
     box-sizing: border-box;          /*Opera/IE 8+ */
@@ -148,6 +147,7 @@ input{
 button, input{
     background-color: white;
     border: 1px solid grey;
+    color: black;
 }
 button:focus{
     background-color: rgb(225,225,225);
