@@ -142,7 +142,7 @@ function setPlayingCards(cards) { //active game cards
 }
 
 function documentResize() {
-    $("#smltown_html").removeClass("static staticCard");
+    $("#smltown_html").removeClass("smltown_static smltown_staticCard");
 
     $("#smltown_body").width("100%");
     $("#smltown_menu, #smltown_card").addClass("smltown_swipe");
@@ -151,15 +151,15 @@ function documentResize() {
 
     //horizontal /3
 //    if (9 * $(window).width() >= 16 * $(window).height()) {
-//        $("html").addClass("static staticCard");
+//        $("html").addClass("smltown_static staticCard");
 //        $("body").width($(window).height() * 3 / 4);
 //        $("#smltown_menu, #card").width(($(window).width() - $("body").width()) / 2);
 //        //horizontal /2
 //    } else 
     if (3 * $(window).width() >= 4 * $(window).height()) {
-        $("#smltown_html").addClass("static");
-//        $("#body").width($(window).height() * 3 / 4);
-        $("#smltown_body").width(450);
+        $("#smltown_html").addClass("smltown_static");
+        $("#smltown_body").width($("#smltown_html").width() - $("#smltown_menu").width());
+//        $("#smltown_body").width(450);
         $("#smltown_menu, #smltown_body, #smltown_console").height($(window).height() - $("#smltown_header").height());
 //        $("#smltown_menu").width($(window).width() - $("body").width());
         //vertical
@@ -224,7 +224,8 @@ function setUserNamesByClass() {
 }
 
 function gameBack() {
-    $("#smltown_html").load(Game.path + "gameList.php", function() {
-        indexLoad();
-    });
+    load("gameList.php");
+//    $("#smltown_html").load(Game.path + "gameList.php", function() {
+//        indexLoad();
+//    });
 }

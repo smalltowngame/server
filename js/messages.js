@@ -54,8 +54,8 @@ function setMessage(data) {
 }
 
 function notify(text, okCallback, cancelCallback) {
-    $("#smltown_logOk").off("tap");
-    $("#smltown_logCancel").off("tap");
+    $("#smltown_popupOk").off("tap");
+    $("#smltown_popupCancel").off("tap");
 
     if (text == "") {
         $("#smltown_filter").removeClass("notification");
@@ -64,14 +64,14 @@ function notify(text, okCallback, cancelCallback) {
 
     text = message(text); //LANG
 
-    $("#smltown_log .text").html(text);
+    $("#smltown_popup .text").html(text);
     //show
     $("#filter").addClass("notification");
-    $("#logOk").hide();
-    $("#logCancel").hide();
+    $("#popupOk").hide();
+    $("#popupCancel").hide();
     if (okCallback) { //!= false
-        $("#smltown_logOk").show();
-        $("#smltown_logOk").one("tap", function(e) {
+        $("#smltown_popupOk").show();
+        $("#smltown_popupOk").one("tap", function(e) {
             e.preventDefault(); //prevent player select
             //hide
             $("#smltown_filter").removeClass("notification");
@@ -83,8 +83,8 @@ function notify(text, okCallback, cancelCallback) {
     }
 
     if (cancelCallback) { //!= false
-        $("#smltown_logCancel").show();
-        $("#smltown_logCancel").one("tap", function(e) {
+        $("#smltown_popupCancel").show();
+        $("#smltown_popupCancel").one("tap", function(e) {
             e.preventDefault(); //prevent player select
             //hide
             $("#smltown_filter").removeClass("notification");

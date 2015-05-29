@@ -275,6 +275,8 @@
     z-index: 8;
     pointer-events:none;
     font-size: 16px;
+    position: absolute;
+    top: 0;
 }
 
 #smltown_filter.rules > div{
@@ -293,8 +295,8 @@
 }
 
 .smltown_swipe{
-    -webkit-transition: 0.3s;
-    transition: 0.3s;
+    -webkit-transition: -webkit-transform 0.3s;
+    transition: -webkit-transform 0.3s;
     z-index: 9;
 }
 
@@ -631,7 +633,7 @@
     right:-8px;
 }
 
-#smltown_log{
+#smltown_popup{
     display: none;
     z-index: 9;
     margin-top:100px;
@@ -654,16 +656,16 @@
     -webkit-box-shadow: 0 8px 5px -5px rgba(0,0,0,0.4), 0 -8px 5px -5px rgba(0,0,0,0.4);
     box-shadow: 0 8px 5px -5px rgba(0,0,0,0.4), 0 -8px 5px -5px rgba(0,0,0,0.4);
 }
-#smltown_filter.notification #smltown_log{ /*if filter is notification*/
+#smltown_filter.notification #smltown_popup{ /*if filter is notification*/
     display: block;
 }
 
-#smltown_log .text{
+#smltown_popup .text{
     padding-bottom: 10px;
     /*text-shadow: -1px -1px 1px white;*/
 }
 
-#smltown_log .smltown_button{
+#smltown_popup .smltown_button{
     border-radius: 100px;
     width:80%;
 }
@@ -736,7 +738,7 @@
     bottom: 0;
     background-color: rgb(207,225,157);
 }
-#smltown_chat{    
+#smltown_chatInput{    
     line-height: inherit !important;
     font-size: 16px;
     outline: 0;
@@ -744,7 +746,7 @@
     background-color: transparent;
     border-top: 1px solid rgba(0,0,0,0.1);
 }
-#smltown_chatForm, #smltown_chat{
+#smltown_chatForm, #smltown_chatInput{
     width:100%;
 }
 #smltown_chatForm .smltown_send{
@@ -922,13 +924,21 @@ smltown_name{
 .smltown_static #header{
     z-index: 10;
 }
-.smltown_static body{
+.smltown_static #smltown_body{
     width: 100%;
+    display: table;
+}
+.smltown_static #smltown_list, .smltown_static #smltown_console{
+    display: inline-block;
 }
 .smltown_static #smltown_menu{
     width: 300px !important;
     margin-left: initial !important;
 }
+.smltown_static #smltown_list{
+    width: 400px !important;
+}
+
 .smltown_static #smltown_menuContent{
     width: 100%;
 }
@@ -937,10 +947,10 @@ smltown_name{
     position: relative;
 }
 .smltown_static #smltown_console{
-    width: auto !important; 
     position: relative !important;
     border-top: none !important;
     border-radius: 0 !important;
+    display: table-cell;
 }
 .smltown_static #smltown_chatForm{
     display:inherit;
@@ -949,37 +959,3 @@ smltown_name{
 .smltown_static #smltown_console .text{
     margin-bottom: 25px;
 }
-/*.static body{
-    float: right;
-}
-.static #console{
-    position: inherit;
-    width: auto;
-}
-.static #consoleTitle{
-    position: inherit;
-}
-.static #smltown_menu{
-    position: fixed;
-    width: auto;
-    margin-left: auto;
-}
-.static #smltown_menu > div{
-    width: 100% !important;
-    overflow-y: scroll;
-}
-.static #list, .unTouchable #list{
-    height: calc(80% - 60px) !important;
-}
-
-.staticCard body{
-    float: inherit !important;
-}
-.staticCard #card{
-    position: fixed;
-    padding-left: inherit;
-    right: 0;
-}
-.staticCard #card > div{
-    width: auto !important;
-}*/

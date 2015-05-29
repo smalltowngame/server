@@ -266,10 +266,10 @@ function events() {
         $('#smltown_console').toggleClass("extended");
         chatUpdate();
         if ($("#smltown_console").hasClass("extended")) {
-            $("#smltown_chat").focus();
+            $("#smltown_chatInput").focus();
         }
     });
-    $("#smltown_chat").on("focusout", function() {
+    $("#smltown_chatInput").on("focusout", function() {
         if ($("#smltown_console").hasClass("extended")) {
             return;
         }
@@ -277,8 +277,8 @@ function events() {
     });
 
     $("#smltown_chatForm").submit(function() {
-        $('#smltown_chat').blur();
-        var text = $('#smltown_chat').val();
+        $('#smltown_chatInput').blur();
+        var text = $('#smltown_chatInput').val();
         if (text.length) {
             addChat(text);
             Game.request.chat(text);
@@ -314,7 +314,7 @@ function addChat(text, userId) {
 }
 
 function chatFocusOut() { //DEVICE FUNCTION CALL!!!
-    $('#smltown_chat').val("");
+    $('#smltown_chatInput').val("");
     $("#smltown_console").removeClass("extended");
     chatUpdate();
 }
@@ -505,7 +505,7 @@ function touchScroll(div, side) { //side: top or bottom
             y = e.originalEvent.touches[0].pageY;
 
             if ("console" == element) {
-                $("#smltown_chat").blur();
+                $("#smltown_chatInput").blur();
 
             } else {//prevent scroll on swipe
                 x = e.originalEvent.touches[0].pageX;
@@ -569,7 +569,7 @@ $("#smltown_list").scroll(function() {
 });
 
 function onPlayersScroll() { //only touch
-    if (parseInt($("#list > div").css("top")) < 0) {
+    if (parseInt($("#smltown_list > div").css("top")) < 0) {
         $("#smltown_header").addClass("thin");
     } else {
         $("#smltown_header").removeClass("thin");

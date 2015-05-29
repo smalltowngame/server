@@ -36,9 +36,11 @@ if (empty($content)) {
         $action = $obj->action;
         $obj->userId = $userId;
         $obj->gameId = gameId();
-        if (petition("SELECT count(*) as count FROM games WHERE id = $obj->gameId")[0]->count == 0) {
-            echo "window.history.back()"; //prevent "ghost games" petitions 
-            return;
+        if (isset($queries['id'])) {
+            if (petition("SELECT count(*) as count FROM games WHERE id = " . $queries['id'])[0]->count == 0) {
+                echo "window.history.back()"; //prevent "ghost games" petitions 
+                return;
+            }
         }
         $action($obj);
     } else {
@@ -51,8 +53,8 @@ function gameId() {
     parse_str(parse_url($_SERVER['HTTP_REFERER'], PHP_URL_QUERY), $queries);
     if (isset($queries['id'])) {
         $gameId = $queries['id'];
-    } else {        
-        $gameId = " (SELECT id FROM games) ";
+    } else {
+        $gameId = " (SELECT id FROM games LIMIT 1) ";
     }
     return $gameId;
 }

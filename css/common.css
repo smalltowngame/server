@@ -159,6 +159,10 @@ body{
     transform: translate3d(0, 10000px, 0);
 }
 
+#smltown_errorLog{
+    color: red;
+}
+
 /* Overthrow CSS: Enable overflow: auto on elements with overthrow class when html element has overthrow class too */
 .overthrow-enabled .overthrow {
     overflow: auto;

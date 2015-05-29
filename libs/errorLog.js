@@ -1,6 +1,6 @@
 
-function setLog(log){
-	var div = document.getElementById('log');
+function setLog(log) {
+    var div = document.getElementById('smltown_errorLog');
     div.innerHTML = div.innerHTML + log + "\n";
 }
 

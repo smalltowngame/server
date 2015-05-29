@@ -1,11 +1,11 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <?php
 session_start();
 $_SESSION['gameId'] = null;
 ?>
 
 <!--Local game List mode only-->
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>  
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -26,7 +26,8 @@ $_SESSION['gameId'] = null;
             <div id="smltown_footer">
                 <br/>                
             </div>
-            <div id="smltown_log" class="title" style="color:red"></div>
+            <div id="smltown_errorLog" class="title"></div>
+            <div id="smltown_log" class="title"></div>
         </div>
 
         <div id="smltown_reload" class="smltown_button" onclick="reload()">reload</div>
@@ -96,7 +97,6 @@ $_SESSION['gameId'] = null;
                 gameReq.onreadystatechange = function() {
                     if (this.readyState == 4) {
                         if (this.status == 200) {
-                            console.log(222)
                             this.smalltownHeader = this.getResponseHeader('smalltown');
                             var url = this.href;
                             if (isNaN(this.smalltownHeader)) {
@@ -157,7 +157,6 @@ $_SESSION['gameId'] = null;
             }
 
             function addLocalGamesRow(href, ip, name) {
-                console.log(111)
                 var div = $("<div class='smltown_game local'>");
                 div.append("<span class='name'>Local Game</span>");
                 div.append("<span class='smltown_admin'><small>ip: " + ip + "</small>" + name + "</span>");
