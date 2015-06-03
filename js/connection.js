@@ -48,14 +48,18 @@ function websocketConnection(callback) {
 }
 
 function ajaxConnection() {
-    console.log("ajaxConnection");
-    // AJAX
+    // AJAX    
     Game.serverUrl = Game.path + "server_ajax.php";
+    if (smltown.gameId) {
+        Game.serverUrl += "?id=" + smltown.gameId;
+    }
 
     //ajax request function
-
     Game.request.send = function(obj, over, callback) {
         console.log(obj);
+        if (smltown.gameId) {
+            obj.gameId = smltown.gameId;
+        }
 
         var sendXmlHttpRequest = new XMLHttpRequest();
         sendXmlHttpRequest.open("POST", Game.serverUrl, true);
@@ -89,14 +93,14 @@ function ajaxConnection() {
     };
     Game.HttpRequest.onreadystatechange = function() {
         /////////DEBUG
-//    if (Game.HttpRequest.responseText) {
-//        console.log(Game.HttpRequest.readyState);
-//        console.log(Game.HttpRequest.responseText);
-//    }
+        //if (Game.HttpRequest.responseText) {
+        //    console.log(Game.HttpRequest.readyState);
+        //    console.log(Game.HttpRequest.responseText);
+        //}
         if (Game.HttpRequest.readyState != 4) { //!important
             return;
         }
-        
+
         if (Game.HttpRequest.responseText) { //catch errors and code
             var string = Game.HttpRequest.responseText;
             string = unescape(encodeURIComponent(string)); //decode backslashes special chars
@@ -118,9 +122,9 @@ function ajaxConnection() {
             Game.load.loaded();
         }
         //next interval
-//        setTimeout(function() {
-//            Game.pingRequest();
-//        }, Game.ping);
+        setTimeout(function() {
+            Game.pingRequest();
+        }, Game.ping);
 //        }, Game.ping += 10);
     };
 
@@ -159,9 +163,9 @@ Game.onmessage = function(res) {
             setMessage(res.data);
             break;
         case "chat":
+            console.log(res)
             addChat(res.text, res.userId);
-            chatUpdate();
-            setUserNamesByClass();
+            //chatUpdate();
             break;
         case "extra":
             setTimeout(function() {

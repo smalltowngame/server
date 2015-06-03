@@ -96,8 +96,7 @@
 }
 
 #smltown_list{
-    /*overflow: hidden;*/
-    height: calc(100% - 30px);
+    height: 100%;
 }
 
 #smltown_list > div{
@@ -174,7 +173,7 @@
     width:100%;
     position:absolute;
     bottom:0;
-    height:20%;    
+    height:25%;    
     z-index: 9;
     font-size:14px;
     border-radius: 14px 14px 0 0;    
@@ -188,8 +187,11 @@
     background: linear-gradient(rgb(215,235,155), rgb(215,235,130));
     background: linear-gradient(rgb(200,220,155), rgb(195,220,130));
 
-    transition: height 500ms;
-    -webkit-transition: height 500ms;
+    -webkit-transition: transform 250ms;
+    -moz-transition: transform 250ms;
+    -ms-transition: transform 250ms;
+    -o-transition: transform 250ms;
+    transition: transform 250ms;
 
     -webkit-box-shadow: 0 -1px 3px rgba(0,0,0,0.7), inset 0 0 10px white;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
     -moz-box-shadow: 0 -1px 3px rgba(0,0,0,0.7), inset 0 0 10px white;  /* Firefox 3.5 - 3.6 */
@@ -198,6 +200,15 @@
 #smltown_console:hover{
     background-color: rgb(230,250,175);
 }
+#smltown_console.smltown_reduced{
+    transform: translateY(80%);
+    -webkit-transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+    transition: none;
+}
+
 #smltown_console .text{
     padding: 0 10px;
     position: absolute;
@@ -210,7 +221,12 @@
 }
 
 #smltown_console.extended{
-    height:100%; 
+    height: 98% !important;
+    /*    -webkit-transition: height 400ms;
+        -moz-transition: height 400ms;
+        -ms-transition: height 400ms;
+        -o-transition: height 400ms;
+        transition: height 400ms;*/
 }
 #smltown_console.extended .text{
     margin-bottom: 25px;
@@ -411,6 +427,8 @@
     position: absolute;
     width: 100%;
     z-index: 1;
+    -webkit-transition: -webkit-transform 0.3s;
+    transition: -webkit-transform 0.3s;
 }
 #smltown_menu .smltown_selector, #smltown_menu .smltown_selector > div{
     overflow: hidden;
@@ -444,7 +462,7 @@
     border-style: none;
     border-top: solid 1px rgba(0,0,0,0.2);
 }
-#smltown_menu .smltown_button{
+#smltown_menu .smltown_action{
     padding-top: 13px;
     padding-bottom: 7px;
     font-weight: bold;
@@ -523,10 +541,10 @@
     height: auto !important;
 }
 
-#smltown_cardBack.rotate{
+#smltown_cardBack.smltown_rotate{
     transform:rotateY(-180deg);
 }
-#smltown_cardFront.rotate{
+#smltown_cardFront.smltown_rotate{
     transform:rotateY(0);
 }
 
@@ -668,6 +686,7 @@
 #smltown_popup .smltown_button{
     border-radius: 100px;
     width:80%;
+    margin: auto;
 }
 
 .smltown_sleep{
@@ -773,14 +792,6 @@
     pointer-events: inherit !important;
     color: black !important;
     font-weight: bold;
-}
-
-.smltown_device{
-    display:none;
-}
-
-textarea {
-    resize: none;
 }
 
 .smltown_quit{
@@ -921,8 +932,8 @@ smltown_name{
     z-index: 0 !important;
 }
 
-.smltown_static #header{
-    z-index: 10;
+.smltown_static #smltown_header{
+    z-index: 11 !important;
 }
 .smltown_static #smltown_body{
     width: 100%;
@@ -934,6 +945,10 @@ smltown_name{
 .smltown_static #smltown_menu{
     width: 300px !important;
     margin-left: initial !important;
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.7);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.7);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.7);
+
 }
 .smltown_static #smltown_list{
     width: 400px !important;
@@ -958,4 +973,8 @@ smltown_name{
 
 .smltown_static #smltown_console .text{
     margin-bottom: 25px;
+}
+
+.smltown_static #smltown_menu{
+    transform: translateX(0) !important;
 }

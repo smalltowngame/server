@@ -6,10 +6,10 @@ function startGame($obj) {
     $gameId = $obj->gameId;
 
     //add villagers bots
-    $countPlayers = petition("SELECT count(*) as count FROM plays WHERE gameId = $gameId")[0]->count;
+    $countPlayers = petition("SELECT count(*) as count FROM smltown_plays WHERE gameId = $gameId")[0]->count;
     if (4 > $countPlayers) {
-        saveMessage("There's not suficient players in game, some bots have been added.", $gameId);
-        $sql = "INSERT INTO plays (gameId, userId, status, card, admin) VALUES";
+        saveMessage("There's not suficient players in smltown_game, some bots have been added.", $gameId);
+        $sql = "INSERT INTO smltown_plays (gameId, userId, status, card, admin) VALUES";
         $minPlayers = 4;
         for ($i = $countPlayers; $i < $minPlayers; $i++) {
             $userId = getRandomUserId();
@@ -30,11 +30,11 @@ function restartGame($obj) {
     $gameId = $obj->gameId;
     
     //clean
-    sql("DELETE FROM plays WHERE gameId = $gameId AND admin < 0");
-    sql("UPDATE plays SET status = 1, sel = null, rulesJS = '', rulesPHP = '', reply = '', message = null WHERE gameId = $gameId");
-    sql("UPDATE games SET status = 0, night = null, time = null, chat = '' WHERE id =  $gameId");
+    sql("DELETE FROM smltown_plays WHERE gameId = $gameId AND admin < 0");
+    sql("UPDATE smltown_plays SET status = 1, sel = null, rulesJS = '', rulesPHP = '', reply = '', message = null WHERE gameId = $gameId");
+    sql("UPDATE smltown_games SET status = 0, night = null, time = null, chat = '' WHERE id =  $gameId");
 
-    $players = petition("SELECT * FROM plays WHERE admin > -1 AND gameId = $gameId");
+    $players = petition("SELECT * FROM smltown_plays WHERE admin > -1 AND gameId = $gameId");
 
     $cards = loadCards($gameId);
     $playerCount = count($players);
@@ -97,7 +97,7 @@ function restartGame($obj) {
             $sql2 = "$sql2,";
         }
     }
-    sql("UPDATE plays SET card = CASE userId $sql1 END WHERE userId IN ($sql2)");
+    sql("UPDATE smltown_plays SET card = CASE userId $sql1 END WHERE userId IN ($sql2)");
 
     updateUsers($gameId, null, "card");
     updatePlayers($gameId, null, array("status", "sel"));
@@ -110,7 +110,7 @@ function restartGame($obj) {
 function setDayTime($obj) {
     $gameId = $obj->gameId;
     $values = array('dayTime' => $obj->time);
-    sql("UPDATE games SET dayTime = :dayTime WHERE id = $gameId", $values);
+    sql("UPDATE smltown_games SET dayTime = :dayTime WHERE id = $gameId", $values);
     setFlash($gameId, "updated day time");
 }
 
@@ -118,7 +118,7 @@ function setOpenVoting($obj) {
     $gameId = $obj->gameId;
     $openVotations = $obj->value;
     $values = array('openVoting' => $openVotations);
-    sql("UPDATE games SET openVoting = :openVoting WHERE id = $gameId", $values);
+    sql("UPDATE smltown_games SET openVoting = :openVoting WHERE id = $gameId", $values);
     if ($openVotations == 1) {
         setFlash($gameId, "open voting mode enabled");
     } else {
@@ -130,7 +130,7 @@ function setEndTurnRule($obj) {
     $gameId = $obj->gameId;
     $endTurn = $obj->value;
     $values = array('endTurn' => $endTurn);
-    sql("UPDATE games SET endTurn = :endTurn WHERE id = $gameId", $values);
+    sql("UPDATE smltown_games SET endTurn = :endTurn WHERE id = $gameId", $values);
     if ($endTurn == 1) {
         setFlash($gameId, "admin can end day turn");
     } else {
@@ -142,7 +142,7 @@ function setPassword($obj) {
     $gameId = $obj->gameId;
     $password = $obj->password;
     $values = array('password' => $password);
-    sql("UPDATE games SET password = :password WHERE id = $gameId", $values);
+    sql("UPDATE smltown_games SET password = :password WHERE id = $gameId", $values);
     if (empty($password)) {
         setFlash($gameId, "password game was removed");
     } else {
@@ -156,7 +156,7 @@ function saveCards($obj) {
     $values = array(
         'cards' => $cards
     );
-    sql("UPDATE games SET cards = :cards WHERE id = $gameId", $values);
+    sql("UPDATE smltown_games SET cards = :cards WHERE id = $gameId", $values);
     updateGame($gameId, null, "cards");
 }
 
@@ -168,8 +168,8 @@ function deletePlayer($obj) { //at specific game
     $values = array(
         'id' => $obj->id
     );
-    sql("UPDATE plays SET card = null WHERE gameId = $gameId", $values); //prevent important card removes from game
+    sql("UPDATE smltown_plays SET card = null WHERE gameId = $gameId", $values); //prevent important card removes from game
     updateUsers($gameId, null, "card");
-    sql("DELETE FROM plays WHERE gameId = $gameId AND userId = :id", $values);
+    sql("DELETE FROM smltown_plays WHERE gameId = $gameId AND userId = :id", $values);
     updatePlayers($gameId, null, "userId");
 }

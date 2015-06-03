@@ -4,7 +4,7 @@ class Tables {
 
     //TABLES OBJECT
     public $tables = array(
-        'games' => array(
+        'smltown_games' => array(
             'id' => "int(11) UNSIGNED NOT NULL AUTO_INCREMENT",
             'name' => "varchar(255) UNIQUE not null",
             'password' => "varchar(255)",
@@ -20,13 +20,13 @@ class Tables {
             'lastConnection' => "timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
             'PRIMARY KEY' => "(id)"
         ),
-        'players' => array(
+        'smltown_players' => array(
             'id' => "varchar(255) UNIQUE NOT NULL",
             'name' => "varchar(255)",
             'lastConnection' => "timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
             'PRIMARY KEY' => "(id)"
         ),
-        'plays' => array(
+        'smltown_plays' => array(
             'id' => "int(11) UNSIGNED NOT NULL AUTO_INCREMENT", //phpmyqdmin edit
             'userId' => "varchar(255) NOT NULL",
             'gameId' => "int(11) UNSIGNED NOT NULL",

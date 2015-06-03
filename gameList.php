@@ -1,10 +1,5 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<?php
-session_start();
-$_SESSION['gameId'] = null;
-?>
-
 <!--Local game List mode only-->
 <html>  
     <head>
@@ -25,12 +20,12 @@ $_SESSION['gameId'] = null;
 
             <div id="smltown_footer">
                 <br/>                
-            </div>
-            <div id="smltown_errorLog" class="title"></div>
-            <div id="smltown_log" class="title"></div>
+            </div>            
+            <div class="smltown_log" class="title"></div>
+            <div class="smltown_errorLog" class="title"></div>            
         </div>
 
-        <div id="smltown_reload" class="smltown_button" onclick="reload()">reload</div>
+        <div id="smltown_reload" class="smltown_button" onclick="gameListReload()">reload</div>
 
         <script>
 
@@ -39,7 +34,7 @@ $_SESSION['gameId'] = null;
 //            };
             window.onbeforeunload = function() {
                 console.log("stopLocalGameRequests")
-                stopLocalGameRequests();
+//                stopLocalGameRequests();
                 return null;
             };
 
@@ -58,7 +53,7 @@ $_SESSION['gameId'] = null;
                 ready();
             }
 
-            function reload() {
+            function gameListReload() {
                 stopLocalGameRequests();
                 XMLHttpRequestTimeout += 500000 / XMLHttpRequestTimeout;
                 console.log("tiemout: " + XMLHttpRequestTimeout);
@@ -164,8 +159,7 @@ $_SESSION['gameId'] = null;
                 $("#smltown_games").prepend(div);
                 div.click(function() {
                     stopLocalGameRequests();
-                    //window.location.href = href + "game.php";
-                    $("#smltown_html").load(Game.path + "game.php");
+					load("game");
                 });
             }
 

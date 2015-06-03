@@ -22,7 +22,7 @@ function updateUsers($gameId, $userId = null, $select = null) { //way to update 
     );
 
     if (!$userId) {
-        $players = petition("SELECT userId as id FROM plays WHERE gameId = $gameId"); //get all players
+        $players = petition("SELECT userId as id FROM smltown_plays WHERE gameId = $gameId"); //get all players
         for ($i = 0; $i < count($players); $i++) {
             $uniqueRes = $res;
             $userId = $players[$i]->id;
@@ -69,7 +69,7 @@ function getUserInfo($gameId, $userId, $select = null) {
     } else {
         $sql = "$sql userId, card, rulesJS, message";
     }
-    return petition("$sql FROM plays WHERE gameId = $gameId AND userId = '$userId'")[0];
+    return petition("$sql FROM smltown_plays WHERE gameId = $gameId AND userId = '$userId'")[0];
 }
 
 function getInfoPlayers($gameId, $select = null, $userId = null) {
@@ -78,22 +78,22 @@ function getInfoPlayers($gameId, $select = null, $userId = null) {
         $sql = "$sql userId as id, " . selectArray($select);
         //full request
     } else {
-        $sql = "$sql plays.userId as id, plays.admin"
+        $sql = "$sql smltown_plays.userId as id, smltown_plays.admin"
                 //plays.sel when openVoting
-                . ", CASE WHEN 1 = (SELECT openVoting FROM games WHERE id = $gameId) THEN plays.sel END AS sel"
+                . ", CASE WHEN 1 = (SELECT openVoting FROM smltown_games WHERE id = $gameId) THEN smltown_plays.sel END AS sel"
                 //name from players.name
-                . ", CASE WHEN players.id = plays.userId THEN players.name ELSE '' END AS name"
+                . ", CASE WHEN smltown_players.id = smltown_plays.userId THEN smltown_players.name ELSE '' END AS name"
                 //status 1 when is 0
-                . ", CASE WHEN plays.status > -1 THEN 1 ELSE plays.status END AS status"
+                . ", CASE WHEN smltown_plays.status > -1 THEN 1 ELSE smltown_plays.status END AS status"
                 //card if dead or end game
-                . ", CASE WHEN plays.status = -1 OR (SELECT status FROM games WHERE id = $gameId) = 3 ";
+                . ", CASE WHEN smltown_plays.status = -1 OR (SELECT status FROM smltown_games WHERE id = $gameId) = 3 ";
         if (null != $userId && !is_array($userId)) { //same user cards
             //card if is night and same player
-            $sql = "$sql OR plays.card = (SELECT card FROM plays WHERE status = 2 AND userId = $userId AND gameId = $gameId)";
+            $sql = "$sql OR smltown_plays.card = (SELECT card FROM smltown_plays WHERE status = 2 AND userId = $userId AND gameId = $gameId)";
         }
         $sql = "$sql THEN card END AS card";
     }
-    $sql = "$sql FROM plays, players WHERE (plays.gameId = $gameId AND players.id = plays.userId) OR (plays.gameId = $gameId AND plays.admin < 0)";
+    $sql = "$sql FROM smltown_plays, smltown_players WHERE (smltown_plays.gameId = $gameId AND smltown_players.id = smltown_plays.userId) OR (smltown_plays.gameId = $gameId AND smltown_plays.admin < 0)";
     $values = array();
     if (is_array($userId)) {
         $wheres = $userId;
@@ -115,14 +115,14 @@ function getGameInfo($gameId, $userId = null, $array = null) {
         $sql = "$sql id,name,password,status,time,dayTime,openVoting,endTurn,cards,chat";
         if ($userId) {
             $sql = "$sql ,"
-                    . " CASE WHEN (SELECT card FROM plays WHERE userId = '$userId' AND gameId = $gameId) = night"
+                    . " CASE WHEN (SELECT card FROM smltown_plays WHERE userId = '$userId' AND gameId = $gameId) = night"
                     . " OR status = 1 AND"
-                    . " (SELECT count(*) FROM plays WHERE message IS NOT NULL) = 0"
+                    . " (SELECT count(*) FROM smltown_plays WHERE message IS NOT NULL) = 0"
                     . "	THEN night END AS night";
         }
     }
 
-    $games = petition("$sql FROM games WHERE id = $gameId");
+    $games = petition("$sql FROM smltown_games WHERE id = $gameId");
 
     if (count($games) > 0) { //exists
         $game = $games[0];
@@ -136,7 +136,7 @@ function getGameInfo($gameId, $userId = null, $array = null) {
 
 function getGamesInfo($obj = null) { //all game selector page
     //remove plays without game
-    sql("DELETE FROM plays WHERE 0 = (SELECT count(*) FROM games WHERE id = plays.gameId)");
+    sql("DELETE FROM smltown_plays WHERE 0 = (SELECT count(*) FROM smltown_games WHERE id = smltown_plays.gameId)");
 
 //    if (isset($_SESSION['userId'])) {
 //        $userId = $_SESSION['userId'];
@@ -147,20 +147,20 @@ function getGamesInfo($obj = null) { //all game selector page
 //                . "OR status IS NULL");
 //    }
     //remove players without plays
-    sql("DELETE FROM players WHERE 0 = (SELECT count(*) FROM plays WHERE userId = players.id)");
+    sql("DELETE FROM smltown_players WHERE 0 = (SELECT count(*) FROM smltown_plays WHERE userId = smltown_players.id)");
 
     //remove games
-    sql("DELETE FROM games WHERE "
+    sql("DELETE FROM smltown_games WHERE "
             //remove empty games
-            . "(0 = (SELECT count(*) FROM plays WHERE gameId = games.id) AND lastConnection < (NOW() - INTERVAL 10 SECOND))"
+            . "(0 = (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id) AND lastConnection < (NOW() - INTERVAL 10 SECOND))"
             //remove 36h inactivity
             . "OR lastConnection < (NOW() - INTERVAL 36 HOUR)");
 
     $games = json_encode(petition("SELECT id,name,status,dayTime,openVoting"
                     . ", CASE WHEN password IS NOT NULL THEN 1 END AS password"
-                    . ", (SELECT name FROM players WHERE id = (SELECT userId FROM plays WHERE gameId = games.id AND admin = 1 LIMIT 1) ) AS admin"
-                    . ", (SELECT count(*) FROM plays WHERE gameId = games.id) AS players"
-                    . " FROM games"));
+                    . ", (SELECT name FROM smltown_players WHERE id = (SELECT userId FROM smltown_plays WHERE gameId = smltown_games.id AND admin = 1 LIMIT 1) ) AS admin"
+                    . ", (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id) AS smltown_players"
+                    . " FROM smltown_games"));
 
     if (isset($obj)) {
         echo $games;
@@ -175,7 +175,7 @@ function nullFilter($var) { //NULL and none filter to responses
 }
 
 function getRules($gameId) {
-    $playerCount = petition("SELECT count(*) as count FROM plays WHERE gameId = $gameId")[0]->count;
+    $playerCount = petition("SELECT count(*) as count FROM smltown_plays WHERE gameId = $gameId")[0]->count;
     $cards = loadCards(); //all
     foreach ($cards as $cardName => &$card) { //important
         $min = 0;

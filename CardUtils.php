@@ -22,7 +22,7 @@ class CardUtils {
 	public function getGame($select){
 		$gameId = self::$gameId;
 		$values = array("select" => $select);
-		$res = petition("SELECT :select FROM games WHERE id = $gameId", $values);
+		$res = petition("SELECT :select FROM smltown_games WHERE id = $gameId", $values);
 		if(count($res) > 0){
 			return $res[0][$select];
 		}
@@ -35,7 +35,7 @@ class CardUtils {
         $values = array(
             'id' => $id
         );
-        $player = petition("SELECT name FROM players WHERE id = :id", $values);
+        $player = petition("SELECT name FROM smltown_players WHERE id = :id", $values);
         if (count($player) > 0) {
             if (count($player) > 1) {
                 echo "multiple players with id = $id";
@@ -55,7 +55,7 @@ class CardUtils {
             $sql = "$sql userId, card, status, sel";
         }
 
-        $sql = "$sql FROM plays WHERE gameId = $gameId";
+        $sql = "$sql FROM smltown_plays WHERE gameId = $gameId";
 
         $values = array();
         foreach ($wheres as $key => $value) {
@@ -72,7 +72,7 @@ class CardUtils {
     public function getPlayersCard($card, $like = null, $dead = null) {
         $gameId = self::$gameId;
         $values = array();
-        $sql = "SELECT * FROM plays WHERE gameId = $gameId AND card";
+        $sql = "SELECT * FROM smltown_plays WHERE gameId = $gameId AND card";
 
         if ($like) { //all kind
             $values['card'] = "%_$card";
@@ -118,7 +118,7 @@ class CardUtils {
                 $sql = "$sql ,$selects[$i]";
             }
         }
-        $result = petition("$sql FROM plays, players WHERE gameId = $gameId AND plays.userId = :userId AND players.id = :userId", $values)[0];
+        $result = petition("$sql FROM smltown_plays, smltown_players WHERE gameId = $gameId AND smltown_plays.userId = :userId AND smltown_players.id = :userId", $values)[0];
         if ($selects && !is_array($selects)) {
             return $result->$selects; //return only the atribute
         }
@@ -134,7 +134,7 @@ class CardUtils {
 		$updateValues = array("card", "status", "rulesJS");
 
         $values = array('userId' => $id);
-        $sql = "UPDATE plays SET";
+        $sql = "UPDATE smltown_plays SET";
         $i = 0;
         foreach ($array as $key => $value) {
             if (!$key == "card" && !$key == "status" && !$key == "sel") { //injection prevent
@@ -160,7 +160,6 @@ class CardUtils {
             }
         }
 		
-		
     }
 
     public function addPlayerRules($kind, $rules, $id = null) {
@@ -173,7 +172,7 @@ class CardUtils {
             'userId' => $id,
             'rules' => $rules
         );
-        sql("UPDATE plays SET rules$kind ="
+        sql("UPDATE smltown_plays SET rules$kind ="
 			. " CASE WHEN rules$kind = '' THEN CONCAT(rules$kind, ';', :rules) ELSE :rules END"
 			. " WHERE gameId = $gameId AND userId = :userId", $values);
         updateUsers($gameId, $id, "rules$kind");
@@ -192,7 +191,7 @@ class CardUtils {
 
     public function endGame() {
         $gameId = self::$gameId;
-        sql("UPDATE games SET status = 3 WHERE id = $gameId");
+        sql("UPDATE smltown_games SET status = 3 WHERE id = $gameId");
         updateGame($gameId);
     }
 
@@ -209,7 +208,7 @@ class CardUtils {
 
     public function getUserIdByCard($card) {
         $values = array('card' => $card);
-        return petition("SELECT userId FROM plays WHERE card = $card", $values);
+        return petition("SELECT userId FROM smltown_plays WHERE card = $card", $values);
     }
 
     public function setMessage($message, $id = null) {

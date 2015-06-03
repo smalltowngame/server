@@ -109,7 +109,7 @@ Game.request = {
         }        
         Game.request.send({
             action: "addUser",
-            id: Game.id,
+            //id: smltown.gameId,
             userId: Game.userId, //device stored userId
             userName: Game.userName
         });

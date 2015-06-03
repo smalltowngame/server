@@ -71,7 +71,7 @@ a:hover{
     border: 5px solid rgb(125,200,0);
     border-radius: 20px;
 }
-smltown_.game:active{
+.smltown_game:active{
     box-shadow: inset 2px 2px 5px black;
 }
 .smltown_game .smltown_name{
@@ -103,4 +103,9 @@ smltown_.game:active{
 .smltown_game.local{
     background-color: rgba(0,0,255,0.3) !important;
     border: 5px solid rgb(0,0,255);
+}
+
+#smltown_gameList, #smltown_game{
+	display: none;
+	height: 100%;
 }

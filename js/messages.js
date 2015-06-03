@@ -4,50 +4,56 @@ function login(log) {
         log = log.log; //server side
     }
     $("#smltown_login").remove(); //clean
-    $("body").append("<div class='dialog'><form id='login'>"
-            + "<input type='text' class='name' placeholder='set your name'>"
+    $("#smltown_html").append("<div class='smltown_dialog'><form id='smltown_login'>"
+            + "<input type='text' class='smltown_name' placeholder='set your name'>"
             + "<input type='submit' value='Ok'>"
-            + "<div class='smltown_button cancel'>Cancel</div>"
-            + "<div class='log'></div>"
+            + "<div class='smltown_button smltown_cancel'>Cancel</div>"
+            + "<div class='smltown_log'></div>"
             + "</form><div>");
     if (log) {
-        $("#smltown_login .log").html(log);
+        $("#smltown_login .smltown_log").html(log);
     }
-    $("#smltown_login .name").focus();
+    $("#smltown_login .smltown_name").focus();
 
     //LOGIN EVENTS
-    $("#smltown_login").submit(function() {
-        var name = $(this).find(".name").val();
+    $("#smltown_login").submit(function() { //submit 4 device buttons
+        var name = $(this).find(".smltown_name").val();
         if (!name || !/\S/.test(name)) { //not only whitespaces
-            $("#smltown_login .log").text("empty name!");
+            $("#smltown_login .smltown_log").text("empty name!");
             return false;
         }
 
         for (var id in Game.players) {
             if (Game.players[id].name == name) {
-                $("#smltown_login .log").text("name already exists!");
+                $("#smltown_login .smltown_log").text("name already exists!");
                 return false;
             }
         }
 
         Game.request.setName(name);
 
-        $(".dialog").remove();
+        $(".smltown_dialog").remove();
         return false; //prevent submit
     });
-    $("#smltown_login .cancel").on("tap", function() {
-        Game.request.deletePlayer(Game.user.id, function() {
+    $("#smltown_login .smltown_cancel").on("tap", function() {
+        console.log(123)
+        if (typeof Game.user != "undefined") {
+            Game.request.deletePlayer(Game.user.id, function() {
+                gameBack();
+            });
+        } else {
             gameBack();
-        });
+        }
+        $(".smltown_dialog").remove();
     });
 }
 
 
 function setMessage(data) {
     notify(data, function() {
-		if(Game.info.status == 2){
-        	sleep();
-		}
+        if (Game.info.status == 2) {
+            sleep();
+        }
         endTurn();
         Game.request.messageReceived();
     }, false);

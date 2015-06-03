@@ -133,40 +133,10 @@ function setPlayingCards(cards) { //active game cards
     for (var cardName in cards) {
         var cardNumber = cards[cardName];
         var div = $(".smltown_rulesCard[card='" + cardName + "']");
-        div.removeClass("cardOut");
+        div.removeClass("smltown_cardOut");
         if (cardNumber) { //not set
             div.find("input").val(cardNumber).show();
             div.find("span").hide();
-        }
-    }
-}
-
-function documentResize() {
-    $("#smltown_html").removeClass("smltown_static smltown_staticCard");
-
-    $("#smltown_body").width("100%");
-    $("#smltown_menu, #smltown_card").addClass("smltown_swipe");
-    $("#smltown_menu").width("200%");
-    $("#smltown_card").width("inherit");
-
-    //horizontal /3
-//    if (9 * $(window).width() >= 16 * $(window).height()) {
-//        $("html").addClass("smltown_static staticCard");
-//        $("body").width($(window).height() * 3 / 4);
-//        $("#smltown_menu, #card").width(($(window).width() - $("body").width()) / 2);
-//        //horizontal /2
-//    } else 
-    if (3 * $(window).width() >= 4 * $(window).height()) {
-        $("#smltown_html").addClass("smltown_static");
-        $("#smltown_body").width($("#smltown_html").width() - $("#smltown_menu").width());
-//        $("#smltown_body").width(450);
-        $("#smltown_menu, #smltown_body, #smltown_console").height($(window).height() - $("#smltown_header").height());
-//        $("#smltown_menu").width($(window).width() - $("body").width());
-        //vertical
-    } else {
-        //unTouchable
-        if (!Modernizr.touch) {
-            $("#smltown_html").addClass("unTouchable");
         }
     }
 }
@@ -218,14 +188,20 @@ function addBackgroundCard(div, filename) {
 
 function setUserNamesByClass() {
     for (var id in Game.players) {
-        var name = Game.players[id].name;
+        var name = playingCards;
         $(".id" + id + ":empty").append(name + ": "); //not .text() translate
     }
 }
 
 function gameBack() {
-    load("gameList.php");
-//    $("#smltown_html").load(Game.path + "gameList.php", function() {
-//        indexLoad();
-//    });
+    load("gameList");
+}
+
+function viewport() {
+    var e = window, a = 'inner';
+    if (!('innerWidth' in window)) {
+        a = 'client';
+        e = document.documentElement || document.body;
+    }
+    return {width: e[a + 'Width'], height: e[a + 'Height']};
 }

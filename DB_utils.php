@@ -7,7 +7,7 @@ function loadCards($gameId = null) { //GAME ID FUTURE ERRORS
     $cards = array();
 
     if (isset($gameId)) { // if specific game
-        $string = petition("SELECT cards FROM games WHERE id = $gameId")[0]->cards;
+        $string = petition("SELECT cards FROM smltown_games WHERE id = $gameId")[0]->cards;
 
         //IF CARDS EMPTY OR CURRUPTED
         if (empty($string)) {
@@ -87,13 +87,13 @@ function getCards($cards, $playerCount) {
 function getCard($obj, $callback) { //only night
 //    $card = petition("SELECT plays.card FROM games, plays WHERE plays.gameId = $obj->gameId AND plays.userId = $obj->userId 
 //        AND games.night = plays.card");
-    $card = petition("SELECT card FROM plays WHERE gameId = $obj->gameId AND userId = $obj->userId");
+    $card = petition("SELECT card FROM smltown_plays WHERE gameId = $obj->gameId AND userId = $obj->userId");
     $obj->card = $card[0]->card;
     $callback($obj);
 }
 
 function getCardRules($gameId) {
-    $playerCards = petition("SELECT card FROM plays WHERE gameId = $gameId");
+    $playerCards = petition("SELECT card FROM smltown_plays WHERE gameId = $gameId");
     for ($i = 0; $i < count($playerCards); $i++) {
         $card = $playerCards[$i]->card;
     }
@@ -123,12 +123,12 @@ function setNotifications($gameId, $message, $wheres = null) {
 //static message (updates from ping)
 function saveMessage($message, $gameId, $userId = null) {
     $values = array('message' => $message);
-    $sql = "UPDATE plays SET message = :message WHERE gameId = $gameId AND status > -1 AND admin > -1 AND";
+    $sql = "UPDATE smltown_plays SET message = :message WHERE gameId = $gameId AND status > -1 AND admin > -1 AND";
     if (null != $userId) {
         $sql = "$sql userId = $userId";
     } else {
         $sql = "$sql (";
-        $players = petition("SELECT userId FROM plays WHERE gameId = $gameId");
+        $players = petition("SELECT userId FROM smltown_plays WHERE gameId = $gameId");
         for ($i = 0; $i < count($players); $i++) {
             $playerId = $players[$i]->userId;
             $sql = "$sql userId = '$playerId'";
@@ -153,12 +153,12 @@ function saveMessage($message, $gameId, $userId = null) {
 
 function getPlayers($gameId, $wheres) {
     $values = array();
-    $sql = "SELECT userId FROM plays WHERE gameId = $gameId " . whereArray($wheres, $values);
+    $sql = "SELECT userId FROM smltown_plays WHERE gameId = $gameId " . whereArray($wheres, $values);
     return petition($sql, $values);
 }
 
 function playersAlive($gameId, $onlyRealPlayers = false) {
-    $sql = "SELECT count(*) as count FROM plays WHERE gameId = $gameId AND status > 0";
+    $sql = "SELECT count(*) as count FROM smltown_plays WHERE gameId = $gameId AND status > 0";
     if ($onlyRealPlayers) {
         $sql = "$sql AND admin > -1";
     }
@@ -167,7 +167,7 @@ function playersAlive($gameId, $onlyRealPlayers = false) {
 
 function getRandomUserId() {
     $id = mt_rand();
-    $count = petition("SELECT count(*) as count FROM players, plays WHERE players.id = $id OR plays.userId = $id")[0]->count;
+    $count = petition("SELECT count(*) as count FROM smltown_players, smltown_plays WHERE smltown_players.id = $id OR smltown_plays.userId = $id")[0]->count;
     if ($count > 0) { //repeated id
         return getRandomUserId();
     }
@@ -176,8 +176,8 @@ function getRandomUserId() {
 
 function checkGameOver($gameId) {
     if (playersAlive($gameId) < 2) {
-        sql("UPDATE games SET status = 3 WHERE id = $gameId");
-        sql("UPDATE plays SET status = -1 WHERE id = $gameId AND status < 1");
+        sql("UPDATE smltown_games SET status = 3 WHERE id = $gameId");
+        sql("UPDATE smltown_plays SET status = -1 WHERE id = $gameId AND status < 1");
         updateGame($gameId, null, "status");
         updatePlayers($gameId, null, "status");
         return true;
@@ -186,7 +186,7 @@ function checkGameOver($gameId) {
 }
 
 function getDiscusTime($gameId) {
-    $dayTime = petition("SELECT dayTime FROM games WHERE id = $gameId")[0]->dayTime;
+    $dayTime = petition("SELECT dayTime FROM smltown_games WHERE id = $gameId")[0]->dayTime;
     if (!$dayTime) {
         $dayTime = 60;
     }
@@ -200,11 +200,11 @@ function getDiscusTime($gameId) {
 //GAME INTERACTION
 
 function hurtPlayer($gameId, $userId) {
-    sql("UPDATE plays SET status = 0 WHERE gameId = $gameId AND userId = $userId");
+    sql("UPDATE smltown_plays SET status = 0 WHERE gameId = $gameId AND userId = $userId");
 }
 
 function killPlayer($gameId, $userId) {
-    sql("UPDATE plays SET status = -1, rulesJS = null WHERE gameId = $gameId AND userId = $userId");
+    sql("UPDATE smltown_plays SET status = -1, rulesJS = null WHERE gameId = $gameId AND userId = $userId");
     updateUsers($gameId, $userId, "rules"); // necessary?
     return checkGameOver($gameId);
 }

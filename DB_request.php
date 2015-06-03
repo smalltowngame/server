@@ -3,14 +3,15 @@
 //USER REQUESTS
 
 function addUser($obj) { //insert user to game
-    $gameId = $obj->id;
+	//echo $obj->gameId;
+    $gameId = $obj->gameId;
     $userId = $obj->userId;
     $userName = $obj->userName;
 
     //prevent sql injection on gameId
     $values = array('gameId' => $gameId);
-    if (petition("SELECT count(*) as count FROM games WHERE id = :gameId", $values)[0]->count == 0) {
-        echo "DB_request error gameId = $gameId.";
+    if (petition("SELECT count(*) as count FROM smltown_games WHERE id = :gameId", $values)[0]->count == 0) {
+        echo "DB_request sql injection prevention: any game found whith gameId = $gameId.";
         return;
     }
 
@@ -32,7 +33,7 @@ function addUser($obj) { //insert user to game
         $userId = getRandomUserId();
     }
     $values = array('userName' => $userName, 'userId' => $userId);
-    sql("INSERT IGNORE INTO players (id, name) VALUES (:userId, :userName)", $values);
+    sql("INSERT IGNORE INTO smltown_players (id, name) VALUES (:userId, :userName)", $values);
 
     $_SESSION['userId'] = $userId;
     $_SESSION['userName'] = $userName;
@@ -48,14 +49,14 @@ function addUser($obj) { //insert user to game
 
     $values = array('userId' => $userId, 'gameId' => $gameId);
 
-    $sql = "INSERT INTO plays (userId, gameId, admin) SELECT :userId, :gameId,";
+    $sql = "INSERT INTO smltown_plays (userId, gameId, admin) SELECT :userId, :gameId,";
     if (null == $admin) {
-        $sql = "$sql CASE WHEN (SELECT count(*) FROM plays WHERE admin = 1 AND gameId = :gameId) = 0 THEN 1 ELSE 0 END";
+        $sql = "$sql CASE WHEN (SELECT count(*) FROM smltown_plays WHERE admin = 1 AND gameId = :gameId) = 0 THEN 1 ELSE 0 END";
     } else {
         $sql = "$sql $admin";
     }
-    $sql = "$sql FROM DUAL" //from nothing  (only 1 time)
-            . " WHERE (SELECT count(*) FROM plays WHERE userId = :userId AND gameId = :gameId) = 0";
+    $sql = "$sql FROM DUAL" //from nothing (read table only 1 time)
+            . " WHERE (SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = :gameId) = 0";
 
     $sth = sql($sql, $values);
 
@@ -77,7 +78,7 @@ function setName($obj) {
     $values = array('name' => $userName);
 
     //duplicated names works on js, isn't a real security issue
-    sql("UPDATE players SET name = :name WHERE id = '$userId'", $values);
+    sql("UPDATE smltown_players SET name = :name WHERE id = '$userId'", $values);
 
     $_SESSION['userName'] = $userName;
     updatePlayers($gameId, null, "name"); //way to update new players to other people
@@ -100,24 +101,19 @@ function setName($obj) {
 function chat($obj) {
     $gameId = $obj->gameId;
     $userId = $obj->userId;
-    $text = "$userId~$obj->text";
+    $text = $obj->text;
     $res = array(
         'type' => "chat",
-        'userId' => $userId,
-        'text' => $text
+        'userId' => $obj->userId,
+        'text' => $obj->text
     );
 
-    $plays = petition("SELECT userId FROM plays WHERE gameId = $gameId AND userId <> $userId");
+    $plays = petition("SELECT userId FROM smltown_plays WHERE gameId = $gameId AND userId <> $userId");
     for ($i = 0; $i < count($plays); $i++) {
         send_response(json_encode($res), 
         $gameId, 
         $plays[$i]->userId);
     }
-
-    $values = array(
-        'chat' => $text
-    );
-    sql("UPDATE games SET chat = CONCAT(chat , '·', :chat) WHERE id = $gameId", $values);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -131,7 +127,7 @@ function getAll($obj) {
 
 function checkPassword($obj) {
     $values = array('gameId' => $obj->gameId, 'password' => $obj->password);
-    echo petition("SELECT count(*) as count FROM games WHERE id = :gameId AND password = :password", $values)[0]->count;
+    echo petition("SELECT count(*) as count FROM smltown_games WHERE id = :gameId AND password = :password", $values)[0]->count;
 }
 
 function setMessage($obj) {
@@ -142,7 +138,7 @@ function setMessage($obj) {
 //    $gameId = $obj->gameId;
 //    $userId = $obj->userId;
 //    killPlayer($gameId, $userId);
-//    $name = petition("SELECT name FROM players WHERE id = '$userId'")[0]->name;
+//    $name = petition("SELECT name FROM smltown_players WHERE id = '$userId'")[0]->name;
 //    if (isset($obj->message)) {
 //        $str = $obj->message;
 //    } else {
@@ -176,7 +172,7 @@ function createGame($obj = null) {
     }
 
     //check
-    $sth = sql('INSERT IGNORE INTO games (name, cards) VALUES (:name, :cards)', $values);
+    $sth = sql('INSERT IGNORE INTO smltown_games (name, cards) VALUES (:name, :cards)', $values);
     global $pdo;
     $id = $pdo->lastInsertId();
     if ($sth->rowCount() == 0) { //nothing changes
@@ -190,10 +186,10 @@ function createGame($obj = null) {
         $value = array(
             'name' => $values['name']
         );
-        sql("DELETE FROM games WHERE 0 < "
-                . "(SELECT count(*) FROM plays WHERE 1 = "
-                . "(SELECT admin FROM plays WHERE plays.gameId = games.id LIMIT 0,1)) "
-                . "AND (games.status <> 1 AND games.status <> 2 AND games.name <> :name)", $value);
+        sql("DELETE FROM smltown_games WHERE 0 < "
+                . "(SELECT count(*) FROM smltown_plays WHERE 1 = "
+                . "(SELECT admin FROM smltown_plays WHERE smltown_plays.gameId = smltown_games.id LIMIT 0,1)) "
+                . "AND (smltown_games.status <> 1 AND smltown_games.status <> 2 AND smltown_games.name <> :name)", $value);
     }
 
     //return

@@ -6,7 +6,7 @@ function ajax(request, callback) {
     req.send(request);
     req.onreadystatechange = function () { //DEBUG
         if (req.readyState == 4 && req.responseText) {
-            console.log(req.responseText)
+            //console.log(req.responseText)
             if (callback) {
                 callback(req.responseText);
             }

@@ -75,13 +75,15 @@ body{
     border: 1px solid black;
     padding: 10px;
     color: white;
-    font-weight: bold;
     -webkit-box-shadow: 5px 0 20px rgba(0,0,0,0.4),
         -5px 0 20px rgba(0,0,0,0.4);  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
     -moz-box-shadow:    5px 0 20px rgba(0,0,0,0.4),
         -5px 0 20px rgba(0,0,0,0.4);  /* Firefox 3.5 - 3.6 */
     box-shadow: 5px 0 20px rgba(0,0,0,0.4),
         -5px 0 20px rgba(0,0,0,0.4);
+}
+.smltown_dialog form > *{
+    font-weight: bold;
 }
 .smltown_dialog input{
     width: 100%;
@@ -109,10 +111,9 @@ body{
 
 .smltown_button, #smltown_html input[type=text], #smltown_html input[type=submit], #smltown_html input[type=button]{ /* not checkbox */
     padding: 0 10px;
-    margin: 0;
     height: 50px;
     width: 100%;
-    font-size: 14px;    
+    /*font-size: 14px;*/    
     -webkit-box-sizing: border-box;  /*Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;     /*Firefox, other Gecko */
     box-sizing: border-box;          /*Opera/IE 8+ */
@@ -159,7 +160,7 @@ body{
     transform: translate3d(0, 10000px, 0);
 }
 
-#smltown_errorLog{
+.smltown_errorLog{
     color: red;
 }
 

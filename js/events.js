@@ -19,19 +19,6 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 //VARIABLES DECLARATION
-var contentHeights = {//android 2.3 bug on height content div
-    updateConsole: function() {
-        if ($("#smltown_console").hasClass("extended")) {
-            this.console = $("#smltown_body").height();
-            return;
-        }
-        this.console = $("#smltown_body").height() * 0.2;
-    }
-    ,
-    menuContent: $("#smltown_body").height(),
-    console: $("#smltown_body").height() * 0.2,
-    list: $("#smltown_body").height() * 0.8 - 30,
-};
 
 //autorun
 if (Modernizr.touch) {
@@ -40,27 +27,87 @@ if (Modernizr.touch) {
     $("#smltown_console .text").css("position", "relative");
 }
 
-$(window).resize(function() {
-    documentResize();
+function windowResize() {
+    smltown_error(111)
+    //DEFINE HTML HEIGHT FOR PLUGINS
+    var rest = viewport().height - $("#smltown_html").offset().top;
+    $("#smltown_html").css("height", rest + "px");
+
+    //RESIZE FUNCTIONS//////////////////////////////////////////////////////////
+    $("#smltown_html").removeClass("smltown_static smltown_staticCard");
+
+    //WIDTHS
+    $("#smltown_body").width("100%");
+    $("#smltown_menu, #smltown_card").addClass("smltown_swipe");
+    $("#smltown_menu").width("200%");
+    $("#smltown_card").width("inherit");
+
+    //HEIGHTS
+    $("#smltown_body").height($("#smltown_html").height() - $("#smltown_header").height());
+
+    //horizontal /3
+//    if (9 * $(window).width() >= 16 * $(window).height()) {
+//        $("html").addClass("smltown_static staticCard");
+//        $("body").width($(window).height() * 3 / 4);
+//        $("#smltown_menu, #card").width(($(window).width() - $("body").width()) / 2);
+//        //horizontal /2
+//    } else 
+    if (3 * $(window).width() >= 4 * $(window).height()) {
+        $("#smltown_html").addClass("smltown_static");
+        $("#smltown_body").width($("#smltown_html").width() - $("#smltown_menu").width());
+//        $("#smltown_body").width(450);
+        $("#smltown_menu, #smltown_body, #smltown_console").height($(window).height() - $("#smltown_header").height());
+//        $("#smltown_menu").width($(window).width() - $("body").width());
+        //vertical
+    } else {
+        //unTouchable
+        if (!Modernizr.touch) {
+            $("#smltown_html").addClass("unTouchable");
+        }
+    }
+
+    //RESTORE HEIGHT CONSTANTS
+    window.contentHeights = {//android 2.3 BUG on height content div
+        updateConsole: function() {
+            setTimeout(function() {
+                if ($("#smltown_console").hasClass("extended")) {
+                    this.smltown_console = $("#smltown_body").height();
+                } else {
+                    this.smltown_console = $("#smltown_body").height() * 0.25;
+                }
+                $("#smltown_console").height(this.smltown_console);
+            }, 500);
+        }
+        ,
+        smltown_menuContent: $("#smltown_body").height(),
+        smltown_console: $("#smltown_body").height() * 0.25,
+        smltown_list: $("#smltown_body").height() * 0.75 - 30
+    };
+    ///////////////////////////////////////////////////////////////////////////
+
     resizeCard();
+}
+
+$(window).resize(function() {
+    windowResize();
 });
+
 //////////////////////////////////////////////////////
 
 function cardSwipeRotate() {
-    $("#smltown_card").removeClass("visible");
+    $("#smltown_card").removeClass("smltown_visible");
     setTimeout(function() {
-        $("#card > div").removeClass("rotate");
+        $("#smltown_card > div").removeClass("smltown_rotate");
     }, 400);
 }
 function cardRotateSwipe() {
-    if ($("#smltown_card > div").hasClass("rotate")) {
-        $("#smltown_card > div").removeClass("rotate");
+    if ($("#smltown_card > div").hasClass("smltown_rotate")) {
+        $("#smltown_card > div").removeClass("smltown_rotate");
     }
     setTimeout(function() {
-        $("#smltown_card").removeClass("visible");
+        $("#smltown_card").removeClass("smltown_visible");
     }, 400);
 }
-
 
 //var transition = 0;
 function events() {
@@ -102,16 +149,16 @@ function events() {
 
     //TAP MENUS
     $("#smltown_card").on("tap", function() {
-        if ($("#card > div").hasClass("rotate")) {
+        if ($("#smltown_card > div").hasClass("smltown_rotate")) {
             cardRotateSwipe();
         } else {
-            $("#card > div").addClass("rotate");
+            $("#smltown_card > div").addClass("smltown_rotate");
         }
     });
 
     $("#smltown_menu").on("tap", function(e) {
-        if ($(e.target).attr("id") == "menu") {
-            $(this).removeClass("visible");
+        if ($(e.target).attr("id") == "smltown_menu") {
+            $(this).removeClass("smltown_visible");
         }
     });
 
@@ -177,35 +224,36 @@ function events() {
         var div = $(this);
         var animation = function() {
         };
-        if ($(this).hasClass("falseSelector")) { //if is cards
+        if ($(this).hasClass("smltown_falseSelector")) { //if is cards
             div = $(this).parent();
             animation = animateAuto; //utils function
         } else if ($(this).is(':first-child')) { //if is selector
             div = $(this).parent();
             animation = animateButtons; //utils function
-        } else if (!$(this).hasClass("smltown_button") && !$(this).hasClass("input")) { //selected
+        } else if (!$(this).hasClass("smltown_button") && !$(this).hasClass("smltown_input")) { //selected
             animation = animateAuto; //utils function
         }
 
-        if (div.hasClass("auto")) { //remove auto
+        if (div.hasClass("smltown_auto")) { //remove auto
             if (div.hasClass("text")) {
-                removeAuto(div.find(".auto")); //prevent card selector close
+                removeAuto(div.find(".smltown_auto")); //prevent card selector close
             } else {
                 removeAuto(div);
             }
             //return menu at original top position
-            $("#smltown_menuContent > div").animate({top: 0}, 300);
+            $("#smltown_menuContent > div").css("transform", "translateY(0)");
 
         } else { //add auto (expand)
             var parent = div.parent();
             parent.not("#smltown_menu > div").css("height", "auto");
             animation(div, function(height) {
                 if (height > contentHeights.menuContent) {
-                    $("#smltown_menuContent > div").animate({top: -div.position().top}, 300);
+                    console.log("translateY(" + -div.position().top + ")");
+                    $("#smltown_menuContent > div").css("transform", "translateY(" + -div.position().top + "px)");
                 }
             }); //div auto height
-            removeAuto($("#smltown_menu .auto").not(parent));
-            div.addClass("auto");
+            removeAuto($("#smltown_menu .smltown_auto").not(parent));
+            div.addClass("smltown_auto");
         }
 
     });
@@ -262,7 +310,13 @@ function events() {
         gameBack();
     });
 
+//    $("#smltown_console").on("mousedown", function() {
+//        if ($("#smltown_chatInput").is(":focus"))
+//            console.log(123)
+//    });
+
     $("#smltown_console").on("mouseup", function() {
+//        if($("#smltown_chatInput").is(":focus"))
         $('#smltown_console').toggleClass("extended");
         chatUpdate();
         if ($("#smltown_console").hasClass("extended")) {
@@ -273,7 +327,7 @@ function events() {
         if ($("#smltown_console").hasClass("extended")) {
             return;
         }
-        chatFocusOut();
+        chatUpdate();
     });
 
     $("#smltown_chatForm").submit(function() {
@@ -293,27 +347,74 @@ function events() {
     touchScroll($("#smltown_console"), "bottom");
 }
 
-function addChats(chats) {
-    console.log("chats = " + chats)
+//function addChats(chats) {
+//    console.log("chats = " + chats)
+//    var arrayChats = chats.split("·");
+//    var values;
+//    for (var i = 0; i < arrayChats.length; i++) {
+//        values = arrayChats[i].split("~");
+//        addChat(values[1], values[0]);
+//    }
+//    chatUpdate();
+//    setUserNamesByClass();
+//}
+
+function addChats() { //from coockie	
+    var chats = getCookie("chat");
     var arrayChats = chats.split("·");
     var values;
     for (var i = 0; i < arrayChats.length; i++) {
         values = arrayChats[i].split("~");
-        addChat(values.text, values.userId);
+        writeChat(values[1], values[0]);
     }
     chatUpdate();
     setUserNamesByClass();
 }
 
-function addChat(text, userId) {
-    console.log("text = " + text)
-    if (!userId) {
-        userId = Game.user.id;
-    }
-    $("#smltown_console .text").append("<div><span class='id" + userId + "'></span>" + text + "</div>");
+function clearChats() { //coockie
+    document.cookie = "chat=;domain=." + document.domain + ";path=/;";
 }
 
-function chatFocusOut() { //DEVICE FUNCTION CALL!!!
+function addChat(text, userId) { //from server
+    if (typeof userId == "undefined") {
+        userId = Game.userId;
+    }
+    var now = new Date();
+    now.setTime(now.getTime() + 31536000000); //1 year
+    var domain = "." + document.domain;
+    if (document.domain == "localhost") {
+        domain = "";
+        document.cookie.Domain = null;
+    }
+    document.cookie = "chat=" + getCookie("chat") + "·" + userId + "~" + text + ";expires=" + now.toGMTString() + ";domain=" + domain + ";path=/;";
+    writeChat(text, userId);
+}
+
+function writeChat(text, userId) {
+    var name = "";
+    if (typeof Game.players[userId] != "undefined") { //if player no longer exists
+        name = Game.players[userId].name + ": ";
+    }
+    console.log(text)
+    text = emoji.replace_unified(text);
+    console.log(text)
+    $("#smltown_console .text").append("<div><span class='id" + userId + "'>" + name + "</span>" + text + "</div>");
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ')
+            c = c.substring(1);
+        if (c.indexOf(name) == 0)
+            return c.substring(name.length, c.length);
+    }
+    return "";
+}
+
+function chatFocusOut() { //LET DEVICE FUNCTION CALL!!!
     $('#smltown_chatInput').val("");
     $("#smltown_console").removeClass("extended");
     chatUpdate();
@@ -328,7 +429,7 @@ function chatUpdate() {
 }
 
 function removeAuto(sel) { //remove auto height
-    sel.removeClass("auto");
+    sel.removeClass("smltown_auto");
     sel.stop().css("height", ""); //stop animations
 }
 
@@ -350,17 +451,12 @@ function menuInput(id, callback) { //menu cell with input
     });
     $("#smltown_" + id + " input").on('blur', function() {
 //        $("#" + id + " form").trigger('submit');
-
         var val = $(this).val();
-
         $(this).val("");
-        console.log(val)
         if (!val) {
             return false;
         }
-        console.log(333)
         $(this).attr("placeholder", val);
-
         callback(val);
         return false;
     });
@@ -467,45 +563,45 @@ function rulesEvents() {
             $this.addClass("selected");
             $("#smltown_body").append("<div id='infoSelectedCard'>" + Game.cards[$this.attr("card")].desc);
         }, 1);
-    })
+    });
 }
 
-function touchScroll(div, side) { //side: top or bottom
+function touchScroll(div, side) { //side: top or bottom    
     div.off("touchstart");
     var element = div.attr("id");
+    console.log("'" + element + "' scroll on '" + side + "' done")
     //android 2.3 bug on height content div
     var $this = div.find(">div");
 
-    if ($this.css(side) == "auto") {
-        $this.css(side, 0);
+    if ($this.css("transform") == "none") {
+        $this.css("transform", "translateY(0px)");
     }
 
-    var animationTop = {}, animationBottom = {};
-    animationTop[side] = 2;
+    var finalPosition, x, y, pageX, pageY, originScrollY, position, moved;
 
-    var finalPosition, x, y, pageX, pageY, originScrollY;
-    var direction = 1;
-    if (side == "bottom") {
-        direction = -1;
-    }
     div.on("touchstart", function(e) { //necessary top != auto
-        var maxScroll = contentHeights[element] - $this.height() - 10; //see bottom list
-        if (maxScroll > 0) {
-            $this.css(side, 0);
+        position = null; //reset final position to prevent calculations 
+        var maxScroll = contentHeights[element] - $this.height() + 10; //see bottom list
+        if (maxScroll > -10) {
+            console.log("not scroll " + element);
+            $this.css("transform", "translateY(0px)");
             return;
         }
+
         pageX = e.originalEvent.touches[0].pageX;
         pageY = e.originalEvent.touches[0].pageY;
-        originScrollY = parseInt($this.css(side)) - pageY * direction;
+        var Y = parseInt($this.css('transform').split(',')[5]);
+        originScrollY = Y - pageY;
 
         $(this).on("touchmove", function(e) {
-            e.preventDefault(); //faster (test on 2.3 android)
+            e.preventDefault(); //faster (test on 2.3 android)    
+            moved = true;
 
             //limit scroll
             y = e.originalEvent.touches[0].pageY;
 
-            if ("console" == element) {
-                $("#smltown_chatInput").blur();
+            if ("smltown_console" == element) {
+//                $("#smltown_chatInput").blur();
 
             } else {//prevent scroll on swipe
                 x = e.originalEvent.touches[0].pageX;
@@ -515,42 +611,67 @@ function touchScroll(div, side) { //side: top or bottom
             }
 
             //scroll
-            finalPosition = originScrollY + y * direction;
-            if (finalPosition > 0) {
-                finalPosition = 10;
-            } else if (finalPosition < maxScroll) {
-                finalPosition = maxScroll - 10;
+            finalPosition = originScrollY + y;
+            if (side == "top") {
+                if (finalPosition > 0) {
+                    finalPosition = 10;
+                } else if (finalPosition < maxScroll) {
+                    finalPosition = maxScroll - 10;
+                }
             } else {
-                if ("list" == element) {
-                    $("#smltown_console").css("margin-bottom", "-20%");
+                if (finalPosition < 0) {
+                    finalPosition = -10;
+                } else if (finalPosition > -maxScroll) {
+                    finalPosition = -maxScroll + 10;
                 }
             }
-            $this.css(side, finalPosition + "px");
+            //prevent extra calculations
+            if (position == finalPosition) {
+                return;
+            }
+
+            if ("smltown_list" == element) {
+                $("#smltown_console").addClass("smltown_reduced");
+            }
+
+            position = finalPosition;
+            $this.css("transform", "translateY(" + finalPosition + "px)");
 
             //common events
-            if ("list" == element) {
+            if ("smltown_list" == element) {
                 onPlayersScroll();
             }
 
         }).one("touchend", function() {
             $(this).off("touchmove");
-            if (finalPosition > 0) {
-                $this.animate(animationTop, 100);
-            } else if (finalPosition < maxScroll) {
-                animationBottom[side] = maxScroll;
-                $this.animate(animationBottom, 100);
+            if (!moved) {
+                return;
             }
-            if ("list" == element) {
+            if (side == "top") {
+                if (finalPosition > 0) {
+                    $this.css("transform", "translateY(2px)");
+                } else if (finalPosition < maxScroll) {
+                    $this.css({
+                        transform: "translateY(" + maxScroll + "px)"
+                    });
+                }
+            } else {
+                if (finalPosition < 0) {
+                    $this.css("transform", "translateY(0px)");
+                } else if (finalPosition > -maxScroll) {
+                    $this.css("transform", "translateY(" + (-maxScroll) + "px)");
+                }
+            }
+
+            if ("smltown_list" == element) {
                 setTimeout(function() { //let some time to continue scroling
-                    $("#smltown_console").css("margin-bottom", "inherit");
+                    $("#smltown_console").removeClass("smltown_reduced");
                 }, 500);
 
-            } else if ("menu" == element) {
+            } else if ("smltown_menu" == element) {
                 if ($(this).height() - $this.height() > 0) {//client see bottom list                        
-                    $this.animate(animationTop, 100);
+                    $this.css("transform", "translateY(0px)");
                 }
-            } else if ("console" == element) {
-                chatFocusOut();
             }
         });
     });
@@ -564,12 +685,14 @@ function touchScroll(div, side) { //side: top or bottom
  });
  */
 
+//computer
 $("#smltown_list").scroll(function() {
     onPlayersScroll();
 });
 
 function onPlayersScroll() { //only touch
-    if (parseInt($("#smltown_list > div").css("top")) < 0) {
+    var Y = parseInt($("#smltown_list > div").css('transform').split(',')[5]);
+    if (Y < 0) {
         $("#smltown_header").addClass("thin");
     } else {
         $("#smltown_header").removeClass("thin");
