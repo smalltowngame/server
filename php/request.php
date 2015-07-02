@@ -2,30 +2,21 @@
 
 //USER REQUESTS
 
-function addUser($obj) { //insert user to game
-	//echo $obj->gameId;
-    $gameId = $obj->gameId;
-    $userId = $obj->userId;
-    $userName = $obj->userName;
+function addUser($obj = null) { //obj: insert user to game
+    $userId = null;
+    $userName = null;
 
-    //prevent sql injection on gameId
-    $values = array('gameId' => $gameId);
-    if (petition("SELECT count(*) as count FROM smltown_games WHERE id = :gameId", $values)[0]->count == 0) {
-        echo "DB_request sql injection prevention: any game found whith gameId = $gameId.";
-        return;
+    if (isset($_SESSION['userId'])) {
+        $userId = $_SESSION['userId'];
+    } else if (isset($_COOKIE['smltown_userId'])) {
+        //let devices pass user id but insecure.
+        $userId = $_COOKIE['smltown_userId'];
     }
 
-    if (!$userId) {
-        if (isset($_SESSION['userId'])) {
-            $userId = $_SESSION['userId'];
-        }
-    }
-    if (!$userName) {
-        if (isset($_SESSION['userName'])) {
-            $userName = $_SESSION['userName'];
-        } else if (isset($_COOKIE['smalltown_userName'])) {
-            $userName = $_COOKIE['smalltown_userName'];
-        }
+    if (isset($_SESSION['userName'])) {
+        $userName = $_SESSION['userName'];
+    } else if (isset($_COOKIE['smltown_userName'])) {
+        $userName = $_COOKIE['smltown_userName'];
     }
 
     //add user
@@ -37,8 +28,41 @@ function addUser($obj) { //insert user to game
 
     $_SESSION['userId'] = $userId;
     $_SESSION['userName'] = $userName;
-    setcookie("smalltown_userName", $userName, time() + 864000); //10 days
+    setcookie("smalltown_userName", $userName, time() + 864000, "/"); //10 days
     //
+    
+    if (null != $obj && isset($obj->gameId)) {
+        addUserInGame($obj);
+    }
+}
+
+function addUserInGame($obj) { //and create game
+    $gameId = $obj->gameId;
+    $userId = $obj->userId;
+
+    //prevent sql injection on gameId
+    $values = array('gameId' => $gameId);
+    $games = petition("SELECT password FROM smltown_games WHERE id = :gameId", $values);
+    if (count($games) == 0) {
+        echo "SMLTOWN.Load.showPage('gameList')";
+        return;
+    }
+
+    if ($games[0]->password && !isset($_SESSION["game$gameId"])) {
+        if (!isset($obj->password)) {
+            echo "SMLTOWN.Game.askPassword();";
+            die();
+        }
+
+        $values = array('password' => $obj->password);
+        $count = petition("SELECT count(*) as count FROM smltown_games WHERE id = $gameId AND password = :password", $values)[0]->count;
+        if ($count == 0) {
+            echo "SMLTOWN.Game.askPassword('wrong passord');";
+            die();
+        }
+    }
+    $_SESSION["game$gameId"] = 1;
+
     //admin check
     $admin = null;
     if (in_array($_SERVER['REMOTE_ADDR'], array('127.0.0.1', '::1'))) {
@@ -60,15 +84,17 @@ function addUser($obj) { //insert user to game
 
     $sth = sql($sql, $values);
 
-    //UPDATE    
+    //UPDATE
     updateUsers($gameId, $userId);
-    if ($sth->rowCount() == 0) { //nothing changes
+    if ($sth->rowCount() == 0) { //nothing changes on insert: player is not new
         updatePlayers($gameId, $userId);
     } else {
         updatePlayers($gameId); //way to update new players to others
     }
     updateRules($gameId, $userId); //THIS position admin / playing cards
     updateGame($gameId, $userId);
+
+    checkGameErrors($gameId);
 }
 
 function setName($obj) {
@@ -98,21 +124,29 @@ function setName($obj) {
     }
 }
 
+function becomeAdmin($obj) {
+    $gameId = $obj->gameId;
+    $userId = $obj->userId;
+    sql("UPDATE smltown_plays SET admin = CASE WHEN userId = '$userId' THEN 1 ELSE 0 END" + "WHERE gameId = $gameId");
+    setFlash($gameId, "you stole admin role", array("userId" => $userId));
+    $res = array(
+        'type' => "SMLTOWN.Load.reloadGame"
+    );
+    send_response(json_encode($res), $gameId, $userId);
+}
+
 function chat($obj) {
     $gameId = $obj->gameId;
     $userId = $obj->userId;
-    $text = $obj->text;
     $res = array(
         'type' => "chat",
         'userId' => $obj->userId,
         'text' => $obj->text
     );
 
-    $plays = petition("SELECT userId FROM smltown_plays WHERE gameId = $gameId AND userId <> $userId");
+    $plays = petition("SELECT userId FROM smltown_plays WHERE gameId = $gameId AND userId <> '$userId'");
     for ($i = 0; $i < count($plays); $i++) {
-        send_response(json_encode($res), 
-        $gameId, 
-        $plays[$i]->userId);
+        send_response(json_encode($res), $gameId, $plays[$i]->userId);
     }
 }
 
@@ -123,11 +157,6 @@ function getAll($obj) {
     $gameId = $obj->gameId;
     $userId = $obj->userId;
     updateAll($gameId, $userId);
-}
-
-function checkPassword($obj) {
-    $values = array('gameId' => $obj->gameId, 'password' => $obj->password);
-    echo petition("SELECT count(*) as count FROM smltown_games WHERE id = :gameId AND password = :password", $values)[0]->count;
 }
 
 function setMessage($obj) {
@@ -195,4 +224,10 @@ function createGame($obj = null) {
     //return
     echo $id; //echo return!
     return $id;
+}
+
+//list games
+
+function searchGames($obj) {
+    $name = $obj->name;
 }

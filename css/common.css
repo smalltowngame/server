@@ -12,16 +12,8 @@ symbol{
     margin: 0 5px;
 }
 
-#smltown_html, #smltown_body{
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    background-color: white;   
+html{
     overflow: hidden;
-}
-
-#smltown_html{
-    background-image: url("../img/background4.jpg");
 }
 
 body{
@@ -29,7 +21,19 @@ body{
     overflow: hidden;
 }
 
+#smltown_html, #smltown_body{    
+    width: 100%;    
+    margin: 0;    
+    overflow: hidden;
+}
+
 #smltown_html{
+    height: 100%;
+    background-color: white;
+    background-image: url("../img/background4.jpg");
+    position: relative;
+    overflow: hidden;
+
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
@@ -38,13 +42,11 @@ body{
 }
 
 #smltown_body{
+    height: calc(100% - 55px);
     position: relative;
-    left: 0;
-    top: 0;
-    bottom:0;
-    /*text-shadow: 1px 1px 1px rgba(255,255,255,0.4);*/
     box-sizing: border-box;    
     outline: none;
+    /*text-shadow: 1px 1px 1px rgba(255,255,255,0.4);*/
 
     background: -webkit-radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
     background: -o-radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
@@ -52,8 +54,8 @@ body{
     background: radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
 }
 
-.smltown_title{
-    padding: 10px;
+#smltown_html table{
+    border-collapse: collapse;
 }
 
 .smltown_dialog{
@@ -113,7 +115,7 @@ body{
     padding: 0 10px;
     height: 50px;
     width: 100%;
-    /*font-size: 14px;*/    
+    font-size: 16px;    
     -webkit-box-sizing: border-box;  /*Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;     /*Firefox, other Gecko */
     box-sizing: border-box;          /*Opera/IE 8+ */
@@ -152,16 +154,29 @@ body{
     background: rgba(0,0,0,0.5);
 }
 
-#smltown_html input{
+/*android 2.3 input visibility bug*/
+/*but causing errors on chat input :/*/
+/*#smltown_html input{
     position:relative;
     top: -10000px;
     -webkit-transform: translate3d(0, 10000px, 0);
     moz-transform: translate3d(0, 10000px, 0);
     transform: translate3d(0, 10000px, 0);
-}
+}*/
 
 .smltown_errorLog{
     color: red;
+    text-align: right;
+    margin: 0 10px;
+    min-height: 1px; //display
+}
+
+.smltown_animated{
+    -webkit-transition: 300ms;
+    -moz-transition: 300ms;
+    -ms-transition: 300ms;
+    -o-transition: 300ms;
+    transition: 300ms;
 }
 
 /* Overthrow CSS: Enable overflow: auto on elements with overthrow class when html element has overthrow class too */

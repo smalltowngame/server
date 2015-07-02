@@ -1,10 +1,22 @@
 <?php
 //CUPID
-////CARD PROPERTIES
+//lang
+$card['text'] = array(
+    "en" => array(
+        "name" => "cupid",
+        "rules" => "make two people fall in love",
+        "inLove" => "you are in love with "
+    ),
+    "es" => array(
+        "name" => "cupido",
+        "rules" => "enamora dos jugadores",
+        "inLove" => "ahora estás enamorado de "
+    )
+);
 
-$card['name'] = "cupid";
+////CARD 
+$card['serie'] = "classic werewolf";
 $card['initiative'] = -1;
-$card['rules'] = "make two people fall in love";
 $card['max'] = 1;
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -17,7 +29,7 @@ $card['nightSelect'] = function($utils) {
         $toName = $utils->getPlayerName($to);
 
         $idDiv = "$('#" . $to . "')";
-        $js = "$idDiv.click(function(){if(Game.info.status==1){return false}});" //prevent vote
+        $js = "$idDiv.click(function(){if(SMLTOWN.Game.info.status==1){return false}});" //prevent vote
                 . "$idDiv.click(function(){flash('you are in love with $toName')});"; //remember is in love
 
         $php = "$me,$to";
@@ -57,7 +69,7 @@ $card['statusGameChange'] = function($utils) { //statusGameChange have empty use
 
 <script>
 
-    Game.night.select = function (selectedId) {
+    SMLTOWN.Action.night.select = function (selectedId) {
         var first = $(".userCheck"); //check if exists
 
         $("#" + selectedId + " .votes").html("<symbol>N</symbol>");
@@ -74,17 +86,17 @@ $card['statusGameChange'] = function($utils) { //statusGameChange have empty use
         var name2 = $("#" + id2 + " .name").text();
 
         //cupid needs end turn manually!
-        notify(name1 + " and " + name2 + " are now in love", function () {
-            sleep();
-            endTurn();
+        SMLTOWN.Message.notify(name1 + " and " + name2 + " are now in love", function () {
+            SMLTOWN.Action.sleep();
+            SMLTOWN.Action.endTurn();
 
             var message1 = "You are now in love with " + name2 + "!";
-            Game.request.setMessage(message1, id1);
+            SMLTOWN.Server.request.setMessage(message1, id1);
 
             var message2 = "You are now in love with " + name1 + "!";
-            Game.request.setMessage(message2, id2);
+            SMLTOWN.Server.request.setMessage(message2, id2);
 
-            Game.request.nightSelect({
+            SMLTOWN.Server.request.nightSelect({
                 id1: id1,
                 id2: id2
             }, true); //without response
@@ -93,7 +105,7 @@ $card['statusGameChange'] = function($utils) { //statusGameChange have empty use
         return false;
     };
 
-    Game.night.unselect = function (selectedId) {
+    SMLTOWN.Action.night.unselect = function (selectedId) {
         $("#" + selectedId + " .votes").html("");
     };
 

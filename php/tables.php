@@ -11,12 +11,12 @@ class Tables {
             'status' => "int(11) NOT NULL",
             'cards' => "text",
             'night' => "varchar(255)",
+            'timeStart' => "bigint(20)",
             'time' => "bigint(20)",
             'dayTime' => "int(11)",
             'openVoting' => "int(1)",
-            'endTurn' => "int(1)",
+            'endTurn' => "int(1) DEFAULT 1",
             'admin' => "int(1) NOT NULL default 0",
-            'chat' => "text NOT NULL default ''",
             'lastConnection' => "timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
             'PRIMARY KEY' => "(id)"
         ),
@@ -43,7 +43,7 @@ class Tables {
     );
 
     function createDB() {
-        require 'DB_access.php'; //not once?
+        require 'config.php'; //not once?
         $enlace = mysqli_connect("localhost", $database_user, $database_pass);
         if (!$enlace) {
             echo 'IS YOUR MYSQL WORKING? - WRONG DB CREDENTIALS?';
@@ -94,7 +94,7 @@ class Tables {
 }
 
 //default
-include_once 'DB.php';
+include_once 'php/DB.php';
 $tables = new Tables;
 $tables->createDB();
 $tables->createTables();

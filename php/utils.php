@@ -11,7 +11,7 @@ function loadCards($gameId = null) { //GAME ID FUTURE ERRORS
 
         //IF CARDS EMPTY OR CURRUPTED
         if (empty($string)) {
-            echo "empty game cards, please select some cards";
+            echo "SMLTOWN.Message.flash('no cards selected')";
             die();
         }
         try {
@@ -85,20 +85,18 @@ function getCards($cards, $playerCount) {
 }
 
 function getCard($obj, $callback) { //only night
-//    $card = petition("SELECT plays.card FROM games, plays WHERE plays.gameId = $obj->gameId AND plays.userId = $obj->userId 
-//        AND games.night = plays.card");
-    $card = petition("SELECT card FROM smltown_plays WHERE gameId = $obj->gameId AND userId = $obj->userId");
-    $obj->card = $card[0]->card;
-    $callback($obj);
+    return petition("SELECT card FROM smltown_plays WHERE gameId = $obj->gameId AND userId = '$obj->userId'")[0]->card;
+//    $obj->card = $card[0]->card;
+//    $callback($obj);
 }
 
-function getCardRules($gameId) {
-    $playerCards = petition("SELECT card FROM smltown_plays WHERE gameId = $gameId");
-    for ($i = 0; $i < count($playerCards); $i++) {
-        $card = $playerCards[$i]->card;
-    }
-//    return $nightRules;
-}
+//function getCardRules($gameId) {
+//    $playerCards = petition("SELECT card FROM smltown_plays WHERE gameId = $gameId");
+//    for ($i = 0; $i < count($playerCards); $i++) {
+//        $card = $playerCards[$i]->card;
+//    }
+////    return $nightRules;
+//}
 
 //////////////////////////////////////////////////////////////////////////////////
 //MESSAGES WORK
@@ -120,23 +118,27 @@ function setNotifications($gameId, $message, $wheres = null) {
     }
 }
 
+function setError($gameId, $log){
+    send_response(json_encode(array('type' => 'smltown_error(\'' . $log . '\')')), $gameId);
+}
+
 //static message (updates from ping)
 function saveMessage($message, $gameId, $userId = null) {
     $values = array('message' => $message);
     $sql = "UPDATE smltown_plays SET message = :message WHERE gameId = $gameId AND status > -1 AND admin > -1 AND";
     if (null != $userId) {
-        $sql = "$sql userId = $userId";
+        $sql .= " userId = '$userId'";
     } else {
-        $sql = "$sql (";
+        $sql .= " (";
         $players = petition("SELECT userId FROM smltown_plays WHERE gameId = $gameId");
         for ($i = 0; $i < count($players); $i++) {
             $playerId = $players[$i]->userId;
-            $sql = "$sql userId = '$playerId'";
+            $sql .= " userId = '$playerId'";
             if ($i < count($players) - 1) {
-                $sql = "$sql OR";
+                $sql .= " OR";
             }
         }
-        $sql = "$sql)";
+        $sql .= ")";
     }
     sql($sql, $values);
 
@@ -159,15 +161,15 @@ function getPlayers($gameId, $wheres) {
 
 function playersAlive($gameId, $onlyRealPlayers = false) {
     $sql = "SELECT count(*) as count FROM smltown_plays WHERE gameId = $gameId AND status > 0";
-    if ($onlyRealPlayers) {
-        $sql = "$sql AND admin > -1";
-    }
+//    if ($onlyRealPlayers) {
+//        $sql = "$sql AND admin > -1";
+//    }
     return petition($sql)[0]->count;
 }
 
 function getRandomUserId() {
     $id = mt_rand();
-    $count = petition("SELECT count(*) as count FROM smltown_players, smltown_plays WHERE smltown_players.id = $id OR smltown_plays.userId = $id")[0]->count;
+    $count = petition("SELECT count(*) as count FROM smltown_players, smltown_plays WHERE smltown_players.id = '$id' OR smltown_plays.userId = '$id'")[0]->count;
     if ($count > 0) { //repeated id
         return getRandomUserId();
     }
@@ -177,15 +179,15 @@ function getRandomUserId() {
 function checkGameOver($gameId) {
     if (playersAlive($gameId) < 2) {
         sql("UPDATE smltown_games SET status = 3 WHERE id = $gameId");
-        sql("UPDATE smltown_plays SET status = -1 WHERE id = $gameId AND status < 1");
+        sql("UPDATE smltown_plays SET status = -1 WHERE gameId = $gameId AND status < 1");
+        updatePlayers($gameId, null, array("status", "card", "sel"));
         updateGame($gameId, null, "status");
-        updatePlayers($gameId, null, "status");
         return true;
     }
     return false;
 }
 
-function getDiscusTime($gameId) {
+function getDiscusTime($gameId, $now) {
     $dayTime = petition("SELECT dayTime FROM smltown_games WHERE id = $gameId")[0]->dayTime;
     if (!$dayTime) {
         $dayTime = 60;
@@ -193,18 +195,18 @@ function getDiscusTime($gameId) {
     $onlyRealPlayers = true;
     $total = playersAlive($gameId, $onlyRealPlayers);
     $playersCount = intval($total);
-    return round(microtime(true) * 1000) + $playersCount * $dayTime * 1000; //players * dayTime
+    return $now + $playersCount * $dayTime; //players * dayTime
 }
 
 //////////////////////////////////////////////////////////////////////////////////
 //GAME INTERACTION
 
 function hurtPlayer($gameId, $userId) {
-    sql("UPDATE smltown_plays SET status = 0 WHERE gameId = $gameId AND userId = $userId");
+    sql("UPDATE smltown_plays SET status = 0 WHERE status < 2 AND gameId = $gameId AND userId = '$userId'");
 }
 
 function killPlayer($gameId, $userId) {
-    sql("UPDATE smltown_plays SET status = -1, rulesJS = null WHERE gameId = $gameId AND userId = $userId");
+    sql("UPDATE smltown_plays SET status = -1, rulesJS = null WHERE gameId = $gameId AND userId = '$userId'");
     updateUsers($gameId, $userId, "rules"); // necessary?
     return checkGameOver($gameId);
 }
@@ -265,4 +267,22 @@ function whereArray($array, &$values) { //for responses and cadUtils
         $values[$name] = $value;
     }
     return $sql;
+}
+
+function checkGameErrors($gameId) {
+    //night stuck
+    $count = petition("SELECT count(*) as count FROM smltown_games "
+                    . "WHERE status = 2 AND night IS NULL "
+                    . "AND (SELECT count(*) as count FROM smltown_plays WHERE message > '') = 0 "
+                    . "AND id = $gameId")[0]->count;
+    if (1 == $count) {
+        setError($gameId, "error: night turn was lost");
+    }
+
+    //bots error
+    $sth = sql("DELETE FROM smltown_plays WHERE gameId = $gameId AND userId = '' and admin > -1");
+    if ($sth->rowCount() > 0) {
+        setError($gameId, "warn: fixed bot error");
+        
+    }
 }

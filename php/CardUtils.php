@@ -215,6 +215,15 @@ class CardUtils {
         $gameId = self::$gameId;
         saveMessage($message, $gameId, $id);
     }
+    
+    public function getText(){
+        $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+        $text = $GLOBALS['card']['text'];
+        if(!isset($text[$lang])){
+            $lang = "en";
+        }
+        return $text[$lang];
+    }
 
 //    public function updatePlayers($array, $wheres, $userId = null) {
 //        $gameId = self::$gameId;

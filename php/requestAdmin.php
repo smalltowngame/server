@@ -28,11 +28,11 @@ function startGame($obj) {
 
 function restartGame($obj) {
     $gameId = $obj->gameId;
-    
+
     //clean
     sql("DELETE FROM smltown_plays WHERE gameId = $gameId AND admin < 0");
     sql("UPDATE smltown_plays SET status = 1, sel = null, rulesJS = '', rulesPHP = '', reply = '', message = null WHERE gameId = $gameId");
-    sql("UPDATE smltown_games SET status = 0, night = null, time = null, chat = '' WHERE id =  $gameId");
+    sql("UPDATE smltown_games SET status = 0, night = null, timeStart = null, time = null WHERE id =  $gameId");
 
     $players = petition("SELECT * FROM smltown_plays WHERE admin > -1 AND gameId = $gameId");
 
@@ -40,7 +40,6 @@ function restartGame($obj) {
     $playerCount = count($players);
 
     $quantityCards = getCards($cards, $playerCount);
-    echo json_encode($quantityCards);
 
     $minCards = $quantityCards[0];
     $maxCards = $quantityCards[1];
@@ -56,12 +55,13 @@ function restartGame($obj) {
         }
         $players[$playerKeys[$i]]->card = $minCards[$i];
     }
-
-    $maxCardKeys = range(0, count($maxCards) - 1);
+//    $maxCardKeys = range(0, count($maxCards) - 1);
+    $maxCardKeys = range(0, count($minCards) - 1);
     shuffle($maxCardKeys);
 
     $n = count($minCards);
-    //set max cards
+//    //set max cards
+    //set min cards
     for ($i = 0; $i < count($maxCardKeys); $i++) { //by CARDS!
         if (rand(0, 1) == 1) {
             if (count($playerKeys) - $n < 1) {
@@ -69,7 +69,8 @@ function restartGame($obj) {
             }
             $card = $maxCardKeys[$i];
             $playerId = $playerKeys[$n];
-            $players[$playerId]->card = $maxCards[$card];
+//            $players[$playerId]->card = $maxCards[$card];
+            $players[$playerId]->card = $minCards[$card];
             $n++;
         }
     }
@@ -90,8 +91,8 @@ function restartGame($obj) {
     //save user cards on DB
     $sql1 = $sql2 = "";
     foreach ($cardArray as $id => $value) {
-        $sql1 = "$sql1 WHEN $id THEN '$value'";
-        $sql2 = "$sql2 $id";
+        $sql1 = "$sql1 WHEN '$id' THEN '$value'";
+        $sql2 = "$sql2 '$id'";
         end($cardArray); //http://stackoverflow.com/questions/1070244/how-to-determine-the-first-and-last-iteration-in-a-foreach-loop
         if ($id !== key($cardArray)) {
             $sql2 = "$sql2,";
@@ -104,6 +105,14 @@ function restartGame($obj) {
     updateGame($gameId, null, "status");
 }
 
+function endTurn($obj) {
+    $gameId = $obj->gameId;
+    $userId = $obj->userId;
+    sql("UPDATE smltown_games SET time = 0 WHERE id = $gameId"
+            . " AND (SELECT admin FROM smltown_plays WHERE gameId = $gameId AND userId = $userId) = 1");
+    updateGame($gameId, null, "time");
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // SET MENU OPTIONS GAME
 
@@ -111,6 +120,7 @@ function setDayTime($obj) {
     $gameId = $obj->gameId;
     $values = array('dayTime' => $obj->time);
     sql("UPDATE smltown_games SET dayTime = :dayTime WHERE id = $gameId", $values);
+    updateGame($gameId, null, "dayTime");
     setFlash($gameId, "updated day time");
 }
 
@@ -119,6 +129,7 @@ function setOpenVoting($obj) {
     $openVotations = $obj->value;
     $values = array('openVoting' => $openVotations);
     sql("UPDATE smltown_games SET openVoting = :openVoting WHERE id = $gameId", $values);
+    updateGame($gameId, null, "openVoting");
     if ($openVotations == 1) {
         setFlash($gameId, "open voting mode enabled");
     } else {
@@ -131,6 +142,7 @@ function setEndTurnRule($obj) {
     $endTurn = $obj->value;
     $values = array('endTurn' => $endTurn);
     sql("UPDATE smltown_games SET endTurn = :endTurn WHERE id = $gameId", $values);
+    updateGame($gameId, null, "endTurn");
     if ($endTurn == 1) {
         setFlash($gameId, "admin can end day turn");
     } else {
@@ -140,9 +152,14 @@ function setEndTurnRule($obj) {
 
 function setPassword($obj) {
     $gameId = $obj->gameId;
+    if (1 == $gameId) {
+        echo "You can't set password on main server game for security reasons";
+        return;
+    }
     $password = $obj->password;
     $values = array('password' => $password);
     sql("UPDATE smltown_games SET password = :password WHERE id = $gameId", $values);
+    updateGame($gameId, null, "password");
     if (empty($password)) {
         setFlash($gameId, "password game was removed");
     } else {

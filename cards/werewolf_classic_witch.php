@@ -1,11 +1,16 @@
 <?php
 //WITCH
-//CARD PROPERTIES
+//lang
+$card['text'] = array(
+    "en" => array(
+        "name" => "witch",
+        "rules" => "2 potions.."
+    )
+);
 
+//CARD PROPERTIES
 $card['serie'] = "classic werewolf";
-$card['name'] = "witch";
-$card['initiative'] = 3;
-$card['rules'] = "2 potions..";
+$card['initiative'] = 4;
 $card['max'] = 1;
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -19,13 +24,13 @@ $card['nightSelect'] = function($utils) {
 
     if (isset($saveId)) {
         $utils->setPlayer(array('status' => 1), $saveId);
-        $utils->addPlayerRules("JS", 'Game.temp.witchUsedSave=true');
+        $utils->addPlayerRules("JS", 'SMLTOWN.temp.witchUsedSave=true');
         $savedName = $utils->getPlayerName($saveId);
         $res = $res . "$savedName was saved. ";
     }
     if (isset($killId)) {
         $utils->kill($killId);
-        $utils->addPlayerRules("JS", 'Game.temp.witchUsedKill=true');
+        $utils->addPlayerRules("JS", 'SMLTOWN.temp.witchUsedKill=true');
         $savedName = $utils->getPlayerName($killId);
         $res = $res . "$savedName was killed. ";
     }
@@ -66,15 +71,26 @@ $card['extra'] = function($utils) {
 <!--Accept button-->
 <div id="witchButton">
     <span>End your turn?</span>
-    <div class="smltown_button" onclick="Game.temp.witchAccept()">Accept</div>
+    <div class="smltown_button" onclick="SMLTOWN.temp.witchAccept()">Accept</div>
 </div>
 
 <script>
+    
+    SMLTOWN.temp.text = [
+        "en":[
+            "healUsed": "heal potion already been used",
+            "poisonUsed": "poison potion already been used"
+        ],
+        "es":[
+            "healUsed": "la poción de curar ya se ha usado",
+            "poisonUsed": "la poción de veneno ya se ha usado"
+        ]
+    ];
 
-    Game.temp.witchAccept = function() {
+    SMLTOWN.temp.witchAccept = function() {
         var save = $(".witchSave").attr("id");
         var kill = $(".witchKill").attr("id");
-        Game.request.nightSelect({
+        SMLTOWN.Server.request.nightSelect({
             save: save ? save : null,
             kill: kill ? kill : null
         });
@@ -83,7 +99,7 @@ $card['extra'] = function($utils) {
         $(".dying").removeClass("dying");
     };
 
-    Game.night.extra = function(dying) {
+    SMLTOWN.Action.night.extra = function(dying) {
         $("#console").append($("#witchButton"));
         $("#witchButton").show();
 
@@ -94,11 +110,11 @@ $card['extra'] = function($utils) {
         }
     };
 
-    Game.night.select = function(selectedId) {
+    SMLTOWN.Action.night.select = function(selectedId) {
         var div = $("#" + selectedId);
 
         if (div.hasClass("dying")) { //if dying
-            if (!Game.temp.witchUsedSave) { //have this potion yet
+            if (!SMLTOWN.temp.witchUsedSave) { //have this potion yet
                 if (div.hasClass("witchSave")) {
                     div.removeClass("witchSave");
                 } else {
@@ -106,11 +122,12 @@ $card['extra'] = function($utils) {
                     div.addClass("witchSave");
                 }
             } else {
-                flash("heal potion already been used");
+                var message = SMLTOWN.temp.text[SMLTOWN.lang]["healUsed"];
+                SMLTOWN.Message.flash(message);
             }
 
         } else {
-            if (!Game.temp.witchUsedKill) { //have this potion yet
+            if (!SMLTOWN.temp.witchUsedKill) { //have this potion yet
                 if (div.hasClass("witchKill")) {
                     div.removeClass("witchKill");
                 } else {
@@ -118,7 +135,8 @@ $card['extra'] = function($utils) {
                     div.addClass("witchKill");
                 }
             } else {
-                flash("poison potion already been used");
+                var message = SMLTOWN.temp.text[SMLTOWN.lang]["poisonUsed"];
+                SMLTOWN.Message.flash(message);
             }
         }
         return false;

@@ -42,4 +42,11 @@ var lang = {
     suicide: function(name) {
         return name + " comit suicide";
     }
+    ,
+    //
+    dayTime: "day time"
+    ,
+    alive: "alive"
+    ,
+    dead: "dead"
 };

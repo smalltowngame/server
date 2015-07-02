@@ -12,13 +12,16 @@
 
 #smltown_connectionCheck{
     display:none; 
-    color:rgb(170,170,170); 
+    color:rgb(100,100,100); 
     font-size: 12px;
     margin: 10px;
 }
 #smltown_content{
     height: calc(100% - 45px);
     overflow-y: scroll;
+}
+#smltown_content p{
+    margin: 15px;
 }
 
 #smltown_reload{
@@ -38,11 +41,15 @@ a:hover{
 #smltown_games .smltown_button{
     font-weight: bold;
 }
-#smltown_games > div, .smltown_createGame{
+#smltown_games > div{
     position: relative;
     margin: 7px;
     font-weight: bold;
     text-shadow: 1px 1px 1px white;
+}
+.smltown_createGame{
+    margin: 7px;
+    /*font-weight: bold;*/
 }
 
 #smltown_nameGame{
@@ -53,11 +60,12 @@ a:hover{
 #smltown_nameGame input{
     border-width: 0 !important;
 }
-
-#smltown_newGame{
-    width: inherit !important;
-    display: table-cell;
-    white-space: nowrap;
+#smltown_newGame > div{
+    line-height: normal;
+    max-height: 50px;
+    font-size: 14px;
+    overflow:hidden;
+    padding: 0 10px;
 }
 
 .smltown_game{
@@ -70,6 +78,9 @@ a:hover{
     font-size: 80%;
     border: 5px solid rgb(125,200,0);
     border-radius: 20px;
+}
+.smltown_game:hover{
+    box-shadow: -1px -1px 1px white, inset 0 0 5px white;
 }
 .smltown_game:active{
     box-shadow: inset 2px 2px 5px black;
@@ -90,6 +101,11 @@ a:hover{
     top: 10px;
     right: 15px;
 }
+.smltown_gameInfo{
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+}
 .smltown_game .symbols{
     position: absolute;
     bottom: 10px;
@@ -105,7 +121,14 @@ a:hover{
     border: 5px solid rgb(0,0,255);
 }
 
-#smltown_gameList, #smltown_game{
-	display: none;
-	height: 100%;
+/*fixed to prevent scroll on devices*/
+#smltown_game{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+}
+
+#smltown_loadingDiv{
+    margin-top: inherit !important;
 }

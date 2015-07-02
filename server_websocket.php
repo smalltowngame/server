@@ -20,11 +20,11 @@ set_time_limit(0);
 $clients = array($socket);
 
 try {
-    include_once 'DB.php';
-    include_once 'DB_request.php';
-    include_once 'DB_requestAdmin.php';
-    include_once 'DB_response.php';
-    include_once 'DB_utils.php';
+    include_once 'php/DB.php';
+    include_once 'php/request.php';
+    include_once 'php/requestAdmin.php';
+    include_once 'php/response.php';
+    include_once 'php/utils.php';
 } catch (Exception $e) {
     send_response("includes error", null);
 }

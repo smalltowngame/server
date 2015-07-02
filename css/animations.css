@@ -13,7 +13,7 @@
         , left 0s 1000ms
         , background-color 300ms;
 }
-#filter.notification #log{ /*if filter is notification*/
+#filter.smltown_notification #smltown_log{ /*if filter is notification*/
     background-color: rgb(160,195,60);
     left: 0;
     margin-left: 0;
@@ -32,7 +32,7 @@
     left: 200%;
     margin-left: -200%;
 }
-#filter.notification #log .text{
+#filter.smltown_notification #smltown_log .text{
     transition: left 300ms 300ms ease-in;
     left: 0;
     margin-left: 0;
@@ -50,7 +50,7 @@
     margin-left: -200%;
     
 }
-#filter.notification #log .smltown_button{
+#filter.smltown_notification #smltown_log .smltown_button{
     transition: left 300ms 600ms ease-in;
     left: 0;
     margin-left: 0;
@@ -70,7 +70,7 @@
 #log{
     background-image: url('../img/background_speed3.jpeg');
 }
-#filter.notification #log{    
+#filter.smltown_notification #log{    
     /*-webkit-animation: move 500ms linear infinite;*/
 }
 @-webkit-keyframes move {

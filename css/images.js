@@ -1,5 +1,5 @@
 var s = "";
-var pre = "{background-image:url(" + Game.path;
+var pre = "{background-image:url(" + SMLTOWN.path;
 var fin = ")}";
 
 function css(nombre, url) {
@@ -8,7 +8,7 @@ function css(nombre, url) {
 
 //BASE
 
-css(".ajax-loader", "img/load.gif");
+css(".smltown_loader", "img/loader.gif");
 
 var style = document.createElement('style');
 style.type = 'text/css';

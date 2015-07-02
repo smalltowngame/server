@@ -1,0 +1,22 @@
+
+<div id="smltown_content">
+    <div id="smltown_title">
+        <p>Game List:</p>
+    </div>
+
+    <div id="smltown_games"></div>
+    <div id="smltown_loadingDiv"></div>
+
+    <div id="smltown_footer">
+        <br/>                
+    </div>
+    <div class="smltown_log"></div>
+    <div class="smltown_errorLog"></div>            
+</div>
+
+<div id="smltown_reload" class="smltown_button" onclick="SMLTOWN.Load.reloadList()">reload</div>
+
+<script>
+    $("#smltown_game").removeClass();
+    SMLTOWN.Local.pingGames();
+</script>

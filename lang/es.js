@@ -40,7 +40,9 @@ var lang = {
     ,
     alive: "vivo"
     ,
-    newCards: "Repartir nuevas cartas"
+    dead: "muerto"
+    ,
+    newCards: "repartir nuevas cartas"
     ,
     waitingNewGame: "esperando una nueva partida..."
     ,
@@ -55,4 +57,18 @@ var lang = {
     suicide: function(name) {
         return name + " se ha suicidado";
     }
+    ,
+    NoKills: "Nadie a muerto esta noche"
+    ,
+    wasKilled: "ha muerto"
+    ,
+    GettingDark: "Está oscureciendo"
+    ,
+    dayTime: "de día"
+    ,
+    closeEyes: "cierra los ojos"
+    ,
+    wakeUp: "despierta"
+    ,
+    yourTurn: "es tu turno"
 };

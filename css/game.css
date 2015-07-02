@@ -1,30 +1,61 @@
 
+#smltown_game.smltown_night{
+    background-image: url(../img/stars.png);
+    background-size: 100%;
+}
+
 #smltown_list, #smltown_menuContent, #smltown_console{
     overflow-y: auto;
 }
 
 #smltown_filter{
     height:100%;
+    width: 100%;
+    z-index: 8;
+    pointer-events:none;
+    font-size: 16px;
+    position: absolute;
+    top: 0;
 }
 
-#smltown_filter.notification{
+#smltown_filter.rules > div{
+    display: block !important;
+}
+
+#smltown_filter .smltown_ip{
+    font-weight: bold;
+}
+
+#smltown_filter.smltown_notification{
     background-color: rgba(255,255,255,0.5);
+
+    -webkit-transition: 300ms;
+    -moz-transition: 300ms;
+    -ms-transition: 300ms;
+    -o-transition: 300ms;
     transition: 300ms;
 }
-#smltown_filter .countdown{
+#smltown_filter .smltown_countdown{
     color: rgba(255,255,255,0.5);
-    /*text-shadow: none;*/
     font-weight: bold;
     font-size: 100px;
     margin-top: 50%;
     text-align: center;
+
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.smltown_night #smltown_filter{
+    box-shadow: inset 0 0 40px black;
 }
 
 #smltown_header{
     overflow: hidden;
     position: relative;
     height:55px;
-    z-index: 1;
+    z-index: 11;
 
     background: rgb(160,195,0);
     background: -webkit-linear-gradient(rgb(155,200,0), rgb(180,220,0));
@@ -92,7 +123,7 @@
 }
 #smltown_header .smltown_content > div{
     font-size: 14px;
-    margin-left:15px;
+    margin-left:5px;
 }
 
 #smltown_list{
@@ -108,13 +139,16 @@
 }
 
 #smltown_listAlive{
-    background-color: rgba(255,255,255,0.15);
-    background-color: rgba(0,0,150,0.15);
-    background-color: rgba(0,0,225,0.15);
+    /*    background-color: rgba(255,255,255,0.15);
+        background-color: rgba(0,0,150,0.15);*/
+    background-color: rgba(0,0,225,0.25);
 }
 
 #smltown_listDead{
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0,0,0,0.15);
+}
+
+#smltown_listSpectator{    
     background-color: transparent;
 }
 
@@ -174,7 +208,7 @@
     position:absolute;
     bottom:0;
     height:25%;    
-    z-index: 9;
+    z-index: 2;
     font-size:14px;
     border-radius: 14px 14px 0 0;    
     overflow: hidden;
@@ -187,11 +221,11 @@
     background: linear-gradient(rgb(215,235,155), rgb(215,235,130));
     background: linear-gradient(rgb(200,220,155), rgb(195,220,130));
 
-    -webkit-transition: transform 250ms;
-    -moz-transition: transform 250ms;
-    -ms-transition: transform 250ms;
-    -o-transition: transform 250ms;
-    transition: transform 250ms;
+    /*    -webkit-transition: none;
+        -moz-transition: none;
+        -ms-transition: none;
+        -o-transition: none;
+        transition: none;*/
 
     -webkit-box-shadow: 0 -1px 3px rgba(0,0,0,0.7), inset 0 0 10px white;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
     -moz-box-shadow: 0 -1px 3px rgba(0,0,0,0.7), inset 0 0 10px white;  /* Firefox 3.5 - 3.6 */
@@ -200,6 +234,7 @@
 #smltown_console:hover{
     background-color: rgb(230,250,175);
 }
+
 #smltown_console.smltown_reduced{
     transform: translateY(80%);
     -webkit-transition: none;
@@ -209,10 +244,19 @@
     transition: none;
 }
 
-#smltown_console .text{
-    padding: 0 10px;
+#smltown_consoleText{
+    height: 100%;
+}
+#smltown_consoleText > div{
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+/**/
+#smltown_consoleText > div > div{     
     position: absolute;
     bottom: 0;
+    margin: 0 10px;
 }
 
 #smltown_console .smltown_time{
@@ -220,19 +264,24 @@
     color: rgb(100,100,100);
 }
 
-#smltown_console.extended{
-    height: 98% !important;
-    /*    -webkit-transition: height 400ms;
-        -moz-transition: height 400ms;
-        -ms-transition: height 400ms;
-        -o-transition: height 400ms;
-        transition: height 400ms;*/
+.smltown_consoleExtended{
+    z-index: 12;
+    height: auto !important;
+    top: 30px;
+    -webkit-transition: -webkit-transform 250ms, height 250ms;
+    -moz-transition: -moz-transform 250ms, height 250ms;
+    -ms-transition: -ms-transform 250ms, height 250ms;
+    -o-transition: -o-transform 250ms, height 250ms;
+    transition: transform 250ms, height 250ms;
 }
-#smltown_console.extended .text{
-    margin-bottom: 25px;
+.smltown_consoleExtended #smltown_consoleText{
+    height: calc(100% - 50px);
+    width: 100%;
+    bottom: 50px;
+    position: absolute;
 }
-#smltown_console.extended #smltown_chatForm{
-    display: inherit;  
+.smltown_consoleExtended #smltown_chatForm{
+    display: initial;  
 }
 
 #smltown_user .smltown_player{
@@ -267,6 +316,10 @@
     overflow: hidden;
 }
 
+#smltown_gameName{
+    float: right;
+}
+
 .smltown_gameName{
     float:right;	
     padding: 0 10px;
@@ -286,33 +339,19 @@
     padding: 0 5px;
 }
 
-#smltown_filter{
-    width: 100%;
-    z-index: 8;
-    pointer-events:none;
-    font-size: 16px;
-    position: absolute;
-    top: 0;
-}
-
-#smltown_filter.rules > div{
-    display: block !important;
-}
-
-#smltown_filter .smltown_ip{
-    font-weight: bold;
-}
-
 #smltown_menu, #smltown_card{
     height:100%;
     position: absolute;
-    z-index: 10;
+    z-index: 11;
     top:0;
 }
 
 .smltown_swipe{
-    -webkit-transition: -webkit-transform 0.3s;
-    transition: -webkit-transform 0.3s;
+    -webkit-transition: background-color 0.3s, -webkit-transform 0.3s;
+    -moz-transition: background-color 0.3s, -moz-transform 0.3s;
+    -ms-transition: background-color 0.3s, -ms-transform 0.3s;
+    -o-transition: background-color 0.3s, -o-transform 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
     z-index: 9;
 }
 
@@ -321,6 +360,9 @@
     padding-left: 100%;
     color: white;
     cursor: pointer;
+
+    /*vertical?*/
+    width: 100%;
 
     /*    -webkit-transform: translateX(0);
         -moz-transform: translateX(0);
@@ -350,12 +392,16 @@
 
 #smltown_card > div {
     backface-visibility: hidden;
-    /*-webkit-transition: 0.4s;
-    transition: 0.4s;*/
-    width: 100%;
+    /*width: 100%;*/
     height: 100%;
     background-color: black;
     cursor: pointer;
+
+    -webkit-transition: -webkit-transform 0.4s;
+    -moz-transition: -moz-transform 0.4s;
+    -ms-transition: -ms-transform 0.4s;
+    -o-transition: -o-transform 0.4s;
+    transition: transform 0.4s;
 }
 #smltown_cardFront .smltown_cardImage{
     background-size: 100%;
@@ -367,9 +413,12 @@
     top: 0;
     transform: rotateY( -180deg );    
     height: 100%;
+
+    /*vetical?*/
+    width:50%;
 }
 
-#smltown_cardFront .text{
+#smltown_cardFront .smltown_cardText{
     font-size: 42px;
     text-align: center;
     width: 100%;
@@ -381,7 +430,7 @@
     src: url('../webfonts/2D31BA_0_0.eot');
     src: url('../webfonts/2D31BA_0_0.eot?#iefix') format('embedded-opentype'),url('../webfonts/2D31BA_0_0.woff2') format('woff2'),url('../webfonts/2D31BA_0_0.woff') format('woff'),url('../webfonts/2D31BA_0_0.ttf') format('truetype');
 }
-#smltown_cardFront .text > div{
+#smltown_cardFront > .smltown_cardText > div{
     position: absolute;
     width: 100%;
     top: 50%;
@@ -427,8 +476,12 @@
     position: absolute;
     width: 100%;
     z-index: 1;
+
     -webkit-transition: -webkit-transform 0.3s;
-    transition: -webkit-transform 0.3s;
+    -moz-transition: -moz-transform 0.3s;
+    -ms-transition: -ms-transform 0.3s;
+    -o-transition: -o-transform 0.3s;
+    transition: transform 0.3s;
 }
 #smltown_menu .smltown_selector, #smltown_menu .smltown_selector > div{
     overflow: hidden;
@@ -439,6 +492,7 @@
 #smltown_menu .smltown_selector > div{
     padding: 15px 15px 15px 40px;    
     cursor: pointer;
+    overflow: hidden; /*prevent inner div movements*/    
 }
 #smltown_menu .smltown_selector > div:hover{
     background-color: rgba(0,0,0,0.03)
@@ -525,6 +579,10 @@
     padding: 0 !important;
     font-weight: bold;
 
+    -webkit-transition: height 300ms;
+    -moz-transition: height 300ms;
+    -ms-transition: height 300ms;
+    -o-transition: height 300ms;
     transition: height 300ms;
 }
 
@@ -548,18 +606,24 @@
     transform:rotateY(0);
 }
 
-#smltown_body.smltown_night #smltown_filter{
-    -webkit-box-shadow: inset 5px 5px 15px rgba(255,0,0,0.4),
-        inset -5px -5px 15px rgba(255,0,0,0.4);  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-    -moz-box-shadow:    inset 5px 5px 15px rgba(255,0,0,0.4),
-        inset -5px -5px 15px rgba(255,0,0,0.4);  /* Firefox 3.5 - 3.6 */
-    box-shadow: inset 5px 5px 15px rgba(255,0,0,0.4),
-        inset -5px -5px 15px rgba(255,0,0,0.4);
-}
 .smltown_userCheck{
     /*background-color: rgb(255,180,180);*/
     background-color: rgba(255,0,0,0.2);
+    box-shadow: inset 0px 1px 5px black;
 }
+.smltown_preselect{
+    background-color: rgba(255,210,0,0.4);
+    box-shadow: inset 0px 1px 3px black;
+}
+.smltown_preselect:before{
+    content: "SURE?";
+    line-height: 44px; 
+    font-size: 34px;
+    position: absolute;
+    color: rgba(0,0,0,0.25);
+    margin-left: 70px;
+}
+
 .smltown_lastSeconds{
     color: red;
 }
@@ -582,19 +646,21 @@
     height: 46px;
     background-color: rgba(0,0,0,0.2);
     text-align: center;
-    /*text-shadow: 1px 1px 1px rgb(50,50,50);*/
-    line-height: 50px;
+    line-height: 46px;
     background-size: 100%;
     position: absolute;
     right: 3px;
     top: 2px;
+    /*font-weight: bold;*/
+    text-shadow: 1px 1px white;
+
     -webkit-box-shadow: inset 1px 1px 1px rgb(50,50,50);  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
     -moz-box-shadow:    inset 1px 1px 1px rgb(50,50,50);  /* Firefox 3.5 - 3.6 */
     box-shadow: inset 1px 1px 1px rgb(50,50,50);
 
-    color: rgb(250,0,0);
-    font-weight: normal;
-    font-size: 24px;
+    /*color: rgb(250,0,0);*/
+    /*font-weight: normal;*/
+    font-size: 46px;
     border-radius: 10px;
 }
 
@@ -651,6 +717,10 @@
     right:-8px;
 }
 
+.smltown_night #smltown_user .smltown_spectator, .smltown_day #smltown_user .smltown_spectator{
+    opacity: 0.6;
+}
+
 #smltown_popup{
     display: none;
     z-index: 9;
@@ -674,13 +744,17 @@
     -webkit-box-shadow: 0 8px 5px -5px rgba(0,0,0,0.4), 0 -8px 5px -5px rgba(0,0,0,0.4);
     box-shadow: 0 8px 5px -5px rgba(0,0,0,0.4), 0 -8px 5px -5px rgba(0,0,0,0.4);
 }
-#smltown_filter.notification #smltown_popup{ /*if filter is notification*/
+#smltown_filter.smltown_notification #smltown_popup{ /*if filter is notification*/
     display: block;
 }
 
-#smltown_popup .text{
+#smltown_popupText{
     padding-bottom: 10px;
     /*text-shadow: -1px -1px 1px white;*/
+}
+#smltown_popupText p{
+    font-weight: normal;
+    margin: 0;
 }
 
 #smltown_popup .smltown_button{
@@ -741,9 +815,12 @@
     font-weight: bold;    
 
     -webkit-transition: 200ms;
-    transition: 200ms;    
+    -moz-transition: 200ms;
+    -ms-transition: 200ms;
+    -o-transition: 200ms;
+    transition: 200ms;
 }
-#smltown_flash .text{
+#smltown_flash span{
     background-color: rgba(0,0,0,0.4);
     padding:10px;
     /*padding:10px 20px;*/
@@ -810,10 +887,10 @@
     padding-left: 10px;
     margin-top: 15px;
     text-align: right;
-
+    margin: 0;
 }
 
-#smltown_playingCards .cardGroupName{
+#smltown_playingCards .smltown_cardGroupName{
     border-top: 1px solid rgb(100,100,100);
     margin-left: 30px;
     color: grey;
@@ -867,10 +944,10 @@
     font-size: 30px !important;
     width: 100%;
     /*height: 100%;*/
-    text-align: center !important;;
-    border: none;
-    background: transparent;
-    background: none;
+    text-align: center !important;
+    border: none !important;
+    /*background: transparent;*/
+    background: none !important;
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
     box-shadow: none;
@@ -879,7 +956,7 @@
     margin-top: 48px;
 }
 
-.smltown_rulesCard.selected{
+.smltown_selectedRulesCard{
     -webkit-box-shadow: 2px 2px 7px black, 3px 3px 20px yellow, 
         -1px -1px 5px black, -3px -3px 20px yellow !important;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
     -moz-box-shadow:    2px 2px 7px black, 3px 3px 20px yellow, 
@@ -918,11 +995,16 @@ smltown_name{
     position:absolute;
     bottom: 0;
     width: 100%;
-    color: white;
-    /*text-shadow: 1px 1px 1px black;*/
-    z-index: 10;
+    color: white;    
+    z-index: 12;
     text-align: center;
     padding: 10px;
+    font-size:18px;
+    /*text-shadow: 1px 1px 1px black;*/
+}
+#smltown_infoSelectedCard p{
+    font-size:14px;
+    margin:0;
 }
 
 #smltown_backButton{
@@ -978,3 +1060,91 @@ smltown_name{
 .smltown_static #smltown_menu{
     transform: translateX(0) !important;
 }
+
+#smltown_sun{
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.35;
+    z-index: 1;
+}
+
+#smltown_sun > div{    
+    background-image: url(../img/sun.png);
+    width: 128px;
+    height: 128px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.smltown_night #smltown_list{
+    background-image: url(../img/moon.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+/*.daylight1{
+    background: linear-gradient(to bottom, #020111 10%,#3a3a52 100%);
+}
+.daylight2{
+    background: linear-gradient(to bottom, #20202c 0%,#515175 100%);
+}
+.daylight3{
+    background: linear-gradient(to bottom, #40405c 0%,#6f71aa 80%,#8a76ab 100%);
+}*/
+.daylight1{
+    background: linear-gradient(to bottom, #4a4969 0%,#7072ab 50%,#cd82a0 100%);
+}
+.daylight2{
+    background: linear-gradient(to bottom, #757abf 0%,#8583be 60%,#eab0d1 100%);
+}
+.daylight3{
+    background: linear-gradient(to bottom, #82addb 0%,#ebb2b1 100%);
+}
+.daylight4{
+    background: linear-gradient(to bottom, #94c5f8 1%,#a6e6ff 70%,#b1b5ea 100%);
+}
+.daylight5{
+    background: linear-gradient(to bottom, #b7eaff 0%,#94dfff 100%);
+}
+.daylight6{
+    background: linear-gradient(to bottom, #9be2fe 0%,#67d1fb 100%);
+}
+.daylight7{
+    background: linear-gradient(to bottom, #90dffe 0%,#38a3d1 100%);
+}
+.daylight8{
+    background: linear-gradient(to bottom, #57c1eb 0%,#246fa8 100%);
+}
+.daylight9{
+    background: linear-gradient(to bottom, #2d91c2 0%,#1e528e 100%);
+}
+.daylight10{
+    background: linear-gradient(to bottom, #2473ab 0%,#1e528e 70%,#5b7983 100%);
+}
+.daylight11{
+    background: linear-gradient(to bottom, #1e528e 0%,#265889 50%,#9da671 100%);
+}
+.daylight12{
+    background: linear-gradient(to bottom, #1e528e 0%,#728a7c 50%,#e9ce5d 100%);
+}
+.daylight13{
+    background: linear-gradient(to bottom, #154277 0%,#576e71 30%,#e1c45e 70%,#b26339 100%);
+}
+.daylight14{
+    background: linear-gradient(to bottom, #163C52 0%,#4F4F47 30%,#C5752D 60%,#B7490F 80%, #2F1107 100%);
+}
+.daylight15{
+    background: linear-gradient(to bottom, #071B26 0%,#071B26 30%,#8A3B12 80%,#240E03 100%);
+}
+.daylight16{
+    background: linear-gradient(to bottom, #010A10 30%,#59230B 80%,#2F1107 100%);
+}
+/*.daylight17{
+    background: linear-gradient(to bottom, #090401 50%,#4B1D06 100%);
+}*/
