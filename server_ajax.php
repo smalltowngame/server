@@ -38,6 +38,6 @@ if (empty($content)) { //reply petition
 
 //Normal request, echo = error
 } else {
-    include_once 'server_ajax_utils.php';    
+    include_once 'php/server_ajax_utils.php';    
     serverRequest($content);
 }
