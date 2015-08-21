@@ -1,22 +1,37 @@
 
-<div id="smltown_content">
-    <div id="smltown_title">
-        <p>Game List:</p>
+<div id="smltown_gameList">
+
+    <div id="smltown_content">
+        <div id="smltown_title"></div>
+
+        <div id="smltown_gamesWrapper">
+            <div id="smltown_games">
+                <div id="smltown_footer">
+                    <br/>
+                </div>
+            </div>
+            <div id="smltown_loadingDiv"></div>
+        </div>
+
+        <div class="smltown_log"></div>
+        <div class="smltown_errorLog"></div>            
     </div>
 
-    <div id="smltown_games"></div>
-    <div id="smltown_loadingDiv"></div>
+    <div id="smltown_reload" class="smltown_button" onclick="SMLTOWN.Load.reloadList()">reload</div>
 
-    <div id="smltown_footer">
-        <br/>                
-    </div>
-    <div class="smltown_log"></div>
-    <div class="smltown_errorLog"></div>            
 </div>
 
-<div id="smltown_reload" class="smltown_button" onclick="SMLTOWN.Load.reloadList()">reload</div>
-
 <script>
-    $("#smltown_game").removeClass();
-    SMLTOWN.Local.pingGames();
+    //SMLTOWN.Util.translateHTML();
+    $("#smltown_title").html("<p>" + SMLTOWN.Message.translate("GameList"));
+
+    SMLTOWN.Game.info = {};
+
+    SMLTOWN.Load.gameList();
+    
+    //game list events
+    $("#smltown_gamesWrapper").on("scrollBottom", function () {
+        SMLTOWN.Games.loadMore();
+    });
+
 </script>

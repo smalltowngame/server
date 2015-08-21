@@ -25,6 +25,8 @@ var lang = {
     ,
     PlayingCards: "Cartas en Juego"
     ,
+    cardsHelp: "lista de cartas"
+    ,
     UserSettings: "Ajustes de Usuario"
     ,
     Name: "Nombre"
@@ -54,15 +56,13 @@ var lang = {
     ,
     nightTime: "de noche"
     ,
-    suicide: function(name) {
-        return name + " se ha suicidado";
-    }
+    NoKills: "Nadie a sido linchado"
     ,
-    NoKills: "Nadie a muerto esta noche"
+    NoKillsTonight: "Todo el pueblo se despierta sin muertes."
     ,
-    wasKilled: "ha muerto"
+    wasKilled: "ha sido linchado"
     ,
-    GettingDark: "Está oscureciendo"
+    GettingDark: "Está oscureciendo!"
     ,
     dayTime: "de día"
     ,
@@ -71,4 +71,84 @@ var lang = {
     wakeUp: "despierta"
     ,
     yourTurn: "es tu turno"
+    ,
+    PRESELECT: "haz click otra vez para sleccionar"
+    ,
+    GoodMorning: "Buenos Días! <p>(Cuando el sol llegue al otro extremo de la pantalla el tiempo habrá acabado)</p>"
+    ,
+    gameWillStart: "La partida empezará pronto, cierra los ojos!"
+    ,
+    alive2: "Solo hay 2 jugadores en juego. No puede ocurrir ningun linchamiento durante este día."
+    ,
+    a: ""
+    ,
+    wasKilledTonight: "a muerto esta noche"
+    ,
+    dayEnd: "Se ha hecho de noche. Todo el mundo cierra los ojos."
+    ,
+    GameOver: "La partida ha finalizado."
+    ,
+    Win: "(GANADOR)"
+    ,
+    wakingUp: "esperando jugadores a que despierten.."
+    ,
+    noCardsSelected: "por favor, selecciona las cartas de juego"
+    ,
+    botsAdded: "No hay suficientes jugadores en la partida, se han añadido algunos bots de prueba.<p>La partida comenzará pronto</p>"
+    ,
+    lynch: "Acusa a un jugador para el linchamiento! <p>(hablar ahora está prohibido)</p>"
+    ,
+    duplicatedName: "este nombre ya existe en la partida!"
+    ,
+    awakening: "Espera!, algunos jugadores se están despertando!"
+    ,
+    adminRole: "Has quitado el rol de admin"
+    ,
+    EndTurn: "Acabar turno"
+    ,
+    endTurnHelp: "Finaliza con el turno de día"
+    ,
+    OK: "Aceptar"
+    ,
+    Cancel: "Cancelar"
+    ,
+    GameList: "Game List:"
+    ,
+    noCard: "aún no tienes carta"
+    ,
+    youEspectator: "eres espectador"
+    ,
+    youDead: "hey!, estas muerto"
+    ,
+    infoHelp: "ayuda y manual de juego"
+    ,
+    userHelp: "opciones de usuario"
+    ,
+    cleanHelp: "recargar juego"
+    ,
+    Back: "Atrás"
+    ,
+    backHelp: "volver a la lista de partidas"
+    ,
+    sec_p: "seg/p"
+    ,
+    Info: "Info"
+    ,
+    Admin: "Master"
+    ,
+    openVotingEnabled: "ahora se permiten votaciones durante el día"
+    ,
+    openVotingDisabled: "ya no se permiten votaciones durante el día"
+    ,
+    adminEndTurnEnabled: "el master puede fiinalizar el turno de día"
+    ,
+    adminEndTurnDisabled: "el master no puede fiinalizar el turno de día"
+    ,
+    updatedDayTime: "se ha cambiado la duración del día"
+    ,
+    passwordRemoved: "la contraseña del juego desactivada"
+    ,
+    passwordUpdated: "se ha cambiado la contraseña de la partida"
+    ,
+    playingHere: "estas jugando aquí"
 };

@@ -1,7 +1,24 @@
 
-#smltown_game.smltown_night{
-    background-image: url(../img/stars.png);
-    background-size: 100%;
+/*fixed to prevent scroll on devices*/
+#smltown_game{
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+}
+
+#smltown_body{
+    /*height: calc(100% - 55px);*/ //filter in list scroll!
+    position: relative;
+    box-sizing: border-box;    
+    outline: none;
+    /*text-shadow: 1px 1px 1px rgba(255,255,255,0.4);*/
+
+    background: -webkit-radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
+    background: -o-radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
+    background: -moz-radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
+    background: radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
 }
 
 #smltown_list, #smltown_menuContent, #smltown_console{
@@ -9,10 +26,10 @@
 }
 
 #smltown_filter{
+    display: none;
     height:100%;
     width: 100%;
     z-index: 8;
-    pointer-events:none;
     font-size: 16px;
     position: absolute;
     top: 0;
@@ -26,7 +43,11 @@
     font-weight: bold;
 }
 
-#smltown_filter.smltown_notification{
+#smltown_filter.smltown_notification, #smltown_filter.smltown_sleep{
+    display: inherit !important;
+}
+
+#smltown_filter.smltown_notification{    
     background-color: rgba(255,255,255,0.5);
 
     -webkit-transition: 300ms;
@@ -35,7 +56,8 @@
     -o-transition: 300ms;
     transition: 300ms;
 }
-#smltown_filter .smltown_countdown{
+/*#smltown_filter .smltown_countdown{
+    display: inherit !important;
     color: rgba(255,255,255,0.5);
     font-weight: bold;
     font-size: 100px;
@@ -45,9 +67,11 @@
     position: absolute;
     top: 0;
     width: 100%;
-}
+}*/
 
 .smltown_night #smltown_filter{
+    -webkit-box-shadow: inset 0 0 40px black;
+    -moz-box-shadow: inset 0 0 40px black;
     box-shadow: inset 0 0 40px black;
 }
 
@@ -85,11 +109,15 @@
     position: absolute;
     z-index: -1;  
 }
-#smltown_header.thin{
+.smltown_thinHeader #smltown_header{
     height:30px;
 }
-#smltown_header.thin #smltown_menuIcon, #smltown_header.thin #smltown_cardIcon{    
+.smltown_thinHeader #smltown_header #smltown_menuIcon, .smltown_thinHeader  #smltown_header #smltown_cardIcon{    
     opacity: 0;
+}
+
+.smltown_thinHeader #smltown_list{
+    top: 30px !important;
 }
 
 #smltown_menuIcon, #smltown_cardIcon{
@@ -127,7 +155,11 @@
 }
 
 #smltown_list{
-    height: 100%;
+    width: 100%;
+    /*height: 100%;*/
+    position: absolute;
+    top: 55px;
+    bottom: 25%;
 }
 
 #smltown_list > div{
@@ -152,14 +184,19 @@
     background-color: transparent;
 }
 
-.smltown_player{
+.smltown_player{    
     position: relative;
     height: 40px;    
     border: solid rgba(0,0,0,0.35);
     border-top: solid rgba(255,255,255,0.35);
     border-width: 1px 0;
-    box-shadow: inset 0 0 6px rgba(255,255,255,0.5);
     padding: 5px 0;
+    overflow: hidden;
+    cursor: pointer;
+
+    -webkit-box-shadow: inset 0 0 6px rgba(255,255,255,0.5);
+    -moz-box-shadow: inset 0 0 6px rgba(255,255,255,0.5);
+    box-shadow: inset 0 0 6px rgba(255,255,255,0.5);
 }
 
 .smltown_player .smltown_name{
@@ -202,16 +239,33 @@
     /*text-shadow: none;*/
 }
 
+#smltown_body:not(.smltown_night) #smltown_cardConsole{
+    display:none !important;
+}
+
+#smltown_cardConsole{
+    display: none;
+    border-top: 2px solid rgb(50,50,50);
+    z-index: 3;
+
+    background-color: rgb(220,240,175);
+    background: -webkit-linear-gradient(rgb(200,200,200), rgb(150,150,150)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgb(200,200,200), rgb(150,150,150)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgb(200,200,200), rgb(150,150,150)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgb(200,200,200), rgb(150,150,150));
+    background: linear-gradient(rgb(200,200,200), rgb(150,150,150));
+}
+
+#smltown_cardConsole > *:first-child{
+    margin-top: 20px;
+}
+#smltown_cardConsole *{
+    text-align: center;
+}
+
 #smltown_console{
     border-top: 2px solid rgb(140,210,0);
-    width:100%;
-    position:absolute;
-    bottom:0;
-    height:25%;    
     z-index: 2;
-    font-size:14px;
-    border-radius: 14px 14px 0 0;    
-    overflow: hidden;
     cursor: pointer;
 
     background-color: rgb(220,240,175);
@@ -220,28 +274,42 @@
     background: -moz-linear-gradient(rgb(215,235,155), rgb(215,235,130)); /* For Firefox 3.6 to 15 */
     background: linear-gradient(rgb(215,235,155), rgb(215,235,130));
     background: linear-gradient(rgb(200,220,155), rgb(195,220,130));
+}
 
-    /*    -webkit-transition: none;
-        -moz-transition: none;
-        -ms-transition: none;
-        -o-transition: none;
-        transition: none;*/
+#smltown_console, #smltown_cardConsole{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    top: 75%;
+    font-size: 14px;
+    border-radius: 14px 14px 0 0;    
+    overflow: hidden;
+    z-index: 11;
 
     -webkit-box-shadow: 0 -1px 3px rgba(0,0,0,0.7), inset 0 0 10px white;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
     -moz-box-shadow: 0 -1px 3px rgba(0,0,0,0.7), inset 0 0 10px white;  /* Firefox 3.5 - 3.6 */
     box-shadow: 0 -1px 3px rgba(0,0,0,0.7), inset 0 0 10px white;
 }
+
 #smltown_console:hover{
     background-color: rgb(230,250,175);
 }
 
-#smltown_console.smltown_reduced{
+#smltown_game.smltown_reduced #smltown_console{
+    -webkit-transform: translateY(80%);
+    -moz-transform: translateY(80%);
+    -ms-transform: translateY(80%);
+    -o-transform: translateY(80%);
     transform: translateY(80%);
     -webkit-transition: none;
     -moz-transition: none;
     -ms-transition: none;
     -o-transition: none;
     transition: none;
+}
+
+#smltown_game.smltown_reduced #smltown_list{
+    bottom: 0;
 }
 
 #smltown_consoleText{
@@ -267,7 +335,7 @@
 .smltown_consoleExtended{
     z-index: 12;
     height: auto !important;
-    top: 30px;
+    top: 30px !important;
     -webkit-transition: -webkit-transform 250ms, height 250ms;
     -moz-transition: -moz-transform 250ms, height 250ms;
     -ms-transition: -ms-transform 250ms, height 250ms;
@@ -292,32 +360,22 @@
     color: black !important;
 }
 
-#smltown_console, #smltown_consoleTitle{
-    /*background-color: rgb(207,225,157);*/
-}
-
 #smltown_consoleTitle{
-    height: 14px; /*firefox hide chat*/
     color: rgb(50,50,50);
     font-size: 14px;
     color: green;
-    position: absolute;
-    left: 10px;
-    right: 10px;
-
     height: 18px;
     position: absolute;
-    left: 50px;
-    right: 50px;
-    margin: auto;
-
+    left: 35px;
+    right: 35px;    
     bottom: 5px;
     margin: auto 20px;
-    overflow: hidden;
 }
 
 #smltown_gameName{
-    float: right;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .smltown_gameName{
@@ -340,59 +398,47 @@
 }
 
 #smltown_menu, #smltown_card{
-    height:100%;
     position: absolute;
-    z-index: 11;
+    width: 100%;
+    height: 100%;
+    z-index: 12;
     top:0;
-}
 
-.smltown_swipe{
-    -webkit-transition: background-color 0.3s, -webkit-transform 0.3s;
-    -moz-transition: background-color 0.3s, -moz-transform 0.3s;
-    -ms-transition: background-color 0.3s, -ms-transform 0.3s;
-    -o-transition: background-color 0.3s, -o-transform 0.3s;
-    transition: background-color 0.3s, transform 0.3s;
-    z-index: 9;
+    /*background-color transition makes animation choppy!*/
+    -webkit-transition: -webkit-transform ease-in 0.35s;
+    -moz-transition: -moz-transform ease-in 0.35s;
+    -ms-transition:  -ms-transform ease-in 0.35s;
+    -o-transition: -o-transform ease-in 0.35s;
+    transition: transform ease-in 0.35s;
 }
 
 #smltown_card{
-    pointer-events: none;
-    padding-left: 100%;
+    width: 100%;
+    /*left: 100%;*/
+    right: -100%;
     color: white;
     cursor: pointer;
-
-    /*vertical?*/
-    width: 100%;
-
-    /*    -webkit-transform: translateX(0);
-        -moz-transform: translateX(0);
-        -ms-transform: translateX(0);
-        -o-transform: translateX(0);
-        transform: translateX(0);*/
 }
 
-.smltown_visible{
-    background-color: rgba(0,0,0,0.6);
-    pointer-events: auto !important;
-}
 #smltown_card.smltown_visible{
-    -webkit-transform: translateX(-50%);
-    -moz-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    -o-transform: translateX(-50%);
-    transform: translateX(-50%);
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    -o-transform: translateX(-100%);
+    transform: translateX(-100%);
 }
 #smltown_menu.smltown_visible{
-    -webkit-transform: translateX(50%);
-    -moz-transform: translateX(50%);
-    -ms-transform: translateX(50%);
-    -o-transform: translateX(50%);
-    transform: translateX(50%);
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+    transform: translateX(0);    
 }
 
 #smltown_card > div {
+    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    /*width: 100%;*/
+    width: 100%;
     height: 100%;
     background-color: black;
     cursor: pointer;
@@ -409,16 +455,26 @@
 }
 
 #smltown_cardFront {
+    z-index: -1;
     position: absolute;
     top: 0;
-    transform: rotateY( -180deg );    
+    -webkit-transform: rotateY( -180deg );
+    -ms-transform: rotateY( -180deg );
+    transform: rotateY( -180deg ); 
     height: 100%;
 
     /*vetical?*/
     width:50%;
 }
 
-#smltown_cardFront .smltown_cardText{
+#smltown_cardFront .smltown_cardShadow{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+}
+
+.smltown_cardText{
     font-size: 42px;
     text-align: center;
     width: 100%;
@@ -430,7 +486,7 @@
     src: url('../webfonts/2D31BA_0_0.eot');
     src: url('../webfonts/2D31BA_0_0.eot?#iefix') format('embedded-opentype'),url('../webfonts/2D31BA_0_0.woff2') format('woff2'),url('../webfonts/2D31BA_0_0.woff') format('woff'),url('../webfonts/2D31BA_0_0.ttf') format('truetype');
 }
-#smltown_cardFront > .smltown_cardText > div{
+.smltown_cardText > div{
     position: absolute;
     width: 100%;
     top: 50%;
@@ -440,49 +496,88 @@
     transform: translateX(-50%) translateY(-50%);
     font-family: ChineseRocksRg-Regular;
 }
-#smltown_cardFront p{ /*description*/
+.smltown_cardText .smltown_desc{ /*description*/
     margin: 0;
     font-size: 18px;
     color: rgb(150,150,150);
     /*text-shadow: none;*/
 }
 
+.smltown_cardText .smltown_quote{ /*description*/
+    font-style: italic;
+    margin-top: 30px !important;
+    font-family: serif;
+    font-size: 14px;
+    color: rgb(100,100,100)
+}
+
 #smltown_cardBack {
-    background: url('../img/unflipped.png');
+    background: url('../img/unflipped.jpg');
     background-size: 100% 100%;
 }
 
+.smltown_cardShadow{    
+    border-radius: 15px;
+
+    -webkit-box-shadow: inset 1px 1px rgb(99,99,99), 
+        inset 1px -1px rgb(99,99,99), 
+        inset -1px -1px rgb(99,99,99), 
+        inset -1px 1px rgb(99,99,99), 
+        inset 14px 14px rgb(180,180,180), 
+        inset 14px -14px rgb(180,180,180), 
+        inset -14px -14px rgb(180,180,180), 
+        inset -14px 14px rgb(180,180,180), 
+        inset 16px 16px rgb(30,30,30), 
+        inset 16px -16px rgb(30,30,30), 
+        inset -16px -16px rgb(30,30,30), 
+        inset -16px 16px rgb(30,30,30);
+    -moz-box-shadow: inset 1px 1px rgb(99,99,99), 
+        inset 1px -1px rgb(99,99,99), 
+        inset -1px -1px rgb(99,99,99), 
+        inset -1px 1px rgb(99,99,99), 
+        inset 14px 14px rgb(180,180,180), 
+        inset 14px -14px rgb(180,180,180), 
+        inset -14px -14px rgb(180,180,180), 
+        inset -14px 14px rgb(180,180,180), 
+        inset 16px 16px rgb(30,30,30), 
+        inset 16px -16px rgb(30,30,30), 
+        inset -16px -16px rgb(30,30,30), 
+        inset -16px 16px rgb(30,30,30);
+    box-shadow: inset 1px 1px rgb(99,99,99), 
+        inset 1px -1px rgb(99,99,99), 
+        inset -1px -1px rgb(99,99,99), 
+        inset -1px 1px rgb(99,99,99), 
+        inset 14px 14px rgb(180,180,180), 
+        inset 14px -14px rgb(180,180,180), 
+        inset -14px -14px rgb(180,180,180), 
+        inset -14px 14px rgb(180,180,180), 
+        inset 16px 16px rgb(30,30,30), 
+        inset 16px -16px rgb(30,30,30), 
+        inset -16px -16px rgb(30,30,30), 
+        inset -16px 16px rgb(30,30,30);
+}
+
 #smltown_menu{
-    color: black;
-    /*text-shadow: 1px 1px 1px white;*/
-    margin-left: -100%;
-    width:200%;
-    pointer-events: none;
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    -o-transform: translateX(-100%);
+    transform: translateX(-100%);    
 }
 #smltown_menuContent, #smltown_menuContent > div{
     background-color: rgb(250,250,250);
 }
 #smltown_menuContent{
-    position: absolute;    
-    width: calc(50% - 60px);
-    pointer-events: auto;
-    height:100%;    
-
-    /*    -webkit-box-shadow: 1px 0 9px rgba(0,0,0,0.4);   Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ 
-        -moz-box-shadow: 1px 0 9px rgba(0,0,0,0.4);   Firefox 3.5 - 3.6 
-        box-shadow: 1px 0 9px rgba(0,0,0,0.4);*/
-}
-#smltown_menuContent > div{
     position: absolute;
-    width: 100%;
-    z-index: 1;
-
-    -webkit-transition: -webkit-transform 0.3s;
-    -moz-transition: -moz-transform 0.3s;
-    -ms-transition: -ms-transform 0.3s;
-    -o-transition: -o-transform 0.3s;
-    transition: transform 0.3s;
+    width: calc(100% - 52px);
+    top: 0;
+    bottom: 0;
 }
+
+#smltown_menuContent > div{
+    width:100%; /*back button*/
+}
+
 #smltown_menu .smltown_selector, #smltown_menu .smltown_selector > div{
     overflow: hidden;
     font-size: 14px;
@@ -553,6 +648,7 @@
     height: inherit !important;
     text-align: right;
     margin-top: -2px;
+    pointer-events: none;
 }
 
 #smltown_menu .icon{
@@ -590,38 +686,49 @@
     padding-left: 55px;
 }
 
-.smltown_day .smltown_quit, .smltown_night .smltown_quit{
-    display:none;
-}
-
 .smltown_selectedMenu{
     min-height: 50px;
     height: auto !important;
 }
 
-#smltown_cardBack.smltown_rotate{
-    transform:rotateY(-180deg);
+#smltown_cardBack.smltown_rotate{    
+    -webkit-transform: rotateY(-180deg);
+    -moz-transform: rotateY(-180deg);
+    -ms-transform: rotateY(-180deg);
+    -o-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
 }
 #smltown_cardFront.smltown_rotate{
-    transform:rotateY(0);
+    z-index: 0;
+    -webkit-transform: rotateY(0);
+    -moz-transform: rotateY(0);
+    -ms-transform: rotateY(0);
+    -o-transform: rotateY(0);
+    transform: rotateY(0);
 }
 
-.smltown_userCheck{
+.smltown_check{
     /*background-color: rgb(255,180,180);*/
     background-color: rgba(255,0,0,0.2);
+
+    -webkit-box-shadow: inset 0px 1px 5px black;
+    -moz-box-shadow: inset 0px 1px 5px black;
     box-shadow: inset 0px 1px 5px black;
 }
 .smltown_preselect{
     background-color: rgba(255,210,0,0.4);
+
+    -webkit-box-shadow: inset 0px 1px 3px black;
+    -moz-box-shadow: inset 0px 1px 3px black;
     box-shadow: inset 0px 1px 3px black;
 }
 .smltown_preselect:before{
-    content: "SURE?";
-    line-height: 44px; 
-    font-size: 34px;
+    content: attr(preselect-content);
+    line-height: 44px;
+    font-size: 18px;
     position: absolute;
     color: rgba(0,0,0,0.25);
-    margin-left: 70px;
+    margin-left: 55px;
 }
 
 .smltown_lastSeconds{
@@ -633,10 +740,10 @@
     position: absolute;
     bottom: 0;
     right: 0;
-    font-size: 16px;
     margin-right: 45px;
     float:right;
     font-size: 30px;
+    line-height: 38px;
 }
 .smltown_votes span{
     float: right;
@@ -705,16 +812,45 @@
 }
 
 .smltown_player.smltown_spectator .smltown_extra:before{
-    -webkit-transform:rotate(45deg);
-    -moz-transform:rotate(45deg);
-    transform:rotate(45deg);
     left:-8px;
+
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 .smltown_player.smltown_spectator .smltown_extra:after{
-    -webkit-transform:rotate(-45deg);
-    -moz-transform:rotate(-45deg);
-    transform:rotate(-45deg);
     right:-8px;
+
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.smltown_quit, .smltown_waitingPlayer{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 46px;
+    background-size: 100%;     
+    top: 0;
+}
+
+.smltown_quit{
+    display: none;
+    right: 2px;
+}
+
+.smltown_waitingPlayer{
+    font-size: 54px;
+    pointer-events: none;
+    right: 0;
+    left: 0;
+    margin: auto;
 }
 
 .smltown_night #smltown_user .smltown_spectator, .smltown_day #smltown_user .smltown_spectator{
@@ -740,8 +876,8 @@
     background: -moz-linear-gradient(rgb(180,220,0), rgb(155,200,0)); /* For Firefox 3.6 to 15 */
     background: linear-gradient(rgb(180,220,0), rgb(155,200,0));
 
-    -moz-box-shadow: 0 8px 5px -5px rgba(0,0,0,0.4), 0 -8px 5px -5px rgba(0,0,0,0.4);
     -webkit-box-shadow: 0 8px 5px -5px rgba(0,0,0,0.4), 0 -8px 5px -5px rgba(0,0,0,0.4);
+    -moz-box-shadow: 0 8px 5px -5px rgba(0,0,0,0.4), 0 -8px 5px -5px rgba(0,0,0,0.4);
     box-shadow: 0 8px 5px -5px rgba(0,0,0,0.4), 0 -8px 5px -5px rgba(0,0,0,0.4);
 }
 #smltown_filter.smltown_notification #smltown_popup{ /*if filter is notification*/
@@ -754,7 +890,16 @@
 }
 #smltown_popupText p{
     font-weight: normal;
-    margin: 0;
+    margin: 5px 0 0 0;
+}
+
+#smltown_popupText table {
+    margin: auto;
+}
+
+#smltown_popupText td {
+    /* votes */
+    padding: 0 5px;
 }
 
 #smltown_popup .smltown_button{
@@ -773,9 +918,9 @@
     background-color: rgba(0,0,0,0.15) !important;
 }
 .smltown_dead .smltown_extra{
-    color: gainsboro;
+    color: red;
     font-size: 40px;
-    text-shadow: 3px 3px 4px black, -3px -3px 4px black;
+    text-shadow: 2px 2px 1px black;
 }
 
 .smltown_dead .smltown_name{
@@ -871,14 +1016,6 @@
     font-weight: bold;
 }
 
-.smltown_quit{
-    /*line-height: 37px;*/
-    height: inherit;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
 #smltown_playingCards > p:before{
     content:attr(class) " ";
 }
@@ -919,9 +1056,12 @@
     vertical-align: top;
     text-align: center;
     line-height: 82px;
-    box-shadow: 0 0 2px black;
     border-radius: 4px;
     font-size: 20px;
+
+    -webkit-box-shadow: 0 0 2px black;
+    -moz-box-shadow: 0 0 2px black;
+    box-shadow: 0 0 2px black;
 }
 
 .smltown_rulesCard > span{
@@ -948,12 +1088,13 @@
     border: none !important;
     /*background: transparent;*/
     background: none !important;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    box-shadow: none;
     color:white !important;
     /*text-shadow: 1px 1px 1px black, -1px -1px 1px black, -1px 1px 1px black, 1px -1px 1px black;*/
     margin-top: 48px;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 }
 
 .smltown_selectedRulesCard{
@@ -971,13 +1112,17 @@
 }
 .smltown_extra.smltown_textCard{
     display: table;
-    background-color: rgb(200,200,200);
-    box-shadow: inset 0 0 3px black, 0 0 1px black;    
+    background-color: rgb(200,200,200); 
     border-radius: 5px;
     color: rgba(255,255,255,0.8);
+
+    -webkit-box-shadow: inset 0 0 3px black, 0 0 1px black;    
+    -moz-box-shadow: inset 0 0 3px black, 0 0 1px black;    
+    box-shadow: inset 0 0 3px black, 0 0 1px black;    
 }
 .smltown_rulesCard.smltown_textCard{
-    /*height: 100%;*/
+    -webkit-box-shadow: inset 0 0 5px black;
+    -moz-box-shadow: inset 0 0 5px black;
     box-shadow: inset 0 0 5px black;
 }
 
@@ -1012,6 +1157,48 @@ smltown_name{
     top: auto !important;
     bottom: 0 !important;
     z-index: 0 !important;
+}
+
+#smltown_help{
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    margin: auto;
+    left: 0;
+    right: 0;    
+    background-color: rgba(50,150,0,0.5);
+    border-radius: 9px;
+    border: 1px solid rgb(80,80,80);
+    text-align: center;
+    color: gainsboro;
+    font-weight: bold;
+    cursor: pointer;
+    text-shadow: 1px 1px rgb(50,50,50);
+
+    -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0 0 4px rgba(0,0,0,0.5);
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+}
+#smltown_help:hover{
+    -webkit-box-shadow: inset 1px 1px 3px black;
+    -moz-box-shadow: inset 1px 1px 3px black;
+    box-shadow: inset 1px 1px 3px black;
+}
+#smltown_helpMessage{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 80%;
+    height: 80%;
+    background-color: rgba(0,0,0,0.5);
+    border: 1px solid black;
+    color: rgb(200,200,200);
+    padding: 15px;
+    margin: auto;
+    z-index: 99;
 }
 
 .smltown_static #smltown_header{
@@ -1058,6 +1245,10 @@ smltown_name{
 }
 
 .smltown_static #smltown_menu{
+    -webkit-transform: translateX(0) !important;
+    -moz-transform: translateX(0) !important;
+    -ms-transform: translateX(0) !important;
+    -o-transform: translateX(0) !important;
     transform: translateX(0) !important;
 }
 
@@ -1083,11 +1274,62 @@ smltown_name{
 }
 
 .smltown_night #smltown_list{
-    background-image: url(../img/moon.png);
-    background-repeat: no-repeat;
+    background-image: url(../img/stars.png);    
     background-size: 100%;
 }
 
+.smltown_night #smltown_list{
+    background-image: url(../img/stars.png);    
+    background-size: 100%;
+}
+
+#smltown_phpCard{
+    display: none;
+}
+
+.smltown_tour{
+    position: absolute;
+    bottom: 30px;
+    color: blue;
+    text-decoration: underline;
+    left: 0;
+    right: 0;
+    text-align: center;
+    cursor: pointer;
+}
+
+/*#smltown_body.smltown_night:before{*/
+.smltown_night #smltown_list:before{
+    content: "";
+    width: 100%;
+    height:100%;
+    background-image: url(../img/moon.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    position: absolute;
+}
+
+#smltown_body.smltown_waiting .smltown_gameover, #smltown_body.smltown_gameover .smltown_gameover{
+    display: inherit !important;
+}
+#smltown_body.smltown_waiting .smltown_waiting{
+    display: inherit !important;
+}
+
+.smltown_helpDiv{
+    position: absolute;
+    background-color: rgba(0,0,0,0.3);
+    color: white;
+    border: 1px solid black;
+    padding: 10px;
+    z-index: 99;
+    max-width: 38%;    
+    font-size: 15px;
+}
+.smltown_helpDiv small{
+    display:block;
+    text-align: justify;
+}
 /*.daylight1{
     background: linear-gradient(to bottom, #020111 10%,#3a3a52 100%);
 }

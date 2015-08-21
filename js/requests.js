@@ -1,165 +1,165 @@
 
 SMLTOWN.Server.request = {
-    send: function() {
+    send: function () {
+        smltown_error("server connection is not established yet");
     } //creation in JS_connection
     ,
-    selectPlayer: function(id) {
+    selectPlayer: function (id) {
         SMLTOWN.Server.request.send({//not found .this?
             action: "selectPlayer",
             id: id
         }, true);
     }
     ,
-    unSelectPlayer: function() {
+    unSelectPlayer: function () {
         SMLTOWN.Server.request.send({//not found .this?
             action: "unSelectPlayer"
         }, true);
     }
     ,
-    nightSelect: function(obj, noWait) {
+    nightSelect: function (obj, noWait) {
         obj.action = "nightSelect";
         this.send(obj, noWait);
     }
     ,
-    nightUnselect: function(obj) {
+    nightUnselect: function (obj) {
         obj.action = "nightUnselect";
         this.send(obj);
     }
     ,
-    nightExtra: function() {
+    nightExtra: function () {
         this.send({
             action: "nightExtra"
         }, true);
     }
     ,
-    endNightTurn: function() {
+    endNightTurn: function () {
         this.send({
             action: "endNightTurn"
         }, true);
         SMLTOWN.Action.sleep(); //like girl Card
     }
     ,
-    setName: function(name) {
+    setName: function (name) {
         this.send({
             action: "setName",
             name: name
         });
     }
     ,
-    startGame: function() {
+    startGame: function () {
         this.send({
             action: "startGame"
         });
     }
     ,
-    restartGame: function() {
+    restartGame: function () {
         this.send({
             action: "restartGame"
         });
     }
     ,
-    endTurn: function() {
+    endTurn: function () {
         this.send({
             action: "endTurn"
         }, true);
     }
     ,
-    openVotingEnd: function() {
+    openVotingEnd: function () {
         this.send({
             action: "openVotingEnd"
         }, true);
     }
     ,
-    getAll: function() {
+    getAll: function () {
         this.send({
             action: "getAll"
         });
     }
     ,
-//    suicide: function(message) {
-//        if (SMLTOWN.user.status < 0) {
-//            return; //prevent multiple suicide logs
-//        }
-//        SMLTOWN.user.status = -1;
-//
-//        var obj = {action: "suicide"};
-//        if (message) {
-//            obj.message = message;
-//        }
-//        this.send(obj);
-//    }
-//    ,
-    deletePlayer: function(id) {
+    deletePlayer: function (id) {
         this.send({
             action: "deletePlayer",
             id: id
         }, true);
     }
     ,
-    chat: function(text) {
+    chat: function (text) {
         this.send({
             action: "chat",
             text: text.replace(/'/g, "").replace(/"/g, "")
         }, true);
     }
     ,
-    addUser: function() { //start game function only
-        this.send({
-            action: "addUser"
-        });
+    addUser: function (name) { //start game function only
+        if (!name) {
+            name = "";
+        }
+        var obj = {
+            action: "addUser",
+            name: name
+        };
+        var userId = SMLTOWN.Util.getCookie("smltown_userId");
+        if (userId) {
+            obj.userId = userId;
+        }
+        this.send(obj);
     }
     ,
-    addUserInGame: function(password) { //start game function only
+    addUserInGame: function (gameId, password) { //start game function only
         if ("undefined" == typeof password) {
             password = null;
         }
         this.send({
             action: "addUserInGame",
-            password: password
+            gameId: gameId,
+            password: password,
+            userId: SMLTOWN.Util.getCookie("smltown_userId"),
+            lang: SMLTOWN.lang
         });
     }
     ,
-    nightStart: function() {
+    nightStart: function () {
         this.send({
             action: "nightStart"
         });
     }
     ,
-    setPassword: function(password) { //admin
+    setPassword: function (password) { //admin
         this.send({
             action: "setPassword",
             password: password
         }, true);
     }
     ,
-    setDayTime: function(time) {
+    setDayTime: function (time) {
         this.send({
             action: "setDayTime",
             time: time ? time : "NULL"
         }, true);
     }
     ,
-    setOpenVoting: function(isChecked) {
+    setOpenVoting: function (isChecked) {
         this.send({
             action: "setOpenVoting",
             value: isChecked
         }, true);
     }
     ,
-    setEndTurnRule: function(isChecked) {
+    setEndTurnRule: function (isChecked) {
         this.send({
             action: "setEndTurnRule",
             value: isChecked
         }, true);
     }
     ,
-    cardRequest: function() {
+    cardRequest: function () {
         this.send({
             action: "cardRequest"
         });
     }
     ,
-    setMessage: function(message, id) {
+    setMessage: function (message, id) {
         this.send({
             action: "setMessage",
             message: message,
@@ -167,13 +167,17 @@ SMLTOWN.Server.request = {
         }, true);
     }
     ,
-    messageReceived: function() {
+    messageReceived: function (stop) {
+        if ("undefined" == typeof stop || !stop) {
+            stop = 0;
+        }
         this.send({
-            action: "messageReceived"
+            action: "messageReceived",
+            stop: stop
         }, true);
     }
     ,
-    saveCards: function(cards) {
+    saveCards: function (cards) {
 //        console.log(JSON.stringify(cards))
 //        cards = JSON.stringify(cards).replace(/\"/g,"'");
         cards = JSON.stringify(cards);
@@ -184,10 +188,16 @@ SMLTOWN.Server.request = {
         }, true);
     }
     ,
-    becomeAdmin: function() {
+    becomeAdmin: function () {
         this.send({
             action: "becomeAdmin"
         }, true);
+    }
+    ,
+    dayEnd: function () {
+        this.send({
+            action: "dayEnd"
+        }, true); //not loading
     }
 //    ,
 //    exitGame: function(callback) {

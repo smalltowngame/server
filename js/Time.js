@@ -1,6 +1,7 @@
 
 SMLTOWN.Time = {
-    runCountdown: function() { //start day game countdown
+    runCountdown: function () { //start day game countdown
+        console.log("run countdown")
         if (this.countdownInterval) {
             console.log("this.countdownInterval = " + this.countdownInterval)
             return;
@@ -9,80 +10,85 @@ SMLTOWN.Time = {
 
         var timeout = 0;
         //countdown
-        if (this.end) {
+        if ("undefined" == typeof this.end || null == this.end) {
+            $("#smltown_sun").hide();
+            return;
+        } else if (this.end > 0) {
             this.start = SMLTOWN.Game.info.timeStart;
             this.dayTime = this.end - this.start;
-            console.log(this.end + " - " + this.start);
-            console.log(this.dayTime);
+//            console.log(this.end + " - " + this.start);
+//            console.log(this.dayTime);
             timeout = this.end * 1000 - Date.now();
-            this.sunPath();
         }
+        this.sunPath();
 
         //http://stackoverflow.com/questions/3468607/why-does-settimeout-break-for-large-millisecond-delay-values
         if (timeout > 2147483647 || timeout < -2147483647) {
-            smltown_error("error: day time is too big. day time will be 0");
+            smltown_error("error: day time number is too big. day time will set to 0 (timeout = " + timeout + ")");
             timeout = 0;
         }
 
-        this.countdownInterval = setTimeout(function() {
+        this.countdownInterval = setTimeout(function () {
             //last seconds only
             clearInterval($this.lastSeconds);
-            $this.lastSeconds = setInterval(function() {
-                console.log("last seconds")
-                var countdown = ($this.end - (Date.now() / 1000)) | 0; // |0 to remove decimals
-
-                if (countdown < 1) {
-                    $this.clearCountdown();
-                    $this.setSunPosition();
-
-                    if ("1" == SMLTOWN.Game.info.openVoting) {
-                        console.log("openVoting!!!!!!!!!!!!!!!!!!!")
-                        SMLTOWN.Server.request.openVotingEnd(); //if openVoting, not wait after last second
-                        return;
-                    } else {
-                        $("#smltown_statusGame").smltown_text("waitPlayersVotes");
-                    }
-                    if (SMLTOWN.user.status && SMLTOWN.user.status > 0) {
-                        SMLTOWN.Message.notify(
-                                "Select one player for the lynching!"
-                                + "<p>(speak is now forbidden)</p>"
-                                , true);
-                        $("#smltown_sun").css("z-index", 0);
-                    }
-                }
+            $this.lastSeconds = setInterval(function () {
+                $this.dayEnd();
             }, 1000);
+            $this.dayEnd(); //first of all
 
         }, timeout); // in milliseconds!
-
     }
     ,
-    clearCountdown: function() { //remove countdown
-        //console.log("clearCountdown");
+    dayEnd: function () {
+        console.log("last seconds");
+        var countdown = this.end - (Date.now() / 1000);
+        if (countdown > 0) {
+            return;
+        }
+
+        this.clearCountdowns();
+        this.setSunPosition();
+
+        if ("1" == SMLTOWN.Game.info.openVoting) {
+            console.log("openVoting!!!!!!!!!!!!!!!!!!!")
+            SMLTOWN.Server.request.openVotingEnd(); //if openVoting, not wait after last second
+            return;
+        } else {
+            $("#smltown_statusGame").smltown_text("waitPlayersVotes");
+        }
+        if (0 < SMLTOWN.user.status) {
+            SMLTOWN.Server.request.dayEnd();
+            SMLTOWN.Message.notify(SMLTOWN.Message.translate("lynch"), true);
+            $("#smltown_sun").css("z-index", 0); //let vote
+        }
+    }
+    ,
+    clearCountdowns: function () { //remove countdown
+        console.log("clearCountdowns");
         clearTimeout(this.sunInterval);
         clearInterval(this.lastSeconds);
         clearTimeout(this.countdownInterval);
         this.countdownInterval = false;
     }
     ,
-    countdownInterval: false,
-    countdownCorrector: false
+    countdownInterval: false
     ,
     start: null,
     end: null,
     dayTime: null
     ,
-    sunPath: function() {
+    sunPath: function () {
         var $this = this;
         var update = this.dayTime / 16 * 1000;
 
         clearInterval(this.sunInterval);
-        this.sunInterval = setInterval(function() {
+        this.sunInterval = setInterval(function () {
             $this.setSunPosition();
-        }, update); //every second
+        }, update);
         this.setSunPosition();
     }
     ,
-    setSunPosition: function() {
+    setSunPosition: function () {
         var pathLength = $("#smltown_body").width();
         var now = Date.now() / 1000 | 0;
         //console.log(now - this.start + " , " + this.dayTime + " , " + pathLength);
@@ -96,7 +102,7 @@ SMLTOWN.Time = {
 
         } else {
             var perOne = (now - this.start) / this.dayTime;
-            if (!perOne) { //if error stop
+            if (isNaN(perOne)) { //if error stop
                 clearInterval(this.sunInterval);
                 return;
             }

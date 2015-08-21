@@ -8,21 +8,25 @@ class Tables {
             'id' => "int(11) UNSIGNED NOT NULL AUTO_INCREMENT",
             'name' => "varchar(255) UNIQUE not null",
             'password' => "varchar(255)",
+            //game status
+            'type' => "varchar(255) DEFAULT 'mafia-werewolf'",
             'status' => "int(11) NOT NULL",
             'cards' => "text",
             'night' => "varchar(255)",
             'timeStart' => "bigint(20)",
             'time' => "bigint(20)",
+            //admin options
             'dayTime' => "int(11)",
             'openVoting' => "int(1)",
             'endTurn' => "int(1) DEFAULT 1",
-            'admin' => "int(1) NOT NULL default 0",
+            //
             'lastConnection' => "timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
             'PRIMARY KEY' => "(id)"
         ),
         'smltown_players' => array(
             'id' => "varchar(255) UNIQUE NOT NULL",
             'name' => "varchar(255)",
+            'lang' => "varchar(255)",
             'lastConnection' => "timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
             'PRIMARY KEY' => "(id)"
         ),
@@ -36,7 +40,7 @@ class Tables {
             'rulesJS' => "text",
             'status' => "int(11)",
             'sel' => "int(11)",
-            'message' => "varchar(255)",
+            'message' => "text",
             'reply' => "text NOT NULL default ''",
             'PRIMARY KEY' => "(id)"
         )
@@ -59,7 +63,7 @@ class Tables {
     }
 
     function createTables() {
-        foreach ($this->tables as $tablename => $array) {            
+        foreach ($this->tables as $tablename => $array) {
             $sth = sql($this->createTableSring($tablename, $array));
             echo $this->createTableSring($tablename, $array);
             if ($sth->rowCount() > 0) { //nothing changes

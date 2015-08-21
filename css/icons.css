@@ -81,7 +81,7 @@
 }
 
 /*ICONS*/
-#smltown_openVotingIcon{
+.smltown_openVotingIcon{
     font-size: 85%;
     margin-top: 9px;
     width:0.95em;
@@ -93,7 +93,7 @@
     border-radius:0.6em 0.6em 1em 1em;
     position:relative;
 }
-#smltown_openVotingIcon:before{
+.smltown_openVotingIcon:before{
     content:'';
     background:black;
     display:block;
@@ -123,7 +123,7 @@
         0.40em -0.3em 0,
         0.60em -0.22em 0;
 }
-#smltown_openVotingIcon:after{
+.smltown_openVotingIcon:after{
     content: '';
     background: black;
     display: block;
@@ -147,7 +147,7 @@
     border-top-left-radius: 65% 33%;
 }
 
-#smltown_passwordIcon {
+.smltown_passwordIcon {
     margin-top: 0.8em;
     border-radius: 0.3em;
     box-shadow: inset 0.9em 0.8em 0 0 black,inset -0.9em 0.8em 0 0 black,inset 0em -0.4em 0 0 black;
@@ -156,7 +156,7 @@
     height: 1.8em;
     position: relative;
 }
-#smltown_passwordIcon::before {
+.smltown_passwordIcon::before {
     left: 0.32em;
     border-radius: 1em 1em 0 0;
     top: -0.8em;
@@ -168,7 +168,7 @@
     border-bottom: none;
 }
 
-#smltown_endTurnIcon{
+.smltown_endTurnIcon{
     width:2em;
     height:2em;
     border-radius:50%;
@@ -177,7 +177,7 @@
     border-style: solid;
     font-size: 55% !important;
 }
-#smltown_endTurnIcon::before {
+.smltown_endTurnIcon::before {
     position: absolute;
     content: "";
     top: 0.29em;
@@ -191,7 +191,7 @@
     border-left-width: 0.7em;
     border-left-style: solid;
 }
-#smltown_endTurnIcon::after {
+.smltown_endTurnIcon::after {
     position: absolute;
     content: "";
     top: 0.29em;

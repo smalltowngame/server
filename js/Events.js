@@ -38,88 +38,89 @@ SMLTOWN.Events = {
         var mousedown = false;
         var card = null;
 
-        if (SMLTOWN.user.admin) {
-            $(".smltown_rulesCard").touchstart(function () {
-                var $this = $(this);
-                if (card != $(this).attr("smltown_card")) {
-                    tapped = false;
-                    card = $(this).attr("smltown_card");
-                }
-                if (!tapped) { //if tap is not set, set up single tap
-                    mousedown = true;
-                    tapped = setTimeout(function () {
-                        tapped = null; //insert things you want to do when single tapped
-                    }, 300);   //wait then run single click code
-                    mousedown = setTimeout(function () {
-                        // TAPHOLD//////////////////////////////////////////////
-                        if (!mousedown || $this.hasClass("smltown_cardOut")) {
-                            return false;
-                        }
-                        if (SMLTOWN.Game.playing()) {
-                            SMLTOWN.Message.flash("cannot modify cards in game");
-                            return;
-                        }
-
-                        $this.find("input").show();
-                        $this.find("input").focus();
-                        $this.find("span").hide();
-                    }, 600);   //wait then run single click code
-                    return;
-                }
-
-                // DOUBLE TAP (tapped within 300ms of last tap)/////////////////
-                if (SMLTOWN.Game.playing()) {
-                    SMLTOWN.Message.flash("cannot toggle cards in game");
-                    return;
-                }
-                clearTimeout(tapped); //stop single tap callback
-                tapped = null;
-                $(this).toggleClass("smltown_cardOut"); //insert things you want to do when double tapped
-
-                var cards = SMLTOWN.Game.info.cards;
-                if ("object" != typeof cards) {
-                    cards = {};
-                }
-                if ($(this).hasClass("smltown_cardOut")) {
-                    var cardName = $(this).attr("smltown_card");
-                    delete cards[cardName];
-                } else {
-                    cards[$(this).attr("smltown_card")] = 0;
-                }
-                SMLTOWN.Server.request.saveCards(cards);
-
-            }).on("mouseup", function () {
-                mousedown = false;
-
-            }).bind("taphold", function (e) {
-                e.preventDefault();
-                return false;
-
-            }).on("focusout", function () { //input number
-                var cards = SMLTOWN.Game.info.cards;
-                var card = $(this).attr("smltown_card");
-
-                if (!$(this).find("input").val()) {
-                    $(this).find("span").show();
-                    $(this).find("input").hide();
-                    if (card) {
-                        cards[card] = 0;
-                        SMLTOWN.Server.request.saveCards(cards);
+        $(".smltown_rulesCard").touchstart(function () {
+            if (!SMLTOWN.user.admin) {
+                return;
+            }
+            var $this = $(this);
+            if (card != $(this).attr("smltown_card")) {
+                tapped = false;
+                card = $(this).attr("smltown_card");
+            }
+            if (!tapped) { //if tap is not set, set up single tap
+                mousedown = true;
+                tapped = setTimeout(function () {
+                    tapped = null; //insert things you want to do when single tapped
+                }, 300);   //wait then run single click code
+                mousedown = setTimeout(function () {
+                    // TAPHOLD//////////////////////////////////////////////
+                    if (!mousedown || $this.hasClass("smltown_cardOut")) {
+                        return false;
                     }
-                } else { //int value
-                    var val = $(this).find("input").val();
-                    if (val != cards[card]) {
-                        cards[card] = val;
-                        SMLTOWN.Server.request.saveCards(cards);
+                    if (SMLTOWN.Game.playing()) {
+                        SMLTOWN.Message.flash("cannot modify cards in game");
+                        return;
                     }
-                }
-            });
 
-            $(".smltown_rulesCard form").submit(function () {
-                $(this).find("input").blur();
-                return false;
-            });
-        }
+                    $this.find("input").show();
+                    $this.find("input").focus();
+                    $this.find("span").hide();
+                }, 600);   //wait then run single click code
+                return;
+            }
+
+            // DOUBLE TAP (tapped within 300ms of last tap)/////////////////
+            if (SMLTOWN.Game.playing()) {
+                SMLTOWN.Message.flash("cannot toggle cards in game");
+                return;
+            }
+            clearTimeout(tapped); //stop single tap callback
+            tapped = null;
+            $(this).toggleClass("smltown_cardOut"); //insert things you want to do when double tapped
+
+            var cards = SMLTOWN.Game.info.cards;
+            if ("object" != typeof cards) {
+                cards = {};
+            }
+            if ($(this).hasClass("smltown_cardOut")) {
+                var cardName = $(this).attr("smltown_card");
+                delete cards[cardName];
+            } else {
+                cards[$(this).attr("smltown_card")] = 0;
+            }
+            SMLTOWN.Server.request.saveCards(cards);
+
+        }).on("mouseup", function () {
+            mousedown = false;
+
+        }).bind("taphold", function (e) {
+            e.preventDefault();
+            return false;
+
+        }).on("focusout", function () { //input number
+            var cards = SMLTOWN.Game.info.cards;
+            var card = $(this).attr("smltown_card");
+
+            if (!$(this).find("input").val()) {
+                $(this).find("span").show();
+                $(this).find("input").hide();
+                if (card) {
+                    cards[card] = 0;
+                    SMLTOWN.Server.request.saveCards(cards);
+                }
+            } else { //int value
+                var val = $(this).find("input").val();
+                if (val != cards[card]) {
+                    cards[card] = val;
+                    SMLTOWN.Server.request.saveCards(cards);
+                }
+            }
+        });
+
+        $(".smltown_rulesCard form").submit(function () {
+            $(this).find("input").blur();
+            return false;
+        });
 
         //plain user events
         $(".smltown_rulesCard").on("tap", function () {
@@ -139,53 +140,49 @@ SMLTOWN.Events = {
     ,
     //GAME EVENTS //////////////////////////////////////////////////////////////
     game: function () { //1 time load
-        $("#smltown_game").off();
+        var $this = this;
 
         this.menuEvents();
 
         //SWIPES ACTIONS GAME
         $("#smltown_menuIcon").on("click", function () {
-            $("#smltown_game").trigger("swiperight");
+            $this.swipeRight();
         });
         $("#smltown_cardIcon").on("click", function () {
-            $("#smltown_game").trigger("swipeleft");
+            $this.swipeLeft();
         });
 
-        $("#smltown_game").on("swiperight", function (e) {
+        // "> div" resolve some swipe bugs! and without duplications
+        $("#smltown_game > div").on("swiperight", function (e) {
             e.preventDefault();
-
-            if ($("#smltown_card").hasClass("smltown_visible")) {
-                SMLTOWN.Transform.cardSwipeRotate();
-            } else if ($("#smltown_menu").hasClass("smltown_swipe")) {
-                $("#smltown_menu").addClass("smltown_visible");
-            }
+            $this.swipeRight();
         });
-        $("#smltown_game").on("swipeleft", function (e) {
+        $("#smltown_game > div").on("swipeleft", function (e) {
             e.preventDefault();
-            if ($("#smltown_menu").hasClass("smltown_visible")) {
-                $("#smltown_menu").removeClass("smltown_visible");
-            } else {
-                if (!SMLTOWN.card) {
-                    SMLTOWN.Message.flash("no card yet");
-                }
-                else if ($("#smltown_card").hasClass("smltown_swipe")) {
-                    $("#smltown_card").addClass("smltown_visible");
-                }
-            }
+            $this.swipeLeft();
         });
 
+        //ANY setTimeout for Android 2.3 focus!
         $("#smltown_console").on("mouseup", function (e) {
+            console.log(555)
             if ($(e.target).attr("id") == "smltown_chatInput") {
                 return;
             }
-            setTimeout(function () {
+//            setTimeout(function () {
                 $('#smltown_console').toggleClass("smltown_consoleExtended");
-                SMLTOWN.Message.chatUpdate();
                 if ($("#smltown_console").hasClass("smltown_consoleExtended")) {
-                    $("#smltown_chatInput").focus();
+                    $("#smltown_chatInput").trigger('click');
                 }
-            }, 300);
+                SMLTOWN.Message.chatUpdate();
+//            }, 300);
         });
+
+        //Android 2.3
+        $("#smltown_chatInput").click(function () {
+            $("#smltown_chatInput").focus();
+
+        });
+
         $("#smltown_chatInput").on("focusout", function () {
             if ($("#smltown_console").hasClass("smltown_consoleExtended")) {
                 return;
@@ -229,10 +226,47 @@ SMLTOWN.Events = {
                 $(this).removeClass("smltown_visible");
             }
         });
+
+        $("#smltown_help").on("tap", function () {
+            $("#smltown_helpMessage").remove();
+            var message = $("<div id='smltown_helpMessage'>");
+            var tour = $("<div class='smltown_tour'>tour</div>");
+            tour.click(function () {
+                SMLTOWN.Add.nextHelp(0);
+            });
+            message.html("<div class='smltown_text'></div>").append(tour);
+            $("#smltown_body").append(message);
+            SMLTOWN.Add.help();
+            $(document).one("tap", function (e) {
+                e.preventDefault();
+                message.remove();
+            });
+        });
+    }
+    ,
+    swipeRight: function () {
+        if ($("#smltown_card").hasClass("smltown_visible")) {
+            SMLTOWN.Transform.cardSwipeRotate();
+        } else if ($("#smltown_menu").hasClass("smltown_swipe")) {
+            $("#smltown_menu").addClass("smltown_visible");
+        }
+    }
+    ,
+    swipeLeft: function () {
+        if ($("#smltown_menu").hasClass("smltown_visible")) {
+            $("#smltown_menu").removeClass("smltown_visible");
+        } else {
+            if (!SMLTOWN.user.card) {
+                SMLTOWN.Message.flash("noCard");
+            }
+            else if ($("#smltown_card").hasClass("smltown_swipe")) {
+                $("#smltown_card").addClass("smltown_visible");
+            }
+        }
     }
     ,
     //ALL SCROLLS GAME
-    touchScroll: function (div, side) { //side: top or bottom
+    touchScroll: function (div, side) { //side: top or bottom        
         var element = div.attr("id");
         //android 2.3 bug on height content div
         var $this = div.find(">div");
@@ -242,12 +276,19 @@ SMLTOWN.Events = {
         }
 
         var finalPosition, x, y, pageX, pageY, originScrollY, position, moved;
+        var divHeight = div.height(); //can't change, update on widnow transform
+
+        //let night scroll etc..
+        if ("smltown_list" == element) {
+            div = $("#smltown_game"); //global scroll events
+        }
 
         div.off("touchstart");
         div.on("touchstart", function (e) { //necessary top != auto
 
             position = null; //reset final position to prevent calculations 
-            var maxScroll = SMLTOWN.Transform.contentHeights[element] - $this.height(); //see bottom list
+            var maxScroll = divHeight - $this.height(); //see bottom list
+            //console.log(element + " , " + maxScroll)
 
             //not scrolling
             if (maxScroll > -10) {
@@ -268,10 +309,7 @@ SMLTOWN.Events = {
                 //limit scroll
                 y = e.originalEvent.touches[0].pageY;
 
-                if ("smltown_console" == element) {
-                    //$("#smltown_chatInput").blur();
-
-                } else {//prevent scroll on swipe
+                if ("smltown_console" != element) { //prevent scroll on swipe
                     x = e.originalEvent.touches[0].pageX;
                     if (Math.abs(y - pageY) < 2 * Math.abs(x - pageX)) {
                         return;
@@ -280,7 +318,7 @@ SMLTOWN.Events = {
 
                 //scroll
                 finalPosition = originScrollY + y;
-//                    console.log(finalPosition + " , " + $this.height())
+                //console.log(finalPosition + " , " + $this.height())
                 if (side == "top") {
                     if (finalPosition > 0) {
                         finalPosition = 10;
@@ -300,7 +338,7 @@ SMLTOWN.Events = {
                 }
 
                 if ("smltown_list" == element) {
-                    $("#smltown_console").addClass("smltown_reduced");
+                    $("#smltown_game").addClass("smltown_reduced");
                 }
 
                 position = finalPosition;
@@ -320,7 +358,8 @@ SMLTOWN.Events = {
                 if (side == "top") {
                     if (finalPosition > 0) {
                         $this.css("transform", "translateY(2px)");
-                    } else if (finalPosition < maxScroll) {
+                    } else if (finalPosition < maxScroll) { //bottom scroll
+                        $(this).trigger("scrollBottom"); //for games list
                         $this.css({
                             transform: "translateY(" + (maxScroll) + "px)"
                         });
@@ -335,7 +374,7 @@ SMLTOWN.Events = {
 
                 if ("smltown_list" == element) {
                     setTimeout(function () { //let some time to continue scroling
-                        $("#smltown_console").removeClass("smltown_reduced");
+                        $("#smltown_game").removeClass("smltown_reduced");
                     }, 500);
 
                 } else if ("smltown_menu" == element) {
@@ -370,19 +409,24 @@ SMLTOWN.Events = {
 
         //ON USER SETTINGS
         this.menuInput("updateName", function (val) {
+            for (var id in SMLTOWN.players) {
+                if (SMLTOWN.players[id].name == val) {
+                    SMLTOWN.Message.flash("duplicatedName");
+                    return;
+                }
+            }
             SMLTOWN.Server.request.setName(val);
             SMLTOWN.Message.flash("name saved");
         });
 
         $("#smltown_cleanErrors").on("touchend mouseup", function () {
             if ($(this).hasClass("active")) {
-                SMLTOWN.Load.start();
-                $("#smltown_game").load(SMLTOWN.path + "game.php");
+                SMLTOWN.Load.cleanGameErrors();
             }
         });
 
         if (document.location.hostname == "localhost") {
-            var becomeAdmin = $("<div id='becomeAdmin' class='smltown_selectable'><span>BecomeAdmin</span></div>")
+            var becomeAdmin = $("<div id='smltown_becomeAdmin'><span>BecomeAdmin</span></div>")
             $("#smltown_updateName").after(becomeAdmin);
             becomeAdmin.on("tap", function () {
                 SMLTOWN.Server.request.becomeAdmin();
@@ -499,6 +543,8 @@ SMLTOWN.Events = {
     }
     ,
     menuInput: function (id, callback, empty) { //menu cell with input
+        var value = $("#smltown_" + id + " input").val();
+        $("#smltown_" + id + " input").attr("original", value);
         $("#smltown_" + id + " form").submit(function () {
             var input = $(this).find("input");
             if (input.is(":focus")) {
@@ -507,7 +553,11 @@ SMLTOWN.Events = {
             return false;
         });
         $("#smltown_" + id + " input").on('blur', function () {
+            var original = $(this).attr("original");
             var val = $(this).val();
+            if (val === original) {
+                return;
+            }
             if (!empty) {
                 if (!val) {
                     return;

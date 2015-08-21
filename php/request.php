@@ -1,233 +1,252 @@
 <?php
 
-//USER REQUESTS
+include_once 'php/PingRequest.php';
 
-function addUser($obj = null) { //obj: insert user to game
-    $userId = null;
-    $userName = null;
+trait Request {
 
-    if (isset($_SESSION['userId'])) {
-        $userId = $_SESSION['userId'];
-    } else if (isset($_COOKIE['smltown_userId'])) {
-        //let devices pass user id but insecure.
-        $userId = $_COOKIE['smltown_userId'];
-    }
-
-    if (isset($_SESSION['userName'])) {
-        $userName = $_SESSION['userName'];
-    } else if (isset($_COOKIE['smltown_userName'])) {
-        $userName = $_COOKIE['smltown_userName'];
-    }
-
-    //add user
-    if (null == $userId) {
-        $userId = getRandomUserId();
-    }
-    $values = array('userName' => $userName, 'userId' => $userId);
-    sql("INSERT IGNORE INTO smltown_players (id, name) VALUES (:userId, :userName)", $values);
-
-    $_SESSION['userId'] = $userId;
-    $_SESSION['userName'] = $userName;
-    setcookie("smalltown_userName", $userName, time() + 864000, "/"); //10 days
-    //
-    
-    if (null != $obj && isset($obj->gameId)) {
-        addUserInGame($obj);
-    }
-}
-
-function addUserInGame($obj) { //and create game
-    $gameId = $obj->gameId;
-    $userId = $obj->userId;
-
-    //prevent sql injection on gameId
-    $values = array('gameId' => $gameId);
-    $games = petition("SELECT password FROM smltown_games WHERE id = :gameId", $values);
-    if (count($games) == 0) {
-        echo "SMLTOWN.Load.showPage('gameList')";
-        return;
-    }
-
-    if ($games[0]->password && !isset($_SESSION["game$gameId"])) {
-        if (!isset($obj->password)) {
-            echo "SMLTOWN.Game.askPassword();";
-            die();
+    //USER REQUESTS
+    function addUser($lang = "en") {
+        $userId = null;
+        $userName = "";
+        if (isset($this->requestValue['name'])) {
+            $userName = $this->requestValue['name'];
+        }
+        if (isset($this->userId)) {
+            $userId = $this->userId;
         }
 
-        $values = array('password' => $obj->password);
-        $count = petition("SELECT count(*) as count FROM smltown_games WHERE id = $gameId AND password = :password", $values)[0]->count;
-        if ($count == 0) {
-            echo "SMLTOWN.Game.askPassword('wrong passord');";
-            die();
+        //WEBSOCKET
+//        if (isset($this->requestValue['socket'])) {
+//            //
+//        } else {
+//            if (isset($_COOKIE['smltown_userName'])) {
+//                $userName = $_COOKIE['smltown_userName'];
+//            }
+//        }
+        //add user
+        if (null == $userId) {
+            $userId = getRandomUserId();
         }
+        $values = array('userName' => $userName, 'userId' => $userId, 'lang' => $lang);
+        sql("INSERT INTO smltown_players (id, name, lang) VALUES (:userId, :userName, :lang) ON DUPLICATE KEY UPDATE name=VALUES(name), lang=VALUES(lang)", $values);
+
+        //WEBSOCKET
+        if (isset($this->requestValue['socket'])) {
+            global $users;
+            $users[$userId] = $this->requestValue['socket'];
+        }
+
+        $_SESSION['userId'] = $userId;
+        return $userId;
+        //setCookieValue("smltown_userName", $userName);
+        //    if (null != $obj && isset($obj->gameId)) {
+        //        addUserInGame($obj);
+        //    }
     }
-    $_SESSION["game$gameId"] = 1;
 
-    //admin check
-    $admin = null;
-    if (in_array($_SERVER['REMOTE_ADDR'], array('127.0.0.1', '::1'))) {
-        $admin = 1;
-    } else if (strpos($_SERVER['REMOTE_ADDR'], '192.168.') !== false) {
-        $admin = 0;
-    }
+    //special userId but playId
+    public function addUserInGame() { //and create game        
+        if (!isset($this->gameId)) {
+            $gameId = $this->gameId();
+        } else {
+            $gameId = $this->gameId;
+        }
 
-    $values = array('userId' => $userId, 'gameId' => $gameId);
+        //$userId
+        if (isset($this->userId)) {
+            $userId = $this->userId;
 
-    $sql = "INSERT INTO smltown_plays (userId, gameId, admin) SELECT :userId, :gameId,";
-    if (null == $admin) {
-        $sql = "$sql CASE WHEN (SELECT count(*) FROM smltown_plays WHERE admin = 1 AND gameId = :gameId) = 0 THEN 1 ELSE 0 END";
-    } else {
-        $sql = "$sql $admin";
-    }
-    $sql = "$sql FROM DUAL" //from nothing (read table only 1 time)
-            . " WHERE (SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = :gameId) = 0";
-
-    $sth = sql($sql, $values);
-
-    //UPDATE
-    updateUsers($gameId, $userId);
-    if ($sth->rowCount() == 0) { //nothing changes on insert: player is not new
-        updatePlayers($gameId, $userId);
-    } else {
-        updatePlayers($gameId); //way to update new players to others
-    }
-    updateRules($gameId, $userId); //THIS position admin / playing cards
-    updateGame($gameId, $userId);
-
-    checkGameErrors($gameId);
-}
-
-function setName($obj) {
-    $gameId = $obj->gameId;
-    $userId = $obj->userId;
-    $userName = $obj->name;
-    $values = array('name' => $userName);
-
-    //duplicated names works on js, isn't a real security issue
-    sql("UPDATE smltown_players SET name = :name WHERE id = '$userId'", $values);
-
-    $_SESSION['userName'] = $userName;
-    updatePlayers($gameId, null, "name"); //way to update new players to other people
-    //
-    //rewrite header to name game
-    if ("127.0.0.1" == $_SERVER['REMOTE_ADDR']) {
-        $file = file("index.php");
-        $newLines = array();
-        foreach ($file as $line)
-            if (preg_match("/^(header\(\'name)/", $line) === 0) {
-                $newLines[] = chop($line);
-            } else {
-                $newLines[] = chop("header('name:$userName');");
+            if ("null" == $userId || empty($userId) || !isset($userId)) {
+                //        echo "error user id: $userId";
+                //        die();
+                $userId = $this->addUser();
             }
-        $newFile = implode("\n", $newLines);
-        file_put_contents("index.php", $newFile);
+        } else {
+            $userId = $this->addUser();
+        }
+
+        //prevent sql injection on gameId
+        $values = array('gameId' => $gameId);
+        $game = petition("SELECT password FROM smltown_games WHERE id = :gameId", $values)[0]; //game checked in Ping-Request
+
+        if ($game->password && !isset($_SESSION["game$gameId"])) {
+            if (!isset($this->requestValue->password)) {
+                echo "SMLTOWN.Game.askPassword();";
+                die();
+            }
+
+            $values = array('password' => $this->requestValue->password);
+            $count = petition("SELECT count(*) as count FROM smltown_games WHERE id = $gameId AND password = :password", $values)[0]->count;
+            if ($count == 0) {
+                echo "SMLTOWN.Game.askPassword('wrong passord');";
+                die();
+            }
+        }
+        //password done
+        $_SESSION["game$gameId"] = 1;
+
+        //admin check
+        $admin = null;
+
+        $values = array('userId' => $userId, 'gameId' => $gameId);
+
+        //add if not exists
+        $sql = "INSERT INTO smltown_plays (userId, gameId, admin) SELECT :userId, :gameId,";
+        if (null == $admin) {
+            $sql .= " CASE WHEN (SELECT count(*) FROM smltown_plays WHERE admin = 1 AND gameId = :gameId) = 0 THEN 1 ELSE 0 END";
+        } else {
+            $sql .= " $admin";
+        }
+        $sql .= " FROM DUAL" //from ANY TABLE (read table only 1 time)
+                . " WHERE (SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = :gameId) = 0";
+        $sth = sql($sql, $values);
+
+        //update playId
+        $playId = petition("SELECT id FROM smltown_plays WHERE userId = :userId AND gameId = :gameId", $values)[0]->id;
+        $_SESSION['playId'] = $this->playId = $playId;
+        //$this->playId = $playId;
+        //remove as websocket test
+        //$_COOKIE['smltown_userId'] = $userId;
+        //WEBSOCKET
+        if (isset($this->requestValue['socket'])) {
+            echo " add playId to socket = $playId; \n";
+            $this->requestValue['socket']->val->$playId = true;
+        }
+        
+        $this->loadGame($sth->rowCount());
     }
-}
 
-function becomeAdmin($obj) {
-    $gameId = $obj->gameId;
-    $userId = $obj->userId;
-    sql("UPDATE smltown_plays SET admin = CASE WHEN userId = '$userId' THEN 1 ELSE 0 END" + "WHERE gameId = $gameId");
-    setFlash($gameId, "you stole admin role", array("userId" => $userId));
-    $res = array(
-        'type' => "SMLTOWN.Load.reloadGame"
-    );
-    send_response(json_encode($res), $gameId, $userId);
-}
+    public function loadGame($rowCount) {
+        $playId = $this->playId;
 
-function chat($obj) {
-    $gameId = $obj->gameId;
-    $userId = $obj->userId;
-    $res = array(
-        'type' => "chat",
-        'userId' => $obj->userId,
-        'text' => $obj->text
-    );
+        //UPDATE
+        $this->updateRules($playId);
+        $this->updateUsers($playId);
+        if ($rowCount == 0) { //nothing changes on insert: player is not new
+            $this->updatePlayers($playId);
+        } else {
+            $this->updatePlayers(); //way to update new players to others
+        }
+        //updateRules($gameId, $userId); //THIS position admin / playing cards
+        $this->updateGame($playId);
 
-    $plays = petition("SELECT userId FROM smltown_plays WHERE gameId = $gameId AND userId <> '$userId'");
-    for ($i = 0; $i < count($plays); $i++) {
-        send_response(json_encode($res), $gameId, $plays[$i]->userId);
+        $this->checkGameErrors();
     }
-}
 
-////////////////////////////////////////////////////////////////////////////////
-//AUTO GAME REQUESTS
-//on error request
-function getAll($obj) {
-    $gameId = $obj->gameId;
-    $userId = $obj->userId;
-    updateAll($gameId, $userId);
-}
+    public function setName() {
+        $gameId = $this->gameId;
+        $playId = $this->playId;
+        $userName = $this->requestValue['name'];
 
-function setMessage($obj) {
-    saveMessage($obj->message, $obj->gameId, $obj->id);
-}
+        $values = array('name' => $userName);
 
-//function suicide($obj) {
-//    $gameId = $obj->gameId;
-//    $userId = $obj->userId;
-//    killPlayer($gameId, $userId);
-//    $name = petition("SELECT name FROM smltown_players WHERE id = '$userId'")[0]->name;
-//    if (isset($obj->message)) {
-//        $str = $obj->message;
-//    } else {
-//        $str = "message.suicide('$name')";
+        $duplicateName = petition("SELECT count(*) as count FROM smltown_players "
+                        //add players name table
+                        . "LEFT OUTER JOIN smltown_plays "
+                        . "ON smltown_plays.userId = smltown_players.id "
+                        //       
+                        . "WHERE name = '$userName' AND gameId = $gameId")[0]->count;
+
+        if ($duplicateName > 0) {
+            $res = array(
+                'type' => "SMLTOWN.Message.login",
+                "log" => "duplicatedName"
+            );
+            $this->send_response(json_encode($res), $playId);
+            return;
+        }
+
+        //insert if necessary
+        sql("INSERT INTO smltown_players (id, name) SELECT userId, ':name' FROM smltown_plays WHERE id = $playId ON DUPLICATE KEY UPDATE name = :name", $values);
+
+        //$_COOKIE['smltown_userName'] = $userName;
+        $this->updatePlayer($playId, "name"); //way to update new players to other people
+//
+        //rewrite header to name game <TODO>
+//    if ("127.0.0.1" == $_SERVER['REMOTE_ADDR']) {
+//        $file = file("index.php");
+//        $newLines = array();
+//        foreach ($file as $line)
+//            if (preg_match("/^(header\(\'name)/", $line) === 0) {
+//                $newLines[] = chop($line);
+//            } else {
+//                $newLines[] = chop("header('name:$userName');");
+//            }
+//        $newFile = implode("\n", $newLines);
+//        file_put_contents("index.php", $newFile);
 //    }
-//    $res = array(
-//        'type' => "chat",
-//        'text' => $str
-//    );
-//    updatePlayers($gameId);
-//    send_response(json_encode($res), $gameId);
-//}
-//
-//
-// OUT OF GAME SOCKET
-function createGame($obj = null) {
-
-    $cards = array(
-        "werewolf_classic_werewolf" => 0,
-        "werewolf_classic_seer" => 0,
-        "werewolf_classic_witch" => 0,
-        "werewolf_classic_hunter" => 0,
-        "werewolf_classic_cupid" => 0
-    );
-    $values = array(
-        'cards' => json_encode($cards),
-        'name' => ""
-    );
-    if (null != $obj) {
-        $values['name'] = $obj->name;
     }
 
-    //check
-    $sth = sql('INSERT IGNORE INTO smltown_games (name, cards) VALUES (:name, :cards)', $values);
-    global $pdo;
-    $id = $pdo->lastInsertId();
-    if ($sth->rowCount() == 0) { //nothing changes
-        echo "game name already exists";
-        return false;
+    public function becomeAdmin() {
+        $gameId = $this->gameId;
+        $playId = $this->playId;
+
+        sql("UPDATE smltown_plays SET admin = CASE WHEN id = $playId THEN 1 ELSE 0 END WHERE gameId = $gameId");
+        $this->setFlash("adminRole", array("id" => $playId));
+        $this->reloadClientGame($playId);
     }
 
-    //remove unstarted games where admin create this other game
-    if (isset($_SESSION['userId'])) {
-        $userId = $_SESSION['userName'];
-        $value = array(
-            'name' => $values['name']
+    public function chat() {
+        $gameId = $this->gameId;
+        $playId = $this->playId;
+        $text = $this->requestValue['text'];
+
+        $res = array(
+            'type' => "chat",
+            'playId' => $playId,
+            'text' => $text
         );
-        sql("DELETE FROM smltown_games WHERE 0 < "
-                . "(SELECT count(*) FROM smltown_plays WHERE 1 = "
-                . "(SELECT admin FROM smltown_plays WHERE smltown_plays.gameId = smltown_games.id LIMIT 0,1)) "
-                . "AND (smltown_games.status <> 1 AND smltown_games.status <> 2 AND smltown_games.name <> :name)", $value);
+
+        $plays = petition("SELECT id FROM smltown_plays WHERE gameId = $gameId AND id <> $playId");
+        for ($i = 0; $i < count($plays); $i++) {
+            $this->send_response(json_encode($res), $plays[$i]->id);
+        }
     }
 
-    //return
-    echo $id; //echo return!
-    return $id;
-}
+    ////////////////////////////////////////////////////////////////////////////////
+    //AUTO GAME REQUESTS
+    //on error request
+    public function getAll() {
+        if (isset($this->playId)) {
+            $playId = $this->playId;
+            $this->updateAll($playId);
+        }
+    }
 
-//list games
+    public function setMessage() {
+        $message = $this->message;
+        $id = $this->id;
+        $this->saveMessage($message, $id);
+    }
 
-function searchGames($obj) {
-    $name = $obj->name;
+    public function nightExtra() {
+        $playId = $this->playId;
+
+        $play = $this->getCard();
+        if (!$play) {
+            echo "bad extra card request";
+            return;
+        }
+
+        $card = $this->getCardFileByName($play->card);
+
+        $data = $card->extra();
+        $this->send_response(json_encode(array('type' => 'extra', 'data' => $data)), $playId);
+    }
+
+    public function openVotingEnd() { //only as openVoting admin option, or openVoting on finish
+        $this->townVotations();
+    }
+
+    public function dayEnd() {
+        $gameId = $this->gameId;
+
+        $count = petition("SELECT count(*) as count FROM smltown_games WHERE time = 0 AND id = $gameId")[0]->count;
+        if ($count == 0) {
+            return;
+        }
+
+        $this->pendingVotes();
+    }
+
 }

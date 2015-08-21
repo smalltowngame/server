@@ -2,43 +2,45 @@
 
 class CardUtils {
 
-    private static $obj = null;
-    private static $gameId = null;
-    private static $userId = null;
+    use Response,
+        Utils,
+        Connection;
 
-    function __construct($obj) {
-        if (isset($obj))
-            self::$obj = $obj;
-        if (isset($obj->gameId))
-            self::$gameId = $obj->gameId;
-        if (isset($obj->userId))
-            self::$userId = $obj->userId;
+    public $gameId = null;
+    public $playId = null;
+    public $values = null;
+
+    function __construct($gameId, $playId, $values) {
+        $this->gameId = $gameId;
+        $this->playId = $playId;
+        $this->requestValue = $values;
     }
 
-    public function getUserId() {
-        return self::$userId;
+    public function getPlayId() {
+        return $this->playId;
     }
-	
-	public function getGame($select){
-		$gameId = self::$gameId;
-		$values = array("select" => $select);
-		$res = petition("SELECT :select FROM smltown_games WHERE id = $gameId", $values);
-		if(count($res) > 0){
-			return $res[0][$select];
-		}
-	}
 
-    public function getPlayerName($id = null) {
-        if (!isset($id)) {
-            $id = self::$userId;
+    public function getGame($select) {
+        $gameId = $this->gameId;
+
+        $values = array("select" => $select);
+        $res = petition("SELECT :select FROM smltown_games WHERE id = $gameId", $values);
+        if (count($res) > 0) {
+            return $res[0][$select];
+        }
+    }
+
+    public function getPlayerName($playId = null) {
+        if (!isset($playId)) {
+            $playId = $this->playId;
         }
         $values = array(
-            'id' => $id
+            'playId' => $playId
         );
-        $player = petition("SELECT name FROM smltown_players WHERE id = :id", $values);
+        $player = petition("SELECT name FROM smltown_players WHERE id = (SELECT userId FROM smltown_plays WHERE id = :playId)", $values);
         if (count($player) > 0) {
             if (count($player) > 1) {
-                echo "multiple players with id = $id";
+                echo "multiple players with id = $playId";
             }
             return $player[0]->name;
         }
@@ -46,16 +48,17 @@ class CardUtils {
     }
 
     public function getPlayers($wheres = null, $selects = null) {
-        $gameId = self::$gameId;
-        $sql = "SELECT";
+        $gameId = $this->gameId;
+
+        $sql = "SELECT ";
 
         if ($selects) {
-            $sql = "$sql " . selectArray($selects);
+            $sql .= selectArray($selects);
         } else {
-            $sql = "$sql userId, card, status, sel";
+            $sql .= " id, card, status, sel";
         }
 
-        $sql = "$sql FROM smltown_plays WHERE gameId = $gameId";
+        $sql .= " FROM smltown_plays WHERE gameId = $gameId";
 
         $values = array();
         foreach ($wheres as $key => $value) {
@@ -64,76 +67,86 @@ class CardUtils {
                 die();
             }
             $values[$key] = $value;
-            $sql = "$sql AND $key = :$key";
+            $sql .= " AND $key = :$key";
         }
         return petition($sql, $values);
     }
 
     public function getPlayersCard($card, $like = null, $dead = null) {
-        $gameId = self::$gameId;
+        $gameId = $this->gameId;
+
         $values = array();
         $sql = "SELECT * FROM smltown_plays WHERE gameId = $gameId AND card";
 
         if ($like) { //all kind
             $values['card'] = "%_$card";
-            $sql = "$sql LIKE ";
+            $sql .= " LIKE ";
         } else {
             $values['card'] = "$card";
-            $sql = "$sql =";
+            $sql .= " =";
         }
-        $sql = "$sql :card";
+        $sql .= " :card";
 
         if (!isset($dead) || !$dead) { //include dead players
-            $sql = "$sql AND status > 0";
+            $sql .= " AND status > 0";
         }
 
         return petition($sql, $values);
     }
 
-    public function getPlayer($selects = null, $id = null) {
-        $gameId = self::$gameId;
-        if (!$id) {
-            if (!self::$userId) {
-                echo "Bad use of cardUtils->getPlayer. not self:userId is defined when requests: " . json_encode($selects);
-                return false;
-            }
-            $id = self::$userId;
+    public function getPlayer($selects = null, $playId = null) {
+        $gameId = $this->gameId;
+        if (!$playId) {
+            $playId = $this->playId;
         }
         $values = array(
-            'userId' => $id
+            'playId' => $playId
         );
-	
-        $sql = "SELECT userId";
 
+        $sql = "SELECT smltown_plays.id";
+
+//        echo 33;
         if (!is_array($selects)) {
+            echo "; playId = $playId; ";
             if ($selects) { //single value
-                $sql = "$sql ,$selects";
+//                echo "; selects = $selects; ";
+                $sql .= ", $selects";
             } else {
-                $sql = "$sql, name, admin, card, rulesJS, rulesPHP, status, sel, message";
+                $sql .= ", name, admin, card, rulesJS, rulesPHP, status, sel, message";
             }
             //IS ARRAY
         } else {
             for ($i = 0; $i < count($selects); $i++) {
-                $value = $selects[$i];
-                $sql = "$sql ,$selects[$i]";
+                $sql .= " ,$selects[$i]";
             }
         }
-        $result = petition("$sql FROM smltown_plays, smltown_players WHERE gameId = $gameId AND smltown_plays.userId = :userId AND smltown_players.id = :userId", $values)[0];
+        $plays = petition("$sql FROM smltown_plays"
+                //add players name table
+                . " LEFT OUTER JOIN smltown_players"
+                . " ON smltown_plays.userId = smltown_players.id"
+                //
+                . " WHERE smltown_plays.id = :playId", $values);
+        if (count($plays) == 0) {
+            echo "error to get player with id = $playId";
+            return;
+        }
+        $result = $plays[0];
         if ($selects && !is_array($selects)) {
+//            echo "; result = " . json_encode($result);
+//            echo "; end = " . $result->$selects;
             return $result->$selects; //return only the atribute
         }
         return $result;
     }
 
-    public function setPlayer($array, $id = null) {
-        $gameId = self::$gameId;
-        if (!$id) {
-            $id = self::$userId;
-        }
-		
-		$updateValues = array("card", "status", "rulesJS");
+    public function setPlayer($array, $playId = null) {
+        $gameId = $this->gameId;
 
-        $values = array('userId' => $id);
+        if (!$playId) {
+            $playId = $this->playId;
+        }
+
+        $values = array('playId' => $playId);
         $sql = "UPDATE smltown_plays SET";
         $i = 0;
         foreach ($array as $key => $value) {
@@ -141,101 +154,132 @@ class CardUtils {
                 return "error: no valid key";
             }
             $values[$key] = $value;
-            $sql = "$sql $key = :$key";
+            $sql .= " $key = :$key";
 
             $i++;
             if ($i < count($array)) {
-                $sql = "$sql,";
+                $sql .= ",";
             }
             if ($key == "card") {
                 
             }
         }
-        $sql = "$sql WHERE gameId = $gameId AND userId = :userId";
+        $sql .= " WHERE gameId = $gameId AND id = :playId";
         sql($sql, $values);
 
         foreach ($array as $key) {
             if ($key == "card") {
-                updateUsers($gameId, $id, $key);
+                $this->updateUsers($playId, $key);
             }
         }
-		
     }
 
-    public function addPlayerRules($kind, $rules, $id = null) {
-        $kind = strtoupper($kind);
-        $gameId = self::$gameId;
-        if (!isset($id)) {
-            $id = self::$userId;
+    public function setPlayers($array, $wheres = null) {
+        $gameId = $this->gameId;
+
+        $sql = "UPDATE smltown_plays SET";
+        $i = 0;
+        foreach ($array as $value) {
+            $sql .= " $value";
+            $i++;
+            if ($i < count($array)) {
+                $sql .= ",";
+            }
         }
+        $sql .= " WHERE gameId = $gameId";
+
+        foreach ($wheres as $value) {
+            $sql .= " AND $value";
+        }
+
+        sql($sql);
+    }
+
+    public function addPlayerRulesJS($rules, $playId = null) {
+        $gameId = $this->gameId;
+        if (!isset($playId)) {
+            $playId = $this->playId;
+        }
+
         $values = array(
-            'userId' => $id,
+            'playId' => $playId,
             'rules' => $rules
         );
-        sql("UPDATE smltown_plays SET rules$kind ="
-			. " CASE WHEN rules$kind = '' THEN CONCAT(rules$kind, ';', :rules) ELSE :rules END"
-			. " WHERE gameId = $gameId AND userId = :userId", $values);
-        updateUsers($gameId, $id, "rules$kind");
+        sql("UPDATE smltown_plays SET rulesJS = CONCAT(rulesJS, ';' , :rules)"
+                . " WHERE gameId = $gameId AND id = :playId", $values);
+        $this->updateUsers($playId, "rulesJS");
     }
 
-    public function kill($id) {
-        $gameId = self::$gameId;
-        return hurtPlayer($gameId, $id);
+    public function addPlayerRulesPHP($rules, $playId = null) {
+        $gameId = $this->gameId;
+        if (!isset($playId)) {
+            $playId = $this->playId;
+        }
+
+        $values = array(
+            'playId' => $playId,
+            'rules' => $rules
+        );
+        sql("UPDATE smltown_plays SET rulesPHP = :rules"
+                . " WHERE gameId = $gameId AND id = :playId", $values);
+    }
+
+    public function kill($playId) {
+        return $this->hurtPlayer($playId);
     }
 
     public function suicide() {
-        $gameId = self::$gameId;
-        $userId = self::$userId;
-        return killPlayer($gameId, $userId);
+        $playId = $this->playId;
+        return $this->killPlayer($playId);
     }
 
     public function endGame() {
-        $gameId = self::$gameId;
-        sql("UPDATE smltown_games SET status = 3 WHERE id = $gameId");
-        updateGame($gameId);
+        $gameId = $this->gameId;
+//        $endStatus = count($this->TURNS);
+        $endStatus = 5; //PATCH. TODO: $this->TURNS (only breaks on websocket!)
+        echo "status = $endStatus";
+        $this->updatePlayers(null, array("status", "card"));
+        sql("UPDATE smltown_games SET status = $endStatus WHERE id = $gameId");
+        $this->updateGame();
     }
 
     public function requestValue($value) {
-        $obj = self::$obj;
-        return $obj->$value;
+        return $this->requestValue->$value;
     }
 
-    public function send_response($userId, $type, $obj = array()) {
-        $gameId = self::$gameId;
+    public function response($type, $obj = array()) {
+        $playId = $this->playId;
         $obj['type'] = $type;
-        send_response(json_encode($obj), $gameId, $userId);
+        $this->send_response(json_encode($obj), $playId);
     }
 
-    public function getUserIdByCard($card) {
-        $values = array('card' => $card);
-        return petition("SELECT userId FROM smltown_plays WHERE card = $card", $values);
-    }
+//    public function getPlayIdByCard($card) {
+//        $gameId = $this->gameId;
+//        $values = array('card' => $card);
+//        return petition("SELECT id FROM smltown_plays WHERE gameId = $gameId AND card = $card", $values);
+//    }
 
     public function setMessage($message, $id = null) {
-        $gameId = self::$gameId;
-        saveMessage($message, $gameId, $id);
-    }
-    
-    public function getText(){
-        $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-        $text = $GLOBALS['card']['text'];
-        if(!isset($text[$lang])){
-            $lang = "en";
-        }
-        return $text[$lang];
+        $this->saveMessage($message, $id);
     }
 
-//    public function updatePlayers($array, $wheres, $userId = null) {
-//        $gameId = self::$gameId;
-//        if (null == $userId) {
-//            $userId = self::$userId;
-//        }
-//        $res = array(
-//            'type' => "update",
-//            'players' => petition("SELECT userId, "
-//                    . "CASE WHEN $wheres THEN $array ELSE null END as $array "
-//                    . "FROM plays WHERE gameId = $gameId")
-//        );
-//        send_response(json_encode($res), $gameId, $userId);
-//    }
+    public function update_players($value) {
+        $this->updatePlayers(null, $value);
+    }
+
+    public function setGame($array) {
+        $gameId = $this->gameId;
+
+        $sql = "UPDATE smltown_games SET ";
+        $i = 0;
+        foreach ($array as $value) {
+            $sql .= " $value";
+            $i++;
+            if ($i < count($array)) {
+                $sql .= ",";
+            }
+        }
+        sql("$sql WHERE id = $gameId");
+    }
+
 }

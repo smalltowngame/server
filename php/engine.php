@@ -1,316 +1,316 @@
 <?php
 
+trait Engine {
+
 // DAY ACTIONS
+    protected function gameStatusChange() {
+        $gameId = $this->gameId;
 
-function startDay($gameId) {
-    if (checkGameOver($gameId)) { //first (status = 3)
-        die();
-    }
+        $plays = petition("SELECT id, card FROM smltown_plays WHERE gameId = $gameId");
 
-    if (playersAlive($gameId) == 2) {
-        //night = null: becomes night on message received
-        killDying($gameId);
-        sql("UPDATE smltown_games SET status = 1, night = null WHERE id = $gameId");
-        updateGame($gameId, null, "status");
+        for ($i = 0; $i < count($plays); $i++) {
+            $cardName = $plays[$i]->card;
 
-        $message = "Only 2 players are alive. No kill could happen at day";
-        saveMessage($message, $gameId); //alive users       
-        setNotifications($gameId, $message, array('status' => -1)); //dead users
-        die();
-    }
+            $card = $this->getCardFileByName($cardName, $plays[$i]->id);
 
-    $now = round(microtime(true));
-    $time = getDiscusTime($gameId, $now); //seconds
-    sql("UPDATE smltown_games SET night = null, timeStart = $now, time = $time WHERE id = $gameId");
-    updateGame($gameId, null, array("timeStart", "time")); //updates game
-    //before playersAlive to request well 2 players alive to all!
-    setGameStatus($gameId, 1);
-}
+            if (!$card || !property_exists($card, "statusGameChange")) {
+                continue;
+            }
 
-function openVotingEnd($obj) { //only as openVoting admin option, or openVoting on finish
-    $gameId = $obj->gameId;
+            $overrideStatus = $card->statusGameChange();
 
-    //if !open Voting
-    $count = petition("SELECT count(*) as count FROM smltown_games WHERE "
-                    . "id = $gameId AND openVoting = 1 "
-                    . "AND (SELECT count(*) as count FROM smltown_plays WHERE gameId = $gameId AND message > '') = 0 "
-                    . "AND time < " . microtime(true))[0]->count;
-    if (1 == $count) {
-        townVotations($obj);
-    }
-}
+            if (isset($overrideStatus)) {
 
-function townVotations($obj) { //day end
-    $gameId = $obj->gameId;
-
-    $sth = sql("UPDATE smltown_games SET timeStart = null, time = null WHERE id = $gameId "
-            . " AND (time < " . microtime(true)
-            //or endTurn is enabled
-            . " OR (endTurn = 1 AND (SELECT admin FROM smltown_plays WHERE gameId = $gameId AND userId = '$obj->userId')))");
-    if ($sth->rowCount() == 0) {
-        return; //prevent multiple dayEnd requests
-    }
-
-    $players = petition("SELECT sel FROM smltown_plays WHERE gameId = $gameId AND status > 0");
-    $deadId = votations($players);
-
-    if ($deadId != null) {
-        $gameIsOver = hurtPlayer($gameId, $deadId);
-        if ($gameIsOver) {
-            return;
+                if (is_numeric($overrideStatus)) {
+//                    sql("UPDATE smltown_games SET status = $overrideStatus WHERE id = $gameId");
+//                    $this->updateGame(null, "status");
+                    //
+                } else if (false != $overrideStatus) { //string
+                    sql("UPDATE smltown_games SET night = '$cardName' WHERE id = $gameId");
+                    //update night turn to this players make stop
+                    $message = "statusGameChange:$overrideStatus";
+                    $plays = petition("SELECT id, status, card FROM smltown_plays WHERE gameId = $gameId");
+                    for ($i = 0; $i < count($plays); $i++) {
+                        $playId = $plays[$i]->id;
+                        if ($cardName == $plays[$i]->card && -1 < $plays[$i]->status) {
+                            $this->updateGame($playId, "night");
+                            $this->saveMessage($message, $playId);
+                        } else {
+                            $this->setNotifications("$cardName is plotting something", array("id" => $playId));
+                        }
+                    }
+                }
+                return true;
+            }
         }
-    }
-        
-    $message = "votations:$deadId";
-    
-    saveMessage($message, $gameId);
-    setNotifications($gameId, $message, array('status' => -1)); //killed players
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// NIGHT ACTIONS
-function endNightTurn($obj, $initiative = null) { //here requests also statuschange player cards!
-    $gameId = $obj->gameId;
-    $outstandMessages = petition("SELECT count(*) as count FROM smltown_plays WHERE message <> '' AND gameId = $gameId")[0]->count;
-    if ($outstandMessages > 0) { //wait for messages
         return false;
     }
-    if (!$initiative) {
-//        $cards = loadCards($gameId); //slower first?
-        //if comes from statuschange card action 
 
-        $nightTurn = petition("SELECT night FROM smltown_games WHERE id = $gameId")[0]->night;
-        if (!$nightTurn) {
-            setGameStatus($gameId, 2); //night
-            $initiative = -1;
-        } else {
-            $cards = loadCards($gameId);
-            if (!isset($cards[$nightTurn]['initiative'])) { //if last turn was a statuschange action
-                startDay($gameId);
+    ////////////////////////////////////////////////////////////////////////////////
+    // NIGHT ACTIONS
+
+    protected function runTurn($cardName) { //plays of same cards
+        $gameId = $this->gameId;
+
+        $plays = petition("SELECT smltown_plays.id FROM smltown_plays "
+                //add players name table
+                . " LEFT OUTER JOIN smltown_players"
+                . " ON smltown_plays.userId = smltown_players.id"
+                //
+                . " WHERE card = '$cardName' AND status > -1 AND gameId = $gameId");
+
+        if (count($plays) < 1) {
+            echo "ERROR: card file not found. Ending turn..";
+            $this->setNextStatus();
+            return;
+        }
+
+        for ($i = 0; $i < count($plays); $i++) {
+            $playId = $plays[$i]->id;
+            //every card player: distinct languages
+            $card = $this->getCardFileByName($cardName, $playId);
+
+            //if night-Turn function (like girl)
+            if (property_exists($card, "nightBefore")) {
+                $res = $card->nightBefore();
+                if (false !== $res) {
+                    //endNightTurn($gameId, $card->initiative);
+                    $this->setNextTurn($card->initiative);
+                }
             }
-            $initiative = $cards[$nightTurn]['initiative'];
-        }
-    }
-    nextNightTurn($gameId, $initiative);
-}
-
-function nextNightTurn($gameId, $initiative) { //numeric $initiative
-    $play = getNextNightTurn($gameId, $initiative);
-
-    if ($play) { //if found night turn
-        sql("UPDATE smltown_games SET night = '$play->card' WHERE id = $gameId");
-
-        //saveMessage($gameId, $play->userId, "Is your turn (from server)");
-        //
-        //updates
-        updateGame($gameId, $play->userId, array("status", "night"));
-        //end night
-    } else {
-        if ($initiative < 0) { //prevent dayEnd bucles if no night cards error
-            setGameStatus($gameId, 0);
-            echo "error: no night cards?";
-            die();
-        }
-        startDay($gameId);
-    }
-}
-
-function getNextNightTurn($gameId, $turn) {
-    $cards = loadCards($gameId); //slow first 
-    //alive only
-    $plays = petition("SELECT userId, card FROM smltown_plays WHERE gameId = $gameId AND status > -1");
-
-    $lowestInitiative = 100;
-    $next = null;
-    for ($i = 0; $i < count($plays); $i++) {
-        $card = $plays[$i]->card;
-        if (!isset($cards[$card]['initiative'])) {
-            continue;
-        }
-        $initiative = $cards[$card]['initiative'];
-        if ($initiative > $turn && $initiative < $lowestInitiative) {
-            $lowestInitiative = $initiative;
-            $next = $plays[$i];
+            if (property_exists($card, "nightSelect")) {
+                $this->updatePlayers($playId, array("card" => $cardName));
+                $this->updateGame($playId, array("status", "night"));
+            }
         }
     }
 
-    if (isset($next)) {
-        return $next;
+    protected function checkMessages() {
+        $gameId = $this->gameId;
+
+        $outstandMessages = petition("SELECT count(*) as count FROM smltown_plays WHERE message <> '' AND gameId = $gameId")[0]->count;
+        if ($outstandMessages > 0) { //wait for messages
+            return false;
+        }
+        //updateGame($gameId, null, "status");
+        return true;
     }
-    return false;
-}
+
+    ////////////////////////////////////////////////////////////////////////////////
+    //AUTOMATIC REQUESTS
+    public function messageReceived() {
+        $gameId = $this->gameId;
+        $playId = $this->playId;
+        $stop = false;
+        if (isset($this->stop)) {
+            $stop = $this->stop;
+        }
+
+        $sth = sql("UPDATE smltown_plays SET message = '' WHERE message <> '' AND id = $playId");
+        if ($sth->rowCount() == 0) {
+            //DEBUG
+            $this->setError($gameId, "error: no message to recieve.");
+            return; //any message to recibe, prevent posible hack
+        }
+
+        //only on last message
+        $this->updatePlayer($playId, "message");
+        if (!$this->checkMessages()) {
+            return;
+        }
+
+        $status = $this->getTurn();
+        if (count($this->TURNS) == $status) { //if game over
+            echo "GAME OVER";
+            return;
+        }
+
+        if (!$stop) {
+            $night = petition("SELECT night FROM smltown_games WHERE id = $gameId")[0]->night;
+            if (isset($night) && !empty($night)) {
+                $this->setNextTurn();
+            } else { //night == null            
+                $this->setNextStatus();
+            }
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////
+    //DAY SELECTS
+    public function selectPlayer() {
+        $gameId = $this->gameId;
+        $playId = $this->playId;
+        $id = $this->requestValue['id'];
+
+        $values = array('selectedId' => $id);
+        sql("UPDATE smltown_plays SET sel = :selectedId WHERE id = $playId", $values);
+        $this->selectPlayerResponse();
+    }
+
+    public function unSelectPlayer() {
+        $gameId = $this->gameId;
+        $playId = $this->playId;
+        sql("UPDATE smltown_plays SET sel = null WHERE id = $playId");
+        $this->selectPlayerResponse();
+    }
+
+    protected function selectPlayerResponse() {
+        $gameId = $this->gameId;
+
+        //players out of vote rules
+        $plays = petition("SELECT openVoting FROM smltown_plays "
+                //add players name table
+                . "LEFT OUTER JOIN smltown_games "
+                . "ON smltown_plays.gameId = smltown_games.id "
+                //
+                //cout if some alive is not selecting
+                . "WHERE gameId = $gameId AND "
+                . "smltown_plays.status > 0 AND sel IS NULL AND smltown_plays.admin > -1 "
+                //count if games.time is NOT over (null || 0)
+                . "OR smltown_games.time > " . microtime(true));
+
+        //indiferent to openVoting
+        if (count($plays) == 0) { //day ends
+            $this->townVotations();
+        } else {
+            //only in case openVoting update
+            if (1 == $plays[0]->openVoting) {
+                $this->updatePlayers(null, "sel");
+            } else {
+                $this->pendingVotes();
+            }
+        }
+    }
+
+    //NIGHT SELECTS
+    public function nightSelect() {
+        $gameId = $this->gameId;
+
+        $play = $this->getCard(); //own night turn
+        if (!$play) {
+            echo "bad select card request";
+            return;
+        }
+
+        $cardName = $play->card;
+        $card = $this->getCardFileByName($cardName);
+
+        $data = $card->nightSelect();
+
+        if ($data === false) { //not ended turn, update "sel"
+            $plays = petition("SELECT id FROM smltown_plays WHERE gameId = $gameId AND card = '$cardName' AND status > -1");
+            for ($i = 0; $i < count($plays); $i++) {
+                $this->updatePlayers($plays[$i]->id, "sel");
+            }
+            return;
+        }
+
+        sql("UPDATE smltown_plays SET sel = NULL WHERE gameId = $gameId");
+
+        if ($data) { //end turn 4 all players with card
+            $plays = petition("SELECT id FROM smltown_plays WHERE gameId = $gameId AND card = '$cardName' AND status > -1");
+            for ($i = 0; $i < count($plays); $i++) {
+                $this->saveMessage($data, $plays[$i]->id);
+            }
+            return;
+        }
+
+        $ini = null;
+        if (isset($card->initiative)) {
+            $ini = $card->initiative;
+        }
+        $this->setNextTurn($ini); //night
+    }
+
+    public function nightUnselect() {
+        $gameId = $this->gameId;
+        $playId = $this->playId;
+
+        $play = $this->getCard();
+        if (!$play) {
+            echo "bad unselect card request";
+            return;
+        }
+
+        $card = $this->getCardFileByName($play->card);
+        $data = $card->nightUnselect();
+
+        if ($data) {
+            $this->send_response(json_encode(array('type' => 'night', 'data' => $data)), $playId);
+        }
+    }
+
+    protected function getTurn() {
+        $gameId = $this->gameId;
+
+        $res = petition("SELECT status FROM smltown_games WHERE id = $gameId")[0];
+        if (isset($res->status)) {
+            $status = intval($res->status);
+        } else {
+            $status = 0;
+        }
+        return $status;
+    }
+
+    protected function setNextTurn($ini = null) {
+        if (!$this->checkMessages()) {
+            //DEBUG
+            //echo "bad next-turn request";
+            return;
+        }
+        $status = $this->getTurn();
+        $func = $this->TURNS[$status];
+        $this->$func($ini);
+    }
+
+    protected function setNextStatus($ini = null) {
+        $gameId = $this->gameId;
+
+        $status = $this->getTurn() + 1;
+        $statusCount = count($this->TURNS);
+        if ($statusCount == $status) { //equals, not lower
+            $status = 1;
+        } else if ($statusCount < $status) {
+            //game is over
+            return;
+        }
+
+        sql("UPDATE smltown_games SET status = $status, night = null WHERE id = $gameId");
+        $this->updateGame(null, "status");
+
+        if ($this->checkMessages()) { //set setNextStatus in pre-day, after night
+            $func = $this->TURNS[$status];
+            $this->$func($ini);
+        }
+    }
 
 ////////////////////////////////////////////////////////////////////////////////
 //UTILS
-
-function setGameStatus($gameId, $status, $updated = null) {
-    if ($status > 0) { // 1, 2 or 3
-        include_once "CardUtils.php";
-        $cards = loadCards($gameId);
-        $players = petition("SELECT userId, card FROM smltown_plays WHERE gameId = $gameId");
-
-        //STATUS GAME CHANGE
-        for ($i = 0; $i < count($players); $i++) {
-            $player = $players[$i];
-            $cardName = $player->card;
-            if (!isset($cards[$cardName]) || !isset($cards[$cardName]['statusGameChange'])) {
-                continue;
-            }
-            $card = $cards[$cardName];
-            $obj = (object) array('gameId' => $gameId, 'userId' => $player->userId);
-            $overrideStatus = $card['statusGameChange'](new CardUtils($obj));
-            if (isset($overrideStatus)) {
-                if (false == $overrideStatus) {
-                    sql("UPDATE smltown_games SET night = '$cardName' WHERE id = $gameId");
-                    //update night turn to this players make stop
-                    $thisNightPlayers = petition("SELECT userId FROM smltown_plays WHERE card = '$cardName' AND gameId = $gameId");
-                    for ($i = 0; $i < count($thisNightPlayers); $i++) {
-                        $userId = $thisNightPlayers[$i]->userId;
-                        updateGame($gameId, $userId, "night");
-                    }
-                    die(); //STOP!
-                }
-            }
-        }
-    }
-
-    killDying($gameId);
-
-    if (!$updated) {
+    protected function setGameStatus($status) {
+        $gameId = $this->gameId;
         $sth = sql("UPDATE smltown_games SET status = $status WHERE status <> $status AND id = $gameId");
         if ($sth->rowCount() == 0) { //nothing changes
             return false;
         }
+        $this->updateGame(null, "status");
     }
-    updateGame($gameId, null, "status");
-    return true;
-}
 
-function killDying($gameId) {
-    //kill dying players
-    sql("UPDATE smltown_plays SET sel = null, "
-            . "status = (CASE status WHEN 0 THEN -1 WHEN 2 THEN 1 ELSE status END)"
-            . "WHERE gameId = $gameId");
-    updatePlayers($gameId);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-//AUTOMATIC REQUESTS
-
-function messageReceived($obj) {
-    $gameId = $obj->gameId;
-    $userId = $obj->userId;
-
-    $sth = sql("UPDATE smltown_plays SET message = '' WHERE message <> '' AND userId = '$userId' AND gameId = $gameId");
-    if ($sth->rowCount() == 0) {
-        setError($gameId, "error: no message to recieve.");
-        return; //any message to recibe, prevent posible hack
+    protected function getDying() { //kill dying players
+        $gameId = $this->gameId;
+        $kills = petition("SELECT id, sel, "
+                . " CASE WHEN status = 0 THEN card ELSE NULL END AS card"
+                . " FROM smltown_plays WHERE gameId = $gameId");
+        return $kills;
     }
-    endNightTurn($obj);
-}
 
-function nightExtra($obj) {
-    $card = getCard($obj);
-//    getCard($obj, function($obj) {
-        $gameId = $obj->gameId;
-//        $card = $obj->card;
-        $cards = loadCards($gameId);
-        if (!isset($cards[$card]['extra'])) {
-            return false;
-        }
-
-        include_once "CardUtils.php";
-        $data = $cards[$card]['extra'](new CardUtils($obj));
-//        if (!isset($data)) {
-//            endNightTurn($obj);
-//            return;
-//        }
-        if (isset($data)) {
-            if (false == $data) {
-                nextNightTurn($gameId, $cards[$card]['initiative']);
-                return;
-            }
-            $userId = $obj->userId;
-            send_response(json_encode(array('type' => 'extra', 'data' => $data)), $gameId, $userId);
-        }
-//    });
-}
-
-////////////////////////////////////////////////////////////////////////////////
-//SELECTS
-
-function selectPlayer($obj) {
-    $gameId = $obj->gameId;
-    $userId = $obj->userId;
-    $values = array('selectedId' => $obj->id);
-    sql("UPDATE smltown_plays SET sel = :selectedId WHERE gameId = $gameId AND userId = '$userId'", $values);
-    selectPlayerResponse($obj);
-}
-
-function unSelectPlayer($obj) {
-    $gameId = $obj->gameId;
-    $userId = $obj->userId;
-    sql("UPDATE smltown_plays SET sel = null WHERE gameId = $gameId AND userId = '$userId'");
-    selectPlayerResponse($obj);
-}
-
-function selectPlayerResponse($obj) {
-    $gameId = $obj->gameId;
-    //players out of vote rules
-    $openVoting = petition("SELECT smltown_games.openVoting FROM smltown_games, smltown_plays WHERE "
-            //gameId
-            . "smltown_games.id = $gameId AND smltown_plays.gameId = $gameId "
-            //if some alive is not selecting
-            . "AND smltown_plays.status > 0 AND smltown_plays.sel IS NULL AND smltown_plays.admin <> -1 "
-            //if games.time is NOT over
-            . "OR smltown_games.time > " . microtime(true));
-    if (count($openVoting) == 0) { //day end
-        townVotations($obj);
-    } else { //only if case openVoting update
-        if (1 == $openVoting[0]->openVoting) {
-            updatePlayers($gameId, null, "sel");
+    protected function killDying() { //kill dying players
+        $gameId = $this->gameId;
+        $sth = sql("UPDATE smltown_plays SET sel = null, "
+                . "status = (CASE status WHEN 0 THEN -1 WHEN 2 THEN 1 ELSE status END)"
+                . "WHERE gameId = $gameId");
+        if ($sth->rowCount() > 0) { //nothing changes
+            $this->updatePlayers();
         }
     }
-}
 
-function nightSelect($obj) {
-    $card = getCard($obj);
-//    getCard($obj, function($obj) {
-        $gameId = $obj->gameId;
-        $userId = $obj->userId;
-//        $card = $obj->card;
-
-        $cards = loadCards($gameId);
-        include_once "CardUtils.php";        
-        $data = $cards[$card]['nightSelect'](new CardUtils($obj));
-        
-        if ($data == false) { //not ended turn, update "sel"
-            updatePlayers($gameId, $userId, "sel");
-        } else if ($data) { //end turn			
-            sql("UPDATE smltown_plays SET sel = NULL WHERE gameId = $gameId");
-            if ($data === true) { // === not string!
-                $ini = null;
-                if (isset($cards[$card]['initiative'])) { // if "statuschange" card
-                    $ini = $cards[$card]['initiative'];
-                }
-                endNightTurn($obj, $ini);
-            } else { // end of turn with auto-message
-                saveMessage($data, $gameId, $userId);
-            }
-        }
-//    });
-}
-
-function nightUnselect($obj) {
-    $card = getCard($obj);
-//    getCard($obj, function($obj) {
-        $gameId = $obj->gameId;
-//        $card = $obj->card;
-        include_once "CardUtils.php";
-        $cards = loadCards($gameId);
-        $data = $cards[$card]['nightUnselect'](new CardUtils($obj));
-        if ($data) {
-            send_response(json_encode(array('type' => 'night', 'data' => $data)), $gameId, $obj->userId);
-        }
-//    });
 }

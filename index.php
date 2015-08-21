@@ -1,7 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <?php
+
 header('Access-Control-Allow-Origin: *');
-header("Access-Control-Expose-Headers: smalltown, name");
+header("Access-Control-Expose-Headers: smalltown, smltown_name");
 header('smalltown: 1');
 //header('name:u');
 //set cookie lifetime for 10 days (60sec * 60mins * 24hours * 100days)
@@ -24,20 +25,20 @@ ini_set('session.gc_maxlifetime', 864000);
         Load: {},
         Local: {},
         players: {},
-        temp: {}
+        temp: {},
+        Update: {}
     };
+
 </script>
 
 <?php
 session_start();
+
+//path files 4 plugins
 $smalltownURL = "";
-if (isset($_SESSION['smalltownURL']) && file_exists("/game.html") < 1) {
+if (isset($_SESSION['smalltownURL']) && file_exists("/game.php") < 1) {
     $smalltownURL = $_SESSION['smalltownURL'] . "/";
 }
-
-include_once 'php/DB.php';
-include_once 'php/request.php';
-addUser();
 
 global $lang;
 $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
@@ -46,8 +47,10 @@ if (!file_exists("lang/$lang.js")) {
 }
 
 if (isset($_SESSION['smltown_gameId'])) {
-    echo "<script>;SMLTOWN.Game.id = '" . $_SESSION['smltown_gameId'] . "';</script>";
+    echo "<script>;SMLTOWN.Game.info.id = '" . $_SESSION['smltown_gameId'] . "';</script>";
 }
+
+include_once "config.php";
 ?>
 
 <html>
@@ -69,7 +72,7 @@ if (isset($_SESSION['smltown_gameId'])) {
     <!--smalltown is class if not plugin-->
     <body id="smltown">
         <div id="smltown_html">
-            <div id="smltown_game"><div class="smltown_errorLog"></div></div>
+            
         </div>
     </body>
 
@@ -80,37 +83,14 @@ if (isset($_SESSION['smltown_gameId'])) {
 
     SMLTOWN.lang = "<?php echo $lang ?>";
     SMLTOWN.path = "<?php echo $smalltownURL; ?>";
-
-    // wait document ready or if in plugin readyState is complete?
-//    if (document.readyState === "complete") {
-//        loads();
-//    }
-    $(document).one("ready", function() {
-        SMLTOWN.Server.websocketConnection(function(done) {
-            if (!done) {
-                SMLTOWN.Server.ajaxConnection();
-            } else {
-                console.log("WEBSOCKET CONNECTION");
-            }
-        });
-        SMLTOWN.Transform.windowResize();
-        //DEFINE WAY TO NAVIGATE
-        if ($("body").attr("id") == "smltown") { //as MAIN webpage game
-            if (!window.location.hash) {
-                window.location.hash = "gameList"
-            }
-            window.onhashchange = function() {
-                SMLTOWN.Load.end();
-                SMLTOWN.Load.divLoad(window.location.hash.split("#")[1] || "");
-            };
-            window.onhashchange();
-        } else { //as PLUGIN
-            if (typeof SMLTOWN.Game.id != "undefined") {
-                SMLTOWN.Load.showPage("game?" + SMLTOWN.Game.id);
-            } else {
-                SMLTOWN.Load.showPage("gameList");
-            }
-        }
+    SMLTOWN.websocketServer = <?php echo $websocket_server; ?>;
+    
+    SMLTOWN.user.userId = SMLTOWN.Util.getCookie("smltown_userId");
+    SMLTOWN.user.name = SMLTOWN.Util.getLocalStorage("smltown_userName");
+    
+    $(document).one("ready", function () {
+        $("#smltown_footer").html("<i id='smltown_connectionCheck'>This server <span class='allowWebsocket'></span> allows websocket connection.</i>");
+        SMLTOWN.Server.handleConnection();
     });
 
     </script>

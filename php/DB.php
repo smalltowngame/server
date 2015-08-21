@@ -1,15 +1,18 @@
 <?php
-
 // create default config.php if not exists
-if (1 !== (include_once 'config.php')) {
-    $myfile = fopen("config.php", "w") or die("Unable to open file!");
-    fwrite($myfile, '<?php');
-    fwrite($myfile, ' $database_name = "smalltown";');
-    fwrite($myfile, ' $database_user = "root";');
-    fwrite($myfile, ' $database_pass = "";');
+$inc = 'config.php';
+if (!file_exists($inc) || !is_readable($inc)) {
+    $myfile = fopen($inc, "w") or die("Unable to open file!");
+    fwrite($myfile, '<?php' . PHP_EOL);
+    fwrite($myfile, PHP_EOL);
+    fwrite($myfile, '$database_name = "smalltown";' . PHP_EOL);
+    fwrite($myfile, '$database_user = "root";' . PHP_EOL);
+    fwrite($myfile, '$database_pass = "";' . PHP_EOL);
+    fwrite($myfile, PHP_EOL);
+    fwrite($myfile, '$websocket_server = 1;' . PHP_EOL);
     fclose($myfile);
-    include_once 'config.php';
 }
+include_once 'config.php';
 
 global $pdo;
 try {
@@ -84,7 +87,7 @@ function PDOerror($sth, $str = '') {
     echo " in: " . $str;
 
     if ($sth->errorCode() == '42S02') { //if table not exists
-        include 'DB_tables.php';
+        include 'tables.php'; 
 //                $tables = new Tables;
 //                $tables->createTables();
         echo "\n Tables has been created again.";
@@ -92,7 +95,7 @@ function PDOerror($sth, $str = '') {
     } else if ($sth->errorCode() == '42S22') { //if col error
         $array = $sth->errorInfo()[2];
         $col = split("'", $array)[1];
-        include_once 'DB_tables.php';
+        include_once 'tables.php';
         $tables = new Tables;
         $tables->addColumn($col);
     }

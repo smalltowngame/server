@@ -13,22 +13,18 @@ function smltown_error(text) {
             return;
         }
     }
-    
-    //if nothing happend:    
+
+    //if nothing happend: DEBUG
     var body = document.getElementById('smltown_html');
     body.insertBefore(error, body.firstChild);
     smltown_errorEvents(error);
 }
 
 function smltown_errorEvents(div) {
-    div.style.setProperty("transition", "opacity 1s");
-    div.style.setProperty("-webkit-transition", "opacity 1s");
-    setTimeout(function() {
-        div.style.setProperty("opacity", 0);
-    }, 9000);
-    setTimeout(function() {
-        div.style.setProperty("display", "none");
-    }, 20000);
+    div.onclick = function(e) {
+        e.preventDefault();
+        div.style.setProperty("display", "none");        
+    };
 }
 
 window.onerror = function(msg, url, line, col, error) {

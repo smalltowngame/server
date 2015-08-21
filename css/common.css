@@ -12,18 +12,12 @@ symbol{
     margin: 0 5px;
 }
 
-html{
-    overflow: hidden;
-}
-
-body{
+html, body{
     margin: 0 auto;
-    overflow: hidden;
 }
 
 #smltown_html, #smltown_body{    
-    width: 100%;    
-    margin: 0;    
+    width: 100%;
     overflow: hidden;
 }
 
@@ -39,19 +33,6 @@ body{
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-}
-
-#smltown_body{
-    height: calc(100% - 55px);
-    position: relative;
-    box-sizing: border-box;    
-    outline: none;
-    /*text-shadow: 1px 1px 1px rgba(255,255,255,0.4);*/
-
-    background: -webkit-radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
-    background: -o-radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
-    background: -moz-radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
-    background: radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
 }
 
 #smltown_html table{
@@ -77,12 +58,9 @@ body{
     border: 1px solid black;
     padding: 10px;
     color: white;
-    -webkit-box-shadow: 5px 0 20px rgba(0,0,0,0.4),
-        -5px 0 20px rgba(0,0,0,0.4);  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-    -moz-box-shadow:    5px 0 20px rgba(0,0,0,0.4),
-        -5px 0 20px rgba(0,0,0,0.4);  /* Firefox 3.5 - 3.6 */
-    box-shadow: 5px 0 20px rgba(0,0,0,0.4),
-        -5px 0 20px rgba(0,0,0,0.4);
+    -webkit-box-shadow: 5px 0 20px rgba(0,0,0,0.4), -5px 0 20px rgba(0,0,0,0.4);
+    -moz-box-shadow: 5px 0 20px rgba(0,0,0,0.4), -5px 0 20px rgba(0,0,0,0.4);
+    box-shadow: 5px 0 20px rgba(0,0,0,0.4), -5px 0 20px rgba(0,0,0,0.4);
 }
 .smltown_dialog form > *{
     font-weight: bold;
@@ -116,9 +94,9 @@ body{
     height: 50px;
     width: 100%;
     font-size: 16px;    
-    -webkit-box-sizing: border-box;  /*Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box;     /*Firefox, other Gecko */
-    box-sizing: border-box;          /*Opera/IE 8+ */
+    -webkit-box-sizing: border-box;  
+    -moz-box-sizing: border-box; 
+    box-sizing: border-box;
 }
 .smltown_button, #smltown_html input{
     background-color: white;
@@ -134,14 +112,21 @@ body{
     background-color: rgb(225,225,225);
 }
 .smltown_button:active{
-    -webkit-box-shadow: inset 1px 1px 2px rgb(100,100,100);   /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-    -moz-box-shadow: inset 1px 1px 2px rgb(100,100,100);   /* Firefox 3.5 - 3.6 */
+    -webkit-box-shadow: inset 1px 1px 2px rgb(100,100,100);
+    -moz-box-shadow: inset 1px 1px 2px rgb(100,100,100);
     box-shadow: inset 1px 1px 2px rgb(100,100,100);    
 }
 
 .smltown_dialog input, .smltown_dialog .smltown_button{
     margin-bottom:15px;
 }
+
+.smltown_icons{
+    display:inline-block;
+    vertical-align: top;
+    margin: 0 10px;
+}
+
 /*android 2.3*/
 #smltown_html *{
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0); 
@@ -155,14 +140,14 @@ body{
 }
 
 /*android 2.3 input visibility bug*/
-/*but causing errors on chat input :/*/
-/*#smltown_html input{
+/*but causing errors on chat input ¿? */ 
+#smltown_html input{
     position:relative;
     top: -10000px;
     -webkit-transform: translate3d(0, 10000px, 0);
     moz-transform: translate3d(0, 10000px, 0);
     transform: translate3d(0, 10000px, 0);
-}*/
+}
 
 .smltown_errorLog{
     color: red;

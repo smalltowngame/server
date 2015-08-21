@@ -4,32 +4,34 @@ SMLTOWN.Local = {
     ,
     XMLHttpRequestTimeout: 500
     ,
-    pingGames: function() {
+    pingGames: function () {
         this.stopRequests();
         //more timeout
         this.XMLHttpRequestTimeout += 500000 / this.XMLHttpRequestTimeout;
         console.log("tiemout: " + this.XMLHttpRequestTimeout);
 
         $this = this;
-        window.onbeforeunload = function() {
+        window.onbeforeunload = function () {
             $this.stopRequests();
             return null;
         };
 
         $("#smltown_loadingDiv").addClass("smltown_loader");
-        
+
         //setTimeout(function() {
         //ImgPing["localhost"].img.removeAttr("src");
         //},2000);
-        if ($(".smltown_game.smltown_local").length) {
-            this.XMLHttpPing("", "localhost");
-        }
-        for (var i = 1; i <= 255; i++) {
+        //
+//        if ($(".smltown_game.smltown_local").length) {
+//            this.XMLHttpPing("", "localhost");
+//        }
+
+        for (var i = 2; i <= 255; i++) {
             this.XMLHttpPing("192.168.1.", i);
         }
     }
     ,
-    XMLHttpPing: function(ipBase, i) {
+    XMLHttpPing: function (ipBase, i) {
         var $this = this;
         var gameReq = {};
         gameReq = new XMLHttpRequest();
@@ -41,9 +43,11 @@ SMLTOWN.Local = {
 //                    console.log("Timed out!!!");
 //                }
         gameReq.send();
-        gameReq.onreadystatechange = function() {
+        gameReq.onreadystatechange = function () {
             if (this.readyState == 4) {
                 if (this.status == 200) {
+                    console.log(gameReq.ip)
+
                     this.smalltownHeader = this.getResponseHeader('smalltown');
                     var url = this.href;
                     if (isNaN(this.smalltownHeader)) {
@@ -56,7 +60,14 @@ SMLTOWN.Local = {
                         }
                         url += this.smalltownHeader + "/";
                     }
-                    var nameHeader = this.getResponseHeader('name');
+                    
+                    var nameHeader = "";
+                    var headers = this.getAllResponseHeaders();
+                    if(headers.indexOf("smltown_name") > -1){
+                        nameHeader = this.getResponseHeader('smltown_name');
+                    } else {
+                        console.log("not smltown_name header found on local game");
+                    }
                     SMLTOWN.Games.addLocalGamesRow(url, this.ip, nameHeader);
                 }
 
@@ -68,7 +79,7 @@ SMLTOWN.Local = {
         this.gameRequests[i] = gameReq;
     }
     ,
-    areXMLHttpRequestFinished: function() {
+    areXMLHttpRequestFinished: function () {
         for (var key in this.gameRequests) {
             if (this.gameRequests[key].readyState < 4) {
                 return false;
@@ -77,14 +88,14 @@ SMLTOWN.Local = {
         return true;
     }
     ,
-    stopRequests: function() {
+    stopRequests: function () {
         for (var key in SMLTOWN.Local.gameRequests) {
             if (this.gameRequests[key].abort) {
                 this.gameRequests[key].abort();
                 //console.log("abort");
             }
         }
-        $("#smltown_loadingDiv").removeClass("smltown_loader");
+        //$("#smltown_loadingDiv").removeClass("smltown_loader");
     }
 //    ,
 //    ImgPing: function(ipBase, i) {
