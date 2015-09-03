@@ -36,7 +36,8 @@ session_start();
 
 //path files 4 plugins
 $smalltownURL = "";
-if (isset($_SESSION['smalltownURL']) && file_exists("/game.php") < 1) {
+//if (isset($_SESSION['smalltownURL']) && file_exists("/game.php") < 1) {
+if (isset($_SESSION['smalltownURL'])) {
     $smalltownURL = $_SESSION['smalltownURL'] . "/";
 }
 
