@@ -132,8 +132,8 @@ $card->statusGameChange = function() { //statusGameChange have empty userId
     if ($id1 && $id2) {
         $this->setPlayers(array("status = -1"), array("status = 0"));
         $this->addPlayerRulesJS(""
-                . "$('#' + $lovers[0] + ' .smltown_extra').html('<symbol style='color:red; opacity:0.5'>N</symbol>');"
-                . "$('#' + $lovers[1] + ' .smltown_extra').html('<symbol style='color:red; opacity:0.5'>N</symbol>');"
+                . "$('#' + $lovers[0] + ' .smltown_extra').html('<symbol style=\"color:red; opacity:0.5\">N</symbol>');"
+                . "$('#' + $lovers[1] + ' .smltown_extra').html('<symbol style=\"color:red; opacity:0.5\">N</symbol>');"
                 , true);
         $this->endGame();
         return false;

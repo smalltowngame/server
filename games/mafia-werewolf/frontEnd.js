@@ -84,13 +84,12 @@ SMLTOWN.Update.gameStatus = function() {
                 SMLTOWN.Action.cleanVotes();
                 $("#smltown_statusGame").smltown_text("GameOver");
                 $("#smltown_body").attr("class", "smltown_gameover");
-                $("*").unbind(".smltown_rules");
+                SMLTOWN.Action.resetGame();                
             }
 
             for (var id in SMLTOWN.players) {
                 var player = SMLTOWN.players[id];
                 if (player.status > -1) {
-                    console.log("hi")
                     $("#" + player.id + " .smltown_votes").smltown_text("Win");
                 }
             }
@@ -114,8 +113,8 @@ SMLTOWN.Update.gameStatus = function() {
                 $("#smltown_body").attr("class", "smltown_waiting");
                 $("#smltown_statusGame").smltown_text("waitingNewGame");
                 $(".smltown_playerStatus").smltown_text("waiting");
-                SMLTOWN.Action.restartTurn();
-                $("*").unbind(".smltown_rules");
+                SMLTOWN.Action.removeCards();
+                SMLTOWN.Action.resetGame();
             }
 
             if ("1" == SMLTOWN.user.admin && SMLTOWN.user.card) {

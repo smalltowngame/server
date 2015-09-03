@@ -178,7 +178,6 @@ SMLTOWN.Action = {
         for (var id in SMLTOWN.players) {
             var player = SMLTOWN.players[id];
             if (player.card) {
-                //console.log(player.card)
                 //patch
                 SMLTOWN.Add.backgroundCard(player.div.find(".smltown_extra"), player.card);
             }
@@ -206,13 +205,18 @@ SMLTOWN.Action = {
         this.clearCards();
     }
     ,
-    restartTurn: function () {
-        console.log("restart turn");
+    resetGame: function () {
+        SMLTOWN.user.rulesJS = "";
+        $("*").unbind(".smltown_rules");
+    }
+    ,
+    removeCards: function () {
+        console.log("removeCards");
         for (var id in SMLTOWN.players) {
             SMLTOWN.players[id].card = null;
         }
-        //$(".smltown_extra").css("background-image", "none");        
-        this.clearCards();
+        $(".smltown_extra").html("");
+        $(".smltown_extra").css("background-image", "");
     }
     ,
     cleanVotes: function () {
@@ -230,16 +234,9 @@ SMLTOWN.Action = {
         $(".smltown_votes").html("");
         $(".smltown_check").removeClass("smltown_check");
         $(".smltown_preselect").removeClass("smltown_preselect");
-        //$("#smltown_user .smltown_extra").empty();
     }
     ,
     clearCards: function () {
-//        $(".smltown_player").each(function () {
-//            if (!$(this).hasClass("smltown_dead")) {
-//                $(this).find(".smltown_extra").html("");
-//                $(this).find(".smltown_extra").css("background-image", "");
-//            }
-//        });
         for (var id in SMLTOWN.players) {
             var player = SMLTOWN.players[id];
             if (player.status > -1) {

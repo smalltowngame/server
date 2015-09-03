@@ -285,7 +285,6 @@ SMLTOWN.Update = {
 
             if (player.card) {
                 if (player.status == -1 || SMLTOWN.Game.info.status > 4) {
-                    console.log(player.card);
                     SMLTOWN.Add.backgroundCard(div.find(".smltown_extra"), player.card);
                 }
             }

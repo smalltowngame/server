@@ -204,7 +204,7 @@ class CardUtils {
         );
         
         $playSQL = "";
-        if (true != $playId) { // TRUE == ALL PLAYERS
+        if (true !== $playId) { // TRUE == to ALL PLAYERS
             $values['playId'] = $playId;
             $playSQL = "AND id = :playId";
         }
@@ -240,12 +240,15 @@ class CardUtils {
 
     public function endGame() {
         $gameId = $this->gameId;
-//        $endStatus = count($this->TURNS);
+        //$endStatus = count($this->TURNS);
         $endStatus = 5; //PATCH. TODO: $this->TURNS (only breaks on websocket!)
         //echo "status = $endStatus";
-        $this->updatePlayers(null, array("status", "card", "rulesJS")); //let inject from ending card
+        $this->updatePlayers(null, array("status", "card")); //let inject from ending card
         sql("UPDATE smltown_games SET status = $endStatus WHERE id = $gameId");
         $this->updateGame();
+        
+        //left before inject end-game graphics
+        $this->updateUsers(null, "rulesJS");
     }
 
     public function requestValue($value) {

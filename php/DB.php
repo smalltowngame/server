@@ -1,20 +1,5 @@
 <?php
 // create default config.php if not exists
-$inc = 'config.php';
-if (!file_exists($inc) || !is_readable($inc)) {
-    $myfile = fopen($inc, "w") or die("Unable to open file!");
-    fwrite($myfile, '<?php' . PHP_EOL);
-    fwrite($myfile, PHP_EOL);
-    fwrite($myfile, '$database_name = "smalltown";' . PHP_EOL);
-    fwrite($myfile, '$database_user = "root";' . PHP_EOL);
-    fwrite($myfile, '$database_pass = "";' . PHP_EOL);
-    fwrite($myfile, PHP_EOL);
-     fwrite($myfile, '$ajax_server = true;' . PHP_EOL);
-    fwrite($myfile, '$websocket_server = true;' . PHP_EOL);
-    fwrite($myfile, '$websocket_autoload = true;' . PHP_EOL);
-    fwrite($myfile, '$debug = false;' . PHP_EOL);
-    fclose($myfile);
-}
 include_once 'config.php';
 
 global $pdo;
