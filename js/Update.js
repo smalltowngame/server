@@ -399,7 +399,7 @@ SMLTOWN.Update = {
         }
 
         //load card
-        var gamePath = "games/" + SMLTOWN.Game.info.type;
+        var gamePath = SMLTOWN.path + "games/" + SMLTOWN.Game.info.type;
         $("#smltown_phpCard").load(gamePath + "/cards/" + SMLTOWN.user.card + ".php", function(response) { //card could be changed
             SMLTOWN.cardLoading = false;
             if (response.indexOf("Fatal error") > -1) { //catch error
