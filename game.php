@@ -16,8 +16,8 @@ if (!empty($_REQUEST['lang'])) { //from jquery load()
 
 //path files 4 plugins
 $smalltownURL = "";
-if (isset($_SESSION['smalltownURL'])) {
-    $smalltownURL = $_SESSION['smalltownURL'] . "/";
+if (isset($_COOKIE['smalltownURL'])) {
+    $smalltownURL = $_COOKIE['smalltownURL'] . "/";
 }
 
 include_once 'php/DB.php';
