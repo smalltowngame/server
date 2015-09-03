@@ -5,7 +5,8 @@
     height: 100%;
     width: 100%;
     overflow: hidden;
-    position: fixed;
+    /*position fixed breaks wordrpress like version*/
+    /*position: fixed;*/
 }
 
 #smltown_body{
