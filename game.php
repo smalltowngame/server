@@ -217,8 +217,8 @@ if (count($games)) {
 
 </div>
 
-<script type="text/javascript" async=false defer=false src="<?php echo $smalltownURL ?>games/<?php echo $type ?>/frontEnd.js"></script>
-<script type="text/javascript" async=false defer=false src="<?php echo $smalltownURL ?>games/<?php echo $type ?>/lang/<?php echo $lang ?>.js"></script>
+<script type="text/javascript" src="<?php echo $smalltownURL ?>games/<?php echo $type ?>/frontEnd.js"></script>
+<script type="text/javascript" src="<?php echo $smalltownURL ?>games/<?php echo $type ?>/lang/<?php echo $lang ?>.js"></script>
 
 <script>
     console.log("game file load");
