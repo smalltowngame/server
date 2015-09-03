@@ -108,7 +108,7 @@ SMLTOWN.Server = {
                     } else {
                         callback(false);
                     }
-                }, "websocketStart.php");
+                }, SMLTOWN.path + "/websocketStart.php");
                 
                 //if con't connect ajax => network error
                 if (false == success) {
@@ -348,7 +348,7 @@ SMLTOWN.Server = {
     ,
     ajax: function (request, callback, url) {
         console.log(request);
-        var file = "ajax.php";
+        var file = SMLTOWN.path + "ajax.php";
         if (url) {
             console.log("url: " + url);
             file = url;
