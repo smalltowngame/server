@@ -5,24 +5,20 @@ include_once 'php/PingRequest.php';
 trait Request {
 
     //USER REQUESTS
-    function addUser($lang = "en") {
+    function addUser() {
         $userId = null;
+        if (isset($this->userId)) {
+            $userId = $this->userId;
+        }
         $userName = "";
         if (isset($this->requestValue['name'])) {
             $userName = $this->requestValue['name'];
         }
-        if (isset($this->userId)) {
-            $userId = $this->userId;
+        $lang = "en";
+        if (isset($this->requestValue['lang'])) {
+            $lang = $this->requestValue['lang'];
         }
 
-        //WEBSOCKET
-//        if (isset($this->requestValue['socket'])) {
-//            //
-//        } else {
-//            if (isset($_COOKIE['smltown_userName'])) {
-//                $userName = $_COOKIE['smltown_userName'];
-//            }
-//        }
         //add user
         if (null == $userId) {
             $userId = getRandomUserId();
@@ -34,9 +30,10 @@ trait Request {
         if (isset($this->requestValue['socket'])) {
             global $users;
             $users[$userId] = $this->requestValue['socket'];
+            $this->requestValue['socket']->userId = $userId;
         }
 
-        $_SESSION['userId'] = $userId;
+        setcookie('smltown_userId', $userId);
         return $userId;
         //setCookieValue("smltown_userName", $userName);
         //    if (null != $obj && isset($obj->gameId)) {
@@ -58,7 +55,6 @@ trait Request {
 
             if ("null" == $userId || empty($userId) || !isset($userId)) {
                 //        echo "error user id: $userId";
-                //        die();
                 $userId = $this->addUser();
             }
         } else {
@@ -72,47 +68,39 @@ trait Request {
         if ($game->password && !isset($_SESSION["game$gameId"])) {
             if (!isset($this->requestValue->password)) {
                 echo "SMLTOWN.Game.askPassword();";
-                die();
+                return;
             }
 
             $values = array('password' => $this->requestValue->password);
             $count = petition("SELECT count(*) as count FROM smltown_games WHERE id = $gameId AND password = :password", $values)[0]->count;
             if ($count == 0) {
                 echo "SMLTOWN.Game.askPassword('wrong passord');";
-                die();
+                return;
             }
         }
-        //password done
+
+        //if password done
+        sql("UPDATE smltown_players SET gameId = $gameId WHERE id = '$userId'");
         $_SESSION["game$gameId"] = 1;
 
-        //admin check
-        $admin = null;
-
+        // if not exists
         $values = array('userId' => $userId, 'gameId' => $gameId);
-
-        //add if not exists
-        $sql = "INSERT INTO smltown_plays (userId, gameId, admin) SELECT :userId, :gameId,";
-        if (null == $admin) {
-            $sql .= " CASE WHEN (SELECT count(*) FROM smltown_plays WHERE admin = 1 AND gameId = :gameId) = 0 THEN 1 ELSE 0 END";
-        } else {
-            $sql .= " $admin";
-        }
-        $sql .= " FROM DUAL" //from ANY TABLE (read table only 1 time)
-                . " WHERE (SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = :gameId) = 0";
-        $sth = sql($sql, $values);
+        $sth = sql("INSERT INTO smltown_plays (userId, gameId, admin) SELECT :userId, :gameId,"
+                . " CASE WHEN (SELECT count(*) FROM smltown_plays WHERE admin = 1 AND gameId = :gameId) = 0 THEN 1 ELSE 0 END" //admin
+                . " FROM DUAL" //from ANY TABLE (read table only 1 time)
+                . " WHERE (SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = :gameId) = 0", $values);
 
         //update playId
         $playId = petition("SELECT id FROM smltown_plays WHERE userId = :userId AND gameId = :gameId", $values)[0]->id;
         $_SESSION['playId'] = $this->playId = $playId;
-        //$this->playId = $playId;
-        //remove as websocket test
-        //$_COOKIE['smltown_userId'] = $userId;
+        //
         //WEBSOCKET
         if (isset($this->requestValue['socket'])) {
             echo " add playId to socket = $playId; \n";
             $this->requestValue['socket']->val->$playId = true;
+            $this->requestValue['socket']->val->gameId = $gameId;
         }
-        
+
         $this->loadGame($sth->rowCount());
     }
 
@@ -145,14 +133,14 @@ trait Request {
                         . "LEFT OUTER JOIN smltown_plays "
                         . "ON smltown_plays.userId = smltown_players.id "
                         //       
-                        . "WHERE name = '$userName' AND gameId = $gameId")[0]->count;
+                        . "WHERE name = '$userName' AND smltown_plays.gameId = $gameId")[0]->count;
 
         if ($duplicateName > 0) {
             $res = array(
                 'type' => "SMLTOWN.Message.login",
                 "log" => "duplicatedName"
             );
-            $this->send_response(json_encode($res), $playId);
+            $this->send_response($res, $playId);
             return;
         }
 
@@ -183,23 +171,33 @@ trait Request {
 
         sql("UPDATE smltown_plays SET admin = CASE WHEN id = $playId THEN 1 ELSE 0 END WHERE gameId = $gameId");
         $this->setFlash("adminRole", array("id" => $playId));
-        $this->reloadClientGame($playId);
+//        $this->reloadClientGame($playId);
     }
 
     public function chat() {
         $gameId = $this->gameId;
-        $playId = $this->playId;
         $text = $this->requestValue['text'];
 
         $res = array(
             'type' => "chat",
-            'playId' => $playId,
             'text' => $text
         );
 
-        $plays = petition("SELECT id FROM smltown_plays WHERE gameId = $gameId AND id <> $playId");
+        $sqlId = "";
+        if (isset($this->playId)) {
+            $res['playId'] = $this->playId;
+            $sqlId = "AND smltown_plays.id <> $this->playId";
+        }
+        $plays = petition("SELECT smltown_plays.id, name FROM smltown_plays "
+                //add players name table
+                . "LEFT OUTER JOIN smltown_players "
+                . "ON smltown_plays.userId = smltown_players.id "
+                //    
+                . "WHERE smltown_plays.gameId = $gameId $sqlId");
+
         for ($i = 0; $i < count($plays); $i++) {
-            $this->send_response(json_encode($res), $plays[$i]->id);
+            $res['name'] = $plays[$i]->name;
+            $this->send_response($res, $plays[$i]->id, true); //to player
         }
     }
 
@@ -231,7 +229,7 @@ trait Request {
         $card = $this->getCardFileByName($play->card);
 
         $data = $card->extra();
-        $this->send_response(json_encode(array('type' => 'extra', 'data' => $data)), $playId);
+        $this->send_response(array('type' => 'extra', 'data' => $data), $playId);
     }
 
     public function openVotingEnd() { //only as openVoting admin option, or openVoting on finish

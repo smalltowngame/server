@@ -65,15 +65,6 @@ SMLTOWN.Util = {
     }
 };
 
-SMLTOWN.Game.back = function () {
-    console.log("back");
-    if ($("body").attr("id") == "smltown") {
-        window.history.back();
-    } else {
-        SMLTOWN.Load.showPage("gameList");
-    }
-};
-
 SMLTOWN.Game.askPassword = function (log) {
     if (!log) {
         log = "";

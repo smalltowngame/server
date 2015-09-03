@@ -71,20 +71,66 @@ SMLTOWN.Message = {
         });
     }
     ,
-    setMessage: function (data, dead) { //permanent messages
+    setMessage: function (data) { //PERMANENT MESSAGES
+        var t = this.translate;
+        var text;
 
+        var textArray = data.split(":");
+        var action = data;
+        if (textArray.length > 1) {
+            action = textArray.shift();
+            if (this[action]) {
+                text = this[action](textArray.join(":"));
+            } else {
+                text = textArray.join(":");
+            }
+        } else {
+            text = t(action);
+        }
+
+        clearTimeout(SMLTOWN.Action.wakeUpTimeout); //prevent asyncronic wakeup's after
+        $("#smltown_filter").removeClass("smltown_sleep");
+        $("#smltown_filter").addClass("smltown_message");
+
+        this.showMessage(text, action);
     }
     ,
-    notify: function (text, okCallback, cancelCallback) {
+    showMessage: function (text, action) { //overrided
+//        var $this = this;
+//        var time = 0;
+//        var stop = false;
+//
+//        clearTimeout(SMLTOWN.Action.wakeUpTimeout); //prevent asyncronic wakeup's after
+//        $("#smltown_filter").removeClass("smltown_sleep");
+//
+//        setTimeout(function () {
+//            $this.notify(text, function () {
+//                if (SMLTOWN.user.status > -1 && SMLTOWN.Game.info.status == 1) {
+//                    SMLTOWN.Action.sleep();
+//                }
+//                SMLTOWN.Action.cleanVotes();
+//                SMLTOWN.Server.request.messageReceived(stop);
+//            }, false);
+//        }, time);
+    }
+    ,
+    notify: function (text, okCallback, cancelCallback, gameId, important) {
+        //console.log(gameId);
+        if (gameId && SMLTOWN.Game.info.id != gameId) {
+            this.external(text, gameId);
+            return;
+        }
+
         var $this = this;
         $("#smltown_popupOk").off("tap");
         $("#smltown_popupCancel").off("tap");
 
         if (text === "") { //===, not false
-            console.log("empty text")
-            $("#smltown_filter").removeClass("smltown_notification");
+            console.log("empty text");
+            //$this.removeNotification();
             return;
-        } else if (false === text) {
+        }
+        if (false === text) {
             okCallback();
         }
 
@@ -94,12 +140,13 @@ SMLTOWN.Message = {
         //show
         $("#smltown_filter").addClass("smltown_notification");
         $("#smltown_popupOk, #smltown_popupCancel").hide();
+
         if (okCallback) { //!= false
             $("#smltown_popupOk").show();
             $("#smltown_popupOk").one("tap", function (e) {
                 e.preventDefault(); //prevent player select
                 //hide
-                $this.removeNotification();
+                $this.removeNotification(true);
                 if (typeof okCallback == "function") {
                     clearTimeout(SMLTOWN.temp.wakeUpInterval);
                     okCallback();
@@ -112,7 +159,7 @@ SMLTOWN.Message = {
             $("#smltown_popupCancel").one("tap", function (e) {
                 e.preventDefault(); //prevent player select
                 //hide
-                $this.removeNotification();
+                $this.removeNotification(true);
                 if (typeof cancelCallback == "function") {
                     cancelCallback();
                 }
@@ -120,8 +167,12 @@ SMLTOWN.Message = {
         }
     }
     ,
-    removeNotification: function () {
-        $("#smltown_filter").removeClass("smltown_notification");
+    removeNotification: function (force) {
+        var filter = $("#smltown_filter");
+        if (!force && filter.hasClass("smltown_message")) {
+            return;
+        }
+        filter.removeClass("smltown_notification");
     }
     ,
     setLog: function (text, type) {
@@ -147,10 +198,16 @@ SMLTOWN.Message = {
 //        $("#smltown_console .text").prepend("<div><span class='time'>" + new Date().toLocaleTimeString() + " </span>" + text + "</div>");
 //    }
     ,
-    flash: function (text) {
+    flash: function (text, gameId) {
+
+        if (gameId && SMLTOWN.Game.info.id != gameId) {
+            this.external(text, gameId);
+            return;
+        }
+
         $("#smltown_flash").remove();
-        var div = $("<div id='smltown_flash'><span>" + this.translate(text) + "</span></div>");
-        $("body").append(div);
+        var div = $("<div id='smltown_flash'><div>" + this.translate(text) + "</div></div>");
+        $("#smltown_html").append(div);
         setTimeout(function () {
             div.remove();
         }, 1500);
@@ -173,13 +230,13 @@ SMLTOWN.Message = {
             values = arrayChats[i].split("~");
             this.writeChat(values[0], values[1]);
         }
-        this.chatUpdate();
+        SMLTOWN.Transform.chatUpdate();
         SMLTOWN.Add.userNamesByClass();
     }
     ,
-    addChat: function (text, userId) { //from server
-        if (typeof userId == "undefined") {
-            userId = SMLTOWN.user.id;
+    addChat: function (text, playId, gameId, name) { //from server
+        if (typeof playId == "undefined") {
+            playId = null;
         }
 
         var chatName = "chat" + SMLTOWN.Game.info.id;
@@ -187,25 +244,22 @@ SMLTOWN.Message = {
         if (!chat) {
             chat = "";
         }
-        localStorage.setItem(chatName, chat + "·" + text + "~" + userId);
+        localStorage.setItem(chatName, chat + "·" + text + "~" + playId);
 
-        this.writeChat(text, userId);
-    }
-    ,
-    writeChat: function (text, userId) {
-        var name = "";
-        if (typeof SMLTOWN.players[userId] != "undefined") { //if player no longer exists
-            name = SMLTOWN.players[userId].name + ": ";
+        if (gameId && SMLTOWN.Game.info.id != gameId) {
+            this.external(text, gameId, name);
+            return;
         }
-        $("#smltown_consoleText > div > div").append("<div><span class='id" + userId + "'>" + name + "</span>" + text + "</div>");
+
+        this.writeChat(text, playId);
     }
     ,
-    chatUpdate: function () {
-        SMLTOWN.Transform.contentHeights.updateConsole();
-        //if scroll
-        $("#smltown_console").animate({
-            scrollTop: $("#smltown_consoleText > div > div").height() + 50
-        }, 500);
+    writeChat: function (text, playId) {
+        var name = "";
+        if (typeof SMLTOWN.players[playId] != "undefined") { //if player no longer exists
+            name = SMLTOWN.players[playId].name + ": ";
+        }
+        $("#smltown_consoleText > div > div").append("<div><span class='id" + playId + "'>" + name + "</span>" + text + "</div>");
     }
     ,
     clearChat: function () {
@@ -222,5 +276,25 @@ SMLTOWN.Message = {
             return some;
         }
         return lang[some];
+    }
+    ,
+    external: function (text, gameId, name) {
+
+        text = "<small>" + name + ": </small> " + this.translate(text);
+
+        $("#smltown_external").remove();
+        var div = $("<div id='smltown_external'>" + text + "</div>");
+        div.click(function () {
+            window.location.hash = "game?" + gameId;
+        });
+        $("#smltown_html").append(div);
+
+        setTimeout(function () {
+            $("#smltown_external").addClass("smltown_visible");
+        }, 100);
+
+        setTimeout(function () {
+            $("#smltown_external").removeClass("smltown_visible");
+        }, 4000);
     }
 };

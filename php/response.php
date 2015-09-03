@@ -16,7 +16,7 @@ trait Response {
             'cards' => $this->getRules()
         );
         //echo json_encode($res);
-        $this->send_response(json_encode($res), $playId);
+        $this->send_response($res, $playId);
     }
 
     protected function updateUsers($playId = null, $select = null) { //way to update sensitive data for every playerç
@@ -32,13 +32,13 @@ trait Response {
                 $uniqueRes = $res;
                 $playId = $plays[$i]->id;
                 $uniqueRes['user'] = $this->getUserInfo($playId, $select);
-                $this->send_response(json_encode($uniqueRes), $playId);
+                $this->send_response($uniqueRes, $playId);
             }
             return;
         }
 
         $res['user'] = $this->getUserInfo($playId, $select);
-        $this->send_response(json_encode($res), $playId);
+        $this->send_response($res, $playId);
     }
 
     protected function updatePlayers($playId = null, $selects = null) {
@@ -46,7 +46,7 @@ trait Response {
             'type' => "update",
             'players' => $this->getInfoPlayers($selects, $playId)
         );
-        $this->send_response(json_encode($res), $playId);
+        $this->send_response($res, $playId);
     }
 
     protected function updatePlayer($playId, $selects = null) {
@@ -54,7 +54,7 @@ trait Response {
             'type' => "update",
             'player' => $this->getInfoPlayer($selects, $playId)
         );
-        $this->send_response(json_encode($res)); //to all
+        $this->send_response($res); //to all
     }
 
     protected function updateGame($playId = null, $array = null) {
@@ -63,7 +63,7 @@ trait Response {
             'type' => "update",
             'game' => $game
         );
-        $this->send_response(json_encode($res), $playId);
+        $this->send_response($res, $playId);
     }
 
     protected function updateRules($playId = null) {
@@ -71,7 +71,7 @@ trait Response {
             'type' => "update",
             'cards' => $this->getRules($playId)
         );
-        $this->send_response(json_encode($res), $playId);
+        $this->send_response($res, $playId);
     }
 
 // SQL
@@ -105,11 +105,12 @@ trait Response {
             //
             //full request
         } else {
+            $turns = count($this->TURNS);
             $sql .= " name, admin"
                     //plays.sel when openVoting
                     . ", CASE WHEN 1 = (SELECT openVoting FROM smltown_games WHERE id = $gameId) THEN sel END AS sel"
                     //status 1 when is 0
-                    . ", CASE WHEN status > -1 AND 'end' <> (SELECT night FROM smltown_games WHERE id = $gameId) THEN 1 ELSE status END AS status"
+                    . ", CASE WHEN status > -1 AND $turns > (SELECT status FROM smltown_games WHERE id = $gameId) THEN 1 ELSE status END AS status"
                     //message if not playing night (else null)
                     . "," . $this->getMessageCase($gameId)
                     //CARD if DEAD
@@ -132,7 +133,7 @@ trait Response {
                 . " LEFT OUTER JOIN smltown_players"
                 . " ON smltown_plays.userId = smltown_players.id"
                 //
-                . " WHERE gameId = $gameId ";
+                . " WHERE smltown_plays.gameId = $gameId ";
         $values = array();
         if (is_array($playId)) { //not userId but wheres
             $wheres = $playId;
@@ -185,7 +186,7 @@ trait Response {
                 . " LEFT OUTER JOIN smltown_players"
                 . " ON smltown_plays.userId = smltown_players.id"
                 //
-                . " WHERE smltown_plays.id = '$playId' AND gameId = $gameId ";
+                . " WHERE smltown_plays.id = '$playId' AND smltown_plays.gameId = $gameId ";
 
         $plays = petition($sql);
         if (count($plays) > 0) {
@@ -205,9 +206,9 @@ trait Response {
             $sql .= " id,name,password,type,status,timeStart,time,dayTime,openVoting,endTurn,cards";
             if ($playId) {
                 $sql .= ","
-                        . " CASE WHEN" //is night
-                        . " (SELECT card FROM smltown_plays WHERE id = $playId AND gameId = $gameId) = night"
-                        . " AND 0 = (SELECT count(*) FROM smltown_plays WHERE message > '') "
+                        . " CASE WHEN"
+                        . " (SELECT card FROM smltown_plays WHERE id = $playId) = night" //is same night
+                        . " AND 0 = (SELECT count(*) FROM smltown_plays WHERE gameId = $gameId AND message > '') " //not waiting messages
                         . " THEN night END AS night";
             }
         }

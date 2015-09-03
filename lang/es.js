@@ -72,7 +72,7 @@ var lang = {
     ,
     yourTurn: "es tu turno"
     ,
-    PRESELECT: "haz click otra vez para sleccionar"
+    PRESELECT: "click otra vez para sleccionar"
     ,
     GoodMorning: "Buenos Días! <p>(Cuando el sol llegue al otro extremo de la pantalla el tiempo habrá acabado)</p>"
     ,
@@ -80,15 +80,13 @@ var lang = {
     ,
     alive2: "Solo hay 2 jugadores en juego. No puede ocurrir ningun linchamiento durante este día."
     ,
-    a: ""
-    ,
     wasKilledTonight: "a muerto esta noche"
     ,
     dayEnd: "Se ha hecho de noche. Todo el mundo cierra los ojos."
     ,
     GameOver: "La partida ha finalizado."
     ,
-    Win: "(GANADOR)"
+    Win: "VENCEDOR"
     ,
     wakingUp: "esperando jugadores a que despierten.."
     ,
@@ -151,4 +149,10 @@ var lang = {
     passwordUpdated: "se ha cambiado la contraseña de la partida"
     ,
     playingHere: "estas jugando aquí"
+    ,
+    warnServer: "advertencia: el servidor está tardando demasiado"
+    ,
+    somethingHappend: "alguien está tramando algo..."
+    ,
+    noMoreGames: "no hay más partidas"
 };

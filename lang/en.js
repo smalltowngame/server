@@ -11,10 +11,6 @@ var lang = {
     ,
     startGameHelp: "(say everyone close eyes)"
     ,
-    EndTurn: "End turn"
-    ,
-    endTurnHelp: "force turn to end"
-    ,
     gameHelp: "game ADMIN options"
     ,
     DayTime: "Day time by player"
@@ -77,15 +73,13 @@ var lang = {
     ,
     alive2: "Only 2 players are alive. No kill could happen at day"
     ,
-    a: "a"
-    ,
     wasKilledTonight: "has died tonight"
     ,
     dayEnd: "Night is coming. Everybody close your eyes."
     ,
     GameOver: "GAME OVER"
     ,
-    Win: "(WIN)"
+    Win: "WIN"
     ,
     wakingUp: "waitting players wake up.."
     ,
@@ -148,4 +142,10 @@ var lang = {
     passwordUpdated: "updated password game"
     ,
     playingHere: "you are playing here"
+    ,
+    warnServer: "warn: server is taking too long"
+    ,
+    somethingHappend: "someone is plotting something..."
+    ,
+    noMoreGames: "no more games"
 };

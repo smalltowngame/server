@@ -5,7 +5,8 @@
 $card->text = array(
     "en" => array(
         "name" => "werewolf",
-        "rules" => "select your victim",
+        "rules" => "select one victim at night",
+        "quote" => "ARF! ARF!",
         "wasKilled" => " was killed"
     ),
     "es" => array(

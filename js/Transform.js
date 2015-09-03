@@ -68,18 +68,32 @@ SMLTOWN.Transform = {
         if (width > height) {
             width = height * 0.8;
             $("#smltown_card > div").width(width);
-        }else{
+        } else {
             $("#smltown_card > div").width("");
         }
-        $("#smltown_card .smltown_cardText").height(height - width);        
+        $("#smltown_card .smltown_cardText").height(height - width);
     }
     ,
     //ON INPUT CHAT FOCUS OUT ////////////////////////////////////////////////
     chatFocusOut: function () { //LET DEVICES FUNCTION CALL!!!
+        this.hideKeyboard();
         $('#smltown_chatInput').val("");
         $("#smltown_console").removeClass("smltown_consoleExtended");
-        $("#smltown_chatInput").focusout(); //Android 2.3
-        SMLTOWN.Message.chatUpdate();
+
+        this.chatUpdate();
+    }
+    ,
+    chatUpdate: function () {
+        SMLTOWN.Transform.contentHeights.updateConsole();
+        //if scroll
+        $("#smltown_console").animate({
+            scrollTop: $("#smltown_consoleText > div > div").height() + 50
+        }, 500);
+    }
+    ,
+    hideKeyboard: function () {
+        //$("#smltown_chatInput").focusout();
+        //TODO (2.3 is near impossible)
     }
     ,
     //GAME EVENTS FUNCTIONS ///////////////////////////////////////////////////

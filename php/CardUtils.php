@@ -64,7 +64,7 @@ class CardUtils {
         foreach ($wheres as $key => $value) {
             if ($key != "card" && $key != "status" && $key != "sel") { //injection prevent
                 echo "error: no valid key getPlayers on CardUtils";
-                die();
+                return;
             }
             $values[$key] = $value;
             $sql .= " AND $key = :$key";
@@ -105,11 +105,9 @@ class CardUtils {
 
         $sql = "SELECT smltown_plays.id";
 
-//        echo 33;
         if (!is_array($selects)) {
             echo "; playId = $playId; ";
             if ($selects) { //single value
-//                echo "; selects = $selects; ";
                 $sql .= ", $selects";
             } else {
                 $sql .= ", name, admin, card, rulesJS, rulesPHP, status, sel, message";
@@ -202,11 +200,18 @@ class CardUtils {
         }
 
         $values = array(
-            'playId' => $playId,
             'rules' => $rules
         );
+        
+        $playSQL = "";
+        if (true != $playId) { // TRUE == ALL PLAYERS
+            $values['playId'] = $playId;
+            $playSQL = "AND id = :playId";
+        }
+
         sql("UPDATE smltown_plays SET rulesJS = CONCAT(rulesJS, ';' , :rules)"
-                . " WHERE gameId = $gameId AND id = :playId", $values);
+                . " WHERE gameId = $gameId $playSQL", $values);
+
         $this->updateUsers($playId, "rulesJS");
     }
 
@@ -237,8 +242,8 @@ class CardUtils {
         $gameId = $this->gameId;
 //        $endStatus = count($this->TURNS);
         $endStatus = 5; //PATCH. TODO: $this->TURNS (only breaks on websocket!)
-        echo "status = $endStatus";
-        $this->updatePlayers(null, array("status", "card"));
+        //echo "status = $endStatus";
+        $this->updatePlayers(null, array("status", "card", "rulesJS")); //let inject from ending card
         sql("UPDATE smltown_games SET status = $endStatus WHERE id = $gameId");
         $this->updateGame();
     }
@@ -250,7 +255,7 @@ class CardUtils {
     public function response($type, $obj = array()) {
         $playId = $this->playId;
         $obj['type'] = $type;
-        $this->send_response(json_encode($obj), $playId);
+        $this->send_response($obj, $playId);
     }
 
 //    public function getPlayIdByCard($card) {

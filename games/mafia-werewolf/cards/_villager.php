@@ -4,7 +4,8 @@
 $card->text = array(
     "en" => array(
         "name" => "Villager",
-        "rules" => "any hability"
+        "rules" => "any special hability",
+        "quote" => "so then ..."
     ),
     "es" => array(
         "name" => "Aldeano",

@@ -1,13 +1,12 @@
 
 SMLTOWN.Time = {
     runCountdown: function () { //start day game countdown
+        var $this = this;
         console.log("run countdown")
         if (this.countdownInterval) {
-            console.log("this.countdownInterval = " + this.countdownInterval)
-            return;
+            clearTimeout(this.countdownInterval);
         }
-        var $this = this;
-
+        
         var timeout = 0;
         //countdown
         if ("undefined" == typeof this.end || null == this.end) {

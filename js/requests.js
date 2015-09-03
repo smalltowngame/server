@@ -97,12 +97,14 @@ SMLTOWN.Server.request = {
         }
         var obj = {
             action: "addUser",
-            name: name
+            name: name,
+            lang: SMLTOWN.lang
         };
-        var userId = SMLTOWN.Util.getCookie("smltown_userId");
-        if (userId) {
-            obj.userId = userId;
-        }
+//        var userId = SMLTOWN.Util.getCookie("smltown_userId");
+//        $("body").prepend(userId)
+//        if (userId) {
+//            obj.userId = userId;
+//        }
         this.send(obj);
     }
     ,
@@ -114,8 +116,7 @@ SMLTOWN.Server.request = {
             action: "addUserInGame",
             gameId: gameId,
             password: password,
-            userId: SMLTOWN.Util.getCookie("smltown_userId"),
-            lang: SMLTOWN.lang
+            userId: SMLTOWN.Util.getCookie("smltown_userId")
         });
     }
     ,

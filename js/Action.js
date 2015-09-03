@@ -8,7 +8,7 @@ SMLTOWN.Action = {
             SMLTOWN.user.sleeping = false;
         }
         if (!message) { //allways remove last message
-            SMLTOWN.Message.notify("");
+            SMLTOWN.Message.removeNotification();
             return false; //false
         }
         if (!instantlyWakeUp && !SMLTOWN.user.sleeping) {
@@ -58,7 +58,7 @@ SMLTOWN.Action = {
             return;
         }
         this.endTurn();
-        
+
         SMLTOWN.Message.flash("closeEyes");
         $("#smltown_cardConsole").hide();
 
@@ -76,6 +76,62 @@ SMLTOWN.Action = {
     ,
     playerSelect: function (id) {
 
+        var player = SMLTOWN.players[id];
+        if (!SMLTOWN.Game.info.status && SMLTOWN.Game.info.status > 4) { //out of game
+            return;
+        } else if ("undefined" == typeof SMLTOWN.user.status || null == SMLTOWN.user.status) {
+            SMLTOWN.Message.flash("youEspectator");
+            return;
+        } else if (SMLTOWN.user.status < 0) {
+            SMLTOWN.Message.flash("youDead");
+            return;
+        } else if (!player.status) {
+            //SMLTOWN.Message.flash("player is a espectator");
+            return;
+        } else if (player.status < 1) {
+            //SMLTOWN.Message.flash("player is dead");
+            return;
+        }
+
+        //DEFINE day/night functions //override from game rules
+        if(false == this.defineSelectFunctions()){
+            return;
+        }
+
+        //PRESELECT
+        var div = $("#" + player.id);
+        if (!div.hasClass("smltown_preselect") && !div.hasClass("smltown_check")) {
+            $(".smltown_preselect").removeClass("smltown_preselect");
+            div.addClass("smltown_preselect");
+            if ($(".smltown_check").length) { //UNSELECT
+                this.unselect();
+            }
+            return;
+        }
+        $(".smltown_preselect").removeClass("smltown_preselect");
+
+        //SELECT / UNSELECT WORK
+        if (div.hasClass("smltown_check")) { //UNSELECT        
+            this.unselect();
+
+        } else if (this.selectFunction) { //SELECT
+            SMLTOWN.user.sel = player.id;
+            if (this.selectFunction(player.id) != false) { //if night select let
+                this.removeVote(); //if user.sel
+                this.addVote(player.id);
+                $(".smltown_player").removeClass("smltown_check");
+                div.addClass("smltown_check");
+            }
+
+        } else {
+            console.log("not select function");
+        }
+    }
+    ,
+    defineSelectFunctions: function () {
+        //override from game rules
+        this.selectFunction = SMLTOWN.Server.request.selectPlayer;
+        this.unselectFunction = SMLTOWN.Server.request.unSelectPlayer;
     }
     ,
     unselect: function () {
@@ -92,10 +148,9 @@ SMLTOWN.Action = {
     addVote: function (id) {
         var span = $("#" + id + " .smltown_votes");
         span.append("<span> &#x2718; </span>");
-        var count = span.find("span").length;
-        if (id) {
-            $("#" + id + " .smltown_extra").text(count);
-        }
+        //TODO: conflict with cleanVotes and killed players
+        //var count = span.find("span").length;
+        //$("#" + id + " .smltown_extra").text(count);
     }
     ,
     removeVote: function (id) {
@@ -156,8 +211,7 @@ SMLTOWN.Action = {
         for (var id in SMLTOWN.players) {
             SMLTOWN.players[id].card = null;
         }
-        //$(".smltown_extra").css("background-image", "none");
-        $("*").unbind(".smltown_rules");
+        //$(".smltown_extra").css("background-image", "none");        
         this.clearCards();
     }
     ,
@@ -168,15 +222,15 @@ SMLTOWN.Action = {
         for (var id in SMLTOWN.players) {
             var player = SMLTOWN.players[id];
             player.sel = null;
-            if(player.status > -1){ //like no killed stymbol
-                player.div.find(".smltown_extra").html("");                
+            if (player.status > 0) { //like no killed symbol
+                player.div.find(".smltown_extra").html("");
             }
         }
 
         $(".smltown_votes").html("");
         $(".smltown_check").removeClass("smltown_check");
-        $(".smltown_preselect").removeClass("smltown_preselect");    
-        $("#smltown_user .smltown_extra").empty();
+        $(".smltown_preselect").removeClass("smltown_preselect");
+        //$("#smltown_user .smltown_extra").empty();
     }
     ,
     clearCards: function () {
@@ -193,7 +247,7 @@ SMLTOWN.Action = {
                 var div = player.div;
                 div.find(".smltown_extra").html("");
                 div.find(".smltown_extra").css("background-image", "");
-            }            
+            }
         }
     }
     ,

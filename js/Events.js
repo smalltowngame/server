@@ -153,45 +153,39 @@ SMLTOWN.Events = {
         });
 
         // "> div" resolve some swipe bugs! and without duplications
-        $("#smltown_game > div").on("swiperight", function (e) {
+        $("#smltown_game").on("swiperight", function (e) {
             e.preventDefault();
             $this.swipeRight();
         });
-        $("#smltown_game > div").on("swipeleft", function (e) {
+        $("#smltown_game").on("swipeleft", function (e) {
             e.preventDefault();
             $this.swipeLeft();
         });
 
-        //ANY setTimeout for Android 2.3 focus!
+        // ANY setTimeout for Android 2.3 focus !
         $("#smltown_console").on("mouseup", function (e) {
-            console.log(555)
             if ($(e.target).attr("id") == "smltown_chatInput") {
                 return;
             }
 //            setTimeout(function () {
-                $('#smltown_console').toggleClass("smltown_consoleExtended");
-                if ($("#smltown_console").hasClass("smltown_consoleExtended")) {
-                    $("#smltown_chatInput").trigger('click');
-                }
-                SMLTOWN.Message.chatUpdate();
+            $('#smltown_console').toggleClass("smltown_consoleExtended");
+            if ($("#smltown_console").hasClass("smltown_consoleExtended")) {
+                $("#smltown_chatInput").focus();
+            }
+            SMLTOWN.Transform.chatUpdate();
 //            }, 300);
-        });
-
-        //Android 2.3
-        $("#smltown_chatInput").click(function () {
-            $("#smltown_chatInput").focus();
-
         });
 
         $("#smltown_chatInput").on("focusout", function () {
             if ($("#smltown_console").hasClass("smltown_consoleExtended")) {
                 return;
             }
-            SMLTOWN.Message.chatUpdate();
+            SMLTOWN.Transform.chatUpdate();
         });
 
         $("#smltown_chatForm").submit(function () {
-            $('#smltown_chatInput').blur();
+            $("#smltown_console").trigger("mouseup");
+            $('#smltown_chatInput').blur(); //?
             var text = $('#smltown_chatInput').val();
             if (text.length) {
                 SMLTOWN.Message.addChat(text);
@@ -200,6 +194,8 @@ SMLTOWN.Events = {
             SMLTOWN.Transform.chatFocusOut();
             return false;
         });
+
+
 
         //GAME SCROLLS (only touch device) ////////////////////////////////////////
         this.touchScroll($("#smltown_list"), "top");
@@ -280,7 +276,7 @@ SMLTOWN.Events = {
 
         //let night scroll etc..
         if ("smltown_list" == element) {
-            div = $("#smltown_game"); //global scroll events
+            div = $("#smltown_body"); //global scroll events
         }
 
         div.off("touchstart");
@@ -312,6 +308,7 @@ SMLTOWN.Events = {
                 if ("smltown_console" != element) { //prevent scroll on swipe
                     x = e.originalEvent.touches[0].pageX;
                     if (Math.abs(y - pageY) < 2 * Math.abs(x - pageX)) {
+                        console.log(99)
                         return;
                     }
                 }
@@ -332,15 +329,17 @@ SMLTOWN.Events = {
                         finalPosition = -maxScroll + 10;
                     }
                 }
+                
+                if ("smltown_list" == element && finalPosition > maxScroll) { //not at bottom
+                    clearTimeout(SMLTOWN.Events.consoleTimeout);
+                    $("#smltown_game").addClass("smltown_reduced");
+                }
+                
                 //prevent extra calculations
                 if (position == finalPosition) {
                     return;
                 }
-
-                if ("smltown_list" == element) {
-                    $("#smltown_game").addClass("smltown_reduced");
-                }
-
+                
                 position = finalPosition;
                 $this.css("transform", "translateY(" + finalPosition + "px)");
 
@@ -373,9 +372,9 @@ SMLTOWN.Events = {
                 }
 
                 if ("smltown_list" == element) {
-                    setTimeout(function () { //let some time to continue scroling
+                    $this.consoleTimeout = setTimeout(function () { //let some time to continue scroling
                         $("#smltown_game").removeClass("smltown_reduced");
-                    }, 500);
+                    }, 800);
 
                 } else if ("smltown_menu" == element) {
                     if ($(this).height() - $this.height() > 0) {//client see bottom list                        
@@ -435,7 +434,7 @@ SMLTOWN.Events = {
 
         //ON BACK BUTTON
         $("#smltown_backButton").click(function () {
-            SMLTOWN.Game.back();
+            SMLTOWN.Load.back();
         });
 
         // MENU NAVIGATION EVENTS

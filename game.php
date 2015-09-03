@@ -16,7 +16,15 @@ if (!empty($_REQUEST['lang'])) { //from jquery load()
 
 include_once 'php/DB.php';
 $type = "";
-$games = petition("SELECT type FROM smltown_games WHERE id = $gameId");
+
+//TODO, NOT WORK !!!!!!!
+try {
+    $games = petition("SELECT type FROM smltown_games WHERE id = $gameId");
+} catch (Exception $e) {
+    echo "<script>SMLTOWN.Load.showPage('gameList', 'not valid id, mysql error');</script>";
+    exit;
+}
+
 if (count($games)) {
     $type = $games[0]->type;
 } else {
@@ -51,8 +59,8 @@ if (count($games)) {
             </div>
         </div>
 
-        <div id="smltown_filter" class="absolute">
-            <div id="smltown_popup" class="absolute">
+        <div id="smltown_filter">
+            <div id="smltown_popup">
                 <div id="smltown_popupText"></div>
                 <div id="smltown_popupOk" class="smltown_button">OK</div>
                 <div id="smltown_popupCancel" class="smltown_button">Cancel</div>
@@ -207,8 +215,15 @@ if (count($games)) {
 <script type="text/javascript" async=false defer=false src="games/<?php echo $type ?>/lang/<?php echo $lang ?>.js"></script>
 
 <script>
-
-    SMLTOWN.Game.info.type = '<?php echo $type ?>';
+    console.log("game file load");
+    
+    //RESTART
+    SMLTOWN.user = {};
+    SMLTOWN.players = {};    
+    SMLTOWN.Game.info = {
+        id:<?php echo $gameId ?>,
+        type: '<?php echo $type ?>'
+    };
 
     SMLTOWN.Game.loadedFiles = 0;
     SMLTOWN.Util.translateHTML();
@@ -219,9 +234,10 @@ if (count($games)) {
 
     SMLTOWN.Transform.gameResize();
     SMLTOWN.Events.game();
-    
-    //start SOCKET imitation    
+
+    //start SOCKET imitation
     SMLTOWN.Server.request.addUserInGame(SMLTOWN.Game.info.id); //add this user to game
+
     if (!SMLTOWN.Server.websocket) {
         SMLTOWN.Server.startPing();
     }

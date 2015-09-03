@@ -36,7 +36,7 @@ trait Engine {
                             $this->updateGame($playId, "night");
                             $this->saveMessage($message, $playId);
                         } else {
-                            $this->setNotifications("$cardName is plotting something", array("id" => $playId));
+                            $this->setNotifications("somethingHappend", array("id" => $playId));
                         }
                     }
                 }
@@ -57,7 +57,7 @@ trait Engine {
                 . " LEFT OUTER JOIN smltown_players"
                 . " ON smltown_plays.userId = smltown_players.id"
                 //
-                . " WHERE card = '$cardName' AND status > -1 AND gameId = $gameId");
+                . " WHERE card = '$cardName' AND status > -1 AND smltown_plays.gameId = $gameId");
 
         if (count($plays) < 1) {
             echo "ERROR: card file not found. Ending turn..";
@@ -109,7 +109,7 @@ trait Engine {
         $sth = sql("UPDATE smltown_plays SET message = '' WHERE message <> '' AND id = $playId");
         if ($sth->rowCount() == 0) {
             //DEBUG
-            $this->setError($gameId, "error: no message to recieve.");
+            //$this->setError("error: no message to recieve.");
             return; //any message to recibe, prevent posible hack
         }
 
@@ -164,7 +164,7 @@ trait Engine {
                 . "ON smltown_plays.gameId = smltown_games.id "
                 //
                 //cout if some alive is not selecting
-                . "WHERE gameId = $gameId AND "
+                . "WHERE smltown_plays.gameId = $gameId AND "
                 . "smltown_plays.status > 0 AND sel IS NULL AND smltown_plays.admin > -1 "
                 //count if games.time is NOT over (null || 0)
                 . "OR smltown_games.time > " . microtime(true));
@@ -236,7 +236,7 @@ trait Engine {
         $data = $card->nightUnselect();
 
         if ($data) {
-            $this->send_response(json_encode(array('type' => 'night', 'data' => $data)), $playId);
+            $this->send_response(array('type' => 'night', 'data' => $data), $playId);
         }
     }
 

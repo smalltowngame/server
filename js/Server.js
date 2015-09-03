@@ -8,14 +8,22 @@ SMLTOWN.Server = {
     slowPing: 3000
     ,
     handleConnection: function () {
+        console.log("handle connection");
         var $this = this;
+        if (!SMLTOWN.config.websocket_server) {
+            SMLTOWN.Server.ajaxConnection();
+            $(".smltown_allowWebsocket").text("NOT");
+            SMLTOWN.Server.request.addUser(SMLTOWN.user.name);
+            this.connected();
+            return;
+        }
+
         SMLTOWN.Server.websocketConnection(function (done) {
             if (!done) {
                 SMLTOWN.Server.ajaxConnection();
                 $(".smltown_allowWebsocket").text("NOT");
             } else {
                 SMLTOWN.Server.websocket = true;
-                console.log("WEBSOCKET CONNECTION");
             }
             SMLTOWN.Server.request.addUser(SMLTOWN.user.name);
             $this.connected();
@@ -24,9 +32,8 @@ SMLTOWN.Server = {
     ,
     websocketConnection: function (callback) {
         var $this = this;
-
         console.log("websocket server config: " + SMLTOWN.websocketServer);
-        if (!SMLTOWN.websocketServer) {
+        if (!SMLTOWN.config.websocket_server) {
             callback(false);
             return;
         }
@@ -38,78 +45,80 @@ SMLTOWN.Server = {
         var path = location.pathname;
         var wsUri = "ws://" + domain + ":9000" + path + "smltown_websocket.php";
         console.log("connecting to: " + wsUri);
-
         try {
             var websocket = new WebSocket(wsUri);
             websocket.onopen = function (ev) {
                 console.log("websocket open");
+                smltown_debug("websocket open");
+                $this.startTime = new Date().getTime();
+                $this.websocketReconnection = false;
                 //SMLTOWN.Message.setLog("websocket connected");
                 $this.request ? null : this.request = {};
                 $this.request.send = function (obj, over, callback) {
                     if (!over) {
                         $this.loading();
                     }
-                    console.log(obj);
+                    console.log(JSON.stringify(obj));
                     obj = $this.addGameInfo(obj);
-
-                    //only 4 websockets (not valid cookies or session)
-                    if (SMLTOWN.user.id) {
-                        obj.playId = SMLTOWN.user.id;
+                    try {
+                        websocket.send(JSON.stringify(obj));
+                    } catch (e) {                        
+                        smltown_debug("send error");
+                        $this.handleConnection();
                     }
-
-                    websocket.send(JSON.stringify(obj));
                 };
-
                 callback(true);
             };
             websocket.onmessage = function (ev) {
                 $this.loaded();
-//                console.log("MESSAGE");
-                //console.log(JSON.stringify(ev)); //debug
-                if (ev.data) {
-                    try {
-                        var res = JSON.parse(ev.data);
-                        $this.onmessage(res);
-                    } catch (e) {
-                        console.log("error onmessage");
-                        console.log(e);
-                    }
-                } else {
-                    console.log("null socket data");
-                }
+                $this.parseResponse(ev.data);
             };
             websocket.onerror = function (ev) {
-                console.log("websocket error:");
+                smltown_error("websocket error:");
+                console.log(ev);
                 websocket.close();
             };
             websocket.onclose = function (ev) {
                 console.log("websocket close:");
                 console.log(ev);
-
+                var endTime = new Date().getTime();
+                var time = (endTime - $this.startTime) / 1000;
+                smltown_error("websocket close: " + time + " seconds.");
                 //if 2nd time
-                if ($this.websocketReconnection) {
-                    console.log(123)
+                if ($this.websocketReconnection) { // true
                     callback(false);
                     return;
                 }
 
-                $this.ajax("", function (connected) {
-                    console.log("websocket reconnection?: " + connected);
-                    if (parseInt(connected) > 0) {
-                        //try again
-                        $this.websocketReconnection = true;
-                        $this.handleConnection();
+                if (!SMLTOWN.config.websocket_autoload) {
+                    console.log("not websocket_autoload");
+                    callback(false);
+                    return;
+                }
 
+                var success = $this.ajax("", function (connected) {
+                    console.log("websocket reconnection?: " + connected);
+                    $this.websocketReconnection = true;
+                    if (0 < parseInt(connected)) {
+                        //try again all connection
+                        $this.handleConnection();
+                    } else if (-1 == parseInt(connected)) {
+                        //still connected? reconnect to websocket?
+                        $this.websocketConnection(callback);
                     } else {
                         callback(false);
                     }
-                }, "websocketServerStart.php");
-
-                //SMLTOWN.Message.setLog("websocket connection closed");                
+                }, "websocketStart.php");
+                
+                //if con't connect ajax => network error
+                if (false == success) {
+                    smltown_debug("trying reconnection every 3 min.");
+                    setTimeout(function(){
+                        $this.handleConnection();
+                    },180000); //try reconnect every 3 min
+                }
             };
-
             SMLTOWN.websocket = websocket;
-
         } catch (e) {
             console.log("websocket error catch");
             callback(false);
@@ -135,6 +144,7 @@ SMLTOWN.Server = {
             };
             window.onhashchange();
         } else { //as PLUGIN
+            console.log("plugin");
             if (typeof SMLTOWN.Game.info.id != "undefined") {
                 SMLTOWN.Load.showPage("game?" + SMLTOWN.Game.info.id);
             } else {
@@ -151,6 +161,12 @@ SMLTOWN.Server = {
         console.log("start ping");
         var $this = this;
         var HttpRequest = this.HttpRequest;
+
+        //stop
+        HttpRequest.abort();
+        clearTimeout(this.pingTimeout);
+        this.ping = this.fastPing;
+
         if (!SMLTOWN.Game.info.id) {
             smltown_error("wrong game id: " + SMLTOWN.Game.info.id + ", leaving...");
             console.log("wrong");
@@ -160,7 +176,6 @@ SMLTOWN.Server = {
             return;
         }
         this.url = SMLTOWN.path + "smltown_ajax.php?id=" + SMLTOWN.Game.info.id;
-
         //PING
         HttpRequest.onreadystatechange = function () {
             /////////DEBUG
@@ -168,43 +183,19 @@ SMLTOWN.Server = {
 //            console.log(HttpRequest.readyState);
 //                console.log(HttpRequest.responseText);
 //            }
-            if (HttpRequest.readyState != 4) { //!important
+            if (HttpRequest.readyState != 4) {
                 return;
             }
 
             if (HttpRequest.responseText) { //catch errors and code
-                //console.log(HttpRequest.responseText)
-                var string = HttpRequest.responseText;
-                string = unescape(encodeURIComponent(string)); //decode backslashes special chars
-
-                var array = string.split("|");
-                for (var i = 0; i < array.length; i++) {
-                    if (array[i]) {
-//                    console.log(array[i])
-                        var json;
-                        try {
-                            json = JSON.parse(array[i]);
-                        } catch (e) {
-                            try {
-                                eval(array[i]);
-                            } catch (e) {
-                                console.log("error on parse request: " + array[i]); //not setLog
-                            }
-
-                            continue;
-                        }
-                        $this.onmessage(json);
-                    }
-                }
-                $this.loaded();
+                $this.parseResponse(HttpRequest.responseText)
             }
             //next interval
-            setTimeout(function () {
+            $this.pingTimeout = setTimeout(function () {
                 $this.pingRequest();
             }, $this.ping);
 //        }, SMLTOWN.server.ping += 10);
         };
-
         this.pingRequest();
     }
     ,
@@ -214,11 +205,10 @@ SMLTOWN.Server = {
     }
     ,
     ajaxConnection: function () {
-        console.log("ajax connection")
+        console.log("ajax connection");
         var $this = this;
         // AJAX
         this.url = SMLTOWN.path + "smltown_ajax.php";
-
         //ajax request function
         this.request.send = function (obj, over, callback) {
             if (!over) {
@@ -226,28 +216,59 @@ SMLTOWN.Server = {
             }
             console.log(obj);
             obj = $this.addGameInfo(obj);
-
             var sendXmlHttpRequest = new XMLHttpRequest();
             sendXmlHttpRequest.open("POST", $this.url, true);
             sendXmlHttpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             sendXmlHttpRequest.send(JSON.stringify(obj));
             sendXmlHttpRequest.onreadystatechange = function () {
-                if (sendXmlHttpRequest.readyState == 4) {
-                    if (sendXmlHttpRequest.responseText) {
-                        $this.loaded();
-                        console.log(sendXmlHttpRequest.responseText);
-                        try {
-                            eval(sendXmlHttpRequest.responseText); //prevent ghost games petitions from server
-                        } catch (e) {
-                            smltown_error("Send request error: " + sendXmlHttpRequest.responseText);
-                        }
-                    }
+
+                if (sendXmlHttpRequest.readyState != 4) {
+                    return;
+                }
+
+                if (sendXmlHttpRequest.responseText) {
+                    //$this.loaded();
+                    //console.log(sendXmlHttpRequest.responseText);
+//                        try {
+//                            eval(sendXmlHttpRequest.responseText); //prevent ghost games petitions from server
+//                        } catch (e) {
+//                            smltown_error("Send request error: " + sendXmlHttpRequest.responseText);
+//                        }
+                    $this.parseResponse(sendXmlHttpRequest.responseText);
                 }
                 if (callback) {
                     callback();
                 }
             };
         };
+    }
+    ,
+    parseResponse: function (string) {
+        //console.log(string)
+        string = unescape(encodeURIComponent(string)); //decode backslashes special chars
+
+        var array = string.split("|");
+        for (var i = 0; i < array.length; i++) {
+            if (array[i]) {
+                //console.log(array[i])
+                var json;
+                try {
+                    json = JSON.parse(array[i]);
+                } catch (e) {
+//                    console.log(e);
+                    console.log(array[i]);
+                    try {
+                        eval(array[i]);
+                    } catch (e) {
+                        smltown_debug("error on parse request: " + array[i]); //not setLog
+                    }
+
+                    continue;
+                }
+                this.onmessage(json);
+            }
+        }
+        this.loaded();
     }
     ,
     // LOADING SCREEN
@@ -268,39 +289,54 @@ SMLTOWN.Server = {
     ,
 // JSON HANDLE
     onmessage: function (res) {
-//    console.log(JSON.stringify(res));
-        switch (res.type) {
-            case "flash":
-                SMLTOWN.Message.flash(res.data);
-                break;
-            case "notify":
-                SMLTOWN.Message.setMessage(res.data);
-                break;
-            case "chat":
-                console.log(res)
-                SMLTOWN.Message.addChat(res.text, res.userId);
-                //chatUpdate();
-                break;
-            case "extra":
-                SMLTOWN.Action.wakeUpCard(function () {
-                    SMLTOWN.Action.night.extra(res.data); //like witch
-                });
-                break;
-            case "update":
-                SMLTOWN.Update.all(res);
-                break;
-            default: //other functions
-                try {
-                    eval(res.type)(res);
-                } catch (e) {
-                    SMLTOWN.Message.setLog(res);
-                }
+        console.log(res);
+        if ("flash" == res.type) {
+            SMLTOWN.Message.flash(res.data, res.gameId);
+            return;
+        }
+        if ("notify" == res.type) {
+            SMLTOWN.Message.setMessage(res.data, null, null, res.gameId);
+            return;
+        }
+        if ("chat" == res.type) {
+            SMLTOWN.Message.addChat(res.text, res.playId, res.gameId, res.name);
+            return;
+        }
+
+        //from here
+        if (res.gameId && res.gameId != SMLTOWN.Game.info.id) {
+            console.log("message received from other game");
+            return;
+        }
+        if (!SMLTOWN.Game.info.id) { //prevent bad requests errors
+            console.log("not in game");
+            return;
+        }
+
+        if ("extra" == res.type) {
+            SMLTOWN.Action.wakeUpCard(function () {
+                SMLTOWN.Action.night.extra(res.data); //like witch
+            });
+            return;
+        }
+        if ("update" == res.type) {
+            SMLTOWN.Update.all(res);
+            return;
+        }
+
+        try {
+            eval(res.type)(res);
+        } catch (e) {
+            SMLTOWN.Message.setLog(res);
         }
     }
     ,
     addGameInfo: function (obj) {
         if (SMLTOWN.Game.info.id) {
             obj.gameId = SMLTOWN.Game.info.id;
+        }
+        if (SMLTOWN.user.id) {
+            obj.playId = SMLTOWN.user.id;
         }
         if (SMLTOWN.Game.info.type) {
             obj.gameType = SMLTOWN.Game.info.type;
@@ -321,7 +357,12 @@ SMLTOWN.Server = {
         var req = this.ajaxReq;
         req.open("POST", file, true);
         req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        req.send(JSON.stringify(request));
+        var json = JSON.stringify(request);
+        try {
+            req.send(json);
+        } catch (e) {
+            return false;
+        }
         req.onreadystatechange = function () { //DEBUG
             if (req.readyState == 4 && req.responseText) {
 //                console.log(req.responseText)

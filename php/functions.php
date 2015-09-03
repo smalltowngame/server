@@ -121,10 +121,13 @@ function getGamesInfo($obj) { //all game selector page
 
     if (isset($userId)) { //if is playing game
         $sql .= ", (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '$userId') AS playing";
-        $sql .= ", (SELECT message FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '$userId') AS message ";
+        $sql .= ", (SELECT message FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '$userId') AS message";
+    }else{
+        $sql .= ", '0' AS playing";
+        $sql .= ", '' AS message";
     }
 
-    $sql .= " FROM smltown_games ORDER BY playing DESC ";
+    $sql .= " FROM smltown_games ";
 
     if (!isset($name) || empty($name)) {
         //$sql .= " WHERE name like :name";
@@ -142,10 +145,9 @@ function getGamesInfo($obj) { //all game selector page
                 . "OR lastConnection < (NOW() - INTERVAL 36 HOUR)");
     } else {
         $values["name"] = $name;
-//        $sql .= " WHERE name like :name ORDER BY playing DESC LIMIT $start, $end";
-        $sql .= " WHERE name like :name";
+        $sql .= " WHERE LOWER(name) like :name";
     }
-    $sql .= " LIMIT $start, 15";
+    $sql .= " ORDER BY playing DESC, message DESC, status LIMIT $start, 15";
     $games = json_encode(petition($sql, $values));
 
     echo $games;
@@ -168,16 +170,16 @@ function createGame($obj = null, $id = null) {
         $values['name'] = $obj->name;
     }
 
-    //remove unstarted games where admin create this other game
-    if (isset($_SESSION['playId'])) {
-        $value = array(
-            'name' => $values['name']
-        );
-//        sql("DELETE FROM smltown_games WHERE 0 < "
-//                . "(SELECT count(*) FROM smltown_plays WHERE 1 = "
-//                . "(SELECT admin FROM smltown_plays WHERE smltown_plays.gameId = smltown_games.id LIMIT 0,1)) "
-//                . "AND (smltown_games.status <> 1 AND smltown_games.status <> 2 AND smltown_games.name <> :name)", $value);
-    }
+//    //remove unstarted games where admin create this other game
+//    if (isset($_SESSION['playId'])) {
+//        $value = array(
+//            'name' => $values['name']
+//        );
+////        sql("DELETE FROM smltown_games WHERE 0 < "
+////                . "(SELECT count(*) FROM smltown_plays WHERE 1 = "
+////                . "(SELECT admin FROM smltown_plays WHERE smltown_plays.gameId = smltown_games.id LIMIT 0,1)) "
+////                . "AND (smltown_games.status <> 1 AND smltown_games.status <> 2 AND smltown_games.name <> :name)", $value);
+//    }
 
     //check
     if (!isset($id)) {
@@ -185,7 +187,6 @@ function createGame($obj = null, $id = null) {
         global $pdo;
         $id = $pdo->lastInsertId();
         if ($sth->rowCount() == 0) { //nothing changes
-            echo "game name already exists";
             return false;
         }
     } else {

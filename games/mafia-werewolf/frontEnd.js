@@ -1,21 +1,19 @@
 
-SMLTOWN.Update.gameStatus = function () {
+//SMLTOWN.mafia_werewolf = {};
+
+SMLTOWN.Update.gameStatus = function() {
     console.log("update game");
     //INPUTS
     SMLTOWN.Time.clearCountdowns();
 
     //hide        
     $("#smltown_game").attr("class", "");
-    //$("#smltown_console .smltown_night").hide();
     $(".smltown_gameover").removeClass("smltown_selectable");
     $("#smltown_sun").hide();
-
     $("#smltown_startButton").hide();
     $("#smltown_endTurnButton").hide();
-
     $("#smltown_cardConsole").hide();
 
-    //show &
     switch (SMLTOWN.Game.info.status) {
 
         case 1: //night time
@@ -33,7 +31,7 @@ SMLTOWN.Update.gameStatus = function () {
                 $("#smltown_console .smltown_night").show();
             }
 
-            if (SMLTOWN.user.status > -1 && SMLTOWN.user.card == SMLTOWN.Game.info.night) {
+            if (SMLTOWN.Game.info.night && SMLTOWN.user.status > -1 && SMLTOWN.user.card == SMLTOWN.Game.info.night) {
                 if (SMLTOWN.Action.night.extra) { //if extra
                     SMLTOWN.Server.request.nightExtra(); //1st call
                 } else if (SMLTOWN.Action.night.select) { //or if select                        
@@ -86,6 +84,7 @@ SMLTOWN.Update.gameStatus = function () {
                 SMLTOWN.Action.cleanVotes();
                 $("#smltown_statusGame").smltown_text("GameOver");
                 $("#smltown_body").attr("class", "smltown_gameover");
+                $("*").unbind(".smltown_rules");
             }
 
             for (var id in SMLTOWN.players) {
@@ -96,19 +95,27 @@ SMLTOWN.Update.gameStatus = function () {
                 }
             }
 
+            if (SMLTOWN.Action.night.endGame) {
+                SMLTOWN.Action.night.endGame();
+            }
+
             break;
         default: //waiting for new game (0) "new cards"
             SMLTOWN.Server.ping = SMLTOWN.Server.slowPing;
             $(".smltown_gameover").addClass("smltown_selectable");
 
-            if ($("#smltown_body").attr("class") != "smltown_waiting") { // 1st time                    
-                $("#smltown_body").attr("class", "smltown_waiting");
-                var t = SMLTOWN.Message.translate;
-                SMLTOWN.Action.wakeUp(t("gameRestarted"), true);
-                SMLTOWN.Action.restartTurn();
+            if ($("#smltown_body").attr("class") != "smltown_waiting") { // 1st time  
 
+                if ($("#smltown_body").attr("class")) { //only if not on enter game
+                    var t = SMLTOWN.Message.translate;
+                    SMLTOWN.Action.wakeUp(t("gameRestarted"), true);
+                }
+
+                $("#smltown_body").attr("class", "smltown_waiting");
                 $("#smltown_statusGame").smltown_text("waitingNewGame");
                 $(".smltown_playerStatus").smltown_text("waiting");
+                SMLTOWN.Action.restartTurn();
+                $("*").unbind(".smltown_rules");
             }
 
             if ("1" == SMLTOWN.user.admin && SMLTOWN.user.card) {
@@ -122,7 +129,8 @@ SMLTOWN.Update.gameStatus = function () {
     }
 };
 
-SMLTOWN.Update.onStatusChange = function () {
+//mafia-werewolf only function
+SMLTOWN.Update.onStatusChange = function() {
     console.log("status change");
     if (SMLTOWN.user.status > -1 && SMLTOWN.user.card == SMLTOWN.Game.info.night) { //special card like hunter
         //SMLTOWN.Action.wakeUp(); //cose not sleep
@@ -139,31 +147,11 @@ SMLTOWN.Update.onStatusChange = function () {
     SMLTOWN.Action.cleanVotes();
 };
 
-SMLTOWN.Action.playerSelect = function (id) {
-
-    var player = SMLTOWN.players[id];
-    if (!SMLTOWN.Game.info.status && SMLTOWN.Game.info.status > 4) { //out of game
-        return;
-    } else if ("undefined" == typeof SMLTOWN.user.status || null == SMLTOWN.user.status) {
-        SMLTOWN.Message.flash("youEspectator");
-        return;
-    } else if (SMLTOWN.user.status < 0) {
-        SMLTOWN.Message.flash("youDead");
-        return;
-    } else if (!player.status) {
-        //SMLTOWN.Message.flash("player is a espectator");
-        return;
-    } else if (player.status < 1) {
-        //SMLTOWN.Message.flash("player is dead");
-        return;
-    }
-
-    //DEFINE day/night functions
-
+SMLTOWN.Action.defineSelectFunctions = function() {
     if (SMLTOWN.Game.info.status == 3 && null != SMLTOWN.Time.end) { //day. time.end is null when day is over
         if (1 != SMLTOWN.Game.info.openVoting && SMLTOWN.Time.countdownInterval) {
             console.log("time is not ended");
-            return;
+            return false;
         }
         this.selectFunction = SMLTOWN.Server.request.selectPlayer;
         this.unselectFunction = SMLTOWN.Server.request.unSelectPlayer;
@@ -177,43 +165,11 @@ SMLTOWN.Action.playerSelect = function (id) {
         } else {
             console.log("nothing to select");
         }
-        return;
+        return false;
     }
+}
 
-    //PRESELECT
-    if (SMLTOWN.Game.status != 1 || !SMLTOWN.Game.openVoting) { // except day free votes
-        var div = $("#" + player.id);
-        if (!div.hasClass("smltown_preselect") && !div.hasClass("smltown_check")) {
-            $(".smltown_preselect").removeClass("smltown_preselect");
-            div.addClass("smltown_preselect");
-            if ($(".smltown_check").length) { //UNSELECT
-                this.unselect();
-            }
-            return;
-        }
-        $(".smltown_preselect").removeClass("smltown_preselect");
-    }
-
-    //SELECT / UNSELECT WORK
-
-    if (div.hasClass("smltown_check")) { //UNSELECT        
-        this.unselect();
-
-    } else if (this.selectFunction) { //SELECT
-        SMLTOWN.user.sel = player.id;
-        if (this.selectFunction(player.id) != false) { //if night select let
-            this.removeVote(); //if user.sel
-            this.addVote(player.id);
-            $(".smltown_player").removeClass("smltown_check");
-            div.addClass("smltown_check");
-        }
-
-    } else {
-        console.log("not select function");
-    }
-};
-
-SMLTOWN.Game.playing = function () {
+SMLTOWN.Game.playing = function() {
     var status = SMLTOWN.Game.info.status;
     if (status > 0 && status < 5) {
         return true;
@@ -223,63 +179,42 @@ SMLTOWN.Game.playing = function () {
 
 ///////////////////////////////////////////////////////////////////////////////
 //MESAGES
-SMLTOWN.Message.setMessage = function (data) { //permanent messages
+//Override
+SMLTOWN.Message.showMessage = function(text, action) {
     var $this = this;
-    var stop = false, callback = true;
-    var t = this.translate;
     var time = 0;
-    var text;
-
-    var textArray = data.split(":");
-    var action = data;
-    if (textArray.length > 1) {
-        action = textArray.shift();
-        if (this[action]) {
-            text = this[action](textArray.join(":"));
-        } else {
-            text = textArray.join(":");
-        }
-    } else {
-        text = t(action);
-    }
+    var stop = false;
+    var doCallback = true;
 
     // STOP functions
     if ("statusGameChange" == action) {
         SMLTOWN.Game.info.night = SMLTOWN.user.card;
-//        stop = true;
-        callback = false;
+        doCallback = false;
     } else if ("lynch" == action) {
-        callback = false;
+        doCallback = false;
     }
 
-    clearTimeout(SMLTOWN.Action.wakeUpTimeout); //prevent asyncronic wakeup's after
-    $("#smltown_filter").removeClass("smltown_sleep");
-
-    setTimeout(function () {
-        $this.notify(text, function () {
+    setTimeout(function() {
+        $this.notify(text, function() {
             if (SMLTOWN.user.status > -1
                     && SMLTOWN.Game.info.status == 1 //night
                     ) {
                 SMLTOWN.Action.sleep();
             }
-            if (callback) {
+            if (doCallback) {
                 SMLTOWN.Action.cleanVotes();
                 SMLTOWN.Server.request.messageReceived(stop);
             }
         }, false);
     }, time);
+}
 
-    //SMLTOWN.Action.endTurn(); //why?
+//FROM SET-MESSAGE (custom message functions)
+SMLTOWN.Message.votations = function(json) {
+    return killsMessage(json, false) + SMLTOWN.Message.translate("GettingDark");
 };
 
-//from setMessage
-SMLTOWN.Message.votations = function (json) {
-    return killsMessage(json, false)
-            + SMLTOWN.Message.translate("GettingDark");
-};
-
-//from setMessage
-SMLTOWN.Message.kills = function (json) {
+SMLTOWN.Message.kills = function(json) {
     return killsMessage(json, true);
 };
 
@@ -320,17 +255,17 @@ function killsMessage(json, night) {
 
     var linched = false;
     for (var i = 0; i < plays.length; i++) {
-        if (plays[i].card) {            
+        if (plays[i].card) {
             linched = true;
             var play = plays[i];
             var id = play.id;
-            
+
             SMLTOWN.players[id].status = 0;
-            
+
             var name = SMLTOWN.players[id].name;
             var cardName = SMLTOWN.cards[play.card].name;
             sleepText += " <span class='id" + id + "'>" + name + "</span>, "
-                    + t("a") + " " + cardName + ", ";
+                    + cardName + ", ";
 
             if (night) {
                 sleepText += t("wasKilledTonight");

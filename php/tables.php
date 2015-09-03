@@ -27,6 +27,9 @@ class Tables {
             'id' => "varchar(255) UNIQUE NOT NULL",
             'name' => "varchar(255)",
             'lang' => "varchar(255)",
+            'gameId' => "int(11)",
+            'reply' => "text NOT NULL default ''",
+            'websocket' => "int(11) DEFAULT 0",
             'lastConnection' => "timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
             'PRIMARY KEY' => "(id)"
         ),
@@ -51,7 +54,7 @@ class Tables {
         $enlace = mysqli_connect("localhost", $database_user, $database_pass);
         if (!$enlace) {
             echo 'IS YOUR MYSQL WORKING? - WRONG DB CREDENTIALS?';
-            die();
+            return;
         }
 
         $sql = 'CREATE DATABASE smalltown';

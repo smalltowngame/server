@@ -4,7 +4,8 @@
 $card->text = array(
     "en" => array(
         "name" => "witch",
-        "rules" => "2 potions.."
+        "rules" => "use a health and death potions once per game",
+        "quote" => "do you want to play?"
     ),
     "es" => array(
         "name" => "bruja",

@@ -2,7 +2,10 @@
 SMLTOWN.Load = {
     //LOAD CALL    
     showPage: function (url, why) {
-        console.log("show Page: " + url + " for " + why);
+        var $this = this;
+        if (why) {
+            console.log("show Page: " + url + " for " + why);
+        }
         if ($("body").attr("id") == "smltown") { //game as MAIN app
             window.location.hash = url; //get hash and divLoad
         } else {
@@ -13,6 +16,7 @@ SMLTOWN.Load = {
     //LOAD FUNCTION
     divLoad: function (url) {
         console.log("divload");
+        var $this = this;
         var urlArray = url.split("?");
         var urlPage = urlArray[0];
 
@@ -24,14 +28,16 @@ SMLTOWN.Load = {
             this.loadGame();
 
         } else if (urlPage == "gameList") {
-            $("#smltown_html").load(SMLTOWN.path + "gameList.html");
+            $("#smltown_html").load(SMLTOWN.path + "gameList.php", null, function(){
+                $this.end();
+            });
         }
     }
     ,
     //GAME LIST
     gameList: function () {
         if ($("#smltown_connectionCheck").length) {
-            smltown_error("return")
+            smltown_error("return");
             return;
         }
         //ONCE
@@ -60,12 +66,14 @@ SMLTOWN.Load = {
                 $this.gameSearchValue = val;
 
                 if (val.length > 2) {
+                    $this.start();
                     SMLTOWN.Server.ajax({
                         action: "getGamesInfo",
                         userId: SMLTOWN.user.userId,
-                        name: val
+                        name: val.toLowerCase()
                     }, function (games) {
                         SMLTOWN.Games.list(games);
+                        $this.end();
                     });
 
                 } else if (!val.length) { //if remove search name reload again
@@ -86,6 +94,7 @@ SMLTOWN.Load = {
     ,
     //GAME
     loadGame: function () {
+        var $this = this;
         var hashArray = location.hash.split("?");
         if (hashArray.length > 1) {
             SMLTOWN.Game.info.id = hashArray[1];
@@ -93,6 +102,8 @@ SMLTOWN.Load = {
         $("#smltown_html").load(SMLTOWN.path + "game.php", {
             gameId: SMLTOWN.Game.info.id,
             lang: SMLTOWN.lang
+        }, function(){
+            $this.end();
         });
     }
     ,
@@ -110,6 +121,7 @@ SMLTOWN.Load = {
     }
     ,
     cleanGameErrors: function () {
+        console.log("clean errors");
         SMLTOWN.Message.clearChat();
         this.start();
         this.loadGame(); //reload all
@@ -126,13 +138,22 @@ SMLTOWN.Load = {
         clearTimeout(this.timeout);
         this.timeout = setTimeout(function () {
             $this.end();
-            SMLTOWN.Message.notify("warn: server doesn't seems to respond", true);
+            SMLTOWN.Message.notify("warnServer", true);
         }, 5000);
-
     }
     ,
     end: function () {
         clearTimeout(this.timeout);
         $("#smltown_loading").remove();
+    }
+    ,
+    back: function () {
+        console.log("back");
+        if ($("#smltown_game").length) {
+            this.start();
+            this.showPage("gameList");
+            return true;
+        }
+        return false;
     }
 };

@@ -16,7 +16,7 @@ trait Utils {
                 //
                 . " WHERE smltown_plays.id = $playId AND status > -1" //alive
                 . " AND card = (SELECT night FROM smltown_games WHERE id = $gameId)" //only own turn
-                . " AND 0 = (SELECT count(*) FROM smltown_plays WHERE message > '' AND id != $playId AND gameId = $gameId)");
+                . " AND 0 = (SELECT count(*) FROM smltown_plays WHERE message > '' AND id != $playId AND smltown_plays.gameId = $gameId)");
         if (count($cards) == 0) {
             return false;
         }
@@ -30,7 +30,7 @@ trait Utils {
         $players = $this->getPlayers($wheres);
         for ($i = 0; $i < count($players); $i++) {
             $playId = $players[$i]->id;
-            $this->send_response(json_encode(array('type' => 'flash', 'data' => $message)), $playId);
+            $this->send_response(array('type' => 'flash', 'data' => $message), $playId);
         }
     }
 
@@ -39,12 +39,12 @@ trait Utils {
         $players = $this->getPlayers($wheres);
         for ($i = 0; $i < count($players); $i++) {
             $playId = $players[$i]->id;
-            $this->send_response(json_encode(array('type' => 'notify', 'data' => $message)), $playId);
+            $this->send_response(array('type' => 'notify', 'data' => $message), $playId);
         }
     }
 
     protected function setError($log) {
-        $this->send_response(json_encode(array('type' => 'smltown_error(\'' . $log . '\')')));
+        $this->send_response(array('type' => 'smltown_error(\'' . $log . '\')'));
     }
 
     //////////////////////////////////////////////////////////////////////////////////
@@ -153,7 +153,7 @@ trait Utils {
         //bots error
         $sth = sql("DELETE FROM smltown_plays WHERE gameId = $gameId AND userId = '' and admin > -1");
         if ($sth->rowCount() > 0) {
-            setError($gameId, "warn: fixed bot error");
+            setError("warn: fixed bot error");
         }
     }
 
@@ -227,14 +227,14 @@ trait Utils {
         return $returnCards;
     }
 
-    protected function reloadClientGame() {
-        $playId = $this->playId;
-
-        $res = array(
-            'type' => "SMLTOWN.Load.reloadGame"
-        );
-        $this->send_response(json_encode($res), $playId);
-    }
+//    protected function reloadClientGame() {
+//        $playId = $this->playId;
+//
+//        $res = array(
+//            'type' => "SMLTOWN.Load.reloadGame"
+//        );
+//        $this->send_response($res, $playId);
+//    }
 
     //CARD WORKS
 
@@ -249,13 +249,13 @@ trait Utils {
             if (empty($string)) {
                 setGameStatus(0); //if user try restart
                 echo "SMLTOWN.Message.flash('noCardsSelected')";
-                die();
+                return false;
             }
             try {
                 $playingCards = json_decode($string);
             } catch (Exception $e) {
                 echo "selected game cards are corrupted, please change some card";
-                die();
+                return false;
             }
 
             // GET CARDS NUMBER
@@ -293,7 +293,8 @@ trait Utils {
     protected function getCardFile($filename, $playId = null) {
 
         if (!file_exists($filename)) {
-            die("file not exists = " . $filename);
+            echo "file not exists = " . $filename;
+            return false;
         }
 
         if (null == $playId) {
@@ -385,7 +386,7 @@ trait Utils {
             'type' => "update",
             'player' => $plays
         );
-        $this->send_response(json_encode($res));
+        $this->send_response($res);
     }
 
 }

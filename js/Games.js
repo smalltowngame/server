@@ -1,5 +1,7 @@
 
 SMLTOWN.Games = {
+    array: []
+    ,
     offset: 0
     ,
     over: false
@@ -16,16 +18,17 @@ SMLTOWN.Games = {
         if (this.over) {
             return;
         }
-        
+
         $("#smltown_loadingDiv").addClass("smltown_loader");
         var offset = this.offset;
         console.log("loadMore: offset = " + offset);
-        
+
         SMLTOWN.Server.ajax({action: "getGamesInfo", userId: SMLTOWN.user.userId, offset: offset}, function (games) {
             console.log(games);
+            $("#smltown_loadingDiv").removeClass("smltown_loader");
             var length = games.length;
             if (!length) {
-                console.log("no more games");
+                SMLTOWN.Message.flash("noMoreGames");
                 $this.over = true;
                 return;
             }
@@ -33,16 +36,16 @@ SMLTOWN.Games = {
             for (var i = 0; i < length; i++) {
                 $this.addRow(games[i]);
             }
-            
-            $("#smltown_loadingDiv").removeClass("smltown_loader");
+
             $("#smltown_games").append($("#smltown_footer"));
             SMLTOWN.Events.touchScroll($("#smltown_gamesWrapper"), "top");
         });
     }
     ,
-    list: function (games) {
+    list: function (games) {        
         console.log("games = ");
         console.log(games)
+        this.array = games;
         $(".smltown_game").not(".smltown_local").remove();
         var length = games.length;
         this.offset = length;
@@ -76,11 +79,21 @@ SMLTOWN.Games = {
 
         div.append("<span class='smltown_playersCount'><small>players: </small> " + game.players + "</span>");
         div.append("<span class='smltown_admin'><small>admin: </small> " + game.admin + "</span>");
-        if (parseInt(game.playing)) {
+        
+        var gameInfo = $("<span class='smltown_gameInfo'>");
+        if (game.message) {
+            var message = SMLTOWN.Message.translate(game.message);
+            gameInfo.text('"' + message + '"');
+            div.addClass("smltown_playingMessage");
+        } else if (parseInt(game.playing)) {
             var playingHere = SMLTOWN.Message.translate("playingHere");
-            div.append("<span class='smltown_gameInfo'><small>" + playingHere + "</small></span>");
+            gameInfo.html("<small>" + playingHere + "<small>");
             div.addClass("smltown_playing");
+        }else if("0" != game.status){
+            gameInfo.html("<small>game started<small>");
+            div.addClass("smltown_playingStarted");
         }
+        div.append(gameInfo);
 
         $("#smltown_games").append(div);
         this.setEvents(game.id);
@@ -101,17 +114,22 @@ SMLTOWN.Games = {
         });
     }
     ,
-    create: function () {
-        SMLTOWN.Server.loading();
+    create: function () {        
         SMLTOWN.Local.stopRequests();
         var name = $("#smltown_nameGame input").val();
         if (name.length < 3) {
             SMLTOWN.Message.flash("name must contain 3 letters");
             return;
         }
-
-        $("#smltown_log").text("!wait...");
-
+        for(var i = 0; i < this.array; i++){
+            if(name.toLowerCase() == this.array[i].name.toLowerCase()){
+                SMLTOWN.Message.flash("game name exists");
+                return;
+            }
+        }
+        
+        //start loading
+        SMLTOWN.Server.loading();
         SMLTOWN.Server.ajax({
             action: "createGame",
             name: name
@@ -121,7 +139,7 @@ SMLTOWN.Games = {
                 SMLTOWN.Game.info.id = id;
                 SMLTOWN.Load.showPage("game?" + SMLTOWN.Game.info.id);
             } else {
-                smltown_error("id = " + id);
+                smltown_error("error on id = " + id);
             }
         });
     }
@@ -135,7 +153,11 @@ SMLTOWN.Games = {
     }
     ,
     access: function (id) {
-        SMLTOWN.Local.stopRequests();
+        if(id == SMLTOWN.Game.info.id){
+            return;
+        }
+        SMLTOWN.Load.start();
+        SMLTOWN.Local.stopRequests();         
         SMLTOWN.Game.info.id = id;
         SMLTOWN.Load.showPage("game?" + id);
     }

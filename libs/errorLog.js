@@ -1,4 +1,12 @@
 
+function smltown_debug(text){
+    if(SMLTOWN.config.debug){
+        smltown_error(text);
+    }else{
+        console.log("smltown_debug:" + text);
+    }    
+}
+
 function smltown_error(text) {
     console.log(text);
     var log = document.getElementsByClassName('smltown_errorLog');

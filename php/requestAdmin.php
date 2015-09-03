@@ -27,7 +27,7 @@ class AdminRequest extends PingRequest {
             }
             sql($sql);
             $this->updatePlayers();
-            return;
+            //return;
         }
 
         //start game

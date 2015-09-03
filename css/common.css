@@ -13,12 +13,20 @@ symbol{
 }
 
 html, body{
+    /*margin: 0 auto;*/
+}
+
+#smltown{
+    height: 100%;
+    position: absolute;
+    width: 100%;
     margin: 0 auto;
 }
 
 #smltown_html, #smltown_body{    
     width: 100%;
     overflow: hidden;
+    margin: 0 auto;
 }
 
 #smltown_html{
@@ -37,6 +45,10 @@ html, body{
 
 #smltown_html table{
     border-collapse: collapse;
+}
+
+.smltown_loader{
+    background-image: url("../img/loader.gif");
 }
 
 .smltown_dialog{
@@ -82,6 +94,8 @@ html, body{
 }
 
 .smltown_error{
+    position:absolute;
+    z-index: 99;
     color:red;
 }
 
@@ -140,7 +154,7 @@ html, body{
 }
 
 /*android 2.3 input visibility bug*/
-/*but causing errors on chat input ¿? */ 
+/*but causing errors on chat input Â¿? */ 
 #smltown_html input{
     position:relative;
     top: -10000px;
