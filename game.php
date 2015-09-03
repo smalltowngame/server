@@ -14,6 +14,12 @@ if (!empty($_REQUEST['lang'])) { //from jquery load()
     $lang = $_REQUEST['lang'];
 }
 
+//path files 4 plugins
+$smalltownURL = "";
+if (isset($_SESSION['smalltownURL']) && file_exists("/game.php") < 1) {
+    $smalltownURL = $_SESSION['smalltownURL'] . "/";
+}
+
 include_once 'php/DB.php';
 $type = "";
 
@@ -211,8 +217,8 @@ if (count($games)) {
 
 </div>
 
-<script type="text/javascript" async=false defer=false src="games/<?php echo $type ?>/frontEnd.js"></script>
-<script type="text/javascript" async=false defer=false src="games/<?php echo $type ?>/lang/<?php echo $lang ?>.js"></script>
+<script type="text/javascript" async=false defer=false src="<?php echo $smalltownURL ?>games/<?php echo $type ?>/frontEnd.js"></script>
+<script type="text/javascript" async=false defer=false src="<?php echo $smalltownURL ?>games/<?php echo $type ?>/lang/<?php echo $lang ?>.js"></script>
 
 <script>
     console.log("game file load");
