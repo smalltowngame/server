@@ -96,7 +96,7 @@ if (!file_exists($inc) || !is_readable($inc)) {
     $websocket_autoload = false == $autoload ? 1 : $autoload;
     fwrite($myfile, '$websocket_autoload = ' . $websocket_autoload . ';' . PHP_EOL);
     
-    $local = getenv("local_server");
+    $local = getenv("local_servers");
     $local_servers = false == $local ? 1 : $local;
     fwrite($myfile, '$local_servers = ' . $local_servers . ';' . PHP_EOL);
     
