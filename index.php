@@ -63,45 +63,45 @@ if (!file_exists($inc) || !is_readable($inc)) {
     fwrite($myfile, PHP_EOL);
 
     $location = getenv("database_location");
-    $database_location = false == $location ? "localhost" : $location;
+    $database_location = false === $location ? "localhost" : $location;
     fwrite($myfile, '$database_location = "' . $database_location . '";' . PHP_EOL);
 
     $port = getenv("database_port");
-    $database_port = false == $port ? "null" : $port;
+    $database_port = false === $port ? "null" : $port;
     fwrite($myfile, '$database_port = "' . $database_port . '";' . PHP_EOL);
 
     $name = getenv("database_name");
-    $database_name = false == $name ? "smalltown" : $name;
+    $database_name = false === $name ? "smalltown" : $name;
     fwrite($myfile, '$database_name = "' . $database_name . '";' . PHP_EOL);
 
     $user = getenv("database_user");
-    $database_user = false == $user ? "root" : $user;
+    $database_user = false === $user ? "root" : $user;
     fwrite($myfile, '$database_user = "' . $database_user . '";' . PHP_EOL);
 
     $pass = getenv("database_pass");
-    $database_pass = false == $pass ? "" : $pass;
+    $database_pass = false === $pass ? "" : $pass;
     fwrite($myfile, '$database_pass = "' . $database_pass . '";' . PHP_EOL);
 
     fwrite($myfile, PHP_EOL);
 
     $ajax = getenv("ajax_server");
-    $ajax_server = false == $ajax ? 1 : $ajax;
+    $ajax_server = false === $ajax ? 1 : $ajax;
     fwrite($myfile, '$ajax_server = ' . $ajax_server . ';' . PHP_EOL);
 
     $websocket = getenv("websocket_server");
-    $websocket_server = false == $websocket ? 1 : $websocket;
+    $websocket_server = false === $websocket ? 1 : $websocket;
     fwrite($myfile, '$websocket_server = ' . $websocket_server . ';' . PHP_EOL);
 
     $autoload = getenv("websocket_autoload");
-    $websocket_autoload = false == $autoload ? 1 : $autoload;
+    $websocket_autoload = false === $autoload ? 1 : $autoload;
     fwrite($myfile, '$websocket_autoload = ' . $websocket_autoload . ';' . PHP_EOL);
 
     $local = getenv("local_servers");
-    $local_servers = false == $local ? 1 : $local;
+    $local_servers = false === $local ? 1 : $local;
     fwrite($myfile, '$local_servers = ' . $local_servers . ';' . PHP_EOL);
 
     $dbug = getenv("debug");
-    $debug = false == $dbug ? 0 : $dbug;
+    $debug = false === $dbug ? 0 : $dbug;
     fwrite($myfile, '$debug = ' . $debug . ';' . PHP_EOL);
 
     fwrite($myfile, PHP_EOL);
