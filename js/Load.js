@@ -114,7 +114,7 @@ SMLTOWN.Load = {
         //load games
         $(".smltown_game").remove();
         SMLTOWN.Games.update();
-        if ("localhost" != location.hostname) {
+        if ("localhost" != location.hostname && SMLTOWN.config.local_servers) {
             SMLTOWN.Local.pingGames();
         }
     }

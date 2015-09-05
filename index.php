@@ -64,12 +64,10 @@ if (!file_exists($inc) || !is_readable($inc)) {
     
     $location = getenv(database_location);
     $database_location = false == $location ? "localhost" : $location;
-    echo $database_location;
     fwrite($myfile, '$database_location = "' . $database_location . '";' . PHP_EOL);
     
     $port = getenv(database_port);
     $database_port = false == $port ? "null" : $port;
-    echo $database_port;
     fwrite($myfile, '$database_port = "' . $database_port . '";' . PHP_EOL);
     
     $name = getenv(database_name);
@@ -98,6 +96,10 @@ if (!file_exists($inc) || !is_readable($inc)) {
     $websocket_autoload = false == $autoload ? "true" : $autoload;
     fwrite($myfile, '$websocket_autoload = ' . $websocket_autoload . ';' . PHP_EOL);
     
+    $local = getenv(local_server);
+    $local_servers = false == $local ? "true" : $local;
+    fwrite($myfile, '$local_servers = ' . $local_servers . ';' . PHP_EOL);
+    
     $dbug = getenv(debug);
     $debug = false == $dbug ? "false" : $dbug;
     fwrite($myfile, '$debug = ' . $debug . ';' . PHP_EOL);
@@ -120,6 +122,9 @@ if (isset($websocket_server) && $websocket_server == true) {
 }
 if (isset($websocket_autoload) && $websocket_autoload == true) {
     $script .= "SMLTOWN.config.websocket_autoload = true;";
+}
+if (isset($local_servers) && false != $local_servers) {
+    $script .= "SMLTOWN.config.local_servers = true;";
 }
 $script .= "</script>";
 
