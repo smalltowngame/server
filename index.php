@@ -56,7 +56,6 @@ if(getenv(config_update)){
 
 //passing variables with heroku: heroku config:set MY_VAR=somevalue
 $inc = 'config.php';
-echo "1";
 if (!file_exists($inc) || !is_readable($inc)) {
     echo "2";
     $myfile = fopen($inc, "w") or die("Unable to open file!");
@@ -68,6 +67,7 @@ if (!file_exists($inc) || !is_readable($inc)) {
     fwrite($myfile, '$database_location = "' . $database_location . '";' . PHP_EOL);
     
     $port = getenv($database_port);
+    echo $port . " : ";
     $database_port = false == $port ? "null" : $port;
     echo $database_port;
     fwrite($myfile, '$database_location = ' . $database_port . ';' . PHP_EOL);
