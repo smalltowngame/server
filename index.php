@@ -67,10 +67,9 @@ if (!file_exists($inc) || !is_readable($inc)) {
     fwrite($myfile, '$database_location = "' . $database_location . '";' . PHP_EOL);
     
     $port = getenv(database_port);
-    echo "" . $port;
     $database_port = false == $port ? "null" : $port;
     echo $database_port;
-    fwrite($myfile, '$database_location = ' . $database_port . ';' . PHP_EOL);
+    fwrite($myfile, '$database_port = ' . $database_port . ';' . PHP_EOL);
     
     $name = getenv(database_name);
     $database_name = false == $name ? "smalltown" : $name;
