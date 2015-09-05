@@ -53,12 +53,17 @@ if(getenv(config_update)){
     putenv("config_update=false");
 }
 
+//passing variables with heroku: heroku config:set MY_VAR=somevalue
 $inc = 'config.php';
 if (!file_exists($inc) || !is_readable($inc)) {
     $myfile = fopen($inc, "w") or die("Unable to open file!");
     fwrite($myfile, '<?php' . PHP_EOL);
     fwrite($myfile, PHP_EOL);
     
+    $location = isset($database_location) ? $database_location : "localhost";
+    fwrite($myfile, '$database_location = "' . $location . '";' . PHP_EOL);
+    $port = isset($database_port) ? $database_port : "null";
+    fwrite($myfile, '$database_location = ' . $port . ';' . PHP_EOL);
     $name = isset($database_name) ? $database_name : "smalltown";
     fwrite($myfile, '$database_name = "' . $name . '";' . PHP_EOL);
     $user = isset($database_user) ? $database_user : "root";
