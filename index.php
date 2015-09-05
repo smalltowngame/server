@@ -47,19 +47,36 @@ if (!file_exists("lang/$lang.js")) {
     $lang = "en";
 }
 
+//update config file externally
+if(getenv(config_update)){
+    unlink('config.php');
+    putenv("config_update=false");
+}
+
 $inc = 'config.php';
 if (!file_exists($inc) || !is_readable($inc)) {
     $myfile = fopen($inc, "w") or die("Unable to open file!");
     fwrite($myfile, '<?php' . PHP_EOL);
     fwrite($myfile, PHP_EOL);
-    fwrite($myfile, '$database_name = "smalltown";' . PHP_EOL);
-    fwrite($myfile, '$database_user = "root";' . PHP_EOL);
-    fwrite($myfile, '$database_pass = "";' . PHP_EOL);
+    
+    $name = isset($database_name) ? $database_name : "smalltown";
+    fwrite($myfile, '$database_name = "' . $name . '";' . PHP_EOL);
+    $user = isset($database_user) ? $database_user : "root";
+    fwrite($myfile, '$database_user = "' . $user . '";' . PHP_EOL);
+    $pass = isset($database_pass) ? $database_pass : "";
+    fwrite($myfile, '$database_pass = "' . $pass . '";' . PHP_EOL);
+    
     fwrite($myfile, PHP_EOL);
-    fwrite($myfile, '$ajax_server = true;' . PHP_EOL);
-    fwrite($myfile, '$websocket_server = true;' . PHP_EOL);
-    fwrite($myfile, '$websocket_autoload = true;' . PHP_EOL);
-    fwrite($myfile, '$debug = false;' . PHP_EOL);
+    
+    $ajax = isset($ajax_server) ? $ajax_server : "true";
+    fwrite($myfile, '$ajax_server = ' . $ajax . ';' . PHP_EOL);
+    $websocket = isset($websocket_server) ? $websocket_server : "true";
+    fwrite($myfile, '$websocket_server = ' . $websocket . ';' . PHP_EOL);
+    $autoload = isset($websocket_autoload) ? $websocket_autoload : "true";
+    fwrite($myfile, '$websocket_autoload = ' . $websocket_autoload . ';' . PHP_EOL);
+    $dbug = isset($debug) ? $debug : "false";
+    fwrite($myfile, '$debug = ' . $dbug . ';' . PHP_EOL);
+    
     fwrite($myfile, PHP_EOL);
     fwrite($myfile, '$admin_contact = false;' . PHP_EOL);
     fclose($myfile);
