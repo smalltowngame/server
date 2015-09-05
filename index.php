@@ -48,7 +48,7 @@ if (!file_exists("lang/$lang.js")) {
 }
 
 //update config file externally
-if(getenv(config_update)){
+if(getenv("config_update")){
     unlink('config.php');
     putenv("config_update=false");
     echo "config.php update";
@@ -62,50 +62,50 @@ if (!file_exists($inc) || !is_readable($inc)) {
     fwrite($myfile, '<?php' . PHP_EOL);
     fwrite($myfile, PHP_EOL);
     
-    $location = getenv(database_location);
+    $location = getenv("database_location");
     $database_location = false == $location ? "localhost" : $location;
     fwrite($myfile, '$database_location = "' . $database_location . '";' . PHP_EOL);
     
-    $port = getenv(database_port);
+    $port = getenv("database_port");
     $database_port = false == $port ? "null" : $port;
     fwrite($myfile, '$database_port = "' . $database_port . '";' . PHP_EOL);
     
-    $name = getenv(database_name);
+    $name = getenv("database_name");
     $database_name = false == $name ? "smalltown" : $name;
     fwrite($myfile, '$database_name = "' . $database_name . '";' . PHP_EOL);
     
-    $user = getenv(database_user);
+    $user = getenv("database_user");
     $database_user = false == $user ? "root" : $user;
     fwrite($myfile, '$database_user = "' . $database_user . '";' . PHP_EOL);
     
-    $pass = getenv(database_pass);
+    $pass = getenv("database_pass");
     $database_pass = false == $pass ? "" : $pass;
     fwrite($myfile, '$database_pass = "' . $database_pass . '";' . PHP_EOL);
     
     fwrite($myfile, PHP_EOL);
     
-    $ajax = getenv(ajax_server);
-    $ajax_server = false == $ajax ? "true" : $ajax;
+    $ajax = getenv("ajax_server");
+    $ajax_server = false == $ajax ? 1 : $ajax;
     fwrite($myfile, '$ajax_server = ' . $ajax_server . ';' . PHP_EOL);
     
-    $websocket = getenv(websocket_server);
-    $websocket_server = false == $websocket ? "true" : $websocket;
+    $websocket = getenv("websocket_server");
+    $websocket_server = false == $websocket ? 1 : $websocket;
     fwrite($myfile, '$websocket_server = ' . $websocket_server . ';' . PHP_EOL);
     
-    $autoload = getenv(websocket_autoload);
-    $websocket_autoload = false == $autoload ? "true" : $autoload;
+    $autoload = getenv("websocket_autoload");
+    $websocket_autoload = false == $autoload ? 1 : $autoload;
     fwrite($myfile, '$websocket_autoload = ' . $websocket_autoload . ';' . PHP_EOL);
     
-    $local = getenv(local_server);
-    $local_servers = false == $local ? "true" : $local;
+    $local = getenv("local_server");
+    $local_servers = false == $local ? 1 : $local;
     fwrite($myfile, '$local_servers = ' . $local_servers . ';' . PHP_EOL);
     
-    $dbug = getenv(debug);
-    $debug = false == $dbug ? "false" : $dbug;
+    $dbug = getenv("debug");
+    $debug = false == $dbug ? 0 : $dbug;
     fwrite($myfile, '$debug = ' . $debug . ';' . PHP_EOL);
     
     fwrite($myfile, PHP_EOL);
-    fwrite($myfile, '$admin_contact = false;' . PHP_EOL);
+    fwrite($myfile, '$admin_contact = 0;' . PHP_EOL);
     fclose($myfile);
 }
 include_once "config.php";
@@ -114,17 +114,17 @@ $script = "<script>;";
 //if (isset($_SESSION['smltown_gameId'])) {
 //    $script .= "SMLTOWN.Game.info.id = '" . $_SESSION['smltown_gameId'] . "';";
 //}
-if (isset($debug) && $debug == true) {
-    $script .= "SMLTOWN.config.debug = true;";
+if (isset($debug)) {
+    $script .= "SMLTOWN.config.debug = $debug;";
 }
-if (isset($websocket_server) && $websocket_server == true) {
-    $script .= "SMLTOWN.config.websocket_server = true;";
+if (isset($websocket_server)) {
+    $script .= "SMLTOWN.config.websocket_server = $websocket_server;";
 }
-if (isset($websocket_autoload) && $websocket_autoload == true) {
-    $script .= "SMLTOWN.config.websocket_autoload = true;";
+if (isset($websocket_autoload)) {
+    $script .= "SMLTOWN.config.websocket_autoload = $websocket_autoload;";
 }
-if (isset($local_servers) && $local_servers == true) {
-    $script .= "SMLTOWN.config.local_servers = true;";
+if (isset($local_servers)) {
+    $script .= "SMLTOWN.config.local_servers = $local_servers;";
 }
 $script .= "</script>";
 
