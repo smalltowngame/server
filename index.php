@@ -51,6 +51,7 @@ if (!file_exists("lang/$lang.js")) {
 if(getenv(config_update)){
     unlink('config.php');
     putenv("config_update=false");
+    echo "config.php update";
 }
 
 //passing variables with heroku: heroku config:set MY_VAR=somevalue
