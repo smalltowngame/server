@@ -67,6 +67,7 @@ if (!file_exists($inc) || !is_readable($inc)) {
     
     $port = getenv($database_port);
     $database_port = !$port ? "null" : $port;
+    echo $port;
     fwrite($myfile, '$database_location = ' . $database_port . ';' . PHP_EOL);
     
     $name = getenv($database_name);
