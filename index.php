@@ -123,7 +123,7 @@ if (isset($websocket_server) && $websocket_server == true) {
 if (isset($websocket_autoload) && $websocket_autoload == true) {
     $script .= "SMLTOWN.config.websocket_autoload = true;";
 }
-if (isset($local_servers) && false != $local_servers) {
+if (isset($local_servers) && $local_servers == true) {
     $script .= "SMLTOWN.config.local_servers = true;";
 }
 $script .= "</script>";
