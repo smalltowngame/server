@@ -48,10 +48,10 @@ if (!file_exists("lang/$lang.js")) {
 }
 
 //update config file externally
-if (getenv("config_update")) {
+if (true === getenv("config_update")) {
     unlink('config.php');
     putenv("config_update=false");
-    echo "config.php update";
+    echo "console.log('WARN: config.php update by global server variable')";
 }
 
 //passing variables with heroku: heroku config:set MY_VAR=somevalue
