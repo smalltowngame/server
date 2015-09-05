@@ -60,27 +60,43 @@ if (!file_exists($inc) || !is_readable($inc)) {
     fwrite($myfile, '<?php' . PHP_EOL);
     fwrite($myfile, PHP_EOL);
     
-    $location = isset($database_location) ? $database_location : "localhost";
-    fwrite($myfile, '$database_location = "' . $location . '";' . PHP_EOL);
-    $port = isset($database_port) ? $database_port : "null";
-    fwrite($myfile, '$database_location = ' . $port . ';' . PHP_EOL);
-    $name = isset($database_name) ? $database_name : "smalltown";
-    fwrite($myfile, '$database_name = "' . $name . '";' . PHP_EOL);
-    $user = isset($database_user) ? $database_user : "root";
-    fwrite($myfile, '$database_user = "' . $user . '";' . PHP_EOL);
-    $pass = isset($database_pass) ? $database_pass : "";
-    fwrite($myfile, '$database_pass = "' . $pass . '";' . PHP_EOL);
+    $location = getenv($database_location);
+    $database_location = !$location ? "localhost" : $database_location;
+    fwrite($myfile, '$database_location = "' . $database_location . '";' . PHP_EOL);
+    
+    $port = getenv($database_port);
+    $database_port = !$port ? "null" : $port;
+    fwrite($myfile, '$database_location = ' . $database_port . ';' . PHP_EOL);
+    
+    $name = getenv($database_name);
+    $database_name = !$name ? "smalltown" : $name;
+    fwrite($myfile, '$database_name = "' . $database_name . '";' . PHP_EOL);
+    
+    $user = getenv($database_user);
+    $database_user = !$user ? "root" : $user;
+    fwrite($myfile, '$database_user = "' . $database_user . '";' . PHP_EOL);
+    
+    $pass = getenv($database_pass);
+    $database_pass = !$pass ? "" : $pass;
+    fwrite($myfile, '$database_pass = "' . $database_pass . '";' . PHP_EOL);
     
     fwrite($myfile, PHP_EOL);
     
-    $ajax = isset($ajax_server) ? $ajax_server : "true";
-    fwrite($myfile, '$ajax_server = ' . $ajax . ';' . PHP_EOL);
-    $websocket = isset($websocket_server) ? $websocket_server : "true";
-    fwrite($myfile, '$websocket_server = ' . $websocket . ';' . PHP_EOL);
-    $autoload = isset($websocket_autoload) ? $websocket_autoload : "true";
+    $ajax = getenv($ajax_server);
+    $ajax_server = !$ajax ? "true" : $ajax;
+    fwrite($myfile, '$ajax_server = ' . $ajax_server . ';' . PHP_EOL);
+    
+    $websocket = getenv($websocket_server);
+    $websocket_server = !$websocket ? "true" : $websocket;
+    fwrite($myfile, '$websocket_server = ' . $websocket_server . ';' . PHP_EOL);
+    
+    $autoload = getenv($websocket_autoload);
+    $websocket_autoload = !$autoload ? "true" : $autoload;
     fwrite($myfile, '$websocket_autoload = ' . $websocket_autoload . ';' . PHP_EOL);
-    $dbug = isset($debug) ? $debug : "false";
-    fwrite($myfile, '$debug = ' . $dbug . ';' . PHP_EOL);
+    
+    $dbug = getenv($debug);
+    $debug = !$dbug ? "false" : $debug;
+    fwrite($myfile, '$debug = ' . $debug . ';' . PHP_EOL);
     
     fwrite($myfile, PHP_EOL);
     fwrite($myfile, '$admin_contact = false;' . PHP_EOL);
