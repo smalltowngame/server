@@ -93,11 +93,12 @@ html, body{
     width: 100%;
 }
 
-.smltown_error{
+/*.smltown_error{
     position:absolute;
     z-index: 99;
     color:red;
-}
+    color: grey;
+}*/
 
 .smltown_unselect{
     pointer-events: none;
@@ -163,8 +164,10 @@ html, body{
     transform: translate3d(0, 10000px, 0);
 }
 
+
 .smltown_errorLog{
-    color: red;
+    /*color: red;*/
+    color: grey;
     text-align: right;
     margin: 0 10px;
     min-height: 1px; //display

@@ -60,6 +60,8 @@ if (!file_exists($inc) || !is_readable($inc)) {
     fwrite($myfile, '$websocket_server = true;' . PHP_EOL);
     fwrite($myfile, '$websocket_autoload = true;' . PHP_EOL);
     fwrite($myfile, '$debug = false;' . PHP_EOL);
+    fwrite($myfile, PHP_EOL);
+    fwrite($myfile, '$admin_contact = false;' . PHP_EOL);
     fclose($myfile);
 }
 include_once "config.php";
@@ -113,8 +115,7 @@ echo $script;
     </body>
 
     <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/jquery-1.11.0.min.js"></script>
-
-    <script type="text/javascript" src="<?php echo $smalltownURL ?>js/Util.js"></script>
+    <script type="text/javascript" src="<?php echo $smalltownURL ?>js/Util.js"></script>    
     <script type="text/javascript" src="<?php echo $smalltownURL ?>js/Games.js"></script>
 
     <script>
@@ -125,15 +126,13 @@ echo $script;
     SMLTOWN.user.userId = SMLTOWN.Util.getCookie("smltown_userId");
     SMLTOWN.user.name = SMLTOWN.Util.getLocalStorage("smltown_userName");
 
-    $(document).one("ready", function() {
+    $(document).one("ready", function () {
         $("#smltown_footer").append("<i id='smltown_connectionCheck'>This server <span class='allowWebsocket'></span> allows websocket connection.</i>");
         SMLTOWN.Server.handleConnection();
     });
 
     </script>
-    <script type="text/javascript" src="<?php echo $smalltownURL ?>lang/<?php echo $lang ?>.js"></script>
-    <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/jquery.mobile.events.min.js"></script>
-    <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/modernizr.custom.36644.js"></script>
+    <script type="text/javascript" src="<?php echo $smalltownURL ?>lang/<?php echo $lang ?>.js"></script>      
     <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/json2.js"></script>
     <script type="text/javascript" src="<?php echo $smalltownURL ?>js/Server.js"></script>
     <script type="text/javascript" src="<?php echo $smalltownURL ?>js/requests.js"></script> <!--before connection-->
@@ -144,8 +143,11 @@ echo $script;
     <script type="text/javascript" src="<?php echo $smalltownURL ?>js/Transform.js"></script>
     <script type="text/javascript" src="<?php echo $smalltownURL ?>js/Add.js"></script>
     <script type="text/javascript" src="<?php echo $smalltownURL ?>js/Load.js"></script>
-    <script type="text/javascript" src="<?php echo $smalltownURL ?>js/Local.js"></script>
-    <script type="text/javascript" src="<?php echo $smalltownURL ?>js/Events.js"></script>
+    <script type="text/javascript" src="<?php echo $smalltownURL ?>js/Local.js"></script>    
     <script type="text/javascript" src="<?php echo $smalltownURL ?>js/Time.js"></script>
+
+    <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/jquery.mobile.events.min.js"></script>
+    <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/modernizr.custom.36644.js"></script><!--after mobile.events-->
+    <script type="text/javascript" src="<?php echo $smalltownURL ?>js/Events.js"></script><!--after modernizr-->
 
 </html>

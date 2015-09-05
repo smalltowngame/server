@@ -202,7 +202,6 @@ if (count($games)) {
             <div id="smltown_consoleLog">
                 <p class="smltown_errorLog"></p>
                 <div></div>
-
             </div>
         </div>
         <form id="smltown_chatForm">
@@ -222,6 +221,9 @@ if (count($games)) {
 
 <script>
     console.log("game file load");
+    
+    //add translated selector if chat empty
+     $("#smltown_consoleLog > div").attr("empty-content", SMLTOWN.Message.translate("emptyChat"));
     
     //RESTART
     SMLTOWN.user = {};

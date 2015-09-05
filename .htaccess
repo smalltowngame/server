@@ -5,5 +5,5 @@ Allow from all
 #RewriteCond %{REQUEST_FILENAME} !-f
 #RewriteRule ^([^\.]+)$ $1.php [NC,L]
 
-php_value session.cookie_lifetime 864000
-php_value session.gc_maxlifetime 864000
+#php_value session.cookie_lifetime 864000
+#php_value session.gc_maxlifetime 864000

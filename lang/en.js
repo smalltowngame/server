@@ -148,4 +148,18 @@ var lang = {
     somethingHappend: "someone is plotting something..."
     ,
     noMoreGames: "no more games"
+    ,
+    emptyChat: "Be the first to write something in the chat!"
+    ,
+    createGame: "create game"
+    ,
+    gameName: "game name"
+    ,
+    hideGameSwipe: "Swipe to hide this game.. "
+    ,
+    hideGameSwipeInfo: "This game will appear again on refresh"
+    ,
+    removeGameSwipe: "Swipe to remove game permanently.. "
+    ,
+    removeGameSwipeInfo: "This game will be removed permanently"
 };

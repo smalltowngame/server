@@ -8,19 +8,27 @@ if (isset($_COOKIE['smltown_userId'])) {
 <div id="smltown_gameList">
 
     <div id="smltown_content">
-        <div id="smltown_title"></div>
+        <div id="smltown_title">
+            <table id='smltown_createGame' style="display: none">
+                <td id='smltown_nameGame'>
+                    <input type='text'>
+                </td>
+                <td id='smltown_newGame' class='smltown_button'>
+                    <div>createGame</div>
+                </td>
+            </table>
+        </div>
 
         <div id="smltown_gamesWrapper">
             <div id="smltown_games">
                 <div id="smltown_footer">
                     <div id="smltown_loadingDiv"></div>
                     <br/>
+                    <div class="smltown_log" style="position:absolute; z-index:99"></div>
+                    <div class="smltown_errorLog"></div>     
                 </div>
             </div>
-        </div>
-
-        <div class="smltown_log" style="position:absolute; z-index:99"></div>
-        <div class="smltown_errorLog"></div>            
+        </div>       
     </div>
 
     <div id="smltown_reload" class="smltown_button" onclick="SMLTOWN.Load.reloadList()">reload</div>
@@ -28,8 +36,9 @@ if (isset($_COOKIE['smltown_userId'])) {
 </div>
 
 <script>
-    //SMLTOWN.Util.translateHTML();
-    $("#smltown_title").html("<p>" + SMLTOWN.Message.translate("GameList") + "</p>");
+
+    $("#smltown_nameGame input").attr("placeholder", "🔍 " + SMLTOWN.Message.translate("gameName"));
+    SMLTOWN.Util.translateHTML();
 
     SMLTOWN.Game.info = {};
     SMLTOWN.Load.gameList();

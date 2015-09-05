@@ -55,7 +55,7 @@ SMLTOWN.Util = {
     }
     ,
     translateHTML: function () {
-        var textNodes = $("#smltown_game *:not(script)").contents().filter(function () {
+        var textNodes = $("#smltown_html > div *:not(script)").contents().filter(function () {
             return(this.nodeType === 3 && $.trim(this.textContent).length > 1);
         });
         for (var i = 0; i < textNodes.length; i++) {

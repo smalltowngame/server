@@ -259,7 +259,7 @@ SMLTOWN.Message = {
         if (typeof SMLTOWN.players[playId] != "undefined") { //if player no longer exists
             name = SMLTOWN.players[playId].name + ": ";
         }
-        $("#smltown_consoleText > div > div").append("<div><span class='id" + playId + "'>" + name + "</span>" + text + "</div>");
+        $("#smltown_consoleLog > div").append("<div><span class='id" + playId + "'>" + name + "</span>" + text + "</div>");
     }
     ,
     clearChat: function () {

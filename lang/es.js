@@ -155,4 +155,18 @@ var lang = {
     somethingHappend: "alguien está tramando algo..."
     ,
     noMoreGames: "no hay más partidas"
+    ,
+    emptyChat: "Sé el primero en escribir algo en el chat!"
+    ,
+    createGame: "crear partida"
+    ,
+    gameName: "nombre de la partida"
+    ,
+    hideGameSwipe: "Rechaza la partida. "
+    ,
+    hideGameSwipeInfo: "Esta partida volverá a aparecer cuando refresques la lista"
+    ,
+    removeGameSwipe: "Elimina permanentemente la partida. "
+    ,
+    removeGameSwipeInfo: "Eres administrador de esta partida y se eliminará para siempre"
 };

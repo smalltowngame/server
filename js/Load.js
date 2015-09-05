@@ -44,10 +44,7 @@ SMLTOWN.Load = {
         var $this = this;
         if ("localhost" != document.location.hostname) {
             //let crate games
-            $("#smltown_title").html("<table class='smltown_createGame'>"
-                    + "<td id='smltown_nameGame'><input type='text' placeholder='&#128269; game name'></td>"
-                    + "<td id='smltown_newGame' class='smltown_button'><div>create game</div></td>"
-                    + "</table>");
+            $("#smltown_createGame").css("display", "inherit");
 
             //LIST EVENTS
             //search utility
@@ -85,6 +82,8 @@ SMLTOWN.Load = {
             $("#smltown_newGame").click(function () {
                 SMLTOWN.Games.create();
             });
+        }else{
+            $("#smltown_title").html("<p>" + SMLTOWN.Message.translate("GameList") + "</p>");
         }
 
         //show kind of connection

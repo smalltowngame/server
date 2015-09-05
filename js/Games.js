@@ -28,7 +28,8 @@ SMLTOWN.Games = {
             $("#smltown_loadingDiv").removeClass("smltown_loader");
             var length = games.length;
             if (!length) {
-                SMLTOWN.Message.flash("noMoreGames");
+                $("#smltown_loadingDiv").append(SMLTOWN.Message.translate("noMoreGames"));
+                //SMLTOWN.Message.flash("noMoreGames");
                 $this.over = true;
                 return;
             }
@@ -42,7 +43,7 @@ SMLTOWN.Games = {
         });
     }
     ,
-    list: function (games) {        
+    list: function (games) {
         console.log("games = ");
         console.log(games)
         this.array = games;
@@ -51,9 +52,9 @@ SMLTOWN.Games = {
         this.offset = length;
         for (var i = 0; i < length; i++) {
             this.addRow(games[i]);
-            if (document.location.hostname == "localhost") {
-                break;
-            }
+//            if (document.location.hostname == "localhost") {
+//                break; //dont let multiple local device games
+//            }
         }
         $("#smltown_games").append($("#smltown_footer"));
         SMLTOWN.Events.touchScroll($("#smltown_gamesWrapper"), "top");
@@ -62,24 +63,28 @@ SMLTOWN.Games = {
     addRow: function (game) {
         var div = $("<div id='" + game.id + "' class='smltown_game'>");
 
-        if (document.location.hostname == "localhost") {
+        var content = $("<div class='smltown_content'>");
+
+        if (document.location.hostname == "localhost" && !game.name) {
             div.addClass("smltown_local");
-            game.name = "Local Game"
-        }
-        var name = $("<span class='smltown_name'>" + game.name + "</span>");
-        div.append(name);
-        if (game.password) {
-            name.append("<symbol class='smltown_password'>x</symbol>");
+            game.name = "Local Game";
         }
 
+        var title = $("<div class='smltown_name'>");
+        title.text(game.name);
+        if (game.password) {
+            title.append("<symbol class='smltown_password'>x</symbol>");
+        }
 
         var icons = $("<div class='smltown_icons'>");
         SMLTOWN.Add.icons(game, icons);
-        div.append(icons);
+        title.append(icons);
 
-        div.append("<span class='smltown_playersCount'><small>players: </small> " + game.players + "</span>");
-        div.append("<span class='smltown_admin'><small>admin: </small> " + game.admin + "</span>");
-        
+        content.append(title);
+
+        content.append("<span class='smltown_playersCount'><small>players: </small> " + game.players + "</span>");
+        content.append("<span class='smltown_admin'><small>admin: </small> " + game.admin + "</span>");
+
         var gameInfo = $("<span class='smltown_gameInfo'>");
         if (game.message) {
             var message = SMLTOWN.Message.translate(game.message);
@@ -89,14 +94,41 @@ SMLTOWN.Games = {
             var playingHere = SMLTOWN.Message.translate("playingHere");
             gameInfo.html("<small>" + playingHere + "<small>");
             div.addClass("smltown_playing");
-        }else if("0" != game.status){
+        } else if ("0" != game.status) {
             gameInfo.html("<small>game started<small>");
             div.addClass("smltown_playingStarted");
         }
-        div.append(gameInfo);
+        content.append(gameInfo);
+
+        div.append(content);
+
+        var back = $("<div class='smltown_backGame'>");
+        var bold = $("<span style='font-weight: bold;'>");
+//        var light = $("<small>");
+        //quit button for own admin games
+        var own = parseInt(game.own);
+        if (own) {
+            back.css("color", "red");
+            bold.smltown_text("removeGameSwipe");
+//            light.smltown_text("removeGameSwipeInfo");
+        } else {
+            bold.smltown_text("hideGameSwipe");
+//            light.smltown_text("hideGameSwipeInfo");
+        }
+        back.append(bold);
+//                .append(light);
+        div.append(back);
 
         $("#smltown_games").append(div);
-        this.setEvents(game.id);
+        this.setGameEvents(div, own);
+    }
+    ,
+    removeGame: function (div) {
+        var id = div.attr("id");
+        SMLTOWN.Server.ajax({
+            action: "removeGame",
+            id: id
+        });
     }
     ,
     addLocalGamesRow: function (href, ip, name) {
@@ -114,20 +146,20 @@ SMLTOWN.Games = {
         });
     }
     ,
-    create: function () {        
+    create: function () {
         SMLTOWN.Local.stopRequests();
         var name = $("#smltown_nameGame input").val();
         if (name.length < 3) {
             SMLTOWN.Message.flash("name must contain 3 letters");
             return;
         }
-        for(var i = 0; i < this.array; i++){
-            if(name.toLowerCase() == this.array[i].name.toLowerCase()){
+        for (var i = 0; i < this.array; i++) {
+            if (name.toLowerCase() == this.array[i].name.toLowerCase()) {
                 SMLTOWN.Message.flash("game name exists");
                 return;
             }
         }
-        
+
         //start loading
         SMLTOWN.Server.loading();
         SMLTOWN.Server.ajax({
@@ -144,20 +176,73 @@ SMLTOWN.Games = {
         });
     }
     ,
-    setEvents: function (id) {
+    setGameEvents: function (div, own) {
         var $this = this;
-        $("#" + id).click(function () {
-            var id = $(this).attr("id");
-            $this.access(id);
+        var content = div.find(".smltown_content");
+        content.on(touchend, this.clickGameEvent);
+
+        content.on(touchstart, function (e) {
+            var touches = e.originalEvent.touches;
+            if(!touches){
+                return;
+            }
+            var xOrigin = touches[0].pageX;
+            var dif = 0;
+            content.on(touchmove, function (e) {
+                var x = e.originalEvent.touches[0].pageX;
+                dif = x - xOrigin;
+                if (dif < 0) {
+                    dif = 0;
+                }
+
+                content.css("transform", "translateX(" + dif + "px)");
+                var opacity = 1 - dif / $(this).width();
+                content.css("opacity", opacity);
+
+                if (dif > 50) {
+                    content.unbind("touchend");
+                }
+            });
+
+            $(document).on(touchend, function (e) {
+                $(document).off(touchend);
+                content.off(touchmove);
+
+                if (dif > content.width() / 2) {
+                    content.css("-webkit-transform", "translateX(" + "" + "120%)");
+                    content.css("-moz-transform", "translateX(" + "" + "120%)");
+                    content.css("transform", "translateX(" + "" + "120%)");
+                    content.addClass("smltown_removeGame");
+                    setTimeout(function () {
+                        div.remove();
+                    }, 500);
+
+                    if (own) {
+                        $this.removeGame(div);
+                    }
+
+                } else {
+                    content.css("-webkit-transform", "translateX(0px)");
+                    content.css("-moz-transform", "translateX(0px)");
+                    content.css("transform", "translateX(0px)");
+                    content.css("opacity", 1);
+                    content.bind("mouseup", $this.clickGameEvent);
+                }
+            });
         });
     }
     ,
+    clickGameEvent: function () {
+        var id = $(this).attr("id");
+        SMLTOWN.Games.access(id); //full path for bind on click 
+    }
+    ,
     access: function (id) {
-        if(id == SMLTOWN.Game.info.id){
+        if (id == SMLTOWN.Game.info.id) {
             return;
         }
         SMLTOWN.Load.start();
-        SMLTOWN.Local.stopRequests();         
+        SMLTOWN.Local.stopRequests();
         SMLTOWN.Game.info.id = id;
         SMLTOWN.Load.showPage("game?" + id);
     }

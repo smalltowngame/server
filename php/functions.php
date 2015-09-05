@@ -122,7 +122,8 @@ function getGamesInfo($obj) { //all game selector page
     if (isset($userId)) { //if is playing game
         $sql .= ", (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '$userId') AS playing";
         $sql .= ", (SELECT message FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '$userId') AS message";
-    }else{
+        $sql .= ", (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '$userId' AND admin = 1) AS own";
+    } else {
         $sql .= ", '0' AS playing";
         $sql .= ", '' AS message";
     }
@@ -180,7 +181,6 @@ function createGame($obj = null, $id = null) {
 ////                . "(SELECT admin FROM smltown_plays WHERE smltown_plays.gameId = smltown_games.id LIMIT 0,1)) "
 ////                . "AND (smltown_games.status <> 1 AND smltown_games.status <> 2 AND smltown_games.name <> :name)", $value);
 //    }
-
     //check
     if (!isset($id)) {
         $sth = sql('INSERT IGNORE INTO smltown_games (name, cards) VALUES (:name, :cards)', $values);
@@ -196,4 +196,14 @@ function createGame($obj = null, $id = null) {
     //return
     echo $id; //echo return!
     return $id;
+}
+
+function removeGame($obj) {
+    $userId = $obj->userId;
+    $gameId = $obj->id;
+    $sth = sql("DELETE FROM smltown_games WHERE id = $gameId AND "
+            . "(SELECT count(*) FROM smltown_plays WHERE admin = 1 AND userId = '$userId') > 0");
+    if ($sth->rowCount() > 0) { //nothing changes
+        sql("DELETE FROM smltown_plays WHERE gameId = $gameId");
+    }
 }

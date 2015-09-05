@@ -18,6 +18,10 @@
     margin: 15px;
 }
 
+#smltown_title:after:empty{
+    content: "Running Games: (not connected)";
+}
+
 #smltown_reload{
     position: absolute;
     bottom: 0;
@@ -35,7 +39,7 @@ a:hover{
 
 #smltown_gamesWrapper{
     position: absolute;
-    top: 58px;
+    top: 60px;
     bottom: 50px;
     left: 0;
     right: 0;
@@ -48,10 +52,10 @@ a:hover{
 #smltown_games > div{
     position: relative;
     margin: 7px;
-    font-weight: bold;
     /*text-shadow: 1px 1px 1px white;*/
 }
-.smltown_createGame{
+
+#smltown_createGame{
     margin: 7px;
     /*font-weight: bold;*/
 }
@@ -74,17 +78,7 @@ a:hover{
 }
 
 .smltown_game{
-    background-color: rgb(200,200,200);
-    cursor: pointer;
     position: relative;
-
-    height: 50px;
-    padding: 8px 15px;
-
-    font-size: 80%;
-    /*border: 5px solid rgb(125,200,0);*/
-    border: 5px solid rgb(150,150,150);
-    border-radius: 20px;
 
     /*box-shadow: inset 1px 1px 0 rgb(99,99,99), inset -1px -1px 0 rgb(99,99,99),inset -1px 1px 0 rgb(99,99,99), inset 1px -1px 0 rgb(99,99,99);*/
 
@@ -92,50 +86,88 @@ a:hover{
         -moz-box-shadow: 1px 1px 1px black, inset 0 0 5px white;
         box-shadow: 1px 1px 1px black, inset 0 0 5px white;*/
 }
-.smltown_game:hover{
+.smltown_game .smltown_content{
+    height: 66px;
+    background-color: rgb(200,200,200);
+    border: 5px solid rgb(150,150,150);
+    border-radius: 20px;
+    font-size: 80%;
+    font-weight: bold;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.smltown_game .smltown_content:hover{
     -webkit-box-shadow: inset 2px 2px 0 rgb(50,50,50);
     -moz-box-shadow: inset 2px 2px 0 rgb(50,50,50);
     box-shadow: inset 2px 2px 0 rgb(50,50,50);
 }
-.smltown_game:active{
+.smltown_game .smltown_content:active{
     -webkit-box-shadow: -1px -1px 0 white;
     -moz-box-shadow: -1px -1px 0 white;
     box-shadow: -1px -1px 0 white;
 }
+
 .smltown_game .smltown_name{
+    position: absolute;
+    left: 0;
+    top: 0;
     font-size: 16px;
+    display: inline-block;     
 }
 .smltown_game .smltown_playersCount{
     position: absolute;
-    bottom: 10px;
-    left: 15px;
+    bottom: 0;
+    left: 0;
 }
 .smltown_game .smltown_admin{
     position: absolute;
-    top: 10px;
-    right: 15px;
+    top: 0;
+    right: 0;
 }
-.smltown_game *{
+.smltown_game .smltown_content *{
     white-space: nowrap;
 }
+.smltown_game .smltown_content > *{
+    margin: 13px 20px;
+}
 
-.smltown_playing{
+.smltown_backGame{
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    line-height: 76px;
+    color: grey;
+    left: 25px;
+    white-space: nowrap;
+    right: 0;
+    overflow: hidden;
+}
+
+.smltown_removeGame{
+    -webkit-transition: 500ms;
+    -moz-transition: 500ms;
+    transition: 500ms;
+    opacity: 0;
+}
+
+.smltown_playing .smltown_content{
     background-color: rgb(190,230,99);
     border: 5px solid rgb(115,185,0);
 }
-.smltown_playingMessage{
+.smltown_playingMessage .smltown_content{
     background-color: rgb(200,255,70);
     border: 5px solid rgb(125,200,0);
 }
-.smltown_playingStarted{
+.smltown_playingStarted .smltown_content{
     background-color: rgb(198,170,170);
     border: 5px solid rgb(150,99,99);
 }
 
 .smltown_gameInfo{
     position: absolute;
-    bottom: 10px;
-    right: 15px;
+    bottom: 0;
+    right: 0;
     width: 60%;
     overflow: hidden;
     text-align: right;    
@@ -162,6 +194,8 @@ a:hover{
 
 #smltown_loadingDiv{
     margin-top: inherit !important;
+    text-align: center;
+    color: grey;
 }
 
 #smltown_footer{

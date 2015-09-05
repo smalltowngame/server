@@ -35,10 +35,6 @@ trait Request {
 
         setcookie('smltown_userId', $userId);
         return $userId;
-        //setCookieValue("smltown_userName", $userName);
-        //    if (null != $obj && isset($obj->gameId)) {
-        //        addUserInGame($obj);
-        //    }
     }
 
     //special userId but playId
@@ -54,7 +50,7 @@ trait Request {
             $userId = $this->userId;
 
             if ("null" == $userId || empty($userId) || !isset($userId)) {
-                //        echo "error user id: $userId";
+                //echo "error user id: $userId";
                 $userId = $this->addUser();
             }
         } else {

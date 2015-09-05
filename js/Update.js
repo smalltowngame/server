@@ -1,6 +1,6 @@
 
 SMLTOWN.Update = {
-    all: function(res) {
+    all: function (res) {
         var $this = this;
 
         if (res.user) {
@@ -142,7 +142,7 @@ SMLTOWN.Update = {
         clearTimeout(SMLTOWN.temp.wakeUpInterval);
     }
     ,
-    game: function(game) {
+    game: function (game) {
 
         if (game.name) {
             $("#smltown_gameName").text(game.name);
@@ -161,7 +161,7 @@ SMLTOWN.Update = {
 
         //open voting
         $("#smltown_openVoting input").attr('checked', false);
-        $("#smltown_sun").css("z-index", "initial"); // back to list
+        $("#smltown_sun").css("z-index", 1); // back to list
         if ("1" == game.openVoting) {
             $("#smltown_openVoting input").attr('checked', true);
             $("#smltown_sun").css("z-index", 0); // back to list
@@ -184,9 +184,9 @@ SMLTOWN.Update = {
         SMLTOWN.Add.icons(game, $("#smltown_header .smltown_content"));
     }
     ,
-    gameLoad: function() {
+    gameLoad: function () {
         this.gameStatus();
-        
+
         //after game status
         if (SMLTOWN.rules && SMLTOWN.user.status > -1) {
             eval(SMLTOWN.rules); //like a cupid lover
@@ -194,12 +194,12 @@ SMLTOWN.Update = {
         }
     }
     ,
-    gameStatus: function() {
+    gameStatus: function () {
         //OVERRIDE
         console.log("EMPTY gameStatus");
     }
     ,
-    players: function() {
+    players: function () {
         var players = SMLTOWN.players;
         var newPlayers = 0;
 
@@ -307,7 +307,12 @@ SMLTOWN.Update = {
                 div.find(".smltown_extra").text("");
             }
 
-            $('<style>.id' + player.id + ' {color: ' + colors[iColor++] + '}</style>').appendTo('head');
+            if (player.id != SMLTOWN.user.id) {
+                $('<style>.id' + player.id + ' {color: ' + this.userColors[iColor++] + '}</style>').appendTo('head');
+            }else{
+                $('<style>.id' + player.id + ' {font-weight: bold}</style>').appendTo('head');
+            }
+
             div.find(".smltown_name").addClass("id" + player.id);
             if (player.admin == 1) {
                 div.find(".smltown_name").append("<symbol>R</symbol>");
@@ -359,7 +364,7 @@ SMLTOWN.Update = {
         return newPlayers;
     }
     ,
-    userCard: function() {
+    userCard: function () {
         console.log("user-Card update");
         var $this = this;
         SMLTOWN.cardLoading = true;
@@ -400,7 +405,7 @@ SMLTOWN.Update = {
 
         //load card
         var gamePath = SMLTOWN.path + "games/" + SMLTOWN.Game.info.type;
-        $("#smltown_phpCard").load(gamePath + "/cards/" + SMLTOWN.user.card + ".php", function(response) { //card could be changed
+        $("#smltown_phpCard").load(gamePath + "/cards/" + SMLTOWN.user.card + ".php", function (response) { //card could be changed
             SMLTOWN.cardLoading = false;
             if (response.indexOf("Fatal error") > -1) { //catch error
                 smltown_error(response);
@@ -411,7 +416,7 @@ SMLTOWN.Update = {
         });
     }
     ,
-    updateCards: function() {
+    updateCards: function () {
         console.log("update Cards");
 
         $("#smltown_playingCards").html("");
@@ -482,7 +487,7 @@ SMLTOWN.Update = {
         }
     }
     ,
-    playingCards: function(cards) { //active game cards
+    playingCards: function (cards) { //active game cards
         $(".smltown_rulesCard").addClass("smltown_cardOut");
         for (var cardName in cards) {
             var cardNumber = cards[cardName];
@@ -494,7 +499,8 @@ SMLTOWN.Update = {
             }
         }
     }
-};
+    ,
+    //http://stackoverflow.com/questions/309149/generate-distinctly-different-rgb-colors-in-graphs
+    userColors: ['#00FF00', '#0000FF', '#FF0000', '#01FFFE', '#FFA6FE', '#FFDB66', '#006401', '#010067', '#95003A', '#007DB5', '#FF00F6', '#FFEEE8', '#774D00', '#90FB92', '#0076FF', '#D5FF00', '#FF937E', '#6A826C', '#FF029D', '#FE8900', '#7A4782', '#7E2DD2', '#85A900', '#FF0056', '#A42400', '#00AE7E', '#683D3B', '#BDC6FF', '#263400', '#BDD393', '#00B917', '#9E008E', '#001544', '#C28C9F', '#FF74A3', '#01D0FF', '#004754', '#E56FFE', '#788231', '#0E4CA1', '#91D0CB', '#BE9970', '#968AE8', '#BB8800', '#43002C', '#DEFF74', '#00FFC6', '#FFE502', '#620E00', '#008F9C', '#98FF52', '#7544B1', '#B500FF', '#00FF78', '#FF6E41', '#005F39', '#6B6882', '#5FAD4E', '#A75740', '#A5FFD2', '#FFB167', '#009BFF', '#E85EBE']
 
-http://stackoverflow.com/questions/309149/generate-distinctly-different-rgb-colors-in-graphs
-        var colors = ['#00FF00 ', '#0000FF ', '#FF0000 ', '#01FFFE ', '#FFA6FE ', '#FFDB66 ', '#006401 ', '#010067 ', '#95003A ', '#007DB5 ', '#FF00F6 ', '#FFEEE8 ', '#774D00 ', '#90FB92 ', '#0076FF ', '#D5FF00 ', '#FF937E ', '#6A826C ', '#FF029D ', '#FE8900 ', '#7A4782 ', '#7E2DD2 ', '#85A900 ', '#FF0056 ', '#A42400 ', '#00AE7E ', '#683D3B ', '#BDC6FF ', '#263400 ', '#BDD393 ', '#00B917 ', '#9E008E ', '#001544 ', '#C28C9F ', '#FF74A3 ', '#01D0FF ', '#004754 ', '#E56FFE ', '#788231 ', '#0E4CA1 ', '#91D0CB ', '#BE9970 ', '#968AE8 ', '#BB8800 ', '#43002C ', '#DEFF74 ', '#00FFC6 ', '#FFE502 ', '#620E00 ', '#008F9C ', '#98FF52 ', '#7544B1 ', '#B500FF ', '#00FF78 ', '#FF6E41 ', '#005F39 ', '#6B6882 ', '#5FAD4E ', '#A75740 ', '#A5FFD2 ', '#FFB167 ', '#009BFF ', '#E85EBE']
+};

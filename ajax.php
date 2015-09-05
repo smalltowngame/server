@@ -11,6 +11,10 @@ if (is_object($obj) && $obj->action) {
 
     include_once 'php/DB.php';
     include_once 'php/functions.php';
+    
+    if (isset($_COOKIE["smltown_userId"])) { //reload user
+        $obj->userId = $_COOKIE["smltown_userId"];
+    }
 
     $action = $obj->action;
     $action($obj);

@@ -50,7 +50,8 @@ class Tables {
     );
 
     function createDB() {
-        require 'config.php'; //not once?
+        //require -> inside this function
+        require 'config.php';
         $enlace = mysqli_connect("localhost", $database_user, $database_pass);
         if (!$enlace) {
             echo 'IS YOUR MYSQL WORKING? - WRONG DB CREDENTIALS?';

@@ -58,7 +58,7 @@ class echoServer extends WebSocketServer {
     protected function closed($user) {
         global $users;
         echo "close: \n";
-        $this->send($user, "websocket closed");
+        //$this->send($user, "websocket closed");
         if (isset($user->userId)) {
             unset($users[$user->userId]);
         }

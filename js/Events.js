@@ -1,8 +1,15 @@
 ///////////////////////////////////////////////////////////////////////////////
 //EVENTS PLUGINS
 
+var touchstart = ('ontouchstart' in document.documentElement ? "touchstart" : "touchstart mousedown");
+var touchmove = ('ontouchmove' in document.documentElement ? "touchmove" : "touchmove mousemove");
+var touchend = ('ontouchend' in document.documentElement ? "touchend" : "touchend mouseup");
+
+console.log(touchstart);
+
 //jQuery
 (function ($) { //unify touchstart and mousedown to prevent double events
+
     $.fn.touchstart = function (event) {
         if ('ontouchstart' in document.documentElement) {
             this.bind("touchstart", function (e) {
@@ -188,7 +195,7 @@ SMLTOWN.Events = {
             $('#smltown_chatInput').blur(); //?
             var text = $('#smltown_chatInput').val();
             if (text.length) {
-                SMLTOWN.Message.addChat(text);
+                SMLTOWN.Message.addChat(text, SMLTOWN.user.id);
                 SMLTOWN.Server.request.chat(text);
             }
             SMLTOWN.Transform.chatFocusOut();
@@ -329,17 +336,17 @@ SMLTOWN.Events = {
                         finalPosition = -maxScroll + 10;
                     }
                 }
-                
+
                 if ("smltown_list" == element && finalPosition > maxScroll) { //not at bottom
                     clearTimeout(SMLTOWN.Events.consoleTimeout);
                     $("#smltown_game").addClass("smltown_reduced");
                 }
-                
+
                 //prevent extra calculations
                 if (position == finalPosition) {
                     return;
                 }
-                
+
                 position = finalPosition;
                 $this.css("transform", "translateY(" + finalPosition + "px)");
 

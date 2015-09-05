@@ -110,7 +110,7 @@ SMLTOWN.Time = {
             relSep = Math.abs(this.dayTime / 2 - (this.end - now)) / this.dayTime * 2;
         }
 
-        var y = Math.pow(relSep, 2) * pathLength / 2; //pow cuadratic movement
+        var y = Math.pow(relSep, 2) * pathLength / 2 + 50; //pow cuadratic movement
 
         console.log("day position: " + dayLight);
         $("#smltown_sun div").css("transform", "translate(" + x + "px, " + y + "px)");
