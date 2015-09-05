@@ -32,11 +32,11 @@ SMLTOWN.Server = {
     ,
     websocketConnection: function (callback) {
         var $this = this;
-        console.log("websocket server config: " + SMLTOWN.config.websocket_server);
-        if (!SMLTOWN.config.websocket_server) {
-            callback(false);
-            return;
-        }
+//        console.log("websocket server config: " + SMLTOWN.config.websocket_server);
+//        if (!SMLTOWN.config.websocket_server) {
+//            callback(false);
+//            return;
+//        }
 //        callback(false);
 //        return;
         // WEBSOCKET
