@@ -57,19 +57,20 @@ if(getenv(config_update)){
 //passing variables with heroku: heroku config:set MY_VAR=somevalue
 $inc = 'config.php';
 if (!file_exists($inc) || !is_readable($inc)) {
-    echo "2";
+
     $myfile = fopen($inc, "w") or die("Unable to open file!");
     fwrite($myfile, '<?php' . PHP_EOL);
     fwrite($myfile, PHP_EOL);
     
     $location = getenv(database_location);
-    $database_location = false == $location ? "localhost" : $database_location;
+    $database_location = false == $location ? "localhost" : $location;
+    echo $database_location;
     fwrite($myfile, '$database_location = "' . $database_location . '";' . PHP_EOL);
     
     $port = getenv(database_port);
     $database_port = false == $port ? "null" : $port;
     echo $database_port;
-    fwrite($myfile, '$database_port = ' . $database_port . ';' . PHP_EOL);
+    fwrite($myfile, '$database_port = "' . $database_port . '";' . PHP_EOL);
     
     $name = getenv(database_name);
     $database_name = false == $name ? "smalltown" : $name;
@@ -98,7 +99,7 @@ if (!file_exists($inc) || !is_readable($inc)) {
     fwrite($myfile, '$websocket_autoload = ' . $websocket_autoload . ';' . PHP_EOL);
     
     $dbug = getenv(debug);
-    $debug = false == $dbug ? "false" : $debug;
+    $debug = false == $dbug ? "false" : $dbug;
     fwrite($myfile, '$debug = ' . $debug . ';' . PHP_EOL);
     
     fwrite($myfile, PHP_EOL);
