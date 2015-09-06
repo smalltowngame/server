@@ -239,7 +239,7 @@ if (count($games)) {
     //INIT VARIABLES
     SMLTOWN.user.sleeping = true;
     SMLTOWN.cardLoading = false;
-
+    
     SMLTOWN.Transform.gameResize();
     SMLTOWN.Events.game();
 

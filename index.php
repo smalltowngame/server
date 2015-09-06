@@ -148,6 +148,7 @@ echo $script;
         <link rel="stylesheet" type="text/css" href="<?php echo $smalltownURL ?>css/index.css">
         <link rel='stylesheet' href='<?php echo $smalltownURL ?>css/common.css'>
         <link rel='stylesheet' href='<?php echo $smalltownURL ?>css/game.css'>
+        <link rel='stylesheet' href='<?php echo $smalltownURL ?>css/static.css'>
         <!--<link rel='stylesheet' href='css/animations.css'>-->
         <link rel='stylesheet' href='<?php echo $smalltownURL ?>css/icons.css'>        
     </head>
@@ -199,6 +200,8 @@ echo $script;
     SMLTOWN.user.name = SMLTOWN.Util.getLocalStorage("smltown_userName");
 
     $(document).one("ready", function () {
+        SMLTOWN.Transform.windowResize();
+        
         $("#smltown_footer").append("<i id='smltown_connectionCheck'>This server <span class='allowWebsocket'></span> allows websocket connection.</i>");
         SMLTOWN.Server.handleConnection();
     });

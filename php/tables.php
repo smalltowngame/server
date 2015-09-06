@@ -10,7 +10,7 @@ class Tables {
             'password' => "varchar(255)",
             //game status
             'type' => "varchar(255) DEFAULT 'mafia-werewolf'",
-            'status' => "int(11) NOT NULL",
+            'status' => "int(11) NOT NULL DEFAULT 0",
             'cards' => "text",
             'night' => "varchar(255)",
             'timeStart' => "bigint(20)",

@@ -354,7 +354,7 @@
 .smltown_consoleExtended{
     z-index: 12;
     height: auto !important;
-    top: 30px !important;
+    top: 56px !important;
     -webkit-transition: -webkit-transform 250ms, height 250ms;
     -moz-transition: -moz-transform 250ms, height 250ms;
     -ms-transition: -ms-transform 250ms, height 250ms;
@@ -419,9 +419,9 @@
 
 #smltown_menu, #smltown_card{
     position: absolute;
-    width: 100%;
+/*    width: 100%;*/
     height: 100%;
-    z-index: 12;
+    z-index: 19;
     top:0;
 
     /*background-color transition makes animation choppy!*/
@@ -433,7 +433,7 @@
 }
 
 #smltown_card{
-    width: 100%;
+    /*width: 100%;*/
     /*left: 100%;*/
     right: -100%;
     color: white;
@@ -578,6 +578,8 @@
 }
 
 #smltown_menu{
+    width: 100%;
+    
     -webkit-transform: translateX(-100%);
     -moz-transform: translateX(-100%);
     -ms-transform: translateX(-100%);
@@ -641,7 +643,7 @@
     width: 100%;
     text-align: right;
     font-weight: normal;
-    margin-top: -4px;
+    margin-top: 4px;
 }
 #smltown_menu small, #smltown_menu input, #smltown_menu form *, .smltown_admin{
     color: rgba(0,0,0,0.3);
@@ -1025,7 +1027,8 @@
 #smltown_chatForm{
     display: none;
     margin:0;
-    position: fixed;
+    /*position: fixed;*/
+    position: absolute;
     bottom: 0;
     background-color: rgb(207,225,157);
 }
@@ -1249,57 +1252,6 @@ smltown_name{
     padding: 15px;
     margin: auto;
     z-index: 99;
-}
-
-.smltown_static #smltown_header{
-    z-index: 11 !important;
-}
-.smltown_static #smltown_body{
-    width: 100%;
-    display: table;
-}
-.smltown_static #smltown_list, .smltown_static #smltown_console{
-    display: inline-block;
-}
-.smltown_static #smltown_menu{
-    width: 300px !important;
-    margin-left: initial !important;
-    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.7);
-    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.7);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.7);
-
-}
-.smltown_static #smltown_list{
-    width: 400px !important;
-}
-
-.smltown_static #smltown_menuContent{
-    width: 100%;
-}
-.smltown_static #smltown_menu, .smltown_static #smltown_body{
-    float: left;
-    position: relative;
-}
-.smltown_static #smltown_console{
-    position: relative !important;
-    border-top: none !important;
-    border-radius: 0 !important;
-    display: table-cell;
-}
-.smltown_static #smltown_chatForm{
-    display:inherit;
-}
-
-.smltown_static #smltown_console .text{
-    margin-bottom: 25px;
-}
-
-.smltown_static #smltown_menu{
-    -webkit-transform: translateX(0) !important;
-    -moz-transform: translateX(0) !important;
-    -ms-transform: translateX(0) !important;
-    -o-transform: translateX(0) !important;
-    transform: translateX(0) !important;
 }
 
 #smltown_sun{

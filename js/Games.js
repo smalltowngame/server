@@ -61,7 +61,7 @@ SMLTOWN.Games = {
     }
     ,
     addRow: function (game) {
-        var div = $("<div id='" + game.id + "' class='smltown_game'>");
+        var div = $("<div id='" + game.id + "' class='smltown_game smltown_fixedGame'>");
 
         var content = $("<div class='smltown_content'>");
 
@@ -176,45 +176,52 @@ SMLTOWN.Games = {
         });
     }
     ,
+    movedGame: false
+    ,
     setGameEvents: function (div, own) {
         var $this = this;
+        var xOrigin, x, dif, opacity;
+
         var content = div.find(".smltown_content");
-        content.on(touchend, this.clickGameEvent);
+        content.on("click", function () {
+            $this.clickGameEvent(div)
+        });
 
         content.on(touchstart, function (e) {
-            var touches = e.originalEvent.touches;
-            if(!touches){
-                return;
+            if (e.originalEvent.touches) {
+                e = e.originalEvent.touches[0];
             }
-            var xOrigin = touches[0].pageX;
-            var dif = 0;
+            xOrigin = e.pageX;
+            dif = 0;
             content.on(touchmove, function (e) {
-                var x = e.originalEvent.touches[0].pageX;
+                $this.movedGame = true;
+                if (e.originalEvent.touches) {
+                    e = e.originalEvent.touches[0];
+                }
+                x = e.pageX;
                 dif = x - xOrigin;
                 if (dif < 0) {
                     dif = 0;
                 }
-
                 content.css("transform", "translateX(" + dif + "px)");
-                var opacity = 1 - dif / $(this).width();
+                opacity = 1 - dif / $(this).width();
                 content.css("opacity", opacity);
 
+                div.removeClass("smltown_fixedGame");
+
                 if (dif > 50) {
-                    content.unbind("touchend");
+                    content.off("click");
                 }
+
             });
 
-            $(document).on(touchend, function (e) {
-                $(document).off(touchend);
+            $(document).one(touchend, function () {
                 content.off(touchmove);
 
                 if (dif > content.width() / 2) {
-                    content.css("-webkit-transform", "translateX(" + "" + "120%)");
-                    content.css("-moz-transform", "translateX(" + "" + "120%)");
-                    content.css("transform", "translateX(" + "" + "120%)");
                     content.addClass("smltown_removeGame");
                     setTimeout(function () {
-                        div.remove();
+//                        div.remove();
                     }, 500);
 
                     if (own) {
@@ -222,18 +229,19 @@ SMLTOWN.Games = {
                     }
 
                 } else {
-                    content.css("-webkit-transform", "translateX(0px)");
-                    content.css("-moz-transform", "translateX(0px)");
-                    content.css("transform", "translateX(0px)");
-                    content.css("opacity", 1);
-                    content.bind("mouseup", $this.clickGameEvent);
+                    div.addClass("smltown_fixedGame");
+                    $this.movedGame = false;
                 }
             });
         });
     }
     ,
-    clickGameEvent: function () {
-        var id = $(this).attr("id");
+    clickGameEvent: function (div) {
+        if (this.movedGame) {
+            return;
+        }
+        var id = div.attr("id");
+        console.log(id);
         SMLTOWN.Games.access(id); //full path for bind on click 
     }
     ,

@@ -1,11 +1,15 @@
 ///////////////////////////////////////////////////////////////////////////////
 //EVENTS PLUGINS
 
+//Modernizr
+if (Modernizr.touch) {
+    console.log("TOUCH");
+    $("#smltown_list, #smltown_menuContent, #smltown_console").css("overflow-y", "hidden");
+}
+
 var touchstart = ('ontouchstart' in document.documentElement ? "touchstart" : "touchstart mousedown");
 var touchmove = ('ontouchmove' in document.documentElement ? "touchmove" : "touchmove mousemove");
 var touchend = ('ontouchend' in document.documentElement ? "touchend" : "touchend mouseup");
-
-console.log(touchstart);
 
 //jQuery
 (function ($) { //unify touchstart and mousedown to prevent double events
@@ -192,12 +196,13 @@ SMLTOWN.Events = {
 
         $("#smltown_chatForm").submit(function () {
             $("#smltown_console").trigger("mouseup");
-            $('#smltown_chatInput').blur(); //?
+//            $('#smltown_chatInput').blur();
             var text = $('#smltown_chatInput').val();
             if (text.length) {
                 SMLTOWN.Message.addChat(text, SMLTOWN.user.id);
                 SMLTOWN.Server.request.chat(text);
             }
+            $('#smltown_chatInput').val("");
             SMLTOWN.Transform.chatFocusOut();
             return false;
         });
