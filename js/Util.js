@@ -10,11 +10,15 @@ SMLTOWN.Util = {
     }
     ,
     getViewport: function () {
-        var e = window, a = 'inner';
-        if (!('innerWidth' in window)) {
-            a = 'client';
-            e = document.documentElement || document.body;
-        }
+//        var e = window, a = 'inner';
+//        if (!('innerWidth' in window)) {
+//            a = 'client';
+//            e = document.documentElement || document.body;
+//        }
+        
+        var e = document.documentElement;
+        var a = 'client';
+        
         return {width: e[a + 'Width'], height: e[a + 'Height']};
     }
     ,
