@@ -205,7 +205,7 @@ SMLTOWN.Games = {
             }
             xOrigin = e.pageX;
             dif = 0;
-            content.on(touchmove, function (e) {
+            $(document).on(touchmove, function (e) {
                 $this.movedGame = true;
                 if (e.originalEvent.touches) {
                     e = e.originalEvent.touches[0];
@@ -228,7 +228,7 @@ SMLTOWN.Games = {
             });
 
             $(document).one(touchend, function () {
-                content.off(touchmove);
+                $(document).off(touchmove);
 
                 if (dif > content.width() / 2) {
                     content.addClass("smltown_removeGame");

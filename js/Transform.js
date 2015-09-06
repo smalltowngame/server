@@ -52,7 +52,8 @@ SMLTOWN.Transform = {
             };
             $("#smltown_chatInput").focus();
             //
-        } else if (3 * $(window).width() >= 4 * $(window).height()) { //horizontal
+//        } else if (3 * $(window).width() >= 4 * $(window).height()) { //horizontal
+        } else if ($(window).width() > $(window).height()) { //horizontal
             console.log("3:4");
             //screen 3:4
             $("#smltown_html").addClass("smltown_static");

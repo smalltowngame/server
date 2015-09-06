@@ -78,11 +78,10 @@ SMLTOWN.Server = {
                 websocket.close();
             };
             websocket.onclose = function (ev) {
-                console.log("websocket close:");
                 console.log(ev);
                 var endTime = new Date().getTime();
                 var time = (endTime - $this.startTime) / 1000;
-                smltown_error("websocket close: " + time + " seconds.");
+                smltown_debug("websocket close: " + time + " seconds.");
                 //if 2nd time
                 if ($this.websocketReconnection) { // true
                     callback(false);
