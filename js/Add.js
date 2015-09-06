@@ -1,10 +1,11 @@
 
 SMLTOWN.Add = {
-    backgroundCard: function (div, filename) {           
+    backgroundCard: function (div, filename) {     
+        console.log(444)
         var nameArray = filename.split("_");
         var nameCard = nameArray[nameArray.length - 1];
         var gamePath = "games/" + SMLTOWN.Game.info.type;
-        var url = SMLTOWN.path + gamePath + "/cards/" + nameCard + ".jpg";
+        var url = SMLTOWN.path + gamePath + "/cards/card_" + nameCard + ".jpg";
 
         $('<img/>').attr('src', url).load(function () {
             $(this).remove(); // prevent memory leaks as @benweet suggested

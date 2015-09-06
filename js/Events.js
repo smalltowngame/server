@@ -152,8 +152,12 @@ SMLTOWN.Events = {
     //GAME EVENTS //////////////////////////////////////////////////////////////
     game: function () { //1 time load
         var $this = this;
-
         this.menuEvents();
+
+        //
+        $("#smltown_chatForm").on("swiperight swipeleft", function (e) {
+            e.preventDefault();
+        });
 
         //SWIPES ACTIONS GAME
         $("#smltown_menuIcon").on("click", function () {
@@ -163,12 +167,17 @@ SMLTOWN.Events = {
             $this.swipeLeft();
         });
 
-        // "> div" resolve some swipe bugs! and without duplications
-        $("#smltown_game").on("swiperight", function (e) {
+        $("#smltown_game").on("swiperight", function (e) {            
+            if("smltown_chatInput" == $(e.target).attr("id")){
+                return;
+            }
             e.preventDefault();
             $this.swipeRight();
         });
         $("#smltown_game").on("swipeleft", function (e) {
+            if("smltown_chatInput" == $(e.target).attr("id")){
+                return;
+            }
             e.preventDefault();
             $this.swipeLeft();
         });
@@ -206,8 +215,6 @@ SMLTOWN.Events = {
             SMLTOWN.Transform.chatFocusOut();
             return false;
         });
-
-
 
         //GAME SCROLLS (only touch device) ////////////////////////////////////////
         this.touchScroll($("#smltown_list"), "top");

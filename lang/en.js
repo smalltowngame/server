@@ -143,7 +143,7 @@ var lang = {
     ,
     playingHere: "you are playing here"
     ,
-    warnServer: "warn: server is taking too long"
+    warnServer: "warn: server is taking too long. It can be a server error, wait s little or refresh the game."
     ,
     somethingHappend: "someone is plotting something..."
     ,
@@ -159,5 +159,5 @@ var lang = {
     ,
     exitGameSwipe: "You will exit from this game.. "
     ,
-    removeGameSwipe: "Swipe to remove game permanently.. "    
+    removeGameSwipe: "Swipe to remove game permanently.. "
 };

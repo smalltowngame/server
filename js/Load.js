@@ -102,7 +102,8 @@ SMLTOWN.Load = {
             gameId: SMLTOWN.Game.info.id,
             lang: SMLTOWN.lang
         }, function(){
-            $this.end();
+            console.log("loaded game");
+            //not end() at this point
         });
     }
     ,
@@ -133,11 +134,12 @@ SMLTOWN.Load = {
         if (!$("#smltown_loading").length) {
             $("#smltown_html").append("<div id='smltown_loading'><div class='smltown_loader'></div></div>");
         }
-        //loading timeout
+        
+        //RESET loading timeout
         clearTimeout(this.timeout);
         this.timeout = setTimeout(function () {
             $this.end();
-            SMLTOWN.Message.notify("warnServer", true);
+            SMLTOWN.Message.notify(SMLTOWN.Message.translate("warnServer"), true);
         }, 5000);
     }
     ,

@@ -22,7 +22,7 @@ if (isset($_COOKIE['smltown_userId'])) {
         <div id="smltown_gamesWrapper">
             <div id="smltown_games">
                 <div id="smltown_footer">
-                    <div id="smltown_loadingDiv"></div>
+                    <div id="smltown_loadingGames"></div>
                     <br/>
                     <div class="smltown_log" style="position:absolute; z-index:99"></div>
                     <div class="smltown_errorLog"></div>     

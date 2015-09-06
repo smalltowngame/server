@@ -19,16 +19,16 @@ SMLTOWN.Games = {
             return;
         }
 
-        $("#smltown_loadingDiv").addClass("smltown_loader");
+        $("#smltown_loadingGames").addClass("smltown_loader");
         var offset = this.offset;
         console.log("loadMore: offset = " + offset);
 
         SMLTOWN.Server.ajax({action: "getGamesInfo", userId: SMLTOWN.user.userId, offset: offset}, function (games) {
             console.log(games);
-            $("#smltown_loadingDiv").removeClass("smltown_loader");
+            $("#smltown_loadingGames").removeClass("smltown_loader");
             var length = games.length;
             if (!length) {
-                $("#smltown_loadingDiv").append(SMLTOWN.Message.translate("noMoreGames"));
+                $("#smltown_loadingGames").append(SMLTOWN.Message.translate("noMoreGames"));
                 //SMLTOWN.Message.flash("noMoreGames");
                 $this.over = true;
                 return;

@@ -16,7 +16,7 @@ SMLTOWN.Local = {
             return null;
         };
 
-        $("#smltown_loadingDiv").addClass("smltown_loader");
+        $("#smltown_loadingGames").addClass("smltown_loader");
 
         //setTimeout(function() {
         //ImgPing["localhost"].img.removeAttr("src");
@@ -73,7 +73,7 @@ SMLTOWN.Local = {
                 }
 
                 if ($this.areXMLHttpRequestFinished()) {
-                    $("#smltown_loadingDiv").removeClass("smltown_loader");
+                    $("#smltown_loadingGames").removeClass("smltown_loader");
                 }
             }
         };
@@ -96,7 +96,7 @@ SMLTOWN.Local = {
                 //console.log("abort");
             }
         }
-        //$("#smltown_loadingDiv").removeClass("smltown_loader");
+        //$("#smltown_loadingGames").removeClass("smltown_loader");
     }
 //    ,
 //    ImgPing: function(ipBase, i) {

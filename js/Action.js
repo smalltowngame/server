@@ -48,9 +48,9 @@ SMLTOWN.Action = {
             }
         });
 
-        //if (this.night.wakeUp) { //like seer salected id's wakeup
-        //    this.night.wakeUp();
-        //}
+        if (SMLTOWN.user.card) {
+            SMLTOWN.Add.backgroundCard($("#" + SMLTOWN.user.id + " .smltown_extra"), SMLTOWN.user.card);
+        }
     }
     ,
     sleep: function () {
@@ -94,7 +94,7 @@ SMLTOWN.Action = {
         }
 
         //DEFINE day/night functions //override from game rules
-        if(false == this.defineSelectFunctions()){
+        if (false == this.defineSelectFunctions()) {
             return;
         }
 
@@ -173,7 +173,7 @@ SMLTOWN.Action = {
     }
     ,
     //turn actions
-    startTurn: function () { //wakeUp
+    startTurn: function () { //from wakeUp
         console.log("start turn");
         for (var id in SMLTOWN.players) {
             var player = SMLTOWN.players[id];
@@ -216,7 +216,8 @@ SMLTOWN.Action = {
             SMLTOWN.players[id].card = null;
         }
         $(".smltown_extra").html("");
-        $(".smltown_extra").css("background-image", "");
+        $(".smltown_extra").css("background-image", SMLTOWN.Update.innocentBackground);
+        console.log(111)
     }
     ,
     cleanVotes: function () {
@@ -243,7 +244,8 @@ SMLTOWN.Action = {
                 player.card = null;
                 var div = player.div;
                 div.find(".smltown_extra").html("");
-                div.find(".smltown_extra").css("background-image", "");
+                div.find(".smltown_extra").css("background-image", SMLTOWN.Update.innocentBackground);
+                console.log(222)
             }
         }
     }

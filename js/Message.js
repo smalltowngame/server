@@ -114,7 +114,7 @@ SMLTOWN.Message = {
 //        }, time);
     }
     ,
-    notify: function (text, okCallback, cancelCallback, gameId, important) {
+    notify: function (text, okCallback, cancelCallback, gameId) {
         //console.log(gameId);
         if (gameId && SMLTOWN.Game.info.id != gameId) {
             this.external(text, gameId);

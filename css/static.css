@@ -23,6 +23,10 @@
     display: inline-block;
 }
 
+.smltown_static #smltown_list{
+    bottom: 0;
+}
+
 .smltown_static #smltown_console{
     border-top: none !important;
     border-radius: 0 !important;
@@ -44,22 +48,24 @@
     bottom: 52px;
 }
 
-.smltown_static #smltown_menu{
-    width: 280px !important;
-    border-right: 1px solid grey;
-}
-
 .smltown_staticMenu #smltown_menu{
     height: auto !important;
     top: 56px;
     bottom: 0;
     margin-left: auto !important;
+    pointer-events: none;
 
     -webkit-transform: translateX(0) !important;
     -moz-transform: translateX(0) !important;
     -ms-transform: translateX(0) !important;
     -o-transform: translateX(0) !important;
     transform: translateX(0) !important;
+}
+
+.smltown_static #smltown_menuContent{
+    width: 280px !important;
+    border-right: 1px solid grey;
+    pointer-events: auto;
 }
 
 .smltown_staticMenu #smltown_menuContent{

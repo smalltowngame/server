@@ -221,13 +221,14 @@ if (count($games)) {
 
 <script>
     console.log("game file load");
-    
+    SMLTOWN.Load.start();
+
     //add translated selector if chat empty
-     $("#smltown_consoleLog > div").attr("empty-content", SMLTOWN.Message.translate("emptyChat"));
-    
+    $("#smltown_consoleLog > div").attr("empty-content", SMLTOWN.Message.translate("emptyChat"));
+
     //RESTART
     SMLTOWN.user = {};
-    SMLTOWN.players = {};    
+    SMLTOWN.players = {};
     SMLTOWN.Game.info = {
         id:<?php echo $gameId ?>,
         type: '<?php echo $type ?>'
@@ -239,8 +240,10 @@ if (count($games)) {
     //INIT VARIABLES
     SMLTOWN.user.sleeping = true;
     SMLTOWN.cardLoading = false;
-    
-    SMLTOWN.Transform.gameResize();
+
+    $(window).ready(function () {
+        SMLTOWN.Transform.gameResize();
+    });
     SMLTOWN.Events.game();
 
     //start SOCKET imitation

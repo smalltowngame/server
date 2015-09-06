@@ -20,6 +20,7 @@ SMLTOWN.Transform = {
         if (9 * $(window).width() >= 16 * $(window).height()) {
             $("#smltown_html").addClass("smltown_static smltown_staticMenu");
         } else if (3 * $(window).width() >= 4 * $(window).height()) { //horizontal
+//        } else if ($(window).width() > $(window).height()) { //horizontal
             $("#smltown_html").addClass("smltown_static");
         } else {
             $("#smltown_console").removeClass("smltown_consoleExtended");
@@ -29,20 +30,21 @@ SMLTOWN.Transform = {
     gameResize: function () {
 
         if (9 * $(window).width() >= 16 * $(window).height()) {
+            console.log("9:16");
             //screen 9:16
             $("#smltown_html").addClass("smltown_static smltown_staticMenu");
             $("#smltown_body").css({
-                'width': $("#smltown_html").width() - $("#smltown_menu").width(),
-                'margin-left': $("#smltown_menu").width()
+                'width': $("#smltown_html").width() - $("#smltown_menuContent").width(),
+                'margin-left': $("#smltown_menuContent").width()
             });
             $("#smltown_console").css({
-                'width': ($("#smltown_html").width() - $("#smltown_menu").width()) / 2
+                'width': ($("#smltown_html").width() - $("#smltown_menuContent").width()) / 2
             });
             $("#smltown_list").css({
-                'width': ($("#smltown_html").width() - $("#smltown_menu").width()) / 2
+                'width': ($("#smltown_html").width() - $("#smltown_menuContent").width()) / 2
             });
             $("#smltown_header").css({
-                'width': $("#smltown_menu").width() + $("#smltown_list").width()
+                'width': $("#smltown_menuContent").width() + $("#smltown_list").width()
             });
             $("smltown_menuIcon").hide();
             //chat
@@ -71,6 +73,7 @@ SMLTOWN.Transform = {
             $("#smltown_list").css({
                 'width': "100%"
             });
+
             $("smltown_menuIcon").hide();
             //chat
             this.chatFocusOutSave = this.chatFocusOut;
@@ -102,6 +105,10 @@ SMLTOWN.Transform = {
             //
             $("smltown_menuIcon").show();
         }
+
+        $("#smltown_filter").css({
+            'width': $("#smltown_list").width()
+        });
 
         this.contentHeights.updateConsole();
         //RESIZE CARD
