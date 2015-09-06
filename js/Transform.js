@@ -116,9 +116,13 @@ SMLTOWN.Transform = {
         var width = $("#smltown_html").width();
         if (width > height) {
             width = height * 0.8;
-            $("#smltown_card > div").width(width);
+            $("#smltown_card").css({
+                'width': width
+            });
         } else {
-            $("#smltown_card > div").width("");
+            $("#smltown_card").css({
+                'width': "100%"
+            });
         }
         $("#smltown_card .smltown_cardText").height(height - width);
         $("#smltown_card").css({

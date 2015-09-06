@@ -84,12 +84,13 @@ SMLTOWN.Server = {
                 smltown_debug("websocket close: " + time + " seconds.");
                 //if 2nd time
                 if ($this.websocketReconnection) { // true
+                    smltown_debug("return to ajax mode");
                     callback(false);
                     return;
                 }
 
                 if (!SMLTOWN.config.websocket_autoload) {
-                    console.log("not websocket_autoload");
+                    smltown_debug("not websocket_autoload");
                     callback(false);
                     return;
                 }
