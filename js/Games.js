@@ -221,7 +221,7 @@ SMLTOWN.Games = {
                 if (dif > content.width() / 2) {
                     content.addClass("smltown_removeGame");
                     setTimeout(function () {
-//                        div.remove();
+                        div.remove();
                     }, 500);
 
                     if (own) {

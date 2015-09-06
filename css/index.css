@@ -25,9 +25,8 @@
 #smltown_reload{
     position: absolute;
     bottom: 0;
-    border-left: none;
-    border-right: none;
-    border-bottom: none;
+    border: none;
+    box-shadow: inset 1px 1px black, inset -1px -1px black;
 }
 a{
     color: blue;

@@ -21,6 +21,7 @@ html, body{
     position: absolute;
     width: 100%;
     margin: 0 auto;
+    overflow: hidden;
 }
 
 #smltown_html, #smltown_body{    
@@ -34,7 +35,7 @@ html, body{
     background-color: white;
     background-image: url("../img/background4.jpg");
     position: relative;
-    overflow: hidden;
+    box-shadow: inset 1px 0 black, inset -1px 0 black;
 
     -webkit-user-select: none;
     -khtml-user-select: none;
