@@ -592,6 +592,7 @@
 #smltown_menuContent{
     position: absolute;
     width: calc(100% - 52px);
+    max-width: 370px;
     top: 0;
     bottom: 0;
 }

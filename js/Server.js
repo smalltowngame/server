@@ -10,7 +10,7 @@ SMLTOWN.Server = {
     handleConnection: function () {
         console.log("handle connection");
         var $this = this;
-        if (SMLTOWN.config.websocket_server) {
+        if (!SMLTOWN.config.websocket_server) {
             SMLTOWN.Server.ajaxConnection();
             $(".smltown_allowWebsocket").text("NOT");
             SMLTOWN.Server.request.addUser(SMLTOWN.user.name);

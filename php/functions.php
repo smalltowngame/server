@@ -207,3 +207,9 @@ function removeGame($obj) {
         sql("DELETE FROM smltown_plays WHERE gameId = $gameId");
     }
 }
+
+function exitGame($obj) {
+    $userId = $obj->user_id;
+    $gameId = $obj->game_id;
+    sql("DELETE FROM smltown_plays WHERE gameId = $gameId AND userId = '$userId'");
+}

@@ -157,9 +157,7 @@ var lang = {
     ,
     hideGameSwipe: "Swipe to hide this game.. "
     ,
-    hideGameSwipeInfo: "This game will appear again on refresh"
+    exitGameSwipe: "You will exit from this game.. "
     ,
-    removeGameSwipe: "Swipe to remove game permanently.. "
-    ,
-    removeGameSwipeInfo: "This game will be removed permanently"
+    removeGameSwipe: "Swipe to remove game permanently.. "    
 };

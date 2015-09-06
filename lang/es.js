@@ -162,11 +162,10 @@ var lang = {
     ,
     gameName: "nombre de la partida"
     ,
-    hideGameSwipe: "Rechaza la partida. "
+    hideGameSwipe: "Rechaza la partida.. "
     ,
-    hideGameSwipeInfo: "Esta partida volverá a aparecer cuando refresques la lista"
+    exitGameSwipe: "Salir de esta partida.."
     ,
-    removeGameSwipe: "Elimina permanentemente la partida. "
-    ,
-    removeGameSwipeInfo: "Eres administrador de esta partida y se eliminará para siempre"
+    removeGameSwipe: "Elimina permanentemente la partida.."
+    
 };

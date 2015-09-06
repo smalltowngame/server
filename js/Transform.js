@@ -16,7 +16,7 @@ SMLTOWN.Transform = {
         //DEFINE HTML HEIGHT FOR PLUGINS
         var rest = SMLTOWN.Util.getViewport().height - $("#smltown_html").offset().top;
         $("#smltown_html").css("height", rest + "px");
-        
+
         if (9 * $(window).width() >= 16 * $(window).height()) {
             $("#smltown_html").addClass("smltown_static smltown_staticMenu");
         } else if (3 * $(window).width() >= 4 * $(window).height()) { //horizontal
@@ -90,6 +90,9 @@ SMLTOWN.Transform = {
             });
             $("#smltown_console").css({
                 'width': "inherit"
+            });
+            $("#smltown_list").css({
+                'width': "100%"
             });
             //
             if (this.chatFocusOutSave) {

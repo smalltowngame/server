@@ -16,6 +16,7 @@ SMLTOWN.Util = {
 //            e = document.documentElement || document.body;
 //        }
         
+        //http://help.dottoro.com/ljknuajj.php
         var e = document.documentElement;
         var a = 'client';
         
