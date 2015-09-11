@@ -63,7 +63,7 @@ trait Utils {
 
         $sql = "SELECT count(*) as count FROM smltown_plays WHERE gameId = $gameId AND status > 0";
         //    if ($onlyRealPlayers) {
-        //        $sql = "$sql AND admin > -1";
+        //        $sql = "$sql AND admin != -2";
         //    }
         return petition($sql)[0]->count;
     }
@@ -151,7 +151,7 @@ trait Utils {
         //        //setGameStatus(1); //wake up
         //    }
         //bots error
-        $sth = sql("DELETE FROM smltown_plays WHERE gameId = $gameId AND userId = '' and admin > -1");
+        $sth = sql("DELETE FROM smltown_plays WHERE gameId = $gameId AND userId = '' and admin != -2");
         if ($sth->rowCount() > 0) {
             setError("warn: fixed bot error");
         }
@@ -352,7 +352,7 @@ trait Utils {
         $gameId = $this->gameId;
 
         $values = array('message' => $message);
-        $sql = "UPDATE smltown_plays SET message = :message WHERE status > -1 AND admin > -1";
+        $sql = "UPDATE smltown_plays SET message = :message WHERE status > -1 AND admin != -2";
 
 
         if (null != $playId) {

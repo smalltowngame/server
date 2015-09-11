@@ -436,8 +436,12 @@ SMLTOWN.Events = {
             SMLTOWN.Server.request.setName(val);
             SMLTOWN.Message.flash("name saved");
         });
-
-        $("#smltown_cleanErrors").on("touchend mouseup", function () {
+        
+        $("#smltown_spectatorMode").on("tap", function () {
+            SMLTOWN.Server.request.spectatorMode(SMLTOWN.user.id);
+        });
+        
+        $("#smltown_cleanErrors").on("tap", function () {
             if ($(this).hasClass("active")) {
                 SMLTOWN.Load.cleanGameErrors();
             }

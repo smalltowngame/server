@@ -13,14 +13,14 @@ class AdminRequest extends PingRequest {
         $gameId = $this->gameId;
 
         //add villagers bots
-        $countPlayers = petition("SELECT count(*) as count FROM smltown_plays WHERE gameId = $gameId")[0]->count;
+        $countPlayers = petition("SELECT count(*) as count FROM smltown_plays WHERE gameId = $gameId AND status > -1")[0]->count;
         if (4 > $countPlayers) {
             $this->saveMessage("botsAdded");
             $sql = "INSERT INTO smltown_plays (gameId, userId, status, card, admin) VALUES";
             $minPlayers = 4;
             for ($i = $countPlayers; $i < $minPlayers; $i++) {
                 $userId = getRandomUserId(); //check TODO
-                $sql = "$sql ($gameId, $userId, 1, '_villager', -1)";
+                $sql = "$sql ($gameId, $userId, 1, '_villager', -2)";
                 if ($i + 1 < $minPlayers) {
                     $sql = "$sql,";
                 }
@@ -40,11 +40,11 @@ class AdminRequest extends PingRequest {
         $gameId = $this->gameId;
 
         //clean
-        sql("DELETE FROM smltown_plays WHERE gameId = $gameId AND admin < 0");
+        sql("DELETE FROM smltown_plays WHERE gameId = $gameId AND admin = 2");
         sql("UPDATE smltown_plays SET status = 1, sel = null, rulesJS = '', rulesPHP = '', reply = '', message = null WHERE gameId = $gameId");
         sql("UPDATE smltown_games SET status = 0, night = null, timeStart = null, time = null WHERE id =  $gameId");
 
-        $players = petition("SELECT * FROM smltown_plays WHERE admin > -1 AND gameId = $gameId");
+        $players = petition("SELECT * FROM smltown_plays WHERE admin != -2 AND gameId = $gameId");
 
         $cards = $this->loadCards();
         $playerCount = count($players);
@@ -73,7 +73,6 @@ class AdminRequest extends PingRequest {
         }
 //    $maxCardKeys = range(0, count($maxCards));
 //    $maxCardKeys = range(0, count($minCards) - 1);
-
 
         $n = count($minCards);
 //    //set max cards
@@ -197,35 +196,6 @@ class AdminRequest extends PingRequest {
         );
         sql("UPDATE smltown_games SET cards = :cards WHERE id = $gameId", $values);
         $this->updateGame(null, "cards");
-    }
-
-////////////////////////////////////////////////////////////////////////////////
-//OTHER ACTIONS
-
-    public function deletePlayer() { //at specific game
-        $gameId = $this->gameId;
-        $playId = $this->playId;
-        $admin = $this->admin;
-        $id = $this->requestValue['id'];
-
-        $values = array(
-            'id' => $id
-        );
-//        $sth = sql("DELETE _plays FROM smltown_plays _plays "
-//                . "WHERE (1 = (SELECT admin FROM smltown_plays WHERE id = $playId) OR _plays.id = $playId) "
-//                . "AND _plays.id = :id", $values);
-
-        $sth = sql("DELETE FROM smltown_plays "
-                . "WHERE (1 = $admin OR id = $playId) "
-                . "AND id = :id", $values);
-
-        $this->updatePlayers(null, "");
-        if ($sth->rowCount() == 0) { //nothing changes
-            echo "can't delete player of game.";
-            return;
-        }
-        sql("UPDATE smltown_plays SET card = '' WHERE gameId = $gameId", $values); //prevent important card removes from game
-        $this->updateUsers(null, "card");
     }
 
 }

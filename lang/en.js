@@ -107,7 +107,7 @@ var lang = {
     ,
     noCard: "no card yet"
     ,
-    youEspectator: "you are a espectator"
+    youSpectator: "you are a spectator"
     ,
     youDead: "hey!, you are dead"
     ,

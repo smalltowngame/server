@@ -80,7 +80,8 @@ trait Response {
         if ($select) {
             $sql .= selectArray($select);
         } else {
-            $sql .= "smltown_plays.id, userId, admin, card, sel, rulesJS, message";
+            //sel and admin comes with players
+            $sql .= "smltown_plays.id, userId, card, rulesJS, message";
         }
         $user = petition("$sql FROM smltown_plays WHERE id = $playId");
         if (count($user) > 0) {
@@ -106,15 +107,15 @@ trait Response {
             //full request
         } else {
             $turns = count($this->TURNS);
-            $sql .= " name, admin"
+            $sql .= " smltown_players.name, smltown_players.type, smltown_players.socialId, admin"
                     //plays.sel when openVoting
                     . ", CASE WHEN 1 = (SELECT openVoting FROM smltown_games WHERE id = $gameId) THEN sel END AS sel"
                     //status 1 when is 0
-                    . ", CASE WHEN status > -1 AND $turns > (SELECT status FROM smltown_games WHERE id = $gameId) THEN 1 ELSE status END AS status"
+                    . ", CASE WHEN smltown_plays.status > -1 AND $turns > (SELECT status FROM smltown_games WHERE id = $gameId) THEN 1 ELSE status END AS status"
                     //message if not playing night (else null)
                     . "," . $this->getMessageCase($gameId)
                     //CARD if DEAD
-                    . ", CASE WHEN status = -1";
+                    . ", CASE WHEN smltown_plays.status = -1";
 
             //CARD if game is ENDED
             if (isset($this->TURNS)) {

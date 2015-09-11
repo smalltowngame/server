@@ -93,7 +93,7 @@ trait Connection {
             $json = json_encode($obj);
             $values = array('reply' => $json); //escape \ from utf-8 special chars
             $sth = sql("UPDATE smltown_plays SET reply = CONCAT(reply , '|' , :reply)"
-                    . " WHERE smltown_plays.id = $playId AND smltown_plays.admin > -1 AND"
+                    . " WHERE smltown_plays.id = $playId AND smltown_plays.admin != -2 AND"
                     . " (SELECT gameId FROM smltown_players WHERE id = smltown_plays.userId) = $gameId ", $values);
             
             //anywhere
@@ -129,7 +129,7 @@ trait Connection {
             $json = json_encode($obj);
             $values = array('reply' => $json); //escape \ from utf-8 special chars
             $sth = sql("UPDATE smltown_plays SET reply = CONCAT(reply , '|' , :reply) WHERE"
-                    . " gameId = $gameId AND gameId = $gameId AND admin > -1", $values);
+                    . " gameId = $gameId AND gameId = $gameId AND admin != -2", $values);
 
             //anywhere
             if ($playerReply && $sth->rowCount() == 0) {

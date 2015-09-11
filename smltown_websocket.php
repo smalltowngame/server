@@ -162,7 +162,7 @@ trait Connection {
         $json = json_encode($obj);
 
         if (isset($playId)) {
-            $plays = petition("SELECT userId FROM smltown_plays WHERE id = $playId AND admin > -1");
+            $plays = petition("SELECT userId FROM smltown_plays WHERE id = $playId AND admin != -2");
             if (0 < count($plays)) {
                 $userId = $plays[0]->userId;
                 if (isset($users[$userId])) {
@@ -178,7 +178,7 @@ trait Connection {
             }
             //
         } else {
-            $plays = petition("SELECT id, userId FROM smltown_plays WHERE gameId = $gameId AND admin > -1");
+            $plays = petition("SELECT id, userId FROM smltown_plays WHERE gameId = $gameId AND admin != -2");
             for ($i = 0; $i < count($plays); $i++) {
                 $userId = $plays[$i]->userId;
                 if (isset($users[$userId])) {

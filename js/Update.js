@@ -1,51 +1,9 @@
 
 SMLTOWN.Update = {
-    all: function (res) {
-        var $this = this;
+    all: function(res) {
 
         if (res.user) {
-            if (res.user.userId) {
-                //only here smltown_userId cookie
-                SMLTOWN.Util.setPersistentCookie("smltown_userId", res.user.userId);
-            }
-
-            for (var key in res.user) {
-                SMLTOWN.user[key] = res.user[key];
-            }
-
-            //prevent old updates
-            if (!SMLTOWN.user.id) {
-                console.log("prevent old updates");
-                return;
-            }
-
-            if (res.user.rulesJS) {
-                console.log("rules = " + res.user.rulesJS);
-                if (!SMLTOWN.players.length) {
-                    SMLTOWN.rules = res.user.rulesJS;
-                } else {
-                    eval(res.user.rulesJS); //like a cupid lover
-                }
-            }
-            if (typeof res.user.message != "undefined" && res.user.message) {
-                if (jQuery.isEmptyObject(SMLTOWN.players)) {
-                    SMLTOWN.Message.message = res.user.message;
-                } else {
-                    SMLTOWN.Message.setMessage(res.user.message);
-                }
-            }
-            if ("1" == res.user.admin) { // == 1
-                $(".smltown_admin").addClass("smltown_selectable");
-                $("#smltown_becomeAdmin").hide();
-            }
-
-            if (res.user.card) { //if is really now updated (card)
-                if (SMLTOWN.user.id) { //check user updated
-                    SMLTOWN.Action.night = {}; //restart functions
-                    SMLTOWN.temp = {}; //restart variables
-                    $this.userCard();
-                }
-            }
+            this.user(res.user);
         }
 
         if (res.players) { // PLAYERS
@@ -81,8 +39,7 @@ SMLTOWN.Update = {
                 }
             }
 
-            var newPlayers = this.players();
-            SMLTOWN.Add.quitPlayerButtons();
+            this.players();
         }
 
         if (res.player) {
@@ -142,7 +99,48 @@ SMLTOWN.Update = {
         clearTimeout(SMLTOWN.temp.wakeUpInterval);
     }
     ,
-    game: function (game) {
+    user: function(user) {
+        if (user.userId) {
+            //only here smltown_userId cookie
+            SMLTOWN.Util.setPersistentCookie("smltown_userId", user.userId);
+        }
+
+        for (var key in user) {
+            SMLTOWN.user[key] = user[key];
+        }
+
+        //prevent old updates
+        if (!SMLTOWN.user.id) {
+            console.log("prevent old updates");
+            return;
+        }
+
+        if (user.rulesJS) {
+            console.log("rules = " + user.rulesJS);
+            if (!SMLTOWN.players.length) {
+                SMLTOWN.rules = user.rulesJS;
+            } else {
+                eval(user.rulesJS); //like a cupid lover
+            }
+        }
+        if (typeof user.message != "undefined" && user.message) {
+            if (jQuery.isEmptyObject(SMLTOWN.players)) {
+                SMLTOWN.Message.message = user.message;
+            } else {
+                SMLTOWN.Message.setMessage(user.message);
+            }
+        }
+
+        if (user.card) { //if is really now updated (card)
+            if (SMLTOWN.user.id) { //check user updated
+                SMLTOWN.Action.night = {}; //restart functions
+                SMLTOWN.temp = {}; //restart variables
+                $this.userCard();
+            }
+        }
+    }
+    ,
+    game: function(game) {
 
         if (game.name) {
             $("#smltown_gameName").text(game.name);
@@ -184,7 +182,7 @@ SMLTOWN.Update = {
         SMLTOWN.Add.icons(game, $("#smltown_header .smltown_content"));
     }
     ,
-    gameLoad: function () {
+    gameLoad: function() {
         this.gameStatus();
 
         //after game status
@@ -194,22 +192,21 @@ SMLTOWN.Update = {
         }
     }
     ,
-    gameStatus: function () {
+    gameStatus: function() {
         //OVERRIDE
         console.log("EMPTY gameStatus");
     }
     ,
-    players: function () {
+    players: function() {
         var players = SMLTOWN.players;
         var newPlayers = 0;
 
-        //1st GET USER PLAYER
+        //1st GET USER PLAYER VALUES
         for (var id in players) {
             var player = players[id];
             if (player.id == SMLTOWN.user.id) {
 
                 if (player.name && SMLTOWN.user.name != player.name) {
-//                    SMLTOWN.Util.setPersistentCookie("smltown_userName", player.name);
                     localStorage.setItem("smltown_userName", player.name);
                 }
 
@@ -219,12 +216,17 @@ SMLTOWN.Update = {
                         SMLTOWN.user[key] = player[key];
                     }
                 }
+                //
 
-                SMLTOWN.user.admin = parseInt(SMLTOWN.user.admin);
                 if (!SMLTOWN.user.name) {
                     SMLTOWN.Message.login("noName");
                 } else {
                     $("#smltown_updateName input").attr("placeholder", SMLTOWN.user.name);
+                }
+
+                if ("1" == SMLTOWN.user.admin) { // == 1
+                    $(".smltown_admin").addClass("smltown_selectable");
+                    $("#smltown_becomeAdmin").hide();
                 }
             }
         }
@@ -246,6 +248,10 @@ SMLTOWN.Update = {
         for (var id in players) {
             var player = players[id];
 
+            //PARSE VALUES
+            player.admin = parseInt(player.admin);
+            player.status = parseInt(player.status);
+
             var div;
             if ($("#" + id).length) {
                 div = $("#" + id);
@@ -260,14 +266,20 @@ SMLTOWN.Update = {
                 up.append("<span class='smltown_name'>");
                 down.append($("<span class='smltown_playerStatus'>"));
                 down.append($("<span class='smltown_votes'>"));
-                div.append($("<div class='smltown_extra' style='background-image:" + this.innocentBackground + "'>"));
-                //div.append($("<div class='smltown_waitingPlayer'>"));
+                div.append("<div class='smltown_extra'>");
                 div.append($("<div class='smltown_waitingPlayer smltown_icon64 smltown_hourglass'>"));
                 div.attr("id", player.id);
                 div.addClass("smltown_player");
                 div.attr("preselect-content", SMLTOWN.Message.translate("PRESELECT"));
                 player.div = div;
                 SMLTOWN.Events.playerEvents(player);
+
+                var picture = $("<div class='smltown_picture smltown_iconUser'>");
+                player.div.append(picture);
+                var url = this.getPicture(player);
+                if (url) {
+                    picture.append("<image src='" + url + "'></img>");
+                }
 
                 newPlayers++;
             }
@@ -277,7 +289,7 @@ SMLTOWN.Update = {
             if (!player.name) {
                 var nameSpan = $(div).find(".name");
                 var refer = "unnamed";
-                if (player.admin < 0) {
+                if (player.admin == -2) {
                     refer = "bot";
                 }
                 $(nameSpan).html(refer + " <small>(.." + player.id.slice(-2) + ")</small>");
@@ -290,12 +302,7 @@ SMLTOWN.Update = {
             }
 
             // SORT divs players
-            player.status = parseInt(player.status);
-            if (isNaN(player.status) || "undefined" == typeof player.status || null == player.status) { //if not playing
-                $("#smltown_listSpectator").append(div);
-                div.addClass("smltown_spectator");
-                div.find(".smltown_playerStatus").smltown_text("spectator");
-            } else if (player.status < 1) {
+            if (player.status < 1) {
                 $("#smltown_listDead").append(div);
                 div.addClass("smltown_dead");
                 div.find(".smltown_playerStatus").smltown_text("dead");
@@ -307,19 +314,41 @@ SMLTOWN.Update = {
                 div.find(".smltown_extra").text("");
             }
 
+            //only user player values width div relation
             if (player.id != SMLTOWN.user.id) {
                 $('<style>.id' + player.id + ' {color: ' + this.userColors[iColor++] + '}</style>').appendTo('head');
             } else {
                 $('<style>.id' + player.id + ' {font-weight: bold}</style>').appendTo('head');
+                //spectator user
+                if ("1" == SMLTOWN.user.admin) {
+                    SMLTOWN.Add.quitPlayerButtons();
+                } else if ("-1" == SMLTOWN.user.admin) {
+                    $("#smltown_spectatorMode").hide();
+                    div.off(".spectator");
+                    div.one("tap.spectator", function(e) {
+                        e.preventDefault();
+                        SMLTOWN.Server.request.playGame(SMLTOWN.user.id);
+                    });
+                } else {
+                    $("#smltown_spectatorMode").show();
+                }
             }
 
             div.find(".smltown_name").addClass("id" + player.id);
-            if (player.admin == 1) {
-                div.find(".smltown_name").append("<symbol>R</symbol>");
+
+            if (player.admin == -1) {
+                $("#smltown_listSpectator").append(div);
+                div.addClass("smltown_spectator");
+                div.find(".smltown_playerStatus").smltown_text("spectator");
+                $("#" + player.id + " .smltown_extra").css("background-image", "none");
+            } else {
+                $("#" + player.id + " .smltown_extra").css("background-image", this.innocentBackground);
+                if (player.admin == 1) {
+                    div.find(".smltown_name").append("<symbol>R</symbol>");
+                }
             }
 
             if (player.message) {
-//                div.find(".smltown_waitingPlayer").text("⌛");
                 div.find(".smltown_waitingPlayer").show();
             }
 
@@ -364,13 +393,20 @@ SMLTOWN.Update = {
         return newPlayers;
     }
     ,
-    userCard: function () {
+    getPicture: function(player) {
+        //social
+        if (player.type == "facebook" && player.socialId) {
+            return "http://graph.facebook.com/" + player.socialId + "/picture";
+        }
+    }
+    ,
+    userCard: function() {
         console.log("user-Card update");
         var $this = this;
         SMLTOWN.cardLoading = true;
 
         if (!$("#smltown_cardFront").hasClass(SMLTOWN.user.card)) { //only new card
-            console.log(123)
+
             $("#smltown_cardFront").attr("class", SMLTOWN.user.card);
 
             var card = SMLTOWN.cards[SMLTOWN.user.card];
@@ -406,7 +442,7 @@ SMLTOWN.Update = {
 
         //load card
         var gamePath = SMLTOWN.path + "games/" + SMLTOWN.Game.info.type;
-        $("#smltown_phpCard").load(gamePath + "/cards/" + SMLTOWN.user.card + ".php", function (response) { //card could be changed
+        $("#smltown_phpCard").load(gamePath + "/cards/" + SMLTOWN.user.card + ".php", function(response) { //card could be changed
             SMLTOWN.cardLoading = false;
             if (response.indexOf("Fatal error") > -1) { //catch error
                 smltown_error(response);
@@ -417,7 +453,7 @@ SMLTOWN.Update = {
         });
     }
     ,
-    updateCards: function () {
+    updateCards: function() {
         console.log("update Cards");
 
         $("#smltown_playingCards").html("");
@@ -488,7 +524,7 @@ SMLTOWN.Update = {
         }
     }
     ,
-    playingCards: function (cards) { //active game cards
+    playingCards: function(cards) { //active game cards
         $(".smltown_rulesCard").addClass("smltown_cardOut");
         for (var cardName in cards) {
             var cardNumber = cards[cardName];

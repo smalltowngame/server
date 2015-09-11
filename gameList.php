@@ -20,13 +20,17 @@ if (isset($_COOKIE['smltown_userId'])) {
         </div>
 
         <div id="smltown_gamesWrapper">
-            <div id="smltown_games">
-                <div id="smltown_footer">
-                    <div id="smltown_loadingGames"></div>
-                    <br/>
-                    <div class="smltown_log" style="position:absolute; z-index:99"></div>
-                    <div class="smltown_errorLog"></div>     
-                </div>
+            <div id="smltown_games"></div>
+
+            <!--http://ryanfait.com/sticky-footer/-->
+            <div id="smltown_footer">
+                <div id="smltown_loadingGames"></div>
+                <br/>
+                <div class="smltown_log" style="position:absolute; z-index:99"></div>
+                <div class="smltown_errorLog"></div>
+
+                <!-- Your like button code -->
+                <div class="fb-like" data-href="https://apps.facebook.com/smltown/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
             </div>
         </div>       
     </div>
@@ -44,7 +48,7 @@ if (isset($_COOKIE['smltown_userId'])) {
     SMLTOWN.Load.gameList();
 
     //game list events
-    $("#smltown_gamesWrapper").on("scrollBottom", function () {
+    $("#smltown_gamesWrapper").on("scrollBottom", function() {
         SMLTOWN.Games.loadMore();
     });
 

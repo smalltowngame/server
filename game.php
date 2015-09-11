@@ -156,7 +156,11 @@ if (count($games)) {
                             <input type="text"/>
                         </form>					
                     </div>
-                    <div id="smltown_cleanErrors" class="smltown_single button">
+                    <div id="smltown_spectatorMode" class="smltown_action">
+                        <span>EspectatorMode</span>
+                        <small>espectatorModeHelp</small>
+                    </div>
+                    <div id="smltown_cleanErrors" class="smltown_action">
                         <span>CleanErrors</span>
                         <small>cleanHelp</small>
                     </div>
@@ -245,10 +249,9 @@ if (count($games)) {
         SMLTOWN.Transform.gameResize();
     });
     SMLTOWN.Events.game();
-
-    //start SOCKET imitation
     SMLTOWN.Server.request.addUserInGame(SMLTOWN.Game.info.id); //add this user to game
-
+    
+    //start SOCKET imitation
     if (!SMLTOWN.Server.websocket) {
         SMLTOWN.Server.startPing();
     }

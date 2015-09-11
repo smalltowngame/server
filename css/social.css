@@ -1,0 +1,11 @@
+
+.fb-like{
+    display: none !important;
+    position: absolute !important;
+    right: 10px;
+    top: 0;
+}
+
+.fb-like.smltown_show{
+    display: inline-block !important;
+}

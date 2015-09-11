@@ -123,7 +123,7 @@ trait BackEnd {
             return; //prevent multiple dayEnd requests
         }
 
-        $players = petition("SELECT sel FROM smltown_plays WHERE gameId = $gameId AND status > 0 AND admin > -1");
+        $players = petition("SELECT sel FROM smltown_plays WHERE gameId = $gameId AND status > 0 AND admin != -2");
         $deadId = votations($players);
 
         //hurt

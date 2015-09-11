@@ -150,36 +150,12 @@ echo $script;
         <link rel='stylesheet' href='<?php echo $smalltownURL ?>css/game.css'>
         <link rel='stylesheet' href='<?php echo $smalltownURL ?>css/static.css'>
         <!--<link rel='stylesheet' href='css/animations.css'>-->
-        <link rel='stylesheet' href='<?php echo $smalltownURL ?>css/icons.css'>        
+        <link rel='stylesheet' href='<?php echo $smalltownURL ?>css/icons.css'>
+        <link rel='stylesheet' href='<?php echo $smalltownURL ?>css/social.css'>     
     </head>
 
     <!--smalltown is class if not plugin-->
     <body id="smltown">
-
-        <!--FACEBOOK-->
-        <script>
-    window.fbAsyncInit = function () {
-        FB.init({
-            appId: '1572792739668689',
-            xfbml: true,
-            version: 'v2.4'
-        });
-
-        // ADD ADDITIONAL FACEBOOK CODE HERE
-    };
-
-    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {
-            return;
-        }
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-        </script>
-
         <div id="smltown_html">            
             <div class='smltown_loader'></div>            
             <img style="position:absolute; top: 50px; left:0; right:0; margin:auto; max-width: 90%;" 
@@ -199,9 +175,17 @@ echo $script;
     SMLTOWN.user.userId = SMLTOWN.Util.getCookie("smltown_userId");
     SMLTOWN.user.name = SMLTOWN.Util.getLocalStorage("smltown_userName");
 
-    $(document).one("ready", function () {
+    // external cookie overwrites
+    (function() {
+        var userName = SMLTOWN.Util.getCookie("smltown_userName");
+        if (userName) {
+            SMLTOWN.user.name = userName;
+        }
+    })();
+
+    $(document).one("ready", function() {
         SMLTOWN.Transform.windowResize();
-        
+
         $("#smltown_footer").append("<i id='smltown_connectionCheck'>This server <span class='allowWebsocket'></span> allows websocket connection.</i>");
         SMLTOWN.Server.handleConnection();
     });
@@ -210,7 +194,7 @@ echo $script;
     <script type="text/javascript" src="<?php echo $smalltownURL ?>lang/<?php echo $lang ?>.js"></script>      
     <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/json2.js"></script>
     <script type="text/javascript" src="<?php echo $smalltownURL ?>js/Server.js"></script>
-    <script type="text/javascript" src="<?php echo $smalltownURL ?>js/requests.js"></script> <!--before connection-->
+    <script type="text/javascript" src="<?php echo $smalltownURL ?>js/request.js"></script> <!--before connection-->
 
     <script type="text/javascript" src="<?php echo $smalltownURL ?>js/Message.js"></script>
     <script type="text/javascript" src="<?php echo $smalltownURL ?>js/Update.js"></script>
@@ -224,5 +208,7 @@ echo $script;
     <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/jquery.mobile.events.min.js"></script>
     <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/modernizr.custom.36644.js"></script><!--after mobile.events-->
     <script type="text/javascript" src="<?php echo $smalltownURL ?>js/Events.js"></script><!--after modernizr-->
+
+    <script type="text/javascript" src="<?php echo $smalltownURL ?>social/facebook.js"></script>
 
 </html>

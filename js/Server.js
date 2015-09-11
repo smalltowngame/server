@@ -10,11 +10,12 @@ SMLTOWN.Server = {
     handleConnection: function () {
         console.log("handle connection");
         var $this = this;
+        
         if (!SMLTOWN.config.websocket_server) {
             SMLTOWN.Server.ajaxConnection();
             $(".smltown_allowWebsocket").text("NOT");
-            SMLTOWN.Server.request.addUser(SMLTOWN.user.name);
-            this.connected();
+            SMLTOWN.Server.request.addUser();
+            $this.connected();
             return;
         }
 
@@ -25,7 +26,7 @@ SMLTOWN.Server = {
             } else {
                 SMLTOWN.Server.websocket = true;
             }
-            SMLTOWN.Server.request.addUser(SMLTOWN.user.name);
+            SMLTOWN.Server.request.addUser();
             $this.connected();
         });
     }
@@ -97,11 +98,12 @@ SMLTOWN.Server = {
 
                 $this.ajax("", function (connected) {
                     console.log("websocket reconnection?: " + connected);
+                    connected = parseInt(connected);
                     $this.websocketReconnection = true;
-                    if (0 < parseInt(connected)) {
+                    if (0 < connected) {
                         //try again all connection
                         $this.handleConnection();
-                    } else if (-1 == parseInt(connected) && !$this.websocketError) {                        
+                    } else if (-1 == connected && !$this.websocketError) {
                         //still connected? reconnect to websocket?
                         $this.websocketConnection(callback);
                         $this.websocketError = true;
@@ -156,9 +158,7 @@ SMLTOWN.Server = {
         var HttpRequest = this.HttpRequest;
 
         //stop
-        HttpRequest.abort();
-        clearTimeout(this.pingTimeout);
-        this.ping = this.fastPing;
+        this.stopPing();
 
         if (!SMLTOWN.Game.info.id) {
             smltown_error("wrong game id: " + SMLTOWN.Game.info.id + ", leaving...");
@@ -183,13 +183,23 @@ SMLTOWN.Server = {
             if (HttpRequest.responseText) { //catch errors and code
                 $this.parseResponse(HttpRequest.responseText)
             }
+
             //next interval
             $this.pingTimeout = setTimeout(function () {
                 $this.pingRequest();
             }, $this.ping);
 //        }, SMLTOWN.server.ping += 10);
+
+            $this.checkNetworkError(HttpRequest);
+
         };
         this.pingRequest();
+    }
+    ,
+    stopPing: function () {
+        this.HttpRequest.abort();
+        clearTimeout(this.pingTimeout);
+        this.ping = this.fastPing;
     }
     ,
     pingRequest: function () {
@@ -232,10 +242,13 @@ SMLTOWN.Server = {
                 if (callback) {
                     callback();
                 }
+
+                //if con't connect ajax => network error
+                $this.checkNetworkError(this);
             };
         };
         //ajax ping if websocket fails
-        if($("#smltown_game").length){
+        if ($("#smltown_game").length) {
             this.startPing();
         }
     }
@@ -306,7 +319,8 @@ SMLTOWN.Server = {
             return;
         }
         if (!SMLTOWN.Game.info.id) { //prevent bad requests errors
-            console.log("not in game");
+            console.log("not in game:");
+            console.log(res);
             return;
         }
 
@@ -363,7 +377,11 @@ SMLTOWN.Server = {
 //            return false;
 //        }
         req.onreadystatechange = function () { //DEBUG
-            if (req.readyState == 4 && req.responseText) {
+            if (req.readyState != 4) {
+                return;
+            }
+
+            if (req.responseText) {
 //                console.log(req.responseText)
                 if (callback) {
                     var parse;
@@ -377,17 +395,22 @@ SMLTOWN.Server = {
                     }
                     callback(parse);
                 }
-                
-                //if con't connect ajax => network error
-                if (this.status != 200 && !isValid(this.response) && this.status == 0) {
-                    console.log("The computer appears to be offline.");                    
-                    smltown_debug("trying reconnection every 3 min.");
-                    setTimeout(function () {
-                        $this.handleConnection();
-                    }, 180000); //try reconnect every 3 min
-
-                }
             }
+            //if con't connect ajax => network error
+            $this.checkNetworkError(this);
         };
+    }
+    ,
+    checkNetworkError: function (XMLHttpRequest) {
+        if ("" == XMLHttpRequest.response && XMLHttpRequest.status == 0) {
+            var $this = this;
+            this.stopPing();
+            console.log("The computer appears to be offline.");
+            smltown_debug("trying reconnection every 2 min.");
+
+            setTimeout(function () {
+                $this.handleConnection();
+            }, 120000); //try reconnect every 2 min
+        }
     }
 };

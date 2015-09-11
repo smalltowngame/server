@@ -114,7 +114,7 @@ var lang = {
     ,
     noCard: "aún no tienes carta"
     ,
-    youEspectator: "eres espectador"
+    youSpectator: "eres espectador"
     ,
     youDead: "hey!, estas muerto"
     ,

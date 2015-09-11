@@ -23,8 +23,22 @@ trait Request {
         if (null == $userId) {
             $userId = getRandomUserId();
         }
-        $values = array('userName' => $userName, 'userId' => $userId, 'lang' => $lang);
-        sql("INSERT INTO smltown_players (id, name, lang) VALUES (:userId, :userName, :lang) ON DUPLICATE KEY UPDATE name=VALUES(name), lang=VALUES(lang)", $values);
+        $values = array('name' => $userName, 'userId' => $userId, 'lang' => $lang);
+        $sqlRows = "id, name, lang";
+        $sqlValues = ":userId, :name, :lang";
+        if (isset($this->requestValue['type'])) {
+            $values['type'] = $this->requestValue['type'];
+            $sqlRows .= ",type";
+            $sqlValues .= ",:type";
+        }
+        if (isset($this->requestValue['socialId'])) {
+            $values['socialId'] = $this->requestValue['socialId'];
+            $sqlRows .= ",socialId";
+            $sqlValues .= ",:socialId";
+        }
+        sql("INSERT INTO smltown_players ($sqlRows) VALUES ($sqlValues) "
+                . "ON DUPLICATE KEY UPDATE name=VALUES(name), lang=VALUES(lang), "
+                . "type=VALUES(type), socialId=VALUES(socialId)", $values);
 
         //WEBSOCKET
         if (isset($this->requestValue['socket'])) {
@@ -33,6 +47,7 @@ trait Request {
             $this->requestValue['socket']->userId = $userId;
         }
 
+        //if not exists
         setcookie('smltown_userId', $userId);
         return $userId;
     }
@@ -82,7 +97,7 @@ trait Request {
         // if not exists
         $values = array('userId' => $userId, 'gameId' => $gameId);
         $sth = sql("INSERT INTO smltown_plays (userId, gameId, admin) SELECT :userId, :gameId,"
-                . " CASE WHEN (SELECT count(*) FROM smltown_plays WHERE admin = 1 AND gameId = :gameId) = 0 THEN 1 ELSE 0 END" //admin
+                . " CASE WHEN (SELECT count(*) FROM smltown_plays WHERE admin = 1 AND gameId = :gameId) = 0 THEN 1 ELSE -1 END" //admin
                 . " FROM DUAL" //from ANY TABLE (read table only 1 time)
                 . " WHERE (SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = :gameId) = 0", $values);
 
@@ -115,6 +130,63 @@ trait Request {
         $this->updateGame($playId);
 
         $this->checkGameErrors();
+    }
+
+    public function playGame() {
+        $userId = $this->userId;
+        $playId = $this->requestValue['id'];
+
+        $sth = sql("UPDATE smltown_plays SET admin = 0 WHERE id = $playId AND userId = '$userId'");
+        if ($sth->rowCount() == 0) {
+            echo "error: can't playGame with this credentials";
+        } else {
+            $this->updatePlayer($playId, "admin"); //way to update new players to other people
+        }
+    }
+
+    public function deletePlayer() { //at specific game
+        $gameId = $this->gameId;
+        $playId = $this->playId;
+        $id = $this->requestValue['id'];
+
+        $values = array(
+            'id' => $id
+        );
+        
+        $card = null;
+        $plays = petition("SELECT card FROM smltown_plays WHERE id = $playId");
+        if (count($plays) > 0) {
+            $card = $plays[0]->card;
+        }
+
+        $sth = sql("DELETE FROM smltown_plays WHERE ("
+                . " 1 = (SELECT * FROM (SELECT admin FROM smltown_plays WHERE id = $playId) AS a)"
+                . " OR id = $playId) "
+                . " AND id = :id", $values);
+
+        if ($sth->rowCount() == 0) { //nothing changes
+            echo "can't delete player of game.";
+            return;
+        }
+
+        if (isset($card)) {
+            sql("UPDATE smltown_plays SET card = '', status = NULL WHERE gameId = $gameId AND ", $values); //prevent important card removes from game
+            $this->updatePlayers(null, "status");
+        }
+
+        $this->updateUsers(null, "card");
+    }
+
+    public function spectatorMode() {
+        $userId = $this->userId;
+        $playId = $this->requestValue['id'];
+
+        $sth = sql("UPDATE smltown_plays SET admin = -1 WHERE id = $playId AND userId = '$userId'");
+        if ($sth->rowCount() == 0) {
+            echo "error: can't spectatorMode with this credentials";
+        } else {
+            $this->updatePlayer($playId, "admin"); //way to update new players to other people
+        }
     }
 
     public function setName() {

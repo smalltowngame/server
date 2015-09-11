@@ -1,7 +1,7 @@
 
 SMLTOWN.Add = {
     backgroundCard: function (div, filename) {     
-        console.log(444)
+
         var nameArray = filename.split("_");
         var nameCard = nameArray[nameArray.length - 1];
         var gamePath = "games/" + SMLTOWN.Game.info.type;
@@ -86,7 +86,7 @@ SMLTOWN.Add = {
             for (var id in SMLTOWN.players) {
                 if (id && id != SMLTOWN.user.id) {
                     $("#" + id).append(
-                            "<div class='smltown_waiting smltown_quit smltown_button'>quit</div>");
+                            "<div class='smltown_waiting smltown_quit'>quit</div>");
                 }
             }
         }

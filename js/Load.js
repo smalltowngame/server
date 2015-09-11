@@ -2,7 +2,6 @@
 SMLTOWN.Load = {
     //LOAD CALL    
     showPage: function (url, why) {
-        var $this = this;
         if (why) {
             console.log("show Page: " + url + " for " + why);
         }
@@ -93,7 +92,6 @@ SMLTOWN.Load = {
     ,
     //GAME
     loadGame: function () {
-        var $this = this;
         var hashArray = location.hash.split("?");
         if (hashArray.length > 1) {
             SMLTOWN.Game.info.id = hashArray[1];

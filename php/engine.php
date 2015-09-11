@@ -165,7 +165,7 @@ trait Engine {
                 //
                 //cout if some alive is not selecting
                 . "WHERE smltown_plays.gameId = $gameId AND "
-                . "smltown_plays.status > 0 AND sel IS NULL AND smltown_plays.admin > -1 "
+                . "smltown_plays.status > 0 AND sel IS NULL AND smltown_plays.admin != -2 "
                 //count if games.time is NOT over (null || 0)
                 . "OR smltown_games.time > " . microtime(true));
 

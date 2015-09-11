@@ -20,31 +20,33 @@ class Tables {
             'openVoting' => "int(1)",
             'endTurn' => "int(1) DEFAULT 1",
             //
-            'lastConnection' => "timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
+            'lastConnection' => "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
             'PRIMARY KEY' => "(id)"
         ),
         'smltown_players' => array(
             'id' => "varchar(255) UNIQUE NOT NULL",
             'name' => "varchar(255)",
             'lang' => "varchar(255)",
+            'type' => "varchar(255)",
+            'socialId' => "varchar(255)",
             'gameId' => "int(11)",
-            'reply' => "text NOT NULL default ''",
+            'reply' => "text NOT NULL DEFAULT ''",
             'websocket' => "int(11) DEFAULT 0",
-            'lastConnection' => "timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
+            'lastConnection' => "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
             'PRIMARY KEY' => "(id)"
         ),
         'smltown_plays' => array(
             'id' => "int(11) UNSIGNED NOT NULL AUTO_INCREMENT", //phpmyqdmin edit
             'userId' => "varchar(255) NOT NULL",
             'gameId' => "int(11) UNSIGNED NOT NULL",
-            'admin' => "int(11)",
+            'admin' => "int(11) NOT NULL DEFAULT -1",
             'card' => "varchar(255)",
             'rulesPHP' => "text",
             'rulesJS' => "text",
             'status' => "int(11)",
             'sel' => "int(11)",
             'message' => "text",
-            'reply' => "text NOT NULL default ''",
+            'reply' => "text NOT NULL DEFAULT ''",
             'PRIMARY KEY' => "(id)"
         )
     );
@@ -92,8 +94,15 @@ class Tables {
         foreach ($this->tables as $tablename => $array) {
             foreach ($array as $colNames => $value) {
                 if ($columnName == $colNames) {
-                    sql("ALTER TABLE $tablename ADD $columnName $value");
-                    return;
+                    echo 666;
+                    $sth = sql("SHOW COLUMNS FROM $tablename LIKE '$columnName'");
+                    $exists = ($sth->rowCount()) ? TRUE : FALSE;
+                    
+                    if(!$exists){
+                        echo 777;
+                        petition("ALTER TABLE $tablename ADD $columnName $value");
+                    }
+                    echo 888;
                 }
             }
         }

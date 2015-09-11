@@ -6,19 +6,19 @@ include_once 'config.php';
 global $pdo;
 
 //database credentials
-if(!isset($database_location)){
+if (!isset($database_location)) {
     $database_location = "localhost";
 }
-if(!isset($database_name)){
+if (!isset($database_name)) {
     $database_name = "smalltown";
 }
-if(!isset($database_user)){
+if (!isset($database_user)) {
     $database_user = "root";
 }
-if(!isset($database_pass)){
+if (!isset($database_pass)) {
     $database_pass = "";
 }
-if(isset($database_port) && !empty($database_port)){
+if (isset($database_port) && !empty($database_port)) {
     $database_name .= ";port=$database_port";
 }
 
@@ -45,7 +45,7 @@ function sql($str, $values = null) {
     if (!isset($pdo)) {
         $error = "error: Wrong data base credentials on 'config.php' file.";
         global $admin_contact;
-        if(isset($admin_contact) && !empty($admin_contact) && false != $admin_contact){
+        if (isset($admin_contact) && !empty($admin_contact) && false != $admin_contact) {
             $error .= "<br/>Please contact with the site admin: " . $admin_contact;
         }
         exit($error);
@@ -109,9 +109,11 @@ function PDOerror($sth, $str = '') {
     } else if ($sth->errorCode() == '42S22') { //if col error
         $array = $sth->errorInfo()[2];
         $col = split("'", $array)[1];
+        $arrayName = split("\.", $col);
+        $name = $arrayName[count($arrayName) - 1];
         include_once 'tables.php';
         $tables = new Tables;
-        $tables->addColumn($col);
+        $tables->addColumn($name);
     }
 }
 

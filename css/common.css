@@ -35,7 +35,7 @@ html, body{
     background-color: white;
     background-image: url("../img/background4.jpg");
     position: relative;
-    box-shadow: inset 1px 0 black, inset -1px 0 black;
+    box-shadow: inset 2px 0 black, inset -2px 0 black;
 
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -63,7 +63,7 @@ html, body{
     background-image: url("../img/loader.gif");
 }
 
-.smltown_dialog{
+#smltown_dialog{
     display: block;
     position: absolute;
     width: 100%;
@@ -73,7 +73,7 @@ html, body{
     z-index: 99;
     text-align: center;
 }
-.smltown_dialog form{    
+#smltown_dialog form{    
     width: 90%;
     height: 60%;
     margin: auto;
@@ -86,10 +86,10 @@ html, body{
     -moz-box-shadow: 5px 0 20px rgba(0,0,0,0.4), -5px 0 20px rgba(0,0,0,0.4);
     box-shadow: 5px 0 20px rgba(0,0,0,0.4), -5px 0 20px rgba(0,0,0,0.4);
 }
-.smltown_dialog form > *{
+#smltown_dialog form > *{
     font-weight: bold;
 }
-.smltown_dialog input{
+#smltown_dialog input{
     width: 100%;
     margin-top: 10px;
     text-align: center;
@@ -144,7 +144,7 @@ html, body{
     box-shadow: inset 1px 1px 2px rgb(100,100,100);    
 }
 
-.smltown_dialog input, .smltown_dialog .smltown_button{
+#smltown_dialog input, #smltown_dialog .smltown_button{
     margin-bottom:15px;
 }
 

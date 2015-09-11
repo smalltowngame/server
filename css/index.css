@@ -42,11 +42,15 @@ a:hover{
     bottom: 50px;
     left: 0;
     right: 0;
-    overflow: hidden
+    overflow-x: hidden;
 }
 
 #smltown_games .smltown_button{
     font-weight: bold;
+}
+#smltown_games{
+    min-height: calc(100% - 99px);
+    margin: 0 auto;    
 }
 #smltown_games > div{
     position: relative;
@@ -191,7 +195,6 @@ a:hover{
     right: 15px;
 }
 .smltown_game small{
-    /*color: rgba(0,0,0,0.5);*/
     color: rgb(125,125,125);
     font-weight: normal;
 }
@@ -208,6 +211,6 @@ a:hover{
 }
 
 #smltown_footer{
-    height: 80px;
+    height: 85px;
 }
 
