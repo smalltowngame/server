@@ -12,6 +12,11 @@
 
 //auto-init
 window.fbAsyncInit = function () {
+    $("#smltown_footer").append(
+                        "<fb:login-button autologoutlink='true'></fb:login-button>");
+            
+    
+    
     FB.init({
         appId: '1572792739668689',
         cookie: true, // enable cookies to allow the server to access 
@@ -19,6 +24,14 @@ window.fbAsyncInit = function () {
         xfbml: true, // parse social plugins on this page
         version: 'v2.4'
     });
+    
+//    FB.Logout();
+
+    FB.login(function (response) {
+        if (response.authResponse) {
+            window.location.reload();
+        }
+    }, {scope: 'email,user_friends'});
 
     FB.getLoginStatus(function (response) {
         SMLTOWN.Social.facebook.statusChangeCallback(response);
