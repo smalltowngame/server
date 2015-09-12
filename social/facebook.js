@@ -1,6 +1,6 @@
 
 // Load the SDK asynchronously
-(function(d, s, id) {
+(function (d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id))
         return;
@@ -11,7 +11,7 @@
 }(document, 'script', 'facebook-jssdk'));
 
 //auto-init
-window.fbAsyncInit = function() {
+window.fbAsyncInit = function () {
     FB.init({
         appId: '1572792739668689',
         cookie: true, // enable cookies to allow the server to access 
@@ -20,7 +20,7 @@ window.fbAsyncInit = function() {
         version: 'v2.2' // use version 2.2
     });
 
-    FB.getLoginStatus(function(response) {
+    FB.getLoginStatus(function (response) {
         SMLTOWN.Social.facebook.statusChangeCallback(response);
     });
 };
@@ -32,14 +32,14 @@ if (typeof SMLTOWN == "undefined") {
 SMLTOWN.Social = {
     facebook: {
         // Login button action
-        checkLoginState: function() {
-            FB.getLoginStatus(function(response) {
+        checkLoginState: function () {
+            FB.getLoginStatus(function (response) {
                 statusChangeCallback(response);
             });
         }
         ,
         // This is called with the results from from FB.getLoginStatus().
-        statusChangeCallback: function(response) {
+        statusChangeCallback: function (response) {
             console.log('statusChangeCallback');
             if (response.status === 'connected') {
                 console.log("connected in facebook");
@@ -55,11 +55,13 @@ SMLTOWN.Social = {
         }
         ,
         // Here we run a very simple test of the Graph API after login is successful.
-        onConnect: function() {
+        onConnect: function () {
+            var $this = this;
             // Your like button code //not .show() because !important
             $(".fb-like").addClass("smltown_show");
+//            $(".fb-like").css('width', $(".fb-like").width());
 
-            FB.api('/me?fields=name,third_party_id', function(user) {
+            FB.api('/me?fields=name,third_party_id,friends,taggable_friends,invitable_friends', function (user) {
                 console.log('Successful login for: ' + user.name);
 //                document.getElementById('status').innerHTML = "<image src='http://graph.facebook.com/" + response.id + "/picture'>";
 
@@ -69,14 +71,27 @@ SMLTOWN.Social = {
                 SMLTOWN.user.name = user.name;
                 SMLTOWN.Server.request.addUser("facebook", user.id);
                 //TODO remove credentials when not logued ?
+                                
+                console.log(user)
+                //friends
+                $("#friendsMenu").show();
+                $("#smltown_friends").on("tap", function () {
+                    $this.invite(user['taggable_friends']);
+                });
             });
         }
         ,
-        reload: function() {
+        reload: function () {
             try {
                 FB.XFBML.parse();
             } catch (ex) {
             }
+        }
+        ,
+        invite: function (friends) {
+            var friendSelector = $("<div id=friendSelector>");
+            $("#smltown_game").append(friendSelector);
+            console.log(friends);
         }
     }
 };

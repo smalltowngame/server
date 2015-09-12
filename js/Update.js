@@ -306,8 +306,6 @@ SMLTOWN.Update = {
                 $("#smltown_listDead").append(div);
                 div.addClass("smltown_dead");
                 div.find(".smltown_playerStatus").smltown_text("dead");
-                //div.find(".smltown_extra").text("☠");
-                div.find(".smltown_extra").text("✘");
             } else {
                 $("#smltown_listAlive").append(div);
                 div.find(".smltown_playerStatus").smltown_text("alive");

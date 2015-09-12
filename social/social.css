@@ -9,3 +9,7 @@
 .fb-like.smltown_show{
     display: inline-block !important;
 }
+
+.fb-like{
+    overflow: hidden;
+}

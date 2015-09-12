@@ -143,15 +143,12 @@ echo $script;
         <link rel="shortcut icon" href="<?php echo $smalltownURL ?>favicon.ico" type="image/x-icon"/>
         <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/errorLog.js"></script>
 
-
-
-        <link rel="stylesheet" type="text/css" href="<?php echo $smalltownURL ?>css/index.css">
+        <link rel='stylesheet' href="<?php echo $smalltownURL ?>css/index.css">
         <link rel='stylesheet' href='<?php echo $smalltownURL ?>css/common.css'>
         <link rel='stylesheet' href='<?php echo $smalltownURL ?>css/game.css'>
         <link rel='stylesheet' href='<?php echo $smalltownURL ?>css/static.css'>
-        <!--<link rel='stylesheet' href='css/animations.css'>-->
         <link rel='stylesheet' href='<?php echo $smalltownURL ?>css/icons.css'>
-        <link rel='stylesheet' href='<?php echo $smalltownURL ?>css/social.css'>     
+        <link rel='stylesheet' href='<?php echo $smalltownURL ?>social/social.css'>     
     </head>
 
     <!--smalltown is class if not plugin-->
@@ -176,14 +173,14 @@ echo $script;
     SMLTOWN.user.name = SMLTOWN.Util.getLocalStorage("smltown_userName");
 
     // external cookie overwrites
-    (function() {
+    (function () {
         var userName = SMLTOWN.Util.getCookie("smltown_userName");
         if (userName) {
             SMLTOWN.user.name = userName;
         }
     })();
 
-    $(document).one("ready", function() {
+    $(document).one("ready", function () {
         SMLTOWN.Transform.windowResize();
 
         $("#smltown_footer").append("<i id='smltown_connectionCheck'>This server <span class='allowWebsocket'></span> allows websocket connection.</i>");
@@ -210,5 +207,12 @@ echo $script;
     <script type="text/javascript" src="<?php echo $smalltownURL ?>js/Events.js"></script><!--after modernizr-->
 
     <script type="text/javascript" src="<?php echo $smalltownURL ?>social/facebook.js"></script>
+
+    <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/emoji/jquery.emojiarea.js"></script>
+    <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/emoji/packs/basic/emojis.js"></script>
+    <link rel='stylesheet' href='<?php echo $smalltownURL ?>libs/emoji/jquery.emojiarea.css'>   
+    <script>
+        $.emojiarea.path = '<?php echo $smalltownURL ?>libs/emoji/packs/basic/images';
+    </script>
 
 </html>

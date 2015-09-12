@@ -1,13 +1,13 @@
 
 //MULTILANGIAGE DETECTION
-(function($) {
-    $.fn.smltown_text = function(text) {
+(function ($) {
+    $.fn.smltown_text = function (text) {
         this.text(check(text));
     };
-    $.fn.smltown_append = function(text) {
+    $.fn.smltown_append = function (text) {
         this.append(check(text));
     };
-    $.fn.smltown_prepend = function(text) {
+    $.fn.smltown_prepend = function (text) {
         this.prepend(check(text));
     };
     function check(text) {
@@ -22,9 +22,9 @@
 })(jQuery);
 
 SMLTOWN.Message = {
-    login: function(log) {
+    login: function (log) {
 
-        this.inputDialog("set your name", function(name) { //ok callback
+        this.inputDialog("set your name", function (name) { //ok callback
             for (var id in SMLTOWN.players) {
                 if (SMLTOWN.players[id].name == name) {
                     $("#smltown_login .smltown_log").smltown_text("duplicatedName");
@@ -33,20 +33,20 @@ SMLTOWN.Message = {
             }
             SMLTOWN.Server.request.setName(name);
 
-        }, function() {  //cancel callback
+        }, function () {  //cancel callback
             SMLTOWN.Server.request.deletePlayer(SMLTOWN.user.id);
             SMLTOWN.Load.showPage("gameList");
 
         }, log);
     }
     ,
-    inputDialog: function(placeholder, okCallback, cancelCallback, log) {
+    inputDialog: function (placeholder, okCallback, cancelCallback, log) {
         if (typeof log == "object") {
             log = log.log; //server side
         }
 
         $("#smltown_dialog").remove(); //clean
-        $("#smltown_body").append("<div id='smltown_dialog'><form id='smltown_dialogForm'>"
+        $("#smltown").append("<div id='smltown_dialog'><form id='smltown_dialogForm'>"
                 + "<input type='text' class='smltown_dialogInput' placeholder='" + placeholder + "'>"
                 + "<input type='submit' value='Ok'>"
                 + "<div class='smltown_button smltown_cancel'>Cancel</div>"
@@ -60,7 +60,7 @@ SMLTOWN.Message = {
         $("#smltown_dialogForm .smltown_dialogInput").focus();
 
         //EVENTS
-        $("#smltown_dialogForm").submit(function() { //submit 4 device buttons
+        $("#smltown_dialogForm").submit(function () { //submit 4 device buttons
             var value = $(this).find(".smltown_dialogInput").val();
             if (!value || !/\S/.test(value)) { //not only whitespaces
                 $("#smltown_dialog .smltown_log").smltown_text("cannot empty!");
@@ -70,7 +70,7 @@ SMLTOWN.Message = {
             $("#smltown_dialog").remove();
             return false; //prevent submit
         });
-        $("#smltown_dialogForm .smltown_cancel").on("tap", function() {
+        $("#smltown_dialogForm .smltown_cancel").on("tap", function () {
             if (cancelCallback) {
                 cancelCallback();
             }
@@ -78,7 +78,7 @@ SMLTOWN.Message = {
         });
     }
     ,
-    setMessage: function(data) { //PERMANENT MESSAGES
+    setMessage: function (data) { //PERMANENT MESSAGES
         var t = this.translate;
         var text;
 
@@ -102,7 +102,7 @@ SMLTOWN.Message = {
         this.showMessage(text, action);
     }
     ,
-    showMessage: function(text, action) { //overrided
+    showMessage: function (text, action) { //overrided
 //        var $this = this;
 //        var time = 0;
 //        var stop = false;
@@ -121,7 +121,7 @@ SMLTOWN.Message = {
 //        }, time);
     }
     ,
-    notify: function(text, okCallback, cancelCallback, gameId) {
+    notify: function (text, okCallback, cancelCallback, gameId) {
         //console.log(gameId);
         if (gameId && SMLTOWN.Game.info.id != gameId) {
             this.external(text, gameId);
@@ -150,7 +150,7 @@ SMLTOWN.Message = {
 
         if (okCallback) { //!= false
             $("#smltown_popupOk").show();
-            $("#smltown_popupOk").one("tap", function(e) {
+            $("#smltown_popupOk").one("tap", function (e) {
                 e.preventDefault(); //prevent player select
                 //hide
                 $this.removeNotification(true);
@@ -163,7 +163,7 @@ SMLTOWN.Message = {
 
         if (cancelCallback) { //!= false
             $("#smltown_popupCancel").show();
-            $("#smltown_popupCancel").one("tap", function(e) {
+            $("#smltown_popupCancel").one("tap", function (e) {
                 e.preventDefault(); //prevent player select
                 //hide
                 $this.removeNotification(true);
@@ -174,7 +174,7 @@ SMLTOWN.Message = {
         }
     }
     ,
-    removeNotification: function(force) {
+    removeNotification: function (force) {
         var filter = $("#smltown_filter");
         if (!force && filter.hasClass("smltown_message")) {
             return;
@@ -182,7 +182,7 @@ SMLTOWN.Message = {
         filter.removeClass("smltown_notification");
     }
     ,
-    setLog: function(text, type) {
+    setLog: function (text, type) {
         var log = $("#smltown_consoleText > div > div");
         var div = $("<div>");
         if (SMLTOWN.isNight) {
@@ -205,7 +205,7 @@ SMLTOWN.Message = {
 //        $("#smltown_console .text").prepend("<div><span class='time'>" + new Date().toLocaleTimeString() + " </span>" + text + "</div>");
 //    }
     ,
-    flash: function(text, gameId) {
+    flash: function (text, gameId) {
 
         if (gameId && SMLTOWN.Game.info.id != gameId) {
             this.external(text, gameId);
@@ -215,7 +215,7 @@ SMLTOWN.Message = {
         $("#smltown_flash").remove();
         var div = $("<div id='smltown_flash'><div>" + this.translate(text) + "</div></div>");
         $("#smltown_html").append(div);
-        setTimeout(function() {
+        setTimeout(function () {
             div.remove();
         }, 1500);
 
@@ -224,7 +224,7 @@ SMLTOWN.Message = {
         }
     }
     ,
-    addChats: function() {
+    addChats: function () {
         var chatName = "chat" + SMLTOWN.Game.info.id;
         var chats = localStorage.getItem(chatName);
         if (!chats) {
@@ -241,7 +241,7 @@ SMLTOWN.Message = {
         SMLTOWN.Add.userNamesByClass();
     }
     ,
-    addChat: function(text, playId, gameId, name) { //from server
+    addChat: function (text, playId, gameId, name) { //from server
         if (typeof playId == "undefined") {
             playId = null;
         }
@@ -261,20 +261,34 @@ SMLTOWN.Message = {
         this.writeChat(text, playId);
     }
     ,
-    writeChat: function(text, playId) {
+    writeChat: function (text, playId) {
         var name = "";
         if (typeof SMLTOWN.players[playId] != "undefined") { //if player no longer exists
             name = SMLTOWN.players[playId].name + ": ";
         }
-        $("#smltown_consoleLog > div").append("<div><span class='id" + playId + "'>" + name + "</span>" + text + "</div>");
+
+        var regex = /(?:\:)\b(\w*)\b(\:)/g;
+        text = text.replace(regex, function myFunction(key) {
+            for (var i = 0; i < $.emojiarea.icons.length; i++) {
+                var group = $.emojiarea.icons[i];
+                if(group.icons[key]){
+                    return window.emoji.EmojiArea.createIcon(i, key);
+                    break;
+                }
+            }
+            return "";
+        });
+
+        var chat = $("<div><span class='id" + playId + "'>" + name + "</span>" + text + "</div>");
+        $("#smltown_consoleLog > div").append(chat);
     }
     ,
-    clearChat: function() {
+    clearChat: function () {
         localStorage.removeItem("chat" + SMLTOWN.Game.info.id);
 //        localStorage.clear();
     }
     ,
-    translate: function(some, attr) {
+    translate: function (some, attr) {
         if (!lang[some]) {
 //            if (attr) {
 //                return attr + " " + some;
@@ -285,22 +299,22 @@ SMLTOWN.Message = {
         return lang[some];
     }
     ,
-    external: function(text, gameId, name) {
+    external: function (text, gameId, name) {
 
         text = "<small>" + name + ": </small> " + this.translate(text);
 
         $("#smltown_external").remove();
         var div = $("<div id='smltown_external'>" + text + "</div>");
-        div.click(function() {
+        div.click(function () {
             window.location.hash = "game?" + gameId;
         });
         $("#smltown_html").append(div);
 
-        setTimeout(function() {
+        setTimeout(function () {
             $("#smltown_external").addClass("smltown_visible");
         }, 100);
 
-        setTimeout(function() {
+        setTimeout(function () {
             $("#smltown_external").removeClass("smltown_visible");
         }, 4000);
     }

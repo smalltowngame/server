@@ -14,8 +14,10 @@ SMLTOWN.Transform = {
     ,
     windowResize: function () {
         //DEFINE HTML HEIGHT FOR PLUGINS
-        var rest = SMLTOWN.Util.getViewport().height - $("#smltown_html").offset().top;
-        $("#smltown_html").css("height", rest + "px");
+        if (!$("#smltown").length) {
+            var rest = SMLTOWN.Util.getViewport().height - $("#smltown_html").offset().top;
+            $("#smltown_html").css("height", rest + "px");
+        }
 
         if (9 * $(window).width() >= 16 * $(window).height()) {
             $("#smltown_html").addClass("smltown_static smltown_staticMenu");

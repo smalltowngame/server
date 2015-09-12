@@ -22,6 +22,8 @@ html, body{
     width: 100%;
     margin: 0 auto;
     overflow: hidden;
+    bottom: 0;
+    /*position: fixed;*/
 }
 
 #smltown_html, #smltown_body{    
@@ -105,18 +107,12 @@ html, body{
     width: 100%;
 }
 
-/*.smltown_error{
-    position:absolute;
-    z-index: 99;
-    color:red;
-    color: grey;
-}*/
-
 .smltown_unselect{
     pointer-events: none;
 }
 
-.smltown_button, #smltown_html input[type=text], #smltown_html input[type=submit], #smltown_html input[type=button]{ /* not checkbox */
+.smltown_button, #smltown_html input[type=text], #smltown_html input[type=submit], #smltown_html input[type=button],
+#smltown input[type=text], #smltown input[type=submit], #smltown input[type=button]{ /* not checkbox */
     padding: 0 10px;
     height: 50px;
     width: 100%;
@@ -125,7 +121,7 @@ html, body{
     -moz-box-sizing: border-box; 
     box-sizing: border-box;
 }
-.smltown_button, #smltown_html input{
+.smltown_button, #smltown_html input, #smltown input{
     background-color: white;
     border: 1px solid grey;
     color: rgb(50,50,50);

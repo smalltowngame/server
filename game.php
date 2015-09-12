@@ -166,6 +166,18 @@ if (count($games)) {
                     </div>
                 </div>
 
+                <div id="friendsMenu" class="smltown_selector" style="display: none">
+                    <div>
+                        <div class="icon">i</div>
+                        <span>Friends</span>
+                        <small>friendsHelp</small>
+                    </div>
+                    <div id="smltown_friends" class="smltown_action">
+                        <span>Invite</span>
+                        <small>inviteHelp</small>				
+                    </div>
+                </div>
+
                 <div class="smltown_selector">
                     <div>
                         <div class="icon">i</div>
@@ -201,16 +213,23 @@ if (count($games)) {
     </div>
 
     <div id="smltown_console">
-        <div id="smltown_consoleText">
-            <!--id 4 scroll detection-->
-            <div id="smltown_consoleLog">
-                <p class="smltown_errorLog"></p>
-                <div></div>
+        <div style="display: table; height: 100%; width: 100%">
+            <div id="smltown_consoleText">
+                <!--id 4 scroll detection-->
+                <div id="smltown_consoleLog">
+                    <p class="smltown_errorLog"></p>
+                    <div></div>
+                </div>
             </div>
+
+            <form id="smltown_chatForm">
+                <div style="position: relative">
+                    <!--<input type="text" id="smltown_chatInput" class="emojis-wysiwyg"/>-->
+                    <textarea type="text" id="smltown_chatInput" class="emojis-wysiwyg"></textarea>
+                    <div id="smltown_sendInput"></div>
+                </div>
+            </form>
         </div>
-        <form id="smltown_chatForm">
-            <input type="text" id="smltown_chatInput"/>
-        </form>
     </div>
 
     <div id="smltown_cardConsole"></div>
@@ -222,6 +241,26 @@ if (count($games)) {
 
 <script type="text/javascript" src="<?php echo $smalltownURL ?>games/<?php echo $type ?>/frontEnd.js"></script>
 <script type="text/javascript" src="<?php echo $smalltownURL ?>games/<?php echo $type ?>/lang/<?php echo $lang ?>.js"></script>
+
+<script>
+    $('.emojis-wysiwyg').emojiarea({wysiwyg: true});
+    $("#smltown_sendInput").click(function () {
+        $("#smltown_chatForm").submit();
+        $("#smltown_chatInput").val("");
+        $(".emoji-wysiwyg-editor").html("");
+    });
+
+    $(".emoji-wysiwyg-editor").blur(function (e) {
+        if ($(e.target).parents("#smltown_chatForm").length > 0) {
+//            e.preventDefault();  //prevent default DOM action
+//            e.stopPropagation();   //stop bubbling
+
+            $(".emoji-wysiwyg-editor").trigger('focus');
+            $("#smltown_chatInput").trigger('change');
+        }
+    });
+
+</script>
 
 <script>
     console.log("game file load");
@@ -250,7 +289,7 @@ if (count($games)) {
     });
     SMLTOWN.Events.game();
     SMLTOWN.Server.request.addUserInGame(SMLTOWN.Game.info.id); //add this user to game
-    
+
     //start SOCKET imitation
     if (!SMLTOWN.Server.websocket) {
         SMLTOWN.Server.startPing();

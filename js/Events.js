@@ -167,15 +167,15 @@ SMLTOWN.Events = {
             $this.swipeLeft();
         });
 
-        $("#smltown_game").on("swiperight", function (e) {            
-            if("smltown_chatInput" == $(e.target).attr("id")){
+        $("#smltown_game").on("swiperight", function (e) {
+            if ("smltown_chatInput" == $(e.target).attr("id")) {
                 return;
             }
             e.preventDefault();
             $this.swipeRight();
         });
         $("#smltown_game").on("swipeleft", function (e) {
-            if("smltown_chatInput" == $(e.target).attr("id")){
+            if ("smltown_chatInput" == $(e.target).attr("id")) {
                 return;
             }
             e.preventDefault();
@@ -184,13 +184,14 @@ SMLTOWN.Events = {
 
         // ANY setTimeout for Android 2.3 focus !
         $("#smltown_console").on("mouseup", function (e) {
-            if ($(e.target).attr("id") == "smltown_chatInput") {
+            if ($(e.target).attr("id") == "smltown_chatForm" || $(e.target).parents('#smltown_chatForm').length > 0) {
                 return;
             }
 //            setTimeout(function () {
             $('#smltown_console').toggleClass("smltown_consoleExtended");
             if ($("#smltown_console").hasClass("smltown_consoleExtended")) {
-                $("#smltown_chatInput").focus();
+//                $("#smltown_chatInput").focus();
+                $(".emoji-wysiwyg-editor").focus();
             }
             SMLTOWN.Transform.chatUpdate();
 //            }, 300);
@@ -436,15 +437,20 @@ SMLTOWN.Events = {
             SMLTOWN.Server.request.setName(val);
             SMLTOWN.Message.flash("name saved");
         });
-        
+
         $("#smltown_spectatorMode").on("tap", function () {
             SMLTOWN.Server.request.spectatorMode(SMLTOWN.user.id);
         });
-        
+
         $("#smltown_cleanErrors").on("tap", function () {
             if ($(this).hasClass("active")) {
                 SMLTOWN.Load.cleanGameErrors();
             }
+        });
+
+        //ON FRIENDS
+        $("#smltown_friends").on("tap", function () {
+            //CUSTOM
         });
 
         if (document.location.hostname == "localhost") {

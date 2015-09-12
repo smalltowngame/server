@@ -284,6 +284,8 @@
     background: linear-gradient(rgb(200,220,155), rgb(195,220,130));
 
     -webkit-transition: -webkit-transform 150ms;
+    /*display: table;*/
+    /*height: 80% !important;*/
 }
 
 #smltown_console, #smltown_cardConsole{
@@ -327,6 +329,8 @@
 }
 
 #smltown_consoleText{
+    /*height: 100%;*/
+    display: table-row;
     height: 100%;
 }
 #smltown_consoleLog{
@@ -344,6 +348,9 @@
     content: attr(empty-content);
     color: rgb(99,99,99);
 }
+#smltown_consoleLog > div > div{     
+    line-height: 20px;
+}
 
 #smltown_consoleText span{     
     text-shadow: 1px 1px rgb(220,220,220);
@@ -357,7 +364,7 @@
 .smltown_consoleExtended{
     z-index: 12;
     height: auto !important;
-    top: 56px !important;
+    top: 5px !important;
     -webkit-transition: -webkit-transform 250ms, height 250ms;
     -moz-transition: -moz-transform 250ms, height 250ms;
     -ms-transition: -ms-transform 250ms, height 250ms;
@@ -365,13 +372,13 @@
     transition: transform 250ms, height 250ms;
 }
 .smltown_consoleExtended #smltown_consoleText{
-    height: calc(100% - 50px);
-    width: 100%;
-    bottom: 50px;
-    position: absolute;
+    /*    height: calc(100% - 50px);
+        width: 100%;
+        bottom: 50px;
+        position: absolute;*/
 }
 .smltown_consoleExtended #smltown_chatForm{
-    display: initial;  
+    display: table-row;  
 }
 
 #smltown_user .smltown_player{
@@ -949,6 +956,10 @@
     font-size: 40px;
     text-shadow: 2px 2px 1px black;
 }
+.smltown_dead .smltown_extra::before{
+    /*content: "☠";*/
+    content: "✘";
+}
 
 .smltown_dead .smltown_name{
     opacity:0.35;
@@ -1010,12 +1021,20 @@
 
 #smltown_chatForm{
     display: none;
-    margin:0;
+    /*margin:0;*/
     /*position: fixed;*/
-    position: absolute;
-    bottom: 0;
-    background-color: rgb(207,225,157);
+    /*position: absolute;*/
+    /*bottom: 0;*/
+    /*background-color: rgb(207,225,157);*/
+    position: relative;
+    /*display: table-row !important;*/
+    background-color: white;
 }
+#smltown_chatForm > div{
+    border-top: 1px solid grey;
+    min-height: 50px;
+}
+
 #smltown_chatInput{    
     line-height: inherit !important;
     font-size: 16px;
@@ -1378,3 +1397,14 @@ smltown_name{
 /*.daylight17{
     background: linear-gradient(to bottom, #090401 50%,#4B1D06 100%);
 }*/
+
+#friendSelector{
+    position: absolute;
+    top: 20px;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background-color: rgba(0,0,0,0.5);
+    border: 1px solid black;
+    border-radius: 20px;
+}
