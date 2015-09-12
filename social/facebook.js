@@ -75,8 +75,14 @@ SMLTOWN.Social = {
                 console.log(user)
                 //friends
                 $("#friendsMenu").show();
-                $("#smltown_friends").on("tap", function () {
-                    $this.invite(user['taggable_friends']);
+//                $("#smltown_friends").on("tap", function () {
+//                    $this.invite(user['taggable_friends']);
+//                });
+
+//                FB.api('/me/friends?fields=id, first_name', function (response) {
+                FB.api('me/friends', {fields: 'id, first_name', limit: 6}, function (response) {
+                    console.log(123);
+                    console.log(response);
                 });
             });
         }
@@ -93,6 +99,7 @@ SMLTOWN.Social = {
             $("#smltown_game").append(friendSelector);
             FB.api('/me/friends?fields=id, first_name', function (response) {
 //            FB.api('me/friends', {fields: 'id, first_name,picture', limit: 6}, function (response) {
+                console.log(123);
                 console.log(response);
             });
             console.log(friends);
