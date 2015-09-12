@@ -79,11 +79,16 @@ SMLTOWN.Social = {
 //                    $this.invite(user['taggable_friends']);
 //                });
 
-//                FB.api('/me/friends?fields=id, first_name', function (response) {
-                FB.api('me/friends', {fields: 'id, first_name', limit: 6}, function (response) {
-                    console.log(123);
-                    console.log(response);
-                });
+//                FB.api('/me/friends', function (response) {
+////                FB.api('me/friends', {fields: 'id, first_name', limit: 6}, function (response) {
+//                    console.log(123);
+//                    console.log(response);
+//                });
+            });
+
+            FB.api('/me/invitable_friends', {fields: 'name,id'}, function (response) {
+                console.log(123);
+                console.log(response);
             });
         }
         ,
