@@ -6,7 +6,7 @@
         return;
     js = d.createElement(s);
     js.id = id;
-    js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.4&appId=1572792739668689";
+    js.src = "//connect.facebook.net/en_US/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
@@ -17,7 +17,7 @@ window.fbAsyncInit = function () {
         cookie: true, // enable cookies to allow the server to access 
         // the session
         xfbml: true, // parse social plugins on this page
-        version: 'v2.2' // use version 2.2
+        version: 'v2.4'
     });
 
     FB.getLoginStatus(function (response) {
@@ -61,7 +61,7 @@ SMLTOWN.Social = {
             $(".fb-like").addClass("smltown_show");
 //            $(".fb-like").css('width', $(".fb-like").width());
 
-            FB.api('/me?fields=name,third_party_id,friends,taggable_friends,invitable_friends', function (user) {
+            FB.api('/me?fields=name,third_party_id', function (user) {
                 console.log('Successful login for: ' + user.name);
 //                document.getElementById('status').innerHTML = "<image src='http://graph.facebook.com/" + response.id + "/picture'>";
 
@@ -71,7 +71,7 @@ SMLTOWN.Social = {
                 SMLTOWN.user.name = user.name;
                 SMLTOWN.Server.request.addUser("facebook", user.id);
                 //TODO remove credentials when not logued ?
-                                
+
                 console.log(user)
                 //friends
                 $("#friendsMenu").show();
@@ -91,6 +91,10 @@ SMLTOWN.Social = {
         invite: function (friends) {
             var friendSelector = $("<div id=friendSelector>");
             $("#smltown_game").append(friendSelector);
+            FB.api('/me/friends?fields=id, first_name', function (response) {
+//            FB.api('me/friends', {fields: 'id, first_name,picture', limit: 6}, function (response) {
+                console.log(response);
+            });
             console.log(friends);
         }
     }
