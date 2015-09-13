@@ -172,7 +172,7 @@ if (count($games)) {
                         <span>Friends</span>
                         <small>friendsHelp</small>
                     </div>
-                    <div id="smltown_friends" class="smltown_action">
+                    <div id="smltown_showFriends" class="smltown_action">
                         <span>Invite</span>
                         <small>inviteHelp</small>				
                     </div>
