@@ -10,7 +10,7 @@ SMLTOWN.Server = {
     handleConnection: function () {
         console.log("handle connection");
         var $this = this;
-        
+
         if (!SMLTOWN.config.websocket_server) {
             SMLTOWN.Server.ajaxConnection();
             $(".smltown_allowWebsocket").text("NOT");
@@ -128,7 +128,13 @@ SMLTOWN.Server = {
         console.log("connected");
         SMLTOWN.Transform.windowResize();
         //DEFINE WAY TO NAVIGATE
-        if ($("body").attr("id") == "smltown" || $("html").attr("id") == "facebook") { //as MAIN webpage game
+        
+        var facebook = null;
+        if (typeof window.parent != "undefined") {
+            facebook = window.parent.document.getElementById("facebook");
+        }
+
+        if ($("body").attr("id") == "smltown" || facebook) { //as MAIN webpage game
             if (!window.location.hash) {
                 console.log("hash = 'gameList'");
                 window.location.hash = "gameList";
