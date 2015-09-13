@@ -79,7 +79,7 @@ SMLTOWN.Social = {
                 //friends
                 $("#smltown_html").addClass("smltown_facebook");
                 $("#smltown_friends").click(function () {
-                    $this.invite();
+                    SMLTOWN.Social.facebook.invite();
                 });
             });
         }
