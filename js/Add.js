@@ -1,11 +1,7 @@
 
 SMLTOWN.Add = {
-    backgroundCard: function (div, filename) {     
-
-        var nameArray = filename.split("_");
-        var nameCard = nameArray[nameArray.length - 1];
-        var gamePath = "games/" + SMLTOWN.Game.info.type;
-        var url = SMLTOWN.path + gamePath + "/cards/card_" + nameCard + ".jpg";
+    backgroundCard: function (div, filename) {
+        var url = this.getCardUrl(filename);
 
         $('<img/>').attr('src', url).load(function () {
             $(this).remove(); // prevent memory leaks as @benweet suggested
@@ -30,6 +26,13 @@ SMLTOWN.Add = {
             }
             div.addClass("smltown_textCard");
         });
+    }
+    ,
+    getCardUrl: function (filename) {
+        var nameArray = filename.split("_");
+        var nameCard = nameArray[nameArray.length - 1];
+        var gamePath = "games/" + SMLTOWN.Game.info.type;
+        return SMLTOWN.path + gamePath + "/cards/card_" + nameCard + ".jpg";
     }
     ,
     icons: function (game, content) {
@@ -210,7 +213,7 @@ SMLTOWN.Add = {
             var button = $("<button>");
             button.text("ok");
             button.click(function () {
-                $this.nextHelp(next+1);
+                $this.nextHelp(next + 1);
             });
             help.append(button);
             //
@@ -222,7 +225,7 @@ SMLTOWN.Add = {
             $(target).on(event + ".help", function () {
                 console.log("help event");
                 $(this).off(".help");
-                $this.nextHelp(next+1);
+                $this.nextHelp(next + 1);
             });
         }
 
