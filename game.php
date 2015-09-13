@@ -307,5 +307,8 @@ if (count($games)) {
     //info
     $("#smltown_disclaimer").load(SMLTOWN.path + "./game_disclaimer.html");
     $("#smltown_currentUrl").append("<b>Current URL:</b> <br/><br/> <small>" + window.location.href + "</small>");
-
+    
+    //cookie
+    SMLTOWN.Util.setPersistentCookie("smltown_gameId", SMLTOWN.Game.info.id);
+    
 </script>

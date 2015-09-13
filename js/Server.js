@@ -142,8 +142,9 @@ SMLTOWN.Server = {
 
         } else { //as PLUGIN
             console.log("plugin");
-            if (typeof SMLTOWN.Game.info.id != "undefined") {
-                SMLTOWN.Load.divLoad("game?" + SMLTOWN.Game.info.id);
+            var gameId = SMLTOWN.Util.getCookie("smltown_gameId");
+            if (gameId) {
+                SMLTOWN.Load.divLoad("game?" + gameId);
             } else {
                 SMLTOWN.Load.divLoad("gameList");
             }

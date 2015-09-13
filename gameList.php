@@ -51,5 +51,8 @@ if (isset($_COOKIE['smltown_userId'])) {
     $("#smltown_gamesWrapper").on("scrollBottom", function() {
         SMLTOWN.Games.loadMore();
     });
+    
+    //cookie
+    SMLTOWN.Util.setPersistentCookie("smltown_gameId", "");
 
 </script>
