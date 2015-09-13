@@ -75,12 +75,12 @@ SMLTOWN.Social = {
                 SMLTOWN.user.name = user.name;
                 SMLTOWN.Server.request.addUser("facebook", user.id);
                 //TODO remove credentials when not logued ?
+            });
 
-                //friends
-                $("#smltown_html").addClass("smltown_facebook");
-                $("#smltown_friends").click(function () {
-                    SMLTOWN.Social.facebook.invite();
-                });
+            //friends
+            $("#smltown_html").addClass("smltown_facebook");
+            $("#smltown_friends").click(function () {
+                SMLTOWN.Social.facebook.invite();
             });
         }
         ,
@@ -130,7 +130,7 @@ SMLTOWN.Social = {
             var friendSelector = $("#smltown_friendsContent");
             var div = $("<div class='smltown_invitableFriend'>");
             div.attr("socialId", f['id']);
-            
+
             div.append("<img src='" + f.picture.data.url + "'>");
 
             var name = $("<p>");
