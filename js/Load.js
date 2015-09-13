@@ -5,7 +5,7 @@ SMLTOWN.Load = {
         if (why) {
             console.log("show Page: " + url + " for " + why);
         }
-        if ($("body").attr("id") == "smltown") { //game as MAIN app
+        if (!SMLTOWN.Server.isPlugin()) { //game as MAIN app
             window.location.hash = url; //get hash and divLoad
         } else {
             this.divLoad(url);

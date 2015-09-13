@@ -129,7 +129,7 @@ SMLTOWN.Server = {
         SMLTOWN.Transform.windowResize();
         //DEFINE WAY TO NAVIGATE
 
-        if ($("body").attr("id") == "smltown" && !this.inIframe) { //as MAIN webpage game
+        if (!this.isPlugin()) { //as MAIN webpage game
             if (!window.location.hash) {
                 console.log("hash = 'gameList'");
                 window.location.hash = "gameList";
@@ -416,11 +416,15 @@ SMLTOWN.Server = {
         }
     }
     ,
-    inIframe: function () {
+    isPlugin: function () {
+        //is iframe
+        var iframe = true;
         try {
-            return window.self !== window.top;
+            iframe = window.self !== window.top;
         } catch (e) {
-            return true;
+            //
         }
+        
+        return ($("body").attr("id") == "smltown" && !iframe);
     }
 };
