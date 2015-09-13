@@ -394,7 +394,7 @@ SMLTOWN.Update = {
     getPicture: function(player) {
         //social
         if (player.type == "facebook" && player.socialId) {
-            return "http://graph.facebook.com/" + player.socialId + "/picture";
+            return "https://graph.facebook.com/" + player.socialId + "/picture";
         }
     }
     ,

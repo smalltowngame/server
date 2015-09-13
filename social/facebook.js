@@ -67,7 +67,7 @@ SMLTOWN.Social = {
 
             FB.api('/me?fields=name,third_party_id', function (user) {
                 console.log('Successful login for: ' + user.name);
-//                document.getElementById('status').innerHTML = "<image src='http://graph.facebook.com/" + response.id + "/picture'>";
+//                document.getElementById('status').innerHTML = "<image src='https://graph.facebook.com/" + response.id + "/picture'>";
 
                 SMLTOWN.Util.setPersistentCookie("smltown_userId", user["third_party_id"]);
                 localStorage.setItem("smltown_userName", user.name);
