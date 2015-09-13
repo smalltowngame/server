@@ -89,7 +89,8 @@ SMLTOWN.Social = {
                     console.log("background = " + background);
                     url = background.split("(")[1].split(")")[0];
                 }
-
+                
+                $("#smltown_filter").addClass("smltown_hide");
                 $("#smltown_win").remove();
                 $("#smltown_game").append("<div id='smltown_win'><div>"
                         + "<div class='smltown_image' style='background-image:url(" + url +")'></div>"
@@ -102,6 +103,7 @@ SMLTOWN.Social = {
 
                 $("#smltown_win .smltown_footer > div").click(function () {
                     $("#smltown_win").remove();
+                    $("#smltown_filter").removeClass("smltown_hide");
                 });
                 $("#smltown_win .smltown_footer .smltown_feed").click(function () {
                     $this.winFeed(url);
