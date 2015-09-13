@@ -77,7 +77,29 @@ SMLTOWN.Social = {
                 });
             };
             SMLTOWN.Social.winFeed = function () {
-                $this.winFeed();
+                var url = null;
+                var background = $("#smltown_cardFront .smltown_cardImage").css("background-image");
+                if (background) {
+                    console.log("background = " + background);
+                    url = background.split("(")[1].split(")")[0];
+                }
+
+                $("#smltown_win").remove();
+                $("#smltown_game").append("<div id='smltown_win'><div>"
+                        + "<div class='smltown_image' style='background-image:url(" + url +")'></div>"
+                        + "<div class='smltown_text'>You won the game!</div>"
+                        + "<div class='smltown_footer'>"
+                        + "<div class='smltown_feed'>Share!</div>"
+                        + "<div>Ok</div>"
+                        + "</div>"
+                        + "</div></div>");
+
+                $("#smltown_win .smltown_footer > div").click(function () {
+                    $("#smltown_win").remove();
+                });
+                $("#smltown_win .smltown_footer .smltown_feed").click(function () {
+                    $this.winFeed(url);
+                });
             };
 
             FB.api("/me/apprequests", function (response) {
@@ -185,23 +207,16 @@ SMLTOWN.Social = {
 //            });
 //        }
         ,
-        winFeed: function () {
+        winFeed: function (url) {
             console.log("win feed: ");
             var cardName = SMLTOWN.user.card.split("_").pop();
-            
-            var url = null;
-            var background = $("#smltown_cardFront .smltown_cardImage").css("background-image");
-            if (background) {
-                console.log("background = " + background)
-                url = background.split("(")[1].split(")")[0];
-            }
-            
+
             FB.ui({
                 method: 'feed',
                 name: SMLTOWN.user.name + " won the Werewolf game!",
                 link: 'https://apps.facebook.com/smltown/',
                 picture: url,
-                caption: 'as survivor',
+                caption: 'Small Town',
                 description: SMLTOWN.user.name + " wins the game as a " + cardName + "."
 
             }, function (response) {  // callback

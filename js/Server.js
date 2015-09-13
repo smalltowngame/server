@@ -425,6 +425,6 @@ SMLTOWN.Server = {
             //
         }
         
-        return ($("body").attr("id") == "smltown" && !iframe);
+        return ($("body").attr("id") != "smltown" || iframe);
     }
 };
