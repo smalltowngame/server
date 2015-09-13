@@ -70,16 +70,19 @@ SMLTOWN.Social = {
             SMLTOWN.Social.invite = function () {
 //                $this.invite();
 
-                FB.ui({
-                    method: 'share',
-                    href: 'https://developers.facebook.com/docs/',
-                }, function (response) {  // callback
-                    if (response && !response.error_message) {
-                        alert('Posting completed.');
-                    } else {
-                        alert('Error while posting.');
-                    }
-                });
+//                FB.ui({
+//                    method: 'share',
+//                    href: 'https://developers.facebook.com/docs/',
+//                }, function (response) {  // callback
+//                    if (response && !response.error_message) {
+//                        alert('Posting completed.');
+//                    } else {
+//                        alert('Error while posting.');
+//                    }
+//                });
+                FB.ui({method: 'apprequests',
+                    message: 'come on man checkout my application. visit http://thinkdiff.net'});
+
             };
 
 
@@ -111,7 +114,7 @@ SMLTOWN.Social = {
         ,
         getRequestData: function (response) {
             var requestUrl = window.location.href.split("request_ids=");
-            if(requestUrl.length < 2){
+            if (requestUrl.length < 2) {
                 return;
             }
             var requestIds = requestUrl[1].split("&")[0].replace(/%2C/g, ",");
