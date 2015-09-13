@@ -170,7 +170,7 @@ trait Request {
         }
 
         if (isset($card)) {
-            sql("UPDATE smltown_plays SET card = '', status = NULL WHERE gameId = $gameId AND ", $values); //prevent important card removes from game
+            sql("UPDATE smltown_plays SET card = '', status = NULL WHERE gameId = $gameId", $values); //prevent important card removes from game
             $this->updatePlayers(null, "status");
         }
 

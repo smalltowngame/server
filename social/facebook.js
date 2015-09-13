@@ -186,6 +186,7 @@ SMLTOWN.Social = {
 //        }
         ,
         winFeed: function () {
+            console.log("win feed");
             var cardName = SMLTOWN.user.card.split("_").pop();
             var url = $("#smltown_cardFront .smltown_cardImage").css("background-image").split("(")[1].split(")")[0];
 
