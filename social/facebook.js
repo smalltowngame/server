@@ -69,23 +69,16 @@ SMLTOWN.Social = {
             $("#smltown_html").addClass("smltown_facebook");
             SMLTOWN.Social.invite = function () {
 //                $this.invite();
-
-//                FB.ui({
-//                    method: 'share',
-//                    href: 'https://developers.facebook.com/docs/',
-//                }, function (response) {  // callback
-//                    if (response && !response.error_message) {
-//                        alert('Posting completed.');
-//                    } else {
-//                        alert('Error while posting.');
-//                    }
-//                });
-                FB.ui({method: 'apprequests',
-                    message: 'come on man checkout my application. visit http://thinkdiff.net'});
-
+                FB.ui({
+                    method: "apprequests",
+                    title: "Werewolf invitation",
+                    message: "Let's play a game",
+                    data: SMLTOWN.Game.info.id
+                });
             };
-
-
+            SMLTOWN.Social.winFeed = function () {
+                $this.winFeed();
+            };
 
             FB.api("/me/apprequests", function (response) {
                 if (!response.data) {
@@ -136,59 +129,76 @@ SMLTOWN.Social = {
             } catch (ex) {
             }
         }
+//        ,
+//        invite: function () {
+//            var $this = this;
+//            $("#smltown_friendSelector").show();
+//
+//            FB.api('/me/friends', {fields: 'name,picture'}, function (response) {
+////                console.log(response);
+//                $("#smltown_friendsContent").html("");
+//
+//                var friends = response.data;
+//                for (var i = 0; i < friends.length; i++) {
+//                    console.log(friends[i]);
+//                    $this.invitableFriend(friends[i]);
+//                }
+//            });
+//
+//            $("#smltown_friendSelector .smltown_submit").click(function () {
+//
+//                // Get the list of selected friends
+//                var sendUIDs = '';
+//                var divFriends = $(".smltown_invitableFriend.active");
+//                for (var i = 0; i < divFriends.length; i++) {
+//                    sendUIDs += divFriends.attr("socialId") + ',';
+//                }
+//
+//                // Use FB.ui to send the Request(s)
+//                FB.ui({
+//                    method: 'apprequests',
+//                    to: sendUIDs,
+//                    title: 'My Great Invite',
+//                    message: 'Check out this Awesome App!',
+//                    data: SMLTOWN.Game.info.id
+//                }, function (response) {
+//                    console.log(response);
+//                });
+//            });
+//        }
+//        ,
+//        invitableFriend: function (f) {
+//            var friendSelector = $("#smltown_friendsContent");
+//            var div = $("<div class='smltown_invitableFriend'>");
+//            div.attr("socialId", f['id']);
+//
+//            div.append("<img src='" + f.picture.data.url + "'>");
+//
+//            var name = $("<p>");
+//            name.text(f.name);
+//            div.append(name);
+//
+//            friendSelector.append(div);
+//
+//            div.click(function () {
+//                $(this).toggleClass("active");
+//            });
+//        }
         ,
-        invite: function () {
-            var $this = this;
-            $("#smltown_friendSelector").show();
+        winFeed: function () {
+            var cardName = SMLTOWN.user.card.split("_").pop();
+            var url = $("#smltown_cardFront .smltown_cardImage").css("background-image").split("(")[1].split(")")[0];
 
-            FB.api('/me/friends', {fields: 'name,picture'}, function (response) {
-//                console.log(response);
-                $("#smltown_friendsContent").html("");
+            FB.ui({
+                method: 'feed',
+                name: SMLTOWN.user.name + " won the Werewolf game!",
+                link: 'https://apps.facebook.com/smltown/',
+                picture: url,
+                caption: 'as survivor',
+                description: SMLTOWN.user.name + " wins the game as a " + cardName + "."
 
-                var friends = response.data;
-                for (var i = 0; i < friends.length; i++) {
-                    console.log(friends[i]);
-                    $this.invitableFriend(friends[i]);
-                }
-            });
-
-            $("#smltown_friendSelector .smltown_submit").click(function () {
-
-                // Get the list of selected friends
-                var sendUIDs = '';
-                var divFriends = $(".smltown_invitableFriend.active");
-                for (var i = 0; i < divFriends.length; i++) {
-                    sendUIDs += divFriends.attr("socialId") + ',';
-                }
-
-                // Use FB.ui to send the Request(s)
-                FB.ui({
-                    method: 'apprequests',
-                    to: sendUIDs,
-                    title: 'My Great Invite',
-                    message: 'Check out this Awesome App!',
-                    data: SMLTOWN.Game.info.id
-                }, function (response) {
-                    console.log(response);
-                });
-            });
-        }
-        ,
-        invitableFriend: function (f) {
-            var friendSelector = $("#smltown_friendsContent");
-            var div = $("<div class='smltown_invitableFriend'>");
-            div.attr("socialId", f['id']);
-
-            div.append("<img src='" + f.picture.data.url + "'>");
-
-            var name = $("<p>");
-            name.text(f.name);
-            div.append(name);
-
-            friendSelector.append(div);
-
-            div.click(function () {
-                $(this).toggleClass("active");
+            }, function (response) {  // callback
+                console.log(response);
             });
         }
     }

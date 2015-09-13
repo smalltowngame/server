@@ -1,7 +1,7 @@
 
 //SMLTOWN.mafia_werewolf = {};
 
-SMLTOWN.Update.gameStatus = function() {
+SMLTOWN.Update.gameStatus = function () {
     console.log("update game");
     //INPUTS
     SMLTOWN.Time.clearCountdowns();
@@ -84,7 +84,11 @@ SMLTOWN.Update.gameStatus = function() {
                 SMLTOWN.Action.cleanVotes();
                 $("#smltown_statusGame").smltown_text("GameOver");
                 $("#smltown_body").attr("class", "smltown_gameover");
-                SMLTOWN.Action.resetGame();                
+                SMLTOWN.Action.resetGame();
+
+                if (SMLTOWN.Social.winFeed) {
+                    SMLTOWN.Social.winFeed();
+                }
             }
 
             for (var id in SMLTOWN.players) {
@@ -129,7 +133,7 @@ SMLTOWN.Update.gameStatus = function() {
 };
 
 //mafia-werewolf only function
-SMLTOWN.Update.onStatusChange = function() {
+SMLTOWN.Update.onStatusChange = function () {
     console.log("status change");
     if (SMLTOWN.user.status > -1 && SMLTOWN.user.card == SMLTOWN.Game.info.night) { //special card like hunter
         //SMLTOWN.Action.wakeUp(); //cose not sleep
@@ -146,7 +150,7 @@ SMLTOWN.Update.onStatusChange = function() {
     SMLTOWN.Action.cleanVotes();
 };
 
-SMLTOWN.Action.defineSelectFunctions = function() {
+SMLTOWN.Action.defineSelectFunctions = function () {
     if (SMLTOWN.Game.info.status == 3 && null != SMLTOWN.Time.end) { //day. time.end is null when day is over
         if (1 != SMLTOWN.Game.info.openVoting && SMLTOWN.Time.countdownInterval) {
             console.log("time is not ended");
@@ -168,7 +172,7 @@ SMLTOWN.Action.defineSelectFunctions = function() {
     }
 }
 
-SMLTOWN.Game.playing = function() {
+SMLTOWN.Game.playing = function () {
     var status = SMLTOWN.Game.info.status;
     if (status > 0 && status < 5) {
         return true;
@@ -179,7 +183,7 @@ SMLTOWN.Game.playing = function() {
 ///////////////////////////////////////////////////////////////////////////////
 //MESAGES
 //Override
-SMLTOWN.Message.showMessage = function(text, action) {
+SMLTOWN.Message.showMessage = function (text, action) {
     var $this = this;
     var time = 0;
     var stop = false;
@@ -193,8 +197,8 @@ SMLTOWN.Message.showMessage = function(text, action) {
         doCallback = false;
     }
 
-    setTimeout(function() {
-        $this.notify(text, function() {
+    setTimeout(function () {
+        $this.notify(text, function () {
             if (SMLTOWN.user.status > -1
                     && SMLTOWN.Game.info.status == 1 //night
                     ) {
@@ -209,11 +213,11 @@ SMLTOWN.Message.showMessage = function(text, action) {
 }
 
 //FROM SET-MESSAGE (custom message functions)
-SMLTOWN.Message.votations = function(json) {
+SMLTOWN.Message.votations = function (json) {
     return killsMessage(json, false) + SMLTOWN.Message.translate("GettingDark");
 };
 
-SMLTOWN.Message.kills = function(json) {
+SMLTOWN.Message.kills = function (json) {
     return killsMessage(json, true);
 };
 
