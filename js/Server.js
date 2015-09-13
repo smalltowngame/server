@@ -128,11 +128,8 @@ SMLTOWN.Server = {
         console.log("connected");
         SMLTOWN.Transform.windowResize();
         //DEFINE WAY TO NAVIGATE
-        
-        var facebook = null;
-        if (typeof window.parent != "undefined") {
-            facebook = window.parent.document.getElementById("facebook");
-        }
+
+        var facebook = window.name.indexOf('iframe_canvas_fb') != -1;
 
         if ($("body").attr("id") == "smltown" || facebook) { //as MAIN webpage game
             if (!window.location.hash) {
