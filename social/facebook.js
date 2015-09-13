@@ -67,7 +67,9 @@ SMLTOWN.Social = {
 
             //friends
             $("#smltown_html").addClass("smltown_facebook");
+            console.log(3333)
             $("#smltown_friends").click(function () {
+                console.log(2222)
                 $this.invite();
             });
 
@@ -92,6 +94,7 @@ SMLTOWN.Social = {
         }
         ,
         invite: function () {
+            console.log(1111);
             var $this = this;
             $("#smltown_friendSelector").show();
 
