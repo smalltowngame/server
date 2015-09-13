@@ -67,9 +67,10 @@ SMLTOWN.Social = {
 
             //friends
             $("#smltown_html").addClass("smltown_facebook");
-            console.log(3333)
-            $("#smltown_friends").on("tap", function () {
-                console.log(2222)
+            console.log(3333);
+            $("#smltown_friends").click(function () {
+                console.log(2222);
+                
                 $this.invite();
             });
 

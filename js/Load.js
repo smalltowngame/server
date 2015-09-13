@@ -31,6 +31,7 @@ SMLTOWN.Load = {
                 $this.end();
             });
         } else {
+            //like facebook mobile request on heroku with url data
             $("#smltown_html").load(SMLTOWN.path + "gameList.php", null, function () {
                 $this.end();
             });
