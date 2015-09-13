@@ -123,6 +123,7 @@ SMLTOWN.Social = {
                     to: sendUIDs,
                     title: 'My Great Invite',
                     message: 'Check out this Awesome App!',
+                    data: SMLTOWN.Game.info.id
                 }, function (response) {
                     console.log(response);
                 });

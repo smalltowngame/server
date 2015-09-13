@@ -260,9 +260,9 @@ SMLTOWN.Events = {
         });
         
         //FRIENDS
-        $("#smltown_friendSelector .smltown_cancel").click(function(){
+        $("#smltown_friendsFooter > div").click(function(){
             $("#smltown_friendSelector").hide();
-        });        
+        });
     }
     ,
     swipeRight: function () {
