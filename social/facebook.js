@@ -65,6 +65,12 @@ SMLTOWN.Social = {
             // Your like button code //not .show() because !important
             $(".fb-like").addClass("smltown_show");
 
+            //friends
+            $("#smltown_html").addClass("smltown_facebook");
+            $("#smltown_friends").click(function () {
+                $this.invite();
+            });
+
             FB.api('/me?fields=name,third_party_id', function (user) {
                 console.log('Successful login for: ' + user.name);
 //                document.getElementById('status').innerHTML = "<image src='https://graph.facebook.com/" + response.id + "/picture'>";
@@ -75,12 +81,6 @@ SMLTOWN.Social = {
                 SMLTOWN.user.name = user.name;
                 SMLTOWN.Server.request.addUser("facebook", user.id);
                 //TODO remove credentials when not logued ?
-            });
-
-            //friends
-            $("#smltown_html").addClass("smltown_facebook");
-            $("#smltown_friends").click(function () {
-                $this.invite();
             });
         }
         ,
