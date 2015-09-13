@@ -69,13 +69,9 @@ SMLTOWN.Social = {
 
             //friends
             $("#smltown_html").addClass("smltown_facebook");
-            console.log(3333);
-            $(this.friendsButton).click(function (e) {
-                e.preventDefault();
-                console.log(2222);
-
+            SMLTOWN.Social.invite = function(){
                 $this.invite();
-            });
+            };
 
             FB.api('/me?fields=name,third_party_id', function (user) {
                 console.log('Successful login for: ' + user.name);

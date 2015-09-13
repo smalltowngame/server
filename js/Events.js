@@ -454,9 +454,9 @@ SMLTOWN.Events = {
         });
 
         //ON FRIENDS
-//        $("#smltown_friends").on("tap", function () {
-//            //CUSTOM
-//        });
+        $("#smltown_friends").on("tap", function () {
+            SMLTOWN.Social.invite();
+        });
 
         if (document.location.hostname == "localhost") {
             var becomeAdmin = $("<div id='smltown_becomeAdmin'><span>BecomeAdmin</span></div>")
