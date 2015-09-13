@@ -71,6 +71,11 @@ SMLTOWN.Social = {
                 $this.invite();
             };
 
+            FB.api("/me/apprequests", function (response) {
+                console.log("apprequests:");
+                console.log(response);
+            });
+
             FB.api('/me?fields=name,third_party_id', function (user) {
                 console.log('Successful login for: ' + user.name);
 //                document.getElementById('status').innerHTML = "<image src='https://graph.facebook.com/" + response.id + "/picture'>";
