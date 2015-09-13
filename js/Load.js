@@ -142,7 +142,7 @@ SMLTOWN.Load = {
         clearTimeout(this.timeout);
         this.timeout = setTimeout(function () {
             $this.end();
-            SMLTOWN.Message.notify(SMLTOWN.Message.translate("warnServer"), true);
+            SMLTOWN.Message.flash(SMLTOWN.Message.translate("warnServer"), true);
         }, 5000);
     }
     ,

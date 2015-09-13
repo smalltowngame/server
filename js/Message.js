@@ -217,7 +217,7 @@ SMLTOWN.Message = {
         $("#smltown_html").append(div);
         setTimeout(function () {
             div.remove();
-        }, 1500);
+        }, text.length * 80);
 
         if (text == "adminRole") {
             SMLTOWN.Load.reloadGame();
@@ -271,7 +271,7 @@ SMLTOWN.Message = {
         text = text.replace(regex, function myFunction(key) {
             for (var i = 0; i < $.emojiarea.icons.length; i++) {
                 var group = $.emojiarea.icons[i];
-                if(group.icons[key]){
+                if (group.icons[key]) {
                     return window.emoji.EmojiArea.createIcon(i, key);
                     break;
                 }

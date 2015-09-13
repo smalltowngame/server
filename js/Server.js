@@ -128,7 +128,8 @@ SMLTOWN.Server = {
         console.log("connected");
         SMLTOWN.Transform.windowResize();
         //DEFINE WAY TO NAVIGATE
-        if ($("body").attr("id") == "smltown") { //as MAIN webpage game
+        var htmlId = $("body").attr("id");
+        if (htmlId == "smltown" || htmlId == "facebook") { //as MAIN webpage game
             if (!window.location.hash) {
                 console.log("hash = 'gameList'")
                 window.location.hash = "gameList"

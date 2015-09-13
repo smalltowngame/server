@@ -72,8 +72,13 @@ SMLTOWN.Social = {
             };
 
             FB.api("/me/apprequests", function (response) {
-                console.log("apprequests:");
-                console.log(response);
+                if (!response.data) {
+                    return;
+                }
+                console.log(response)
+                var data = $this.getRequestData(response);
+                console.log(data);
+                SMLTOWN.Games.access(data.data);
             });
 
             FB.api('/me?fields=name,third_party_id', function (user) {
@@ -87,6 +92,20 @@ SMLTOWN.Social = {
                 SMLTOWN.Server.request.addUser("facebook", user.id);
                 //TODO remove credentials when not logued ?
             });
+        }
+        ,
+        getRequestData: function (response) {            
+            var requestIds = window.location.href.split("request_ids=")[1].split("&")[0].replace(/%2C/g, ",");
+            var arrayId = requestIds.split(",");
+            for (var j = 0; j < arrayId.length; j++) {
+                var requestId = arrayId[j];
+                for (var i = 0; i < response.data.length; i++) {
+                    var request = response.data[i].id.split("_")[0];
+                    if (requestId == request) {
+                        return response.data[i];
+                    }
+                }
+            }
         }
         ,
         reload: function () {
