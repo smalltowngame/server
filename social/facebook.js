@@ -1,7 +1,18 @@
 
+// Load the SDK asynchronously
+(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id))
+        return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
 //auto-init
 window.fbAsyncInit = function () {
-
+    console.log("facebook async");
     FB.init({
         appId: '1572792739668689',
 //        cookie: true, // enable cookies to allow the server to access the session
@@ -16,18 +27,8 @@ window.fbAsyncInit = function () {
     FB.getLoginStatus(function (response) {
         SMLTOWN.Social.facebook.statusChangeCallback(response);
     });
-};
 
-// Load the SDK asynchronously
-(function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id))
-        return;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
+};
 
 if (typeof SMLTOWN == "undefined") {
     SMLTOWN = {};
@@ -57,8 +58,6 @@ SMLTOWN.Social = {
             }
             this.reload();
         }
-        ,
-        friendsButton: $("#smltown_showFriends")[0]
         ,
         // Here we run a very simple test of the Graph API after login is successful.
         onConnect: function () {
