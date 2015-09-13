@@ -160,4 +160,8 @@ var lang = {
     exitGameSwipe: "You will exit from this game.. "
     ,
     removeGameSwipe: "Swipe to remove game permanently.. "
+    ,
+    winner: "You won the game!"
+    ,
+    Share: "Share!"
 };

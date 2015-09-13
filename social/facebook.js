@@ -77,28 +77,22 @@ SMLTOWN.Social = {
                 });
             };
             SMLTOWN.Social.winFeed = function () {
-
                 if ("feed" == SMLTOWN.user.social) {
                     console.log("game was already feeded");
                     return;
                 }
 
-//                var url = null;
-//                var background = $("#smltown_cardFront .smltown_cardImage").css("background-image");
-//                if (background && "none" != background) {
-//                    console.log("background = " + background);
-//                    url = background.split("(")[1].split(")")[0];
-//                }
-
                 var url = SMLTOWN.Add.getCardUrl(SMLTOWN.user.card);
+                var winnerText = SMLTOWN.Message.translate("winner");
+                var shareText = SMLTOWN.Message.translate("Share");
 
                 $("#smltown_filter").addClass("smltown_hide");
                 $("#smltown_win").remove();
                 $("#smltown_game").append("<div id='smltown_win'><div>"
                         + "<div class='smltown_image' style='background-image:url(" + url + ")'></div>"
-                        + "<div class='smltown_text'>You won the game!</div>"
+                        + "<div class='smltown_text'>" + winnerText + "</div>"
                         + "<div class='smltown_footer'>"
-                        + "<div class='smltown_feed'>Share!</div>"
+                        + "<div class='smltown_feed'>" + shareText + "</div>"
                         + "<div>Ok</div>"
                         + "</div>"
                         + "</div></div>");

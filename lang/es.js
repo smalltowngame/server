@@ -167,5 +167,8 @@ var lang = {
     exitGameSwipe: "Salir de esta partida.."
     ,
     removeGameSwipe: "Elimina permanentemente la partida.."
-    
+    ,
+    winner: "Has ganado la partida!"
+    ,
+    Share: "Compartir!"
 };
