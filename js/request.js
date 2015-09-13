@@ -221,6 +221,12 @@ SMLTOWN.Server.request = {
             action: "dayEnd"
         }, true); //not loading
     }
+    ,
+    feed: function(){
+        this.send({
+            action: "feed"
+        }, true); //not loading
+    }
 //    ,
 //    exitGame: function(callback) {
 //        this.send({

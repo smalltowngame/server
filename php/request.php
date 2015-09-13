@@ -314,5 +314,10 @@ trait Request {
 
         $this->pendingVotes();
     }
+    
+    public function feed(){
+        $playId = $this->playId;
+        sql("UPDATE smltown_plays SET social = 'feed' WHERE id = $playId");
+    }
 
 }

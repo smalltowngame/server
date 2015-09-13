@@ -46,6 +46,7 @@ class Tables {
             'status' => "int(11)",
             'sel' => "int(11)",
             'message' => "text",
+            'social' => "varchar(255)",
             'reply' => "text NOT NULL DEFAULT ''",
             'PRIMARY KEY' => "(id)"
         )

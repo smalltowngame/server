@@ -77,6 +77,12 @@ SMLTOWN.Social = {
                 });
             };
             SMLTOWN.Social.winFeed = function () {
+               
+               if("feed" == SMLTOWN.user.social){
+                   console.log("game was already feeded");
+                   return;
+               }
+                
                 var url = null;
                 var background = $("#smltown_cardFront .smltown_cardImage").css("background-image");
                 if (background) {
@@ -220,6 +226,8 @@ SMLTOWN.Social = {
                 description: SMLTOWN.user.name + " wins the game as a " + cardName + "."
 
             }, function (response) {  // callback
+                SMLTOWN.user.social = "feed";
+                SMLTOWN.Server.request.feed();
                 console.log(response);
             });
         }
