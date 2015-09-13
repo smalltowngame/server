@@ -83,6 +83,7 @@ SMLTOWN.Social = {
                 }
 
                 var url = SMLTOWN.Add.getCardUrl(SMLTOWN.user.card);
+                console.log(url)
                 var winnerText = SMLTOWN.Message.translate("winner");
                 var shareText = SMLTOWN.Message.translate("Share");
 
