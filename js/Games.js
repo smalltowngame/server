@@ -284,11 +284,11 @@ SMLTOWN.Games = {
         }
         var id = div.attr("id");
         console.log(id);
-        SMLTOWN.Games.access(id); //full path for bind on click 
+        this.access(id); //full path for bind on click 
     }
     ,
     access: function(id) {
-        if (id == SMLTOWN.Game.info.id) {
+        if ($("#smltown_game").length) {
             return;
         }
         SMLTOWN.Load.start();
