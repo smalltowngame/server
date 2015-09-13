@@ -22,7 +22,7 @@ window.fbAsyncInit = function () {
     });
 
     FB.login(function (response) {
-        //
+        console.log(response);
     }, {scope: 'email,user_friends'});
 
     FB.getLoginStatus(function (response) {
@@ -69,7 +69,7 @@ SMLTOWN.Social = {
 
             //friends
             $("#smltown_html").addClass("smltown_facebook");
-            SMLTOWN.Social.invite = function(){
+            SMLTOWN.Social.invite = function () {
                 $this.invite();
             };
 
@@ -94,7 +94,6 @@ SMLTOWN.Social = {
         }
         ,
         invite: function () {
-            console.log(1111);
             var $this = this;
             $("#smltown_friendSelector").show();
 
@@ -119,7 +118,8 @@ SMLTOWN.Social = {
                 }
 
                 // Use FB.ui to send the Request(s)
-                FB.ui({method: 'apprequests',
+                FB.ui({
+                    method: 'apprequests',
                     to: sendUIDs,
                     title: 'My Great Invite',
                     message: 'Check out this Awesome App!',
