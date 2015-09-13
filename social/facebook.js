@@ -186,10 +186,16 @@ SMLTOWN.Social = {
 //        }
         ,
         winFeed: function () {
-            console.log("win feed");
+            console.log("win feed: ");
             var cardName = SMLTOWN.user.card.split("_").pop();
-            var url = $("#smltown_cardFront .smltown_cardImage").css("background-image").split("(")[1].split(")")[0];
-
+            
+            var url = null;
+            var background = $("#smltown_cardFront .smltown_cardImage").css("background-image");
+            if (background) {
+                console.log("background = " + background)
+                url = background.split("(")[1].split(")")[0];
+            }
+            
             FB.ui({
                 method: 'feed',
                 name: SMLTOWN.user.name + " won the Werewolf game!",
