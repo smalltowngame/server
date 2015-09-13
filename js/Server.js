@@ -129,10 +129,7 @@ SMLTOWN.Server = {
         SMLTOWN.Transform.windowResize();
         //DEFINE WAY TO NAVIGATE
 
-//        var facebook = window.name.indexOf('iframe_canvas_fb') != -1;
-//        console.log("is facebook = " + facebook);
-
-        if ($("body").attr("id") == "smltown" || facebook) { //as MAIN webpage game
+        if ($("body").attr("id") == "smltown" && !this.inIframe) { //as MAIN webpage game
             if (!window.top.location.hash) {
                 console.log("hash = 'gameList'");
                 window.top.location.hash = "gameList";
@@ -415,6 +412,14 @@ SMLTOWN.Server = {
             setTimeout(function () {
                 $this.handleConnection();
             }, 120000); //try reconnect every 2 min
+        }
+    }
+    ,
+    inIframe: function () {
+        try {
+            return window.self !== window.top;
+        } catch (e) {
+            return true;
         }
     }
 };
