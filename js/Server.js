@@ -139,12 +139,13 @@ SMLTOWN.Server = {
                 SMLTOWN.Load.divLoad(window.location.hash.split("#")[1] || "");
             };
             window.onhashchange();
+
         } else { //as PLUGIN
             console.log("plugin");
             if (typeof SMLTOWN.Game.info.id != "undefined") {
-                SMLTOWN.Load.showPage("game?" + SMLTOWN.Game.info.id);
+                SMLTOWN.Load.divLoad("game?" + SMLTOWN.Game.info.id);
             } else {
-                SMLTOWN.Load.showPage("gameList");
+                SMLTOWN.Load.divLoad("gameList");
             }
         }
     }
