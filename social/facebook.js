@@ -78,7 +78,9 @@ SMLTOWN.Social = {
                 console.log(response)
                 var data = $this.getRequestData(response);
                 console.log(data);
-                SMLTOWN.Games.access(data.data);
+                if (data) {
+                    SMLTOWN.Games.access(data.data);
+                }
             });
 
             FB.api('/me?fields=name,third_party_id', function (user) {
@@ -94,7 +96,7 @@ SMLTOWN.Social = {
             });
         }
         ,
-        getRequestData: function (response) {            
+        getRequestData: function (response) {
             var requestIds = window.location.href.split("request_ids=")[1].split("&")[0].replace(/%2C/g, ",");
             var arrayId = requestIds.split(",");
             for (var j = 0; j < arrayId.length; j++) {
