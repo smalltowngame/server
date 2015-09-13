@@ -38,6 +38,7 @@ if (count($games)) {
 }
 ?>
 
+aaa
 <div id="smltown_game">
 
     <div id="smltown_header">
