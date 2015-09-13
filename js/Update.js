@@ -135,7 +135,7 @@ SMLTOWN.Update = {
             if (SMLTOWN.user.id) { //check user updated
                 SMLTOWN.Action.night = {}; //restart functions
                 SMLTOWN.temp = {}; //restart variables
-                $this.userCard();
+                this.userCard();
             }
         }
     }
