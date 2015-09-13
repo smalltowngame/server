@@ -133,13 +133,13 @@ SMLTOWN.Server = {
         console.log("is facebook = " + facebook);
 
         if ($("body").attr("id") == "smltown" || facebook) { //as MAIN webpage game
-            if (!window.location.hash) {
+            if (!window.top.location.hash) {
                 console.log("hash = 'gameList'");
-                window.location.hash = "gameList";
+                window.top.location.hash = "gameList";
             }
             window.onhashchange = function () {
                 SMLTOWN.Load.end();
-                SMLTOWN.Load.divLoad(window.location.hash.split("#")[1] || "");
+                SMLTOWN.Load.divLoad(window.top.location.hash.split("#")[1] || "");
             };
             window.onhashchange();
         } else { //as PLUGIN

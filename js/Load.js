@@ -6,7 +6,7 @@ SMLTOWN.Load = {
             console.log("show Page: " + url + " for " + why);
         }
         if ($("body").attr("id") == "smltown") { //game as MAIN app
-            window.location.hash = url; //get hash and divLoad
+            window.top.location.hash = url; //get hash and divLoad
         } else {
             this.divLoad(url);
         }
@@ -97,7 +97,7 @@ SMLTOWN.Load = {
     ,
     //GAME
     loadGame: function () {
-        var hashArray = location.hash.split("?");
+        var hashArray = window.top.location.hash.split("?");
         if (hashArray.length > 1) {
             SMLTOWN.Game.info.id = hashArray[1];
         }

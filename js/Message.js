@@ -306,7 +306,7 @@ SMLTOWN.Message = {
         $("#smltown_external").remove();
         var div = $("<div id='smltown_external'>" + text + "</div>");
         div.click(function () {
-            window.location.hash = "game?" + gameId;
+            window.top.location.hash = "game?" + gameId;
         });
         $("#smltown_html").append(div);
 
