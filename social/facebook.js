@@ -98,7 +98,7 @@ SMLTOWN.Social = {
             var $this = this;
             $("#smltown_friendSelector").show();
 
-            FB.api('/me/invitable_friends', {fields: 'name,picture'}, function (response) {
+            FB.api('/me/friends', {fields: 'name,picture'}, function (response) {
 //                console.log(response);
                 $("#smltown_friendsContent").html("");
 
