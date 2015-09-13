@@ -110,7 +110,11 @@ SMLTOWN.Social = {
         }
         ,
         getRequestData: function (response) {
-            var requestIds = window.location.href.split("request_ids=")[1].split("&")[0].replace(/%2C/g, ",");
+            var requestUrl = window.location.href.split("request_ids=");
+            if(requestUrl.length < 2){
+                return;
+            }
+            var requestIds = requestUrl[1].split("&")[0].replace(/%2C/g, ",");
             var arrayId = requestIds.split(",");
             for (var j = 0; j < arrayId.length; j++) {
                 var requestId = arrayId[j];
