@@ -218,7 +218,7 @@ SMLTOWN.Games = {
                     dif = 0;
                 }
                 content.css("transform", "translateX(" + dif + "px)");
-                opacity = 1 - dif / $(this).width();
+                opacity = 1 - dif / content.width();
                 content.css("opacity", opacity);
 
                 div.removeClass("smltown_fixedGame");

@@ -68,8 +68,21 @@ SMLTOWN.Social = {
             //friends
             $("#smltown_html").addClass("smltown_facebook");
             SMLTOWN.Social.invite = function () {
-                $this.invite();
+//                $this.invite();
+
+                FB.ui({
+                    method: 'share',
+                    href: 'https://developers.facebook.com/docs/',
+                }, function (response) {  // callback
+                    if (response && !response.error_message) {
+                        alert('Posting completed.');
+                    } else {
+                        alert('Error while posting.');
+                    }
+                });
             };
+
+
 
             FB.api("/me/apprequests", function (response) {
                 if (!response.data) {

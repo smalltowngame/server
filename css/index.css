@@ -55,6 +55,7 @@ a:hover{
 #smltown_games > div{
     position: relative;
     margin: 7px;
+    /*max-width: 550px;*/
     /*text-shadow: 1px 1px 1px white;*/
 }
 

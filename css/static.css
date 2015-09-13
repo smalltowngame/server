@@ -5,7 +5,7 @@
 
 .smltown_static .smltown_game{
     display: inline-block;
-    width: calc(50% - 14px);
+    /*width: calc(50% - 14px);*/
 }
 
 /*////////////////////////////////*/
@@ -45,7 +45,7 @@
 }
 
 .smltown_static #smltown_consoleLog > div{
-    bottom: 52px;
+    /*bottom: 52px;*/
 }
 
 .smltown_staticMenu #smltown_menu{

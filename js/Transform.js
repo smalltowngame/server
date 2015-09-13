@@ -27,6 +27,13 @@ SMLTOWN.Transform = {
         } else {
             $("#smltown_console").removeClass("smltown_consoleExtended");
         }
+        
+        //game width persistent style
+        var totalWidth = $("#smltown_html").width();
+        var cols = parseInt(totalWidth / 350);
+        var width = totalWidth / cols - 14;        
+        $("#gameWidth").remove();
+        $("<style id='gameWidth' type='text/css'> .smltown_game{ width:" + width + "px} </style>").appendTo("head");
     }
     ,
     gameResize: function () {

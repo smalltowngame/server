@@ -149,6 +149,10 @@ html, body{
     vertical-align: top;
     margin: 0 10px;
 }
+.smltown_icons > div{
+    display: inline-block;
+    margin: 0 5px;
+}
 
 /*android 2.3*/
 #smltown_html *{
