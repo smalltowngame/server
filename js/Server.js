@@ -130,13 +130,13 @@ SMLTOWN.Server = {
         //DEFINE WAY TO NAVIGATE
 
         if ($("body").attr("id") == "smltown" && !this.inIframe) { //as MAIN webpage game
-            if (!window.top.location.hash) {
+            if (!window.location.hash) {
                 console.log("hash = 'gameList'");
-                window.top.location.hash = "gameList";
+                window.location.hash = "gameList";
             }
             window.onhashchange = function () {
                 SMLTOWN.Load.end();
-                SMLTOWN.Load.divLoad(window.top.location.hash.split("#")[1] || "");
+                SMLTOWN.Load.divLoad(window.location.hash.split("#")[1] || "");
             };
             window.onhashchange();
         } else { //as PLUGIN
