@@ -27,7 +27,11 @@ SMLTOWN.Load = {
             this.loadGame();
 
         } else if (urlPage == "gameList") {
-            $("#smltown_html").load(SMLTOWN.path + "gameList.php", null, function(){
+            $("#smltown_html").load(SMLTOWN.path + "gameList.php", null, function () {
+                $this.end();
+            });
+        } else {
+            $("#smltown_html").load(SMLTOWN.path + "gameList.php", null, function () {
                 $this.end();
             });
         }
@@ -81,7 +85,7 @@ SMLTOWN.Load = {
             $("#smltown_newGame").click(function () {
                 SMLTOWN.Games.create();
             });
-        }else{
+        } else {
             $("#smltown_title").html("<p>" + SMLTOWN.Message.translate("GameList") + "</p>");
         }
 
@@ -99,7 +103,7 @@ SMLTOWN.Load = {
         $("#smltown_html").load(SMLTOWN.path + "game.php", {
             gameId: SMLTOWN.Game.info.id,
             lang: SMLTOWN.lang
-        }, function(){
+        }, function () {
             console.log("loaded game");
             //not end() at this point
         });
@@ -132,7 +136,7 @@ SMLTOWN.Load = {
         if (!$("#smltown_loading").length) {
             $("#smltown_html").append("<div id='smltown_loading'><div class='smltown_loader'></div></div>");
         }
-        
+
         //RESET loading timeout
         clearTimeout(this.timeout);
         this.timeout = setTimeout(function () {
