@@ -49,7 +49,7 @@
 }
 
 #smltown_filter.smltown_notification, #smltown_filter.smltown_sleep{
-    display: inherit !important;
+    display: inherit;
 }
 
 #smltown_filter.smltown_notification{    
