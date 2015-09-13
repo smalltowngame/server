@@ -454,7 +454,7 @@ SMLTOWN.Events = {
         });
 
         //ON FRIENDS
-        $("#smltown_friends").on("tap", function () {
+        $("#smltown_showFriends").on("tap", function () {
             SMLTOWN.Social.invite();
         });
 
