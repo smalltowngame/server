@@ -59,6 +59,8 @@ SMLTOWN.Social = {
             this.reload();
         }
         ,
+        friendsButton: $("#smltown_showFriends")[0]
+        ,
         // Here we run a very simple test of the Graph API after login is successful.
         onConnect: function () {
             var $this = this;
@@ -68,10 +70,10 @@ SMLTOWN.Social = {
             //friends
             $("#smltown_html").addClass("smltown_facebook");
             console.log(3333);
-            $("#smltown_showFriends").click(function (e) {
+            $(this.friendsButton).click(function (e) {
                 e.preventDefault();
                 console.log(2222);
-                
+
                 $this.invite();
             });
 
