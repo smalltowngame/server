@@ -258,6 +258,11 @@ SMLTOWN.Events = {
                 message.remove();
             });
         });
+        
+        //FRIENDS
+        $("#smltown_friendSelector .smltown_cancel").click(function(){
+            $("#smltown_friendSelector").hide();
+        });        
     }
     ,
     swipeRight: function () {

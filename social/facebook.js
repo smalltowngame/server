@@ -20,9 +20,9 @@ window.fbAsyncInit = function () {
         xfbml: true, // parse social plugins on this page
         version: 'v2.4'
     });
-    
+
     FB.login(function (response) {
-        
+        //
     }, {scope: 'email,user_friends'});
 
     FB.getLoginStatus(function (response) {
@@ -64,7 +64,6 @@ SMLTOWN.Social = {
             var $this = this;
             // Your like button code //not .show() because !important
             $(".fb-like").addClass("smltown_show");
-//            $(".fb-like").css('width', $(".fb-like").width());
 
             FB.api('/me?fields=name,third_party_id', function (user) {
                 console.log('Successful login for: ' + user.name);
@@ -77,23 +76,11 @@ SMLTOWN.Social = {
                 SMLTOWN.Server.request.addUser("facebook", user.id);
                 //TODO remove credentials when not logued ?
 
-                console.log(user)
                 //friends
-                $("#friendsMenu").show();
-//                $("#smltown_friends").on("tap", function () {
-//                    $this.invite(user['taggable_friends']);
-//                });
-
-//                FB.api('/me/friends', function (response) {
-////                FB.api('me/friends', {fields: 'id, first_name', limit: 6}, function (response) {
-//                    console.log(123);
-//                    console.log(response);
-//                });
-            });
-
-            FB.api('/me/invitable_friends', {fields: 'name,id'}, function (response) {
-                console.log(123);
-                console.log(response);
+                $("#smltown_html").addClass("smltown_facebook");
+                $("#smltown_friends").on("tap", function () {
+                    $this.invite();
+                });
             });
         }
         ,
@@ -104,15 +91,57 @@ SMLTOWN.Social = {
             }
         }
         ,
-        invite: function (friends) {
-            var friendSelector = $("<div id=friendSelector>");
-            $("#smltown_game").append(friendSelector);
-            FB.api('/me/friends?fields=id, first_name', function (response) {
-//            FB.api('me/friends', {fields: 'id, first_name,picture', limit: 6}, function (response) {
-                console.log(123);
-                console.log(response);
+        invite: function () {
+            var $this = this;
+            $("#smltown_friendSelector").show();
+
+            FB.api('/me/invitable_friends', {fields: 'name,picture'}, function (response) {
+//                console.log(response);
+                $("#smltown_friendsContent").html("");
+
+                var friends = response.data;
+                for (var i = 0; i < friends.length; i++) {
+                    console.log(friends[i]);
+                    $this.invitableFriend(friends[i]);
+                }
             });
-            console.log(friends);
+
+            $("#smltown_friendSelector .smltown_submit").click(function () {
+
+                // Get the list of selected friends
+                var sendUIDs = '';
+                var divFriends = $(".smltown_invitableFriend.active");
+                for (var i = 0; i < divFriends.length; i++) {
+                    sendUIDs += divFriends.attr("socialId") + ',';
+                }
+
+                // Use FB.ui to send the Request(s)
+                FB.ui({method: 'apprequests',
+                    to: sendUIDs,
+                    title: 'My Great Invite',
+                    message: 'Check out this Awesome App!',
+                }, function (response) {
+                    console.log(response);
+                });
+            });
+        }
+        ,
+        invitableFriend: function (f) {
+            var friendSelector = $("#smltown_friendsContent");
+            var div = $("<div class='smltown_invitableFriend'>");
+            div.attr("socialId", f['id']);
+            
+            div.append("<img src='" + f.picture.data.url + "'>");
+
+            var name = $("<p>");
+            name.text(f.name);
+            div.append(name);
+
+            friendSelector.append(div);
+
+            div.click(function () {
+                $(this).toggleClass("active");
+            });
         }
     }
 };

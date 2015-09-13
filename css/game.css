@@ -1398,13 +1398,83 @@ smltown_name{
     background: linear-gradient(to bottom, #090401 50%,#4B1D06 100%);
 }*/
 
-#friendSelector{
+#smltown_friendSelector{
+    display: none;
     position: absolute;
     top: 20px;
     bottom: 20px;
     left: 20px;
     right: 20px;
-    background-color: rgba(0,0,0,0.5);
-    border: 1px solid black;
-    border-radius: 20px;
+    background-color: white;
+    border: 1px solid rgb(100,100,100);
+    z-index: 99;
+}
+
+#smltown_friendsContent{
+    border: 1px solid rgb(200,200,200);
+    margin: 20px;
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 50px;
+    top: 50px;
+    padding: 15px;
+}
+
+#smltown_friendsTitle{
+    border-bottom: 1px solid rgb(150,150,150);
+    margin: 20px;
+    font-size: 20px;
+    font-family: sans-serif;
+}
+
+.smltown_invitableFriend{
+    width: 150px;
+    display: inline-block;
+    margin: 15px;
+    padding: 4px;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: small;
+    cursor: pointer;
+}
+.smltown_invitableFriend img{
+    border-radius: 3px;
+}
+
+.smltown_invitableFriend.active{
+    background-color: rgb(59, 89, 152);
+    color: white;    
+}
+.smltown_invitableFriend.active img{
+    background-color: rgb(175, 189, 212);
+}
+
+.smltown_invitableFriend img{
+    float: left;
+    border: 1px solid rgb(200,200,200);
+    padding: 3px;
+}
+.smltown_invitableFriend p{
+    margin: 5px;
+    float:left;
+    font-family: sans-serif;
+}
+
+#smltown_friendsFooter{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+#smltown_friendsFooter > div{
+    float: left;
+    margin: 20px;
+    background-color: rgb(200,200,200);
+    padding: 5px 15px;
+    border: 1px solid grey;
+    cursor: pointer;
+}
+#smltown_friendsFooter > div:hover{
+    background-color: rgb(220,220,220);
 }

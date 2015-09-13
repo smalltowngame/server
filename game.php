@@ -166,7 +166,7 @@ if (count($games)) {
                     </div>
                 </div>
 
-                <div id="friendsMenu" class="smltown_selector" style="display: none">
+                <div id="smltown_friendsMenu" class="smltown_selector" style="display: none">
                     <div>
                         <div class="icon">i</div>
                         <span>Friends</span>
@@ -233,6 +233,15 @@ if (count($games)) {
     </div>
 
     <div id="smltown_cardConsole"></div>
+
+    <div id=smltown_friendSelector>
+        <div id='smltown_friendsTitle'>Invite your friends to this game</div>
+        <div id='smltown_friendsContent'></div>
+        <div id='smltown_friendsFooter'>
+            <div class="smltown_submit">Send Invitation</div>
+            <div class="smltown_cancel">Cancel</div>
+        </div>
+    </div>
 
     <!--visuals card-->
     <div id='smltown_phpCard'></div>

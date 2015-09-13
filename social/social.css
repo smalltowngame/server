@@ -13,3 +13,8 @@
 .fb-like{
     overflow: hidden;
 }
+
+.smltown_facebook #smltown_friendsMenu{
+    display: inherit !important;
+}
+
