@@ -1,6 +1,6 @@
 
 SMLTOWN.Update = {
-    all: function(res) {
+    all: function (res) {
 
         if (res.user) {
             this.user(res.user);
@@ -99,7 +99,7 @@ SMLTOWN.Update = {
         clearTimeout(SMLTOWN.temp.wakeUpInterval);
     }
     ,
-    user: function(user) {
+    user: function (user) {
         if (user.userId) {
             //only here smltown_userId cookie
             SMLTOWN.Util.setPersistentCookie("smltown_userId", user.userId);
@@ -140,7 +140,7 @@ SMLTOWN.Update = {
         }
     }
     ,
-    game: function(game) {
+    game: function (game) {
 
         if (game.name) {
             $("#smltown_gameName").text(game.name);
@@ -182,7 +182,7 @@ SMLTOWN.Update = {
         SMLTOWN.Add.icons(game, $("#smltown_header .smltown_content"));
     }
     ,
-    gameLoad: function() {
+    gameLoad: function () {
         this.gameStatus();
 
         //after game status
@@ -192,12 +192,12 @@ SMLTOWN.Update = {
         }
     }
     ,
-    gameStatus: function() {
+    gameStatus: function () {
         //OVERRIDE
         console.log("EMPTY gameStatus");
     }
     ,
-    players: function() {
+    players: function () {
         var players = SMLTOWN.players;
         var newPlayers = 0;
 
@@ -271,15 +271,18 @@ SMLTOWN.Update = {
                 div.attr("id", player.id);
                 div.addClass("smltown_player");
                 div.attr("preselect-content", SMLTOWN.Message.translate("PRESELECT"));
-                player.div = div;
-                SMLTOWN.Events.playerEvents(player);
 
                 var picture = $("<div class='smltown_picture smltown_iconUser'>");
-                player.div.append(picture);
+                div.append(picture);
                 var url = this.getPicture(player);
                 if (url) {
+                    console.log(111)
                     picture.append("<image src='" + url + "'></img>");
+                    console.log(222)
                 }
+
+                player.div = div;
+                SMLTOWN.Events.playerEvents(player);
 
                 newPlayers++;
             }
@@ -323,7 +326,7 @@ SMLTOWN.Update = {
                 } else if ("-1" == SMLTOWN.user.admin) {
                     $("#smltown_spectatorMode").hide();
                     div.off(".spectator");
-                    div.one("tap.spectator", function(e) {
+                    div.one("tap.spectator", function (e) {
                         e.preventDefault();
                         SMLTOWN.Server.request.playGame(SMLTOWN.user.id);
                     });
@@ -391,14 +394,14 @@ SMLTOWN.Update = {
         return newPlayers;
     }
     ,
-    getPicture: function(player) {
+    getPicture: function (player) {
         //social
         if (player.type == "facebook" && player.socialId) {
             return "https://graph.facebook.com/" + player.socialId + "/picture";
         }
     }
     ,
-    userCard: function() {
+    userCard: function () {
         console.log("user-Card update");
         var $this = this;
         SMLTOWN.cardLoading = true;
@@ -440,7 +443,7 @@ SMLTOWN.Update = {
 
         //load card
         var gamePath = SMLTOWN.path + "games/" + SMLTOWN.Game.info.type;
-        $("#smltown_phpCard").load(gamePath + "/cards/" + SMLTOWN.user.card + ".php", function(response) { //card could be changed
+        $("#smltown_phpCard").load(gamePath + "/cards/" + SMLTOWN.user.card + ".php", function (response) { //card could be changed
             SMLTOWN.cardLoading = false;
             if (response.indexOf("Fatal error") > -1) { //catch error
                 smltown_error(response);
@@ -451,7 +454,7 @@ SMLTOWN.Update = {
         });
     }
     ,
-    updateCards: function() {
+    updateCards: function () {
         console.log("update Cards");
 
         $("#smltown_playingCards").html("");
@@ -522,7 +525,7 @@ SMLTOWN.Update = {
         }
     }
     ,
-    playingCards: function(cards) { //active game cards
+    playingCards: function (cards) { //active game cards
         $(".smltown_rulesCard").addClass("smltown_cardOut");
         for (var cardName in cards) {
             var cardNumber = cards[cardName];

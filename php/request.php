@@ -22,6 +22,7 @@ trait Request {
         //add user
         if (null == $userId) {
             $userId = getRandomUserId();
+            $this->userId = $userId;
         }
         $values = array('name' => $userName, 'userId' => $userId, 'lang' => $lang);
         $sqlRows = "id, name, lang";
@@ -49,7 +50,6 @@ trait Request {
 
         //if not exists
         setcookie('smltown_userId', $userId);
-        return $userId;
     }
 
     //special userId but playId
@@ -61,67 +61,87 @@ trait Request {
         }
 
         //$userId
-        if (isset($this->userId)) {
-            $userId = $this->userId;
-
-            if ("null" == $userId || empty($userId) || !isset($userId)) {
-                //echo "error user id: $userId";
-                $userId = $this->addUser();
+        if (isset($this->userId) && !empty($this->userId) && "null" != $this->userId) {
+            $values = array('userId' => $userId);
+            $count = petition("SELECT count(*) FROM smltown_players WHERE userId = :userId", $values)[0]->count;
+            if ($count == 0) {
+                $this->addUser();
             }
         } else {
-            $userId = $this->addUser();
+            $this->addUser();
         }
+        $userId = $this->userId;
 
         //prevent sql injection on gameId
-        $values = array('gameId' => $gameId);
-        $game = petition("SELECT password FROM smltown_games WHERE id = :gameId", $values)[0]; //game checked in Ping-Request
+        $values = array(
+            'userId' => $userId,
+            'gameId' => $gameId
+        );
 
-        if ($game->password && !isset($_SESSION["game$gameId"])) {
+        $select = petition("SELECT password"
+                        . ", (SELECT id FROM smltown_plays WHERE userId = :userId AND gameId = :gameId) AS playId"
+                        . " FROM smltown_games WHERE id = :gameId", $values)[0]; //game checked in Ping-Request
+        //if password game (1st time for game)
+        if (isset($select->password) && !isset($_SESSION["game$gameId"])) {
             if (!isset($this->requestValue->password)) {
                 echo "SMLTOWN.Game.askPassword();";
                 return;
             }
 
-            $values = array('password' => $this->requestValue->password);
-            $count = petition("SELECT count(*) as count FROM smltown_games WHERE id = $gameId AND password = :password", $values)[0]->count;
-            if ($count == 0) {
+            if ($select->password != $this->requestValue->password) {
                 echo "SMLTOWN.Game.askPassword('wrong passord');";
                 return;
             }
         }
 
-        //if password done
-        sql("UPDATE smltown_players SET gameId = $gameId WHERE id = '$userId'");
-        $_SESSION["game$gameId"] = 1;
+//        //if password done
+//        sql("UPDATE smltown_players SET gameId = $gameId WHERE id = '$userId'");
+//        $_SESSION["game$gameId"] = 1;
+//
+//        // if not exists
+//        $values = array('userId' => $userId, 'gameId' => $gameId);
+//        $sth = sql("INSERT INTO smltown_plays (userId, gameId, admin) SELECT :userId, :gameId,"
+//                . " CASE WHEN (SELECT count(*) FROM smltown_plays WHERE admin = 1 AND gameId = :gameId) = 0 THEN 1 ELSE -1 END" //admin
+//                . " FROM DUAL" //from ANY TABLE (read table only 1 time)
+//                . " WHERE (SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = :gameId) = 0", $values);
 
-        // if not exists
-        $values = array('userId' => $userId, 'gameId' => $gameId);
-        $sth = sql("INSERT INTO smltown_plays (userId, gameId, admin) SELECT :userId, :gameId,"
-                . " CASE WHEN (SELECT count(*) FROM smltown_plays WHERE admin = 1 AND gameId = :gameId) = 0 THEN 1 ELSE -1 END" //admin
-                . " FROM DUAL" //from ANY TABLE (read table only 1 time)
-                . " WHERE (SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = :gameId) = 0", $values);
+        $transactions = array(
+            "UPDATE smltown_players SET gameId = :gameId WHERE id = :userId"
+        );
 
-        //update playId
-        $playId = petition("SELECT id FROM smltown_plays WHERE userId = :userId AND gameId = :gameId", $values)[0]->id;
-        $_SESSION['playId'] = $this->playId = $playId;
-        //
-        //WEBSOCKET
-        if (isset($this->requestValue['socket'])) {
-            echo " add playId to socket = $playId; \n";
-            $this->requestValue['socket']->val->$playId = true;
-            $this->requestValue['socket']->val->gameId = $gameId;
+        if (!isset($select->playId)) {
+            array_push($transactions, "INSERT INTO smltown_plays (userId, gameId, admin) SELECT :userId, :gameId,"
+                    . " CASE WHEN (SELECT count(*) FROM smltown_plays WHERE admin = 1 AND gameId = :gameId) = 0 THEN 1 ELSE -1 END" //admin
+                    . " FROM DUAL" //from ANY TABLE (read table only 1 time)
+                    . " WHERE (SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = :gameId) = 0"
+            );
         }
 
-        $this->loadGame($sth->rowCount());
+        transaction($transactions, $values);
+        $this->playId = $select->playId;
+
+        //WEBSOCKET
+        if (isset($this->requestValue['socket'])) {
+            echo " add playId to socket = $this->playId; \n";
+            $this->requestValue['socket']->val->playId = true;
+            $this->requestValue['socket']->val->gameId = $gameId;
+            //not:
+        } else {
+            //update playId (4 ajax)
+            $_SESSION['playId'] = $this->playId;
+            $_SESSION["game$gameId"] = 1;
+        }
+
+        $this->loadGame(isset($select->playId));
     }
 
-    public function loadGame($rowCount) {
+    public function loadGame($current) {
         $playId = $this->playId;
 
         //UPDATE
         $this->updateRules($playId);
         $this->updateUsers($playId);
-        if ($rowCount == 0) { //nothing changes on insert: player is not new
+        if ($current) { //nothing changes on insert: player is not new
             $this->updatePlayers($playId);
         } else {
             $this->updatePlayers(); //way to update new players to others
@@ -152,7 +172,7 @@ trait Request {
         $values = array(
             'id' => $id
         );
-        
+
         $card = null;
         $plays = petition("SELECT card FROM smltown_plays WHERE id = $playId");
         if (count($plays) > 0) {
@@ -244,29 +264,16 @@ trait Request {
 
     public function chat() {
         $gameId = $this->gameId;
+        $playId = $this->playId;
+        $name = $this->requestValue['name'];
         $text = $this->requestValue['text'];
 
-        $res = array(
-            'type' => "chat",
-            'text' => $text
-        );
-
-        $sqlId = "";
+        $sqlId = "gameId = $gameId";
         if (isset($this->playId)) {
-            $res['playId'] = $this->playId;
-            $sqlId = "AND smltown_plays.id <> $this->playId";
+            $sqlId .= " AND id <> $this->playId";
         }
-        $plays = petition("SELECT smltown_plays.id, name FROM smltown_plays "
-                //add players name table
-                . "LEFT OUTER JOIN smltown_players "
-                . "ON smltown_plays.userId = smltown_players.id "
-                //    
-                . "WHERE smltown_plays.gameId = $gameId $sqlId");
 
-        for ($i = 0; $i < count($plays); $i++) {
-            $res['name'] = $plays[$i]->name;
-            $this->send_response($res, $plays[$i]->id, true); //to player
-        }
+        $this->setChat($text, $sqlId, $playId, $name);
     }
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -279,10 +286,30 @@ trait Request {
         }
     }
 
-    public function setMessage() {
-        $message = $this->message;
-        $id = $this->id;
-        $this->saveMessage($message, $id);
+    public function setPlayerNotifications() { //by socialId      
+        $gameId = $this->gameId;
+        $playId = $this->playId;
+
+        $name = "";
+        $players = petition("SELECT name FROM smltown_players WHERE id = (SELECT userId FROM smltown_plays WHERE id = $playId)");
+        if (count($players) > 0) {
+            $name = $players[0]->name;
+        }
+
+        $json = $this->requestValue['friends'];
+        $message = $this->requestValue['message'];
+
+        $array = json_decode($json);
+        for ($i = 0; $i < count($array); $i++) {
+            $socialId = $array[$i];
+            $res = array(
+                'type' => "chat",
+                'text' => $message,
+                'gameId' => $gameId,
+                'name' => $name
+            );
+            $this->send_social_response($res, $socialId);
+        }
     }
 
     public function nightExtra() {
@@ -314,10 +341,19 @@ trait Request {
 
         $this->pendingVotes();
     }
-    
-    public function feed(){
+
+    public function setSocialStauts() {
         $playId = $this->playId;
-        sql("UPDATE smltown_plays SET social = 'feed' WHERE id = $playId");
+        sql("UPDATE smltown_plays SET social = 'feeded' WHERE id = $playId");
+    }
+
+    public function addFriend() {
+        $userId = $this->userId;
+        $socialId = $this->requestValue['socialId'];
+        $values = array(
+            'socialId' => $socialId
+        );
+        sql("UPDATE smltown_players SET friends = CONCAT(friends , '|' , :socialId) WHERE id = '$userId'", $values);
     }
 
 }

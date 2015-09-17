@@ -1,5 +1,7 @@
 <?php
 
+$GLOBALS['ROOT'] = dirname(__FILE__);
+
 // prevent the server from timing out
 set_time_limit(0);
 $users = array();
@@ -61,6 +63,7 @@ class echoServer extends WebSocketServer {
         //$this->send($user, "websocket closed");
         if (isset($user->userId)) {
             unset($users[$user->userId]);
+            sql("UPDATE smltown_players SET websocket = 0 WHERE id = '$userId'");
         }
     }
 
@@ -113,11 +116,8 @@ function data_received($user, $message) {
     // from AJAX request case (1 request client)
     if ("ajax" == $action) {
         global $users, $echo;
-        if (!isset($obj->userId)) {
-            $userId = petition("SELECT userId FROM smltown_plays WHERE id = $obj->to")[0]->userId;
-        } else {
-            $userId = $obj->userId;
-        }
+        $userId = $obj->userId;
+
         if (isset($users[$userId])) {
             echo "user id = $userId";
             $echo->public_send($users[$userId], json_encode($obj));
@@ -133,7 +133,6 @@ function data_received($user, $message) {
 
     if (isset($obj->gameType)) {
         loadMainClass($obj->gameType); //load especific game CLASS
-
         //TODO: if admin or not
         if (true) {
             $request = new GameAdmin($obj);
@@ -148,6 +147,33 @@ function data_received($user, $message) {
 }
 
 trait Connection {
+
+    function send_social_response($obj, $socialId) {
+        //check
+        $values = array(
+            'socialId' => $socialId
+        );
+        $players = petition("SELECT id FROM smltown_players WHERE socialId = :socialId", $values);
+        if (count($players) == 0) {
+            return;
+        }
+
+        global $users, $echo;
+        $gameId = $this->gameId;
+        $obj['gameId'] = $gameId;
+        $json = json_encode($obj);
+
+        $userId = $players[0]->userId;
+        if (isset($users[$userId])) {
+            // instant websocket
+            $user = $users[$userId];
+            $echo->public_send($user, $json);
+            //
+        }else if ($users[$userId]->val->gameId != $gameId) { //4 ajax petition, store on reply
+            $values['reply'] = $json; //escape \ from utf-8 special chars
+            sql("UPDATE smltown_players SET reply = CONCAT(reply , '|' , :reply) WHERE socialId = :socialId", $values);
+        }
+    }
 
     // TODO: reduce mysql calls..
     function send_response($obj, $playId = null, $playerReply = false) {
@@ -170,8 +196,8 @@ trait Connection {
                     $user = $users[$userId];
                     $echo->public_send($user, $json);
                     //
-                } 
-                if(!isset($users[$userId]) || $users[$userId]->val->gameId != $gameId) { //4 ajax petition, store on reply
+                }
+                if (!isset($users[$userId]) || $users[$userId]->val->gameId != $gameId) { //4 ajax petition, store on reply
                     $values = array('reply' => $json); //escape \ from utf-8 special chars
                     sql("UPDATE smltown_plays SET reply = CONCAT(reply , '|' , :reply) WHERE id = $playId", $values);
                 }
@@ -187,7 +213,7 @@ trait Connection {
                     $echo->public_send($user, $json);
                     //
                 }
-                if(!isset($users[$userId]) || $users[$userId]->val->gameId != $gameId) { //4 ajax petition, store on reply
+                if (!isset($users[$userId]) || $users[$userId]->val->gameId != $gameId) { //4 ajax petition, store on reply
                     $values = array('reply' => $json); //escape \ from utf-8 special chars
                     $playId = $plays[$i]->id;
                     sql("UPDATE smltown_plays SET reply = CONCAT(reply , '|' , :reply) WHERE id = $playId", $values);

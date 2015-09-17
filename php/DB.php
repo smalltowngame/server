@@ -1,7 +1,7 @@
 <?php
 
 // create default config.php if not exists
-include_once 'config.php';
+include_once getcwd() . '/config.php';
 
 global $pdo;
 
@@ -61,19 +61,18 @@ function sql($str, $values = null) {
         }
         return $sth;
     } catch (PDOException $e) {
-        echo "111hjg";
         response(false, "ERROR: couldn't connect: " . print_r($e->getMessage()));
     }
 }
 
-function transaction($array) {
+function transaction($array, $values = null) {
     global $pdo;
     $pdo->beginTransaction();
     $res = "";
     try {
         foreach ($array as $str) {
             $sth = $pdo->prepare($str);
-            $stmt = $sth->execute(null);
+            $stmt = $sth->execute($values);
             if (!$stmt) {
                 PDOerror($sth, $str);
                 exit;

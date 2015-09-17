@@ -204,6 +204,12 @@ SMLTOWN.Events = {
             SMLTOWN.Transform.chatUpdate();
         });
 
+        $("#smltown_chatForm").keypress(function (e) {
+            if (e.which == 13) {
+                $("#smltown_chatForm").submit();
+            }
+        });
+
         $("#smltown_chatForm").submit(function () {
             $("#smltown_console").trigger("mouseup");
 //            $('#smltown_chatInput').blur();
@@ -258,9 +264,9 @@ SMLTOWN.Events = {
                 message.remove();
             });
         });
-        
+
         //FRIENDS
-        $("#smltown_friendsFooter > div").click(function(){
+        $("#smltown_friendsFooter > div").click(function () {
             $("#smltown_friendSelector").hide();
         });
     }
@@ -333,7 +339,6 @@ SMLTOWN.Events = {
                 if ("smltown_console" != element) { //prevent scroll on swipe
                     x = e.originalEvent.touches[0].pageX;
                     if (Math.abs(y - pageY) < 2 * Math.abs(x - pageX)) {
-                        console.log(99)
                         return;
                     }
                 }
@@ -455,7 +460,10 @@ SMLTOWN.Events = {
 
         //ON FRIENDS
         $("#smltown_showFriends").on("tap", function () {
-            SMLTOWN.Social.invite();
+            SMLTOWN.Social.showFriends();
+        });
+        $("#smltown_addSocialId").on("tap", function () {
+            SMLTOWN.Social.addSocialId();
         });
 
         if (document.location.hostname == "localhost") {
@@ -608,6 +616,64 @@ SMLTOWN.Events = {
         var id = player.id;
         player.div.on("tap", function () {
             SMLTOWN.Action.playerSelect(id);
+        });
+
+        var timer;
+        player.div.find(".smltown_picture").on(touchstart, function (e) {
+            var $this = $(this);
+            timer = setTimeout(function () {
+                $(document).on(touchstart, function (e) {
+                    if (!$(e.target).parents("#smltown_pictureContextMenu").length && $(e.target).attr("id") != "smltown_pictureContextMenu") {
+                        $(document).off(touchstart);
+                        $("#smltown_pictureContextMenu").hide();
+                    }
+                });
+
+                //FRIEND BUTTON 
+                if (player.socialId) {
+                    var isFriend = false;
+
+                    //smalltown friends
+                    for (var i = 0; i < SMLTOWN.user.friends; i++) {
+                        if (SMLTOWN.user.friends[i] == player.socialId) {
+                            $("#smltown_addFriend").hide();
+                            isFriend = true;
+                            break;
+                        }
+                    }
+                    //social friends
+                    var socialFriends = SMLTOWN.Social.friends;
+                    for (var i = 0; i < socialFriends; i++) {
+                        if (socialFriends[i] == player.socialId) {
+                            $("#smltown_addFriend").hide();
+                            isFriend = true;
+                            break;
+                        }
+                    }
+
+                    if (!isFriend) {
+                        $("#smltown_addFriend").show();
+                    }
+                } else {
+                    $("#smltown_addFriend").hide();
+                }
+
+                //CONTEXT MENU
+                $("#smltown_pictureContextMenu").attr("socialId", player.socialId);
+                var offset = $this.offset();
+                $("#smltown_pictureContextMenu").css({
+                    top: offset.top + $this.height(),
+                    left: offset.left + $this.width()
+                }).show();
+
+            }, 1000);
+        }).on("mouseup mouseleave", function () {
+            clearTimeout(timer);
+        });
+
+        $("#smltown_addFriend").click(function () {
+            var socialId = $("#smltown_pictureContextMenu").attr("socialId");
+            SMLTOWN.Server.request.addFriend(socialId);
         });
     }
 };

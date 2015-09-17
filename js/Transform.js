@@ -27,18 +27,18 @@ SMLTOWN.Transform = {
         } else {
             $("#smltown_console").removeClass("smltown_consoleExtended");
         }
-        
+
         //game width persistent style
         var totalWidth = $("#smltown_html").width();
         var cols = parseInt(totalWidth / 350);
-        var width = totalWidth / cols - 14;        
+        var width = totalWidth / cols - 14;
         $("#gameWidth").remove();
         $("<style id='gameWidth' type='text/css'> .smltown_game{ width:" + width + "px} </style>").appendTo("head");
     }
     ,
     gameResize: function () {
 
-        if (9 * $(window).width() >= 16 * $(window).height()) {
+        if (9 * $(window).width() >= 16 * document.documentElement.clientHeight) {
             console.log("9:16");
             //screen 9:16
             $("#smltown_html").addClass("smltown_static smltown_staticMenu");
@@ -46,12 +46,19 @@ SMLTOWN.Transform = {
                 'width': $("#smltown_html").width() - $("#smltown_menuContent").width(),
                 'margin-left': $("#smltown_menuContent").width()
             });
-            $("#smltown_console").css({
-                'width': ($("#smltown_html").width() - $("#smltown_menuContent").width()) / 2
-            });
+
+            var rest = $("#smltown_html").width() - $("#smltown_menuContent").width();
+            var listWidth = rest / 2;
+            if(listWidth > 600){
+                listWidth = 600;
+            }
             $("#smltown_list").css({
-                'width': ($("#smltown_html").width() - $("#smltown_menuContent").width()) / 2
+                'width': listWidth
             });
+            $("#smltown_console").css({
+                'width': rest - listWidth
+            });
+
             $("#smltown_header").css({
                 'width': $("#smltown_menuContent").width() + $("#smltown_list").width()
             });

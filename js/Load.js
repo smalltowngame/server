@@ -13,7 +13,7 @@ SMLTOWN.Load = {
     }
     ,
     //LOAD FUNCTION
-    divLoad: function (url) {
+    divLoad: function (url, callback) {
         console.log("divload");
         var $this = this;
         var urlArray = url.split("?");
@@ -24,16 +24,26 @@ SMLTOWN.Load = {
             if (typeof urlArray[1] != "undefined") {
                 SMLTOWN.Game.info.id = urlArray[1];
             }
-            this.loadGame();
+            this.loadGame(function () {
+                if (callback) {
+                    callback();
+                }
+            });
 
         } else if (urlPage == "gameList") {
             $("#smltown_html").load(SMLTOWN.path + "gameList.php", null, function () {
                 $this.end();
+                if (callback) {
+                    callback();
+                }
             });
         } else {
             //like facebook mobile request on heroku with url data
             $("#smltown_html").load(SMLTOWN.path + "gameList.php", null, function () {
                 $this.end();
+                if (callback) {
+                    callback();
+                }
             });
         }
     }
@@ -53,33 +63,43 @@ SMLTOWN.Load = {
             //LIST EVENTS
             //search utility
             $("#smltown_nameGame input").keyup(function (e) {
+                var input = $(this);
                 //SUBMIT
                 if (e.keyCode == '13') {
                     SMLTOWN.Games.create();
                     return false;
                 }
+                
+                clearTimeout($this.typing);
+                $this.typing = setTimeout(function () {
 
-                //SEARCH
-                var val = $(this).val();
-                if (val == $this.gameSearchValue) {
-                    return;
-                }
-                $this.gameSearchValue = val;
+                    //SEARCH
+                    var val = input.val();
+                    if (val == $this.gameSearchValue) {
+                        return;
+                    }
+                    $this.gameSearchValue = val;
 
-                if (val.length > 2) {
-                    $this.start();
-                    SMLTOWN.Server.ajax({
-                        action: "getGamesInfo",
-                        userId: SMLTOWN.user.userId,
-                        name: val.toLowerCase()
-                    }, function (games) {
-                        SMLTOWN.Games.list(games);
-                        $this.end();
-                    });
+                    if (val.length > 2) {
+                        $this.nameGameSearched = true;
+                        $this.start();
+                        SMLTOWN.Server.ajax({
+                            action: "getGamesInfo",
+                            userId: SMLTOWN.user.userId,
+                            name: val.toLowerCase()
+                        }, function (games) {
+                            SMLTOWN.Games.list(games);
+                            $this.end();
+                        });
 
-                } else if (!val.length) { //if remove search name reload again
-                    $this.reloadList();
-                }
+                    } else if (!val.length) { //if remove search name reload again       
+                        if ($this.nameGameSearched) {
+                            $this.reloadList();
+                        }
+                        $this.nameGameSearched = false;
+                    }
+
+                }, 650);
             });
 
             //CREATE GAME
@@ -96,7 +116,7 @@ SMLTOWN.Load = {
     }
     ,
     //GAME
-    loadGame: function () {
+    loadGame: function (callback) {
         var hashArray = window.location.hash.split("?");
         if (hashArray.length > 1) {
             SMLTOWN.Game.info.id = hashArray[1];
@@ -106,6 +126,9 @@ SMLTOWN.Load = {
             lang: SMLTOWN.lang
         }, function () {
             console.log("loaded game");
+            if (callback) {
+                callback();
+            }
             //not end() at this point
         });
     }
@@ -134,6 +157,7 @@ SMLTOWN.Load = {
     ,
     start: function () {
         var $this = this;
+        this.loading = true;
         if (!$("#smltown_loading").length) {
             $("#smltown_html").append("<div id='smltown_loading'><div class='smltown_loader'></div></div>");
         }
@@ -142,11 +166,12 @@ SMLTOWN.Load = {
         clearTimeout(this.timeout);
         this.timeout = setTimeout(function () {
             $this.end();
-            SMLTOWN.Message.flash(SMLTOWN.Message.translate("warnServer"), true);
+            SMLTOWN.Message.flash("warnServer");
         }, 5000);
     }
     ,
     end: function () {
+        this.loading = false;
         clearTimeout(this.timeout);
         $("#smltown_loading").remove();
     }

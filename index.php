@@ -26,7 +26,8 @@ ini_set('session.gc_maxlifetime', 864000);
         players: {},
         temp: {},
         Update: {},
-        config: {}
+        config: {},
+        Social: {}
     };
 
 </script>
@@ -117,6 +118,15 @@ $script = "<script>;";
 if (isset($debug)) {
     $script .= "SMLTOWN.config.debug = $debug;";
 }
+//if pcntl_fork not work will slow down ajax calls on detriment of client players
+$pid = -1;
+if (extension_loaded('pcntl')) {
+    echo "aaa123";
+    $pid = pcntl_fork();
+}
+if (function_exists('exec')) {
+//    echo "exec is enabled";
+}
 if (isset($websocket_server)) {
     $script .= "SMLTOWN.config.websocket_server = $websocket_server;";
 }
@@ -143,6 +153,7 @@ echo $script;
         <link rel="shortcut icon" href="<?php echo $smalltownURL ?>favicon.ico" type="image/x-icon"/>
         <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/errorLog.js"></script>
 
+        <link rel='stylesheet' href="<?php echo $smalltownURL ?>css/clean.css">
         <link rel='stylesheet' href="<?php echo $smalltownURL ?>css/index.css">
         <link rel='stylesheet' href='<?php echo $smalltownURL ?>css/common.css'>
         <link rel='stylesheet' href='<?php echo $smalltownURL ?>css/game.css'>
@@ -173,14 +184,15 @@ echo $script;
     SMLTOWN.user.name = SMLTOWN.Util.getLocalStorage("smltown_userName");
 
     // external cookie overwrites
-    (function () {
-        var userName = SMLTOWN.Util.getCookie("smltown_userName");
-        if (userName) {
-            SMLTOWN.user.name = userName;
-        }
-    })();
+//    (function() {
+//        var userName = SMLTOWN.Util.getCookie("smltown_userName");
+//        if (userName) {
+//            console.log("user name = " + userName);
+//            SMLTOWN.user.name = userName;
+//        }
+//    })();
 
-    $(document).one("ready", function () {
+    $(document).one("ready", function() {
         SMLTOWN.Transform.windowResize();
 
         $("#smltown_footer").append("<i id='smltown_connectionCheck'>This server <span class='allowWebsocket'></span> allows websocket connection.</i>");
@@ -201,18 +213,20 @@ echo $script;
     <script type="text/javascript" src="<?php echo $smalltownURL ?>js/Load.js"></script>
     <script type="text/javascript" src="<?php echo $smalltownURL ?>js/Local.js"></script>    
     <script type="text/javascript" src="<?php echo $smalltownURL ?>js/Time.js"></script>
+    <script type="text/javascript" src="<?php echo $smalltownURL ?>js/Social.js"></script>
 
     <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/jquery.mobile.events.min.js"></script>
     <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/modernizr.custom.36644.js"></script><!--after mobile.events-->
     <script type="text/javascript" src="<?php echo $smalltownURL ?>js/Events.js"></script><!--after modernizr-->
-
+    
     <script type="text/javascript" src="<?php echo $smalltownURL ?>social/facebook.js"></script>
 
+    <!--Emojis-->
     <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/emoji/jquery.emojiarea.js"></script>
     <script type="text/javascript" src="<?php echo $smalltownURL ?>libs/emoji/packs/basic/emojis.js"></script>
     <link rel='stylesheet' href='<?php echo $smalltownURL ?>libs/emoji/jquery.emojiarea.css'>   
     <script>
-        $.emojiarea.path = '<?php echo $smalltownURL ?>libs/emoji/packs/basic/images';
+    $.emojiarea.path = '<?php echo $smalltownURL ?>libs/emoji/packs/basic/images';
     </script>
 
 </html>

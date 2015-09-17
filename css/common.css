@@ -77,7 +77,6 @@ html, body{
 }
 #smltown_dialog form{    
     width: 90%;
-    height: 60%;
     margin: auto;
     margin-top: 5%;
     background-color: rgba(0,0,0,0.7);
@@ -95,6 +94,11 @@ html, body{
     width: 100%;
     margin-top: 10px;
     text-align: center;
+}
+#smltown_dialog .smltown_log{
+    color: grey;
+    font-weight: normal;
+    font-size: 12px;
 }
 
 .smltown_absolute{
@@ -137,7 +141,7 @@ html, body{
 .smltown_button:active{
     -webkit-box-shadow: inset 1px 1px 2px rgb(100,100,100);
     -moz-box-shadow: inset 1px 1px 2px rgb(100,100,100);
-    box-shadow: inset 1px 1px 2px rgb(100,100,100);    
+    box-shadow: inset 1px 1px 2px rgb(100,100,100), inset 0 -1px white;
 }
 
 #smltown_dialog input, #smltown_dialog .smltown_button{

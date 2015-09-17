@@ -1,10 +1,10 @@
 <?php
 
+$GLOBALS['ROOT'] = dirname(__FILE__);
 session_start();
 
 //PING resquest
 $content = file_get_contents("php://input");
-
 $obj = json_decode($content);
 
 if (is_object($obj) && $obj->action) {

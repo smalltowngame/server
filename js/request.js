@@ -87,7 +87,8 @@ SMLTOWN.Server.request = {
     chat: function(text) {
         this.send({
             action: "chat",
-            text: text.replace(/'/g, "").replace(/"/g, "")
+            text: text.replace(/'/g, "\'").replace(/"/g, "\""),
+            name: SMLTOWN.user.name
         }, true);
     }
     ,
@@ -98,6 +99,8 @@ SMLTOWN.Server.request = {
             lang: SMLTOWN.lang
         };
 
+        console.log("SMLTOWN.user.name = " + SMLTOWN.user.name)
+        console.log(SMLTOWN.user)
         if (SMLTOWN.user.name) {
             obj.name = SMLTOWN.user.name;
         }
@@ -222,10 +225,25 @@ SMLTOWN.Server.request = {
         }, true); //not loading
     }
     ,
-    feed: function(){
+    setSocialStauts: function(status) { //feed done
         this.send({
-            action: "feed"
+            action: "setSocialStauts",
+            status: status
         }, true); //not loading
+    },
+    setPlayerNotifications: function(jsonFriends, message) {
+        this.send({
+            action: "setPlayerNotifications",
+            friends: jsonFriends,
+            message: message
+        }, true);
+    }
+    ,
+    addFriend: function(socialId){
+        this.send({
+            action: "addFriend",
+            socialId: socialId
+        }, true);
     }
 //    ,
 //    exitGame: function(callback) {

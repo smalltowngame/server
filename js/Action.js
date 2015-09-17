@@ -3,6 +3,12 @@
 SMLTOWN.Action = {
     wakeUp: function(message, instantlyWakeUp, callback) {
         var $this = this;
+        
+        //not wakeup on instantly reconnection
+        if(SMLTOWN.Server.websocketReconnection){
+            return;
+        }
+        
         if (undefined == typeof message) {
             $("#smltown_filter").removeClass("smltown_sleep");
             SMLTOWN.user.sleeping = false;

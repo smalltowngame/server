@@ -1,5 +1,6 @@
 <?php
 
+$GLOBALS['ROOT'] = dirname(__FILE__);
 session_start();
 
 //PING resquest
@@ -19,19 +20,20 @@ if (empty($content)) { //reply petition
     $userId = $_COOKIE["smltown_userId"];
 
     include_once 'php/DB.php';
+
     $plays = petition("(SELECT reply FROM smltown_players WHERE id = '$userId')"
-            . "UNION"
+            . " UNION "
             . "(SELECT reply FROM smltown_plays WHERE userId = '$userId' AND gameId = " . $_GET["id"] . ")");
-    if (count($plays)) {
-        if (empty($plays[0]->reply) && empty($plays[1]->reply)) {
-            die();
-        }
-    } else { // let time to create play on addUserInGame?
+
+    if (!count($plays)) {
         //echo "SMLTOWN.Load.showPage('gameList', 'not play found')";
         die();
     }
+    if (empty($plays[0]->reply) && empty($plays[1]->reply)) {
+        die();
+    }
 
-    //do real request after check: this echo will fire few times
+    //do real request after check: this echo's will fire few times
     //do transaction: prevents remove recents reply's on multiple requests
     echo transaction(array(
         // save '' for concat replys
@@ -83,20 +85,61 @@ if (empty($content)) { //reply petition
 
 trait Connection {
 
+    function send_social_response($obj, $socialId) {
+        global $websocket_server;
+        
+        $gameId = $this->gameId;
+        $obj['gameId'] = $gameId;
+        $json = json_encode($obj);
+
+        $values = array(
+            'socialId' => $socialId,
+            'reply' => $json //escape \ from utf-8 special chars
+        );
+        $sth = sql("UPDATE smltown_players SET reply = CONCAT(reply , '|' , :reply) WHERE "
+                . "socialId = :socialId AND websocket = 0", $values);
+
+        if ($sth->rowCount() > 0) {
+            return;
+        }
+
+        if (!$websocket_server || isset($_SESSION['onlyAjax'])) {
+            return;
+        }
+
+        // WEBSOCKET call ///////////////////////////////////////////
+        $values = array(
+            'socialId' => $socialId
+        );
+        $players = petition("SELECT id FROM smltown_players WHERE socialId = :socialId", $values);
+        if (count($players) == 0) {
+            die("some player not found");
+        }
+
+        include_once 'websocket/client/Base.php';
+        include_once 'websocket/client/Client.php';
+
+        $client = new Client("ws://localhost:9000/smalltown/smalltown/smltown_websocket.php");
+        $obj['action'] = "ajax";
+        $obj['userId'] = $players[0]->userId;
+        $client->send(json_encode($obj));
+        $client->__destruct();
+    }
+
     function send_response($obj, $playId = null, $playerReply = false) {
         global $websocket_server;
         $gameId = $this->gameId;
 
         if (isset($playId)) {
             //warning: cant echo here. every individual messages will arrive before game updates. like 1st night before update
-            //only in game
+            //only in playing game
             $json = json_encode($obj);
             $values = array('reply' => $json); //escape \ from utf-8 special chars
             $sth = sql("UPDATE smltown_plays SET reply = CONCAT(reply , '|' , :reply)"
                     . " WHERE smltown_plays.id = $playId AND smltown_plays.admin != -2 AND"
                     . " (SELECT gameId FROM smltown_players WHERE id = smltown_plays.userId) = $gameId ", $values);
-            
-            //anywhere
+
+            //anywhere (all games)
             if ($playerReply && $sth->rowCount() == 0) {
                 $obj['gameId'] = $gameId;
                 $json = json_encode($obj);
@@ -107,21 +150,25 @@ trait Connection {
                         . "AND websocket = 0", $values);
             }
 
-            if (!$websocket_server) {
+            if (!$websocket_server || isset($_SESSION['onlyAjax'])) {
                 return;
             }
 
-            //else WEBSOCKET calls ///////////////////////////////////////////
+            // WEBSOCKET calls ///////////////////////////////////////////
             include_once 'websocket/client/Base.php';
             include_once 'websocket/client/Client.php';
 
-            //TODO: get on any url                
+            //TODO: get on any url
             $client = new Client("ws://localhost:9000/smalltown/smalltown/smltown_websocket.php");
             $obj['action'] = "ajax";
-            $obj['to'] = $playId;
+            $userId = petition("SELECT userId FROM smltown_plays WHERE id = $playId")[0]->userId;
+            $obj['userId'] = $userId;
 
-            $client->send(json_encode($obj));
+            if (false == $client->send(json_encode($obj))) {
+                $_SESSION['onlyAjax'] = true;
+            }
             $client->__destruct();
+
             //
         } else { //ALL GAME PLAYERS
             //
@@ -142,11 +189,11 @@ trait Connection {
                         . " AND websocket = 0", $values);
             }
 
-            if (!$websocket_server) {
+            if (!$websocket_server || isset($_SESSION['onlyAjax'])) {
                 return;
             }
 
-            //else WEBSOCKET calls ///////////////////////////////////////////
+            // WEBSOCKET calls ///////////////////////////////////////////
             include_once 'websocket/client/Base.php';
             include_once 'websocket/client/Client.php';
 
@@ -163,8 +210,4 @@ trait Connection {
         }
     }
 
-}
-
-class ConnectionException extends Exception {
-    
 }

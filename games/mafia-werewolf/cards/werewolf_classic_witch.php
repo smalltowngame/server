@@ -49,7 +49,7 @@ $card->extra = function() {
 
 <style>	
     .smltown_dying{
-        background-color: rgba(100,0,0,0.3) !important;
+        background: rgba(100,0,0,0.3) !important;
     }
 
     #smltown_witchSave {
@@ -68,27 +68,32 @@ $card->extra = function() {
     SMLTOWN.temp.text = {
         en: {
             "healUsed": "heal potion already been used",
-            "poisonUsed": "poison potion already been used"
+            "poisonUsed": "poison potion already been used",
+            "noMore": "no more potions to use"
         },
         es: {
             "healUsed": "la poción de curar ya se ha usado",
-            "poisonUsed": "la poción de veneno ya se ha usado"
+            "poisonUsed": "la poción de veneno ya se ha usado",
+            "noMore": "no te quedan pociones para usar"
         }
     };
 
-    $("#smltown_witchButton .smltown_button").click(function() {
-        $(".smltown_dying").removeClass("smltown_dying");
-        
+    $("#smltown_witchButton .smltown_button").click(function () {
         var save = $("#smltown_witchSave").closest(".smltown_player").attr("id");
         var kill = $("#smltown_witchKill").closest(".smltown_player").attr("id");
+        SMLTOWN.temp.endTurn(save, kill);
+    });
+
+    SMLTOWN.temp.endTurn = function (save, kill) {
+        $(".smltown_dying").removeClass("smltown_dying");
         SMLTOWN.Server.request.nightSelect({
             save: save ? save : null,
             kill: kill ? kill : null
         });
-     });
+    }
 
-    SMLTOWN.Action.night.extra = function(dying) {
-        console.log(dying)
+    SMLTOWN.Action.night.extra = function (dying) {
+        console.log(dying);
         $("#smltown_cardConsole").show();
         $("#smltown_cardConsole").html($("#smltown_witchButton"));
 
@@ -97,9 +102,15 @@ $card->extra = function() {
             $("#" + id).addClass("smltown_dying");
             $("#" + id + " .smltown_playerStatus").text("dying...");
         }
+
+        if (SMLTOWN.temp.witchUsedSave && SMLTOWN.temp.witchUsedKill) {
+            SMLTOWN.Message.notify(SMLTOWN.temp.text[SMLTOWN.lang]["noMore"], function () {
+                SMLTOWN.temp.endTurn();
+            });
+        }
     };
 
-    SMLTOWN.Action.night.select = function(selectedId) {
+    SMLTOWN.Action.night.select = function (selectedId) {
         var div = $("#" + selectedId);
         var votes = div.find(".smltown_votes");
 
@@ -107,7 +118,7 @@ $card->extra = function() {
             if (!SMLTOWN.temp.witchUsedSave) { //have this potion yet
                 var isCheck = votes.find("#smltown_witchSave").length;
                 $("#smltown_witchSave").remove();
-                if(!isCheck){
+                if (!isCheck) {
                     votes.html("<span id='smltown_witchSave'>✔</span>");
                 }
             } else {
@@ -119,7 +130,7 @@ $card->extra = function() {
             if (!SMLTOWN.temp.witchUsedKill) { //have this potion yet
                 var isCheck = votes.find("#smltown_witchKill").length;
                 $("#smltown_witchKill").remove();
-                if(!isCheck){
+                if (!isCheck) {
                     votes.html("<span id='smltown_witchKill'>✘</span>");
                 }
             } else {

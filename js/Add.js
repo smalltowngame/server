@@ -1,14 +1,25 @@
 
 SMLTOWN.Add = {
-    backgroundCard: function (div, filename) {
+    backgroundCard: function(div, filename) {
+
+        if (SMLTOWN.Load.loading) {
+            setTimeout(function() {
+                SMLTOWN.Add.backgroundCard(div, filename);
+            }, 2000);
+            return;
+        }
+
         var url = this.getCardUrl(filename);
 
-        $('<img/>').attr('src', url).load(function () {
+        $('<img/>').attr('src', url).load(function() {
             $(this).remove(); // prevent memory leaks as @benweet suggested
             div.css('background-image', "url('" + url + "')");
             div.find("name").remove();
-        }).error(function () {
-            var name = nameCard;
+
+        }).error(function() {
+            var nameArray = filename.split("_");
+            var name = nameArray[nameArray.length - 1];
+
             var card = SMLTOWN.cards[filename];
             if (card) {
                 name = card.name;
@@ -26,16 +37,45 @@ SMLTOWN.Add = {
             }
             div.addClass("smltown_textCard");
         });
+
+        //
+//        var url = this.getCardUrl(filename);
+//
+//        var img = new Image();
+//        img.onload = function () {
+//            div.css('background-image', "url('" + url + "')");
+//            div.find("name").remove();
+//        };
+//        img.onerror = function () {
+//            var name = nameArray[nameArray.length - 1];
+//            var card = SMLTOWN.cards[filename];
+//            if (card) {
+//                name = card.name;
+//            }
+//            var nameContent = $("<name>" + name + "</name>");
+//            div.prepend(nameContent);
+//            //fill text size
+//            var fontSize = parseInt(div.css("font-size"));
+//            var divWidth = div.width();
+//            while (nameContent.width() > divWidth) {
+//                div.css("font-size", fontSize-- + "px");
+//                if (!fontSize) {
+//                    return;
+//                }
+//            }
+//            div.addClass("smltown_textCard");
+//        };
+//        img.src = url;
     }
     ,
-    getCardUrl: function (filename) {
+    getCardUrl: function(filename) {
         var nameArray = filename.split("_");
         var nameCard = nameArray[nameArray.length - 1];
         var gamePath = "games/" + SMLTOWN.Game.info.type;
         return SMLTOWN.path + gamePath + "/cards/card_" + nameCard + ".jpg";
     }
     ,
-    icons: function (game, content) {
+    icons: function(game, content) {
         content.find(".smltown_passwordIcon").remove();
         content.find(".smltown_clockIcon").remove();
         content.find(".smltown_openVotingIcon").remove();
@@ -43,7 +83,7 @@ SMLTOWN.Add = {
 
         if (game.password) {
             var icon = $("<div class='smltown_passwordIcon'>");
-            icon.click(function () {
+            icon.click(function() {
                 SMLTOWN.Message.flash("game with password");
             });
             content.append(icon);
@@ -54,7 +94,7 @@ SMLTOWN.Add = {
             var div = $("<div>");
             div.append("<div class='smltown_clockIcon'>");
             div.append(game.dayTime);
-            div.click(function () {
+            div.click(function() {
                 SMLTOWN.Message.flash("seconds of day time by player");
             });
             content.append(div);
@@ -63,7 +103,7 @@ SMLTOWN.Add = {
         //open voting
         if ("1" == game.openVoting) {
             var div = $("<div class='smltown_openVotingIcon'>");
-            div.click(function () {
+            div.click(function() {
                 SMLTOWN.Message.flash("let players vote during the day");
             });
             content.append(div);
@@ -72,14 +112,14 @@ SMLTOWN.Add = {
         //admin end Turn power
         if ("1" == game.endTurn) {
             var div = $("<div class='smltown_endTurnIcon'>");
-            div.click(function () {
+            div.click(function() {
                 SMLTOWN.Message.flash("admin can end turn immediately");
             });
             content.append(div);
         }
     }
     ,
-    quitPlayerButtons: function () {
+    quitPlayerButtons: function() {
 //        if ($.isEmptyObject(SMLTOWN.Game.info)) {
 //            return;
 //        }
@@ -93,21 +133,21 @@ SMLTOWN.Add = {
                 }
             }
         }
-        $(".smltown_player .smltown_quit").click(function () {
+        $(".smltown_player .smltown_quit").click(function() {
             var id = $(this).closest(".smltown_player").attr("id");
             $("#" + id).remove();
             SMLTOWN.Server.request.deletePlayer(id);
         });
     }
     ,
-    userNamesByClass: function () {
+    userNamesByClass: function() {
         for (var id in SMLTOWN.players) {
             var name = SMLTOWN.players[id].name;
             $(".id" + id + ":empty").append(name + ": "); //not .text() translate
         }
     }
     ,
-    help: function () {
+    help: function() {
         var status = SMLTOWN.Game.info.status;
         if (!status) {
             status = 0;
@@ -160,7 +200,7 @@ SMLTOWN.Add = {
         ["#smltown_popup", "help_popup"]
     ]
     ,
-    nextHelp: function (next) {
+    nextHelp: function(next) {
         $(".smltown_helpDiv").remove();
         var help = this.helpList[next];
         if (!help) {
@@ -177,7 +217,7 @@ SMLTOWN.Add = {
         this.locateHelper(help[0], help[1], target, action, next);
     }
     ,
-    locateHelper: function (div, value, target, action, next) {
+    locateHelper: function(div, value, target, action, next) {
         var $this = this;
         var help = $("<div class='smltown_helpDiv'>");
 
@@ -212,7 +252,7 @@ SMLTOWN.Add = {
         if (!target) {
             var button = $("<button>");
             button.text("ok");
-            button.click(function () {
+            button.click(function() {
                 $this.nextHelp(next + 1);
             });
             help.append(button);
@@ -222,7 +262,7 @@ SMLTOWN.Add = {
             if (action) {
                 event = action;
             }
-            $(target).on(event + ".help", function () {
+            $(target).on(event + ".help", function() {
                 console.log("help event");
                 $(this).off(".help");
                 $this.nextHelp(next + 1);

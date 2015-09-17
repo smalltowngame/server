@@ -1,4 +1,107 @@
 
+#smltown_friendSelector{
+    display: none;
+    position: absolute;
+    top: 25px;
+    bottom: 25px;
+    left: 10px;
+    right: 10px;
+    background-color: white;
+    border: 1px solid rgb(100,100,100);
+    z-index: 99;
+    font-family: sans-serif;
+}
+
+#smltown_friendsContent{
+    border: 1px solid rgb(200,200,200);
+    margin: 15px 10px;
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 50px;
+    top: 50px;
+}
+
+#smltown_friendsTitle > *{
+    margin: 20px 10px;
+}
+#smltown_friendsTitle p{
+    color: rgb(150,150,150);
+}
+#smltown_friendsTitle .smltown_update{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.smltown_invitableFriend{
+    width: calc(50% - 15px);
+    max-width: 150px;
+    display: inline-block;
+    margin: 5px;
+    padding: 4px;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: small;
+    cursor: pointer;
+    text-align: center;
+}
+.smltown_invitableFriend img{
+    border-radius: 3px;
+    width: 60px;
+    height: 60px;
+}
+
+.smltown_invitableFriend.active{
+    background-color: rgb(59, 89, 152);
+    color: white;    
+}
+.smltown_invitableFriend.active img{
+    background-color: rgb(175, 189, 212);
+}
+
+.smltown_invitableFriend img{
+    border: 1px solid rgb(200,200,200);
+    padding: 3px;
+}
+.smltown_invitableFriend p{
+    margin: 5px;
+    text-align: center;
+}
+
+#smltown_friendsFooter{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+#smltown_friendsFooter > div{
+    float: left;
+    margin: 10px;
+}
+
+#smltown_friendsFooter > div, #smltown_friendsTitle .smltown_update{    
+    background-color: rgb(200,200,200);
+    padding: 5px 15px;
+    border: 1px solid grey;
+    cursor: pointer;
+}
+#smltown_friendsFooter .smltown_submit{    
+    background-color: #5b74a8;
+    color: gainsboro;
+    font-weight: bold;
+    border: 1px solid black;
+}
+
+#smltown_friendsFooter > div:hover, #smltown_friendsTitle .smltown_update:hover{
+    box-shadow: inset 1px 1px 0 black, inset -1px -1px 0 gainsboro;
+}
+#smltown_friendsFooter > div:active, #smltown_friendsTitle .smltown_update:active{
+    box-shadow: inset 2px 2px 0 black, inset -1px -1px 0 white;
+}
+
+/*******************************************/
+
 .fb-like{
     display: none !important;
     position: absolute !important;

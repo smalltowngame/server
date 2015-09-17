@@ -172,9 +172,13 @@ if (count($games)) {
                         <span>Friends</span>
                         <small>friendsHelp</small>
                     </div>
-                    <div id="smltown_showFriends" class="smltown_action">
+                    <div id="smltown_showFriends" class="smltown_action" style="display: none">
                         <span>Invite</span>
-                        <small>inviteHelp</small>				
+                        <small>inviteHelp</small>
+                    </div>
+                    <div id="smltown_addSocialId" class="smltown_action" style="display: none">
+                        <span>AddSocialId</span>
+                        <small>addSocialIdHelp</small>
                     </div>
                 </div>
 
@@ -234,14 +238,26 @@ if (count($games)) {
 
     <div id="smltown_cardConsole"></div>
 
-    <!--<div id=smltown_friendSelector>
-        <div id='smltown_friendsTitle'>Invite your friends to this game</div>
-        <div id='smltown_friendsContent'></div>
+    <!--friends selector-->
+    <div id=smltown_friendSelector>
+        <div id='smltown_friendsTitle'>
+            <p>Invite your friends</p>
+            <div class="smltown_update">Update</div>
+
+        </div>
+        <div id='smltown_friendsContent'>
+            <!--demo social friend-->
+            <div class='smltown_invitableFriend'><img src=''><p>demo user</p></div>
+        </div>
         <div id='smltown_friendsFooter'>
             <div class="smltown_submit">Send Invitation</div>
-            <div class="smltown_cancel">Cancel</div>
+            <div class="smltown_cancel">Cancel</div>            
         </div>
-    </div>-->
+    </div>
+
+    <div id='smltown_pictureContextMenu'>
+        <div id="smltown_addFriend">add friend</div>
+    </div>
 
     <!--visuals card-->
     <div id='smltown_phpCard'></div>
@@ -253,13 +269,13 @@ if (count($games)) {
 
 <script>
     $('.emojis-wysiwyg').emojiarea({wysiwyg: true});
-    $("#smltown_sendInput").click(function () {
+    $("#smltown_sendInput").click(function() {
         $("#smltown_chatForm").submit();
         $("#smltown_chatInput").val("");
         $(".emoji-wysiwyg-editor").html("");
     });
 
-    $(".emoji-wysiwyg-editor").blur(function (e) {
+    $(".emoji-wysiwyg-editor").blur(function(e) {
         if ($(e.target).parents("#smltown_chatForm").length > 0) {
 //            e.preventDefault();  //prevent default DOM action
 //            e.stopPropagation();   //stop bubbling
@@ -279,7 +295,12 @@ if (count($games)) {
     $("#smltown_consoleLog > div").attr("empty-content", SMLTOWN.Message.translate("emptyChat"));
 
     //RESTART
-    SMLTOWN.user = {};
+    SMLTOWN.user.admin = null;
+    SMLTOWN.user.card = null;
+    SMLTOWN.user.rulesJS = null;
+    SMLTOWN.user.sel = null;
+    SMLTOWN.user.message = null;
+
     SMLTOWN.players = {};
     SMLTOWN.Game.info = {
         id:<?php echo $gameId ?>,
@@ -293,22 +314,22 @@ if (count($games)) {
     SMLTOWN.user.sleeping = true;
     SMLTOWN.cardLoading = false;
 
-    $(window).ready(function () {
+    $(window).ready(function() {
         SMLTOWN.Transform.gameResize();
     });
     SMLTOWN.Events.game();
     SMLTOWN.Server.request.addUserInGame(SMLTOWN.Game.info.id); //add this user to game
 
     //start SOCKET imitation
-    if (!SMLTOWN.Server.websocket) {
-        SMLTOWN.Server.startPing();
-    }
+//    if (!SMLTOWN.Server.websocket) {
+//        SMLTOWN.Server.startPing();
+//    }
 
     //info
     $("#smltown_disclaimer").load(SMLTOWN.path + "./game_disclaimer.html");
     $("#smltown_currentUrl").append("<b>Current URL:</b> <br/><br/> <small>" + window.location.href + "</small>");
-    
+
     //cookie
     SMLTOWN.Util.setPersistentCookie("smltown_gameId", SMLTOWN.Game.info.id);
-    
+
 </script>

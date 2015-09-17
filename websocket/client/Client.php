@@ -24,6 +24,7 @@ class Client extends Base {
 
         if (!array_key_exists('timeout', $this->options))
             $this->options['timeout'] = 5;
+        //echo "timeout = " . $this->options['timeout'];
 
         // the fragment size
         if (!array_key_exists('fragment_size', $this->options))
@@ -72,10 +73,7 @@ class Client extends Base {
         $this->socket = @fsockopen($host_uri, $port, $errno, $errstr, $this->options['timeout']);
 
         if ($this->socket === false) {
-//            throw new ConnectionException(
-//            "Could not open socket to \"$host:$port\": $errstr ($errno)."
-//            );
-            $this->__destruct();
+//            throw new Exception("Could not open socket to \"$host:$port\": $errstr ($errno).");
             return false;
         }
 

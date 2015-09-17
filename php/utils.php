@@ -27,7 +27,7 @@ trait Utils {
     //MESSAGES WORK
     //flash
     protected function setFlash($message, $wheres = null) {
-        $players = $this->getPlayers($wheres);
+        $players = $this->getPlays($wheres);
         for ($i = 0; $i < count($players); $i++) {
             $playId = $players[$i]->id;
             $this->send_response(array('type' => 'flash', 'data' => $message), $playId);
@@ -36,10 +36,28 @@ trait Utils {
 
     //notification
     protected function setNotifications($message, $wheres = null) {
-        $players = $this->getPlayers($wheres);
+        $players = $this->getPlays($wheres);
         for ($i = 0; $i < count($players); $i++) {
             $playId = $players[$i]->id;
             $this->send_response(array('type' => 'notify', 'data' => $message), $playId);
+        }
+    }
+
+    protected function setChat($text, $sqlId, $playId = null, $name = null) {
+      
+        $plays = petition("SELECT id FROM smltown_plays "
+                . "WHERE $sqlId");
+
+        for ($i = 0; $i < count($plays); $i++) {
+            $res = array(
+                'type' => "chat",
+                'text' => $text                
+            );
+            if(isset($playId)){
+                $res['playId'] = $playId;
+                $res['name'] = $name;
+            }
+            $this->send_response($res, $plays[$i]->id, true); //to player
         }
     }
 
@@ -50,11 +68,19 @@ trait Utils {
     //////////////////////////////////////////////////////////////////////////////////
     //DB RQUESTS
 
-    protected function getPlayers($wheres) {
+    protected function getPlays($wheres) {
         $gameId = $this->gameId;
 
         $values = array();
         $sql = "SELECT id FROM smltown_plays WHERE gameId = $gameId " . whereArray($wheres, $values);
+        return petition($sql, $values);
+    }
+
+    protected function getPlayers($wheres) {
+        $gameId = $this->gameId;
+
+        $values = array();
+        $sql = "SELECT id FROM smltown_players WHERE gameId = $gameId " . whereArray($wheres, $values);
         return petition($sql, $values);
     }
 
@@ -235,7 +261,6 @@ trait Utils {
 //        );
 //        $this->send_response($res, $playId);
 //    }
-
     //CARD WORKS
 
     protected function loadCards($all = false) { //GAME ID FUTURE ERRORS
@@ -285,7 +310,7 @@ trait Utils {
     protected function getCardFileByName($name, $playId = null) {
         $gameId = $this->gameId;
         $type = petition("SELECT type FROM smltown_games WHERE id = $gameId")[0]->type;
-        
+
         $filename = "games/$type/cards/$name.php";
         return $this->getCardFile($filename, $playId);
     }

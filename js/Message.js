@@ -127,7 +127,7 @@ SMLTOWN.Message = {
             this.external(text, gameId);
             return;
         }
-
+        
         var $this = this;
         $("#smltown_popupOk").off("tap");
         $("#smltown_popupCancel").off("tap");

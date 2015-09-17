@@ -18,6 +18,7 @@ SMLTOWN.Update.gameStatus = function () {
 
         case 1: //night time
             SMLTOWN.Server.ping = SMLTOWN.Server.fastPing;
+            console.log("ping = " + SMLTOWN.Server.ping);
             var message = false, instant = true;
             SMLTOWN.Action.wakeUp(message, instant); //prevent wake up on other night turn
 
@@ -50,6 +51,7 @@ SMLTOWN.Update.gameStatus = function () {
             break;
         case 3: //town discusing
             SMLTOWN.Server.ping = SMLTOWN.Server.fastPing;
+            console.log("ping = " + SMLTOWN.Server.ping);
             $("#smltown_sun").show(); //before countdown!
 
             SMLTOWN.Time.runCountdown();
@@ -76,6 +78,7 @@ SMLTOWN.Update.gameStatus = function () {
             break;
         case 5: //end game
             SMLTOWN.Server.ping = SMLTOWN.Server.slowPing;
+            console.log("ping = " + SMLTOWN.Server.ping);
 
             if ($("#smltown_body").attr("class") != "smltown_gameover") { // 1st time 
                 console.log("end game")
@@ -105,6 +108,7 @@ SMLTOWN.Update.gameStatus = function () {
             break;
         default: //waiting for new game (0) "new cards"
             SMLTOWN.Server.ping = SMLTOWN.Server.slowPing;
+            console.log("ping = " + SMLTOWN.Server.ping);
             $(".smltown_gameover").addClass("smltown_selectable");
 
             if ($("#smltown_body").attr("class") != "smltown_waiting") { // 1st time  

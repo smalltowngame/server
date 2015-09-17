@@ -1,4 +1,5 @@
 <?php
+
 if (isset($_COOKIE['smltown_userId'])) {
     include_once 'php/DB.php';
     sql("UPDATE smltown_players SET gameId = null WHERE id = '" . $_COOKIE['smltown_userId'] . "'");
@@ -40,6 +41,7 @@ if (isset($_COOKIE['smltown_userId'])) {
 </div>
 
 <script>
+    SMLTOWN.Server.stopPing();
 
     $("#smltown_nameGame input").attr("placeholder", "🔍 " + SMLTOWN.Message.translate("gameName"));
     SMLTOWN.Util.translateHTML();
