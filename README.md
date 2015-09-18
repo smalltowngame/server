@@ -37,7 +37,7 @@ It's available for now:
 
 You are free to use this CODE in any way you want.
 
-Crad images by liberlibelula (Libertad Delgado Rodríguez)
+Werewolf card images by liberlibelula (Libertad Delgado Rodríguez)
 * [deviantart](http://liberlibelula.deviantart.com/)
 * [artstation](https://www.artstation.com/artist/liberlibelula)
 * [tumblr (Art)](https://www.tumblr.com/blog/liberlibelulaart)
