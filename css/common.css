@@ -101,6 +101,60 @@ html, body{
     font-size: 12px;
 }
 
+#smltown_bottomDialog{
+    background: white;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    background-color: rgb(99,99,99);
+    color: rgb(200,200,200);
+    text-align: center;
+    z-index: 30;
+    box-shadow: 0 -1px whitesmoke;
+
+    -webkit-transition: -webkit-transform 0.7s;
+    -moz-transition: -moz-transform 0.7s;
+    -ms-transition: -ms-transform 0.7s;
+    -o-transition: -o-transform 0.7s;
+    transition: transform 0.7s;
+}
+
+#smltown_bottomDialog.display{
+    -webkit-transform: -webkit-translateY(-100%);
+    -moz-transform: -moz-translateY(-100%);
+    -ms-transform: -ms-translateY(-100%);
+    -o-transform: -o-translateY(-100%);
+    transform: translateY(-100%);
+}
+#smltown_bottomDialog.display table{
+    width: 100%;
+}
+#smltown_bottomDialog.display td{
+    padding: 0;
+}
+#smltown_bottomDialog.display td:first-child{
+    width: 100%;
+}
+#smltown_bottomDialog .smltown_dialogForm{
+
+}
+#smltown_bottomDialog .smltown_dialogInput{
+    width: 100%;
+}
+#smltown_bottomDialog .smltown_dialogSubmit{
+    width: 100px !important;
+    /*float: right;*/
+    display: table-cell;
+}
+#smltown_bottomDialog .smltown_dialogSend{
+    color: white;
+    background-color: #5b74a8;
+    font-weight: bold;
+}
+#smltown_bottomDialog .smltown_log{
+    padding: 7px;
+}    
+
 .smltown_absolute{
     position: absolute;
     top:0;
@@ -135,10 +189,13 @@ html, body{
     text-align: center;
     line-height: 50px;
 }
-.smltown_button:hover{
+
+.smltown_button:hover, #smltown_html input[type=submit]:hover, #smltown_html input[type=button]:hover,
+#smltown input[type=submit]:hover, #smltown input[type=button]:hover{ /* not checkbox */
     background-color: rgb(225,225,225);
 }
-.smltown_button:active{
+.smltown_button:active,#smltown_html input[type=submit]:active, #smltown_html input[type=button]:active,
+#smltown input[type=submit]:active, #smltown input[type=button]:active{
     -webkit-box-shadow: inset 1px 1px 2px rgb(100,100,100);
     -moz-box-shadow: inset 1px 1px 2px rgb(100,100,100);
     box-shadow: inset 1px 1px 2px rgb(100,100,100), inset 0 -1px white;

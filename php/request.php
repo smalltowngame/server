@@ -62,9 +62,9 @@ trait Request {
 
         //$userId
         if (isset($this->userId) && !empty($this->userId) && "null" != $this->userId) {
-            $values = array('userId' => $userId);
-            $count = petition("SELECT count(*) FROM smltown_players WHERE userId = :userId", $values)[0]->count;
-            if ($count == 0) {
+            $values = array('userId' => $this->userId);
+            $count = petition("SELECT count(*) FROM smltown_players WHERE id = :userId", $values);
+            if (count($count)) {
                 $this->addUser();
             }
         } else {

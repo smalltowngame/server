@@ -29,21 +29,34 @@ window.fbAsyncInit = function() {
 SMLTOWN.Social.facebook = {
     // Login button action
     checkLoginState: function() {
+        var $this = this;
         FB.getLoginStatus(function(response) {
-            statusChangeCallback(response);
+            $this.statusChangeCallback(response);
         });
     }
     ,
     // This is called with the results from from FB.getLoginStatus().
     statusChangeCallback: function(response) {
+        var $this = this;
         console.log('statusChangeCallback');
+        $("#smltown_facebookButton").remove();
+        
         if (response.status === 'connected') {
             console.log("connected in facebook");
             this.onConnect();
         } else if (response.status === 'not_authorized') {
             console.log('not_authorized in facebook');
-            $("#smltown_footer").append(
-                    "<fb:login-button scope='public_profile,email' onlogin='SMLTOWN.Social.facebook.checkLoginState();'></fb:login-button>");
+//            $("#smltown_footer").append(
+//                    "<fb:login-button scope='public_profile,user_friends' onlogin='SMLTOWN.Social.facebook.checkLoginState();'></fb:login-button>");
+            $("#smltown_footer").append("<div id='smltown_facebookButton'><div>login via facebook</div></div>");
+
+            $("#smltown_facebookButton div").click(function() {
+                FB.login(function(response) {
+                    console.log(response);
+                    $this.statusChangeCallback(response);
+                }, {scope: 'email,user_friends'});
+            });
+
         } else {
             console.log("not in facebook");
         }
@@ -55,10 +68,6 @@ SMLTOWN.Social.facebook = {
         var $this = this;
         // Your like button code //not .show() because !important
         $(".fb-like").addClass("smltown_show");
-
-        FB.login(function(response) {
-            console.log(response);
-        }, {scope: 'email,user_friends'});
 
         //friends
         $("#smltown_html").addClass("smltown_facebook");
@@ -168,6 +177,14 @@ SMLTOWN.Social.facebook = {
             SMLTOWN.user.social = "feeded";
             SMLTOWN.Server.request.setSocialStatus("feeded");
             console.log(response);
+        });
+    }
+    ,
+    events: function() {
+        $("#smltown_facebookButton").click(function() {
+            if ($(this).is(":hover")) {
+                SMLTOWN.Social.facebook.checkLoginState();
+            }
         });
     }
 };

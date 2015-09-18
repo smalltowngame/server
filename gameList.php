@@ -31,7 +31,7 @@ if (isset($_COOKIE['smltown_userId'])) {
                 <div class="smltown_errorLog"></div>
 
                 <!-- Your like button code -->
-                <div class="fb-like" data-href="https://apps.facebook.com/smltown/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
+                <div class="fb-like" href="https://apps.facebook.com/smltown/" layout="box_count" action="like" show-faces="false" share="false" width="50"></div>
             </div>
         </div>       
     </div>
