@@ -20,11 +20,16 @@ With a lot of extra utilities, the most important: players will wake up with a s
 
 (To make it simpler to run, a jquery library is inside the project.)
 
+## Multiplatform
+
+This framework it thinked to run anywhere
+
 It's available for now:
 
-* web
-* android
-* facebook
+* main webpage [sml.town/game](http://sml.town/game)
+* heroku [shielded-brushlands-9015.herokuapp.com](https://shielded-brushlands-9015.herokuapp.com/)
+* android [play.google.com/store/apps/details?id=town.sml](https://play.google.com/store/apps/details?id=town.sml)
+* facebook [apps.facebook.com/smltown](https://apps.facebook.com/smltown/)
 * wordpress (comming soon)
 * phpBB (comming soon)
 
