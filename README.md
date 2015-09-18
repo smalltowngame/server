@@ -20,6 +20,14 @@ With a lot of extra utilities, the most important: players will wake up with a s
 
 (To make it simpler to run, a jquery library is inside the project.)
 
+It's available for now:
+
+* web
+* android
+* facebook
+* wordpress (comming soon)
+* phpBB (comming soon)
+
 # License
 
 You are free to use this in any way you want.
