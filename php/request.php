@@ -20,26 +20,46 @@ trait Request {
         }
 
         //add user
+        $exists = false;
+
         if (null == $userId) {
             $userId = getRandomUserId();
             $this->userId = $userId;
         }
-        $values = array('name' => $userName, 'userId' => $userId, 'lang' => $lang);
-        $sqlRows = "id, name, lang";
-        $sqlValues = ":userId, :name, :lang";
+        $values = array('name' => $userName, 'lang' => $lang);
+        $sqlRows = "name, lang";
+        $sqlValues = ":name, :lang";
+
         if (isset($this->requestValue['type'])) {
             $values['type'] = $this->requestValue['type'];
             $sqlRows .= ",type";
             $sqlValues .= ",:type";
         }
+
         if (isset($this->requestValue['socialId'])) {
             $values['socialId'] = $this->requestValue['socialId'];
             $sqlRows .= ",socialId";
             $sqlValues .= ",:socialId";
+
+            //check socialId exists
+            $values = array('socialId' => $this->requestValue['socialId']);
+            $players = petition("SELECT id FROM smltown_players WHERE socialId = :socialId", $values);
+            if (count($players) > 0) {
+                $exists = true;
+                $this->userId = $players[0]->id;
+                //
+            } else {
+                $sqlRows .= ",id";
+                $sqlValues .= ",:id";
+                $values['id'] = $this->userId;
+            }
         }
-        sql("INSERT INTO smltown_players ($sqlRows) VALUES ($sqlValues) "
-                . "ON DUPLICATE KEY UPDATE name=VALUES(name), lang=VALUES(lang), "
-                . "type=VALUES(type), socialId=VALUES(socialId)", $values);
+
+        if (!$exists) {
+            sql("INSERT INTO smltown_players ($sqlRows) VALUES ($sqlValues) "
+                    . "ON DUPLICATE KEY UPDATE name=VALUES(name), lang=VALUES(lang), "
+                    . "type=VALUES(type), socialId=VALUES(socialId)", $values);
+        }
 
         //WEBSOCKET
         if (isset($this->requestValue['socket'])) {
