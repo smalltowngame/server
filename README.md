@@ -1,4 +1,4 @@
-# smalltown
+# Smalltown
 
 The werewolf card game done as web app with php server side and mysql server.
 See it in action : http://sml.town/game
@@ -15,3 +15,7 @@ This game can be played on an android device with game "The Werewolf (Small Town
 With a lot of extra utilities, the most important: players will wake up with a soft vibration (customizable).
 
 (To make it simpler to run, a jquery library is inside the project.)
+
+# License
+
+You are free to use this in any way you want.
