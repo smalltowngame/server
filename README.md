@@ -1,7 +1,7 @@
 # Smalltown
 
 The werewolf card game done as web app with php server side and mysql server.
-See it in action : [sml.town/game](http://sml.town/game)
+See it in action on: [sml.town/game](http://sml.town/game)
 
 ## Usage
 
