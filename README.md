@@ -26,7 +26,7 @@ This framework it thinked to run anywhere
 
 It's available for now:
 
-* main webpage [sml.town/game](http://sml.town/game)
+* main Webpage [sml.town/game](http://sml.town/game)
 * heroku [shielded-brushlands-9015.herokuapp.com](https://shielded-brushlands-9015.herokuapp.com/)
 * android [play.google.com/store/apps/details?id=town.sml](https://play.google.com/store/apps/details?id=town.sml)
 * facebook [apps.facebook.com/smltown](https://apps.facebook.com/smltown/)
