@@ -6,6 +6,7 @@ See it in action : http://sml.town/game
 You cad add this game into your webpage with a simple $("#divId").load(gameUrl + "index.php");
 
 **Smalltown is not only a php game, it's a framework to make card games.**
+
 Inside "games" path can be added different card games but only "mafia-werewolf" is now available. It can be added too more cards rules inside cards folder.
 
 Until now I made the next cards: werewolf, seer, witch, cupid, hunter, angel, and a different way to play girl.
