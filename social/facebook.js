@@ -54,7 +54,7 @@ SMLTOWN.Social.facebook = {
                 FB.login(function(response) {
                     console.log(response);
                     $this.statusChangeCallback(response);
-                }, {scope: 'email,user_friends'});
+                }, {scope: 'user_friends'});
             });
 
         } else {
