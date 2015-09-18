@@ -35,4 +35,4 @@ It's available for now:
 
 # License
 
-You are free to use this in any way you want.
+You are free to use this code on github in any way you want.
