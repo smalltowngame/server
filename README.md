@@ -3,7 +3,8 @@
 The werewolf card game done as web app with php server side and mysql server.
 See it in action : [sml.town/game](http://sml.town/game)
 
-You cad add this game into your webpage with a simple ```$("#divId").load(gameUrl + "index.php");```
+You cad add this game into your webpage with a simple: 
+```$("#divId").load(gameUrl + "index.php");```
 
 **Smalltown is not only a php game, it's a framework to make card games.**
 
