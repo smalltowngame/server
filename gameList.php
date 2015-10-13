@@ -66,7 +66,6 @@ if (isset($_COOKIE['smltown_userId'])) {
     }
 
     //TUTORIAL?
-    smltown_error("tutorial = " + localStorage.getItem("tutorial"));
     if ("todo" == localStorage.getItem("tutorial")) {
         SMLTOWN.Message.notify("tutorial?", function () {
             SMLTOWN.Help.tour();

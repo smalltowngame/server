@@ -201,7 +201,6 @@ trait Connection {
                 //MYSELF
                 if ($this->gameId == $gameId) {
                     echo $json;
-                    return;
                 }
             }
 
