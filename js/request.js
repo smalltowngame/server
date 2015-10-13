@@ -47,6 +47,13 @@ SMLTOWN.Server.request = {
         });
     }
     ,
+    setPicture: function(picture) {
+        this.send({
+            action: "setPicture",
+            picture: picture
+        });
+    }
+    ,
     startGame: function() {
         this.send({
             action: "startGame"
@@ -85,37 +92,41 @@ SMLTOWN.Server.request = {
     }
     ,
     chat: function(text) {
-        this.send({
+        var obj = {
             action: "chat",
             text: text.replace(/'/g, "\'").replace(/"/g, "\""),
             name: SMLTOWN.user.name
-        }, true);
-    }
-    ,
-    addUser: function(type, id) { //start game function only
-
-        var obj = {
-            action: "addUser",
-            lang: SMLTOWN.lang
         };
 
-        console.log("SMLTOWN.user.name = " + SMLTOWN.user.name)
-        console.log(SMLTOWN.user)
-        if (SMLTOWN.user.name) {
-            obj.name = SMLTOWN.user.name;
+        if (SMLTOWN.Game.info.night && SMLTOWN.Game.info.night == SMLTOWN.user.card) {
+            obj.action = "nightChat"
         }
-        if (type) {
-            obj.type = type;
-        }
-        if (id) {
-            obj.socialId = id;
-        }
-//        var userId = SMLTOWN.Util.getCookie("smltown_userId");
-//        $("body").prepend(userId)
-//        if (userId) {
-//            obj.userId = userId;
-//        }
         this.send(obj, true);
+    }
+//    ,
+//    addUser: function(type, id) { //start game function only
+//        var obj = {
+//            action: "addUser",
+//            lang: SMLTOWN.lang
+//        };
+//
+//        if (SMLTOWN.user.name) {
+//            obj.name = SMLTOWN.user.name;
+//        }
+//        if (type) {
+//            obj.type = type;
+//        }
+//        if (id) {
+//            obj.socialId = id;
+//        }
+//        this.send(obj, true);
+//    }
+    ,
+    addFacebookUser: function(id) {
+        this.send({
+            action: "addFacebookUser",
+            facebookId: id
+        }, true);
     }
     ,
     addUserInGame: function(gameId, password) { //start game function only
@@ -127,7 +138,7 @@ SMLTOWN.Server.request = {
             gameId: gameId,
             password: password,
             userId: SMLTOWN.Util.getCookie("smltown_userId")
-        });
+        },null, null, "startingConnection", 10000);
     }
     ,
     playGame: function(playId) {
@@ -154,6 +165,13 @@ SMLTOWN.Server.request = {
         this.send({
             action: "setPassword",
             password: password
+        }, true);
+    }
+    ,
+    setPublicGameRule: function(isChecked) {
+        this.send({
+            action: "setPublicGameRule",
+            value: isChecked
         }, true);
     }
     ,
@@ -239,10 +257,19 @@ SMLTOWN.Server.request = {
         }, true);
     }
     ,
-    addFriend: function(socialId){
+    addFriend: function(socialId) {
         this.send({
             action: "addFriend",
             socialId: socialId
+        }, true);
+    }
+    ,
+    checkTranslation: function(lang, kind, some){
+        this.send({
+            action: "checkTranslation",
+            lang: lang,
+            kind: kind,
+            text: some
         }, true);
     }
 //    ,

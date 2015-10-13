@@ -26,7 +26,8 @@
         background: radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));*/
 }
 
-#smltown_list, #smltown_menuContent, #smltown_console{
+/*scroll on events touch detection*/
+#smltown_list, #smltown_menuContent, #smltown_consoleLog{
     overflow-y: auto;
 }
 
@@ -48,11 +49,11 @@
     font-weight: bold;
 }
 
-#smltown_filter.smltown_notification, #smltown_filter.smltown_sleep{
+#smltown_notification.smltown_sleep{
     display: inherit;
 }
 
-#smltown_filter.smltown_notification{    
+#smltown_notification{    
     background-color: rgba(255,255,255,0.5);
 
     -webkit-transition: 300ms;
@@ -74,10 +75,10 @@
     background: -o-linear-gradient(rgb(155,200,0), rgb(180,220,0));
     background: -moz-linear-gradient(rgb(155,200,0), rgb(180,220,0));
     background: linear-gradient(rgb(155,200,0), rgb(180,220,0));    
-    
-    -webkit-box-shadow: 0 1px 0 rgb(110,110,110), inset 0 1px white;
-    -moz-box-shadow: 0 1px 0 rgb(110,110,110), inset 0 1px white;
-    box-shadow: 0 1px 0 rgb(110,110,110), inset 0 1px white;
+
+    -webkit-box-shadow: 0 1px 0 rgb(110,110,110), inset 0 1px gainsboro;
+    -moz-box-shadow: 0 1px 0 rgb(110,110,110), inset 0 1px gainsboro;
+    box-shadow: 0 1px 0 rgb(110,110,110), inset 0 1px gainsboro;
 }
 
 .smltown_thinHeader #smltown_header{
@@ -101,6 +102,12 @@
     -ms-transition: opacity 300ms;
     -o-transition: opacity 300ms;
     transition: opacity 300ms;
+}
+#smltown_menuIcon{
+    width: 34px;
+    height: 34px;
+    top: 9px;
+    left: 13px;
 }
 
 #smltown_header .smltown_content{
@@ -149,29 +156,25 @@
     background-image: url(../img/player_blue.gif);
 }
 
-#smltown_listDead{
-    background-color: rgba(0,0,0,0.15);
-}
-
 #smltown_listSpectator{    
     background-color: transparent;
 }
 
-.smltown_player{    
+.smltown_player{
     position: relative;
     height: 40px;    
-    border: solid rgba(0,0,0,0.35);
-    border-top: solid rgba(255,255,255,0.35);
+    border: solid rgb(99,99,99);
+    border-top: solid rgb(250,250,250);
     border-width: 1px 0;
     padding: 5px 2px;
     overflow: hidden;
     cursor: pointer;
-    box-shadow: inset 0 1px white;
 }
 
 .smltown_player .smltown_name{
     font-weight: bold;
-    text-shadow: 1px 1px rgb(220,220,220);
+    /*text-shadow: 1px 1px rgb(220,220,220);*/
+    font-family: sans-serif;
 }
 .smltown_player .smltown_name symbol{
     font-size: 8px;
@@ -182,24 +185,24 @@
 }
 
 .smltown_player .smltown_up, .smltown_player .smltown_down{
-    left: 45px;
+    left: 55px;
     right: 0;
 }
 .smltown_player .smltown_up{
     top: 4px;    
 }
 .smltown_player .smltown_down{
-    bottom: 6px;
-    height: 15px;
-}
-
-.smltown_player .smltown_up > *, .smltown_player .smltown_down > *{
-    padding: 0 10px;
+    bottom: 5px;
+    color: rgb(99,99,99);
+    font-size: 14px;
 }
 
 .smltown_playerStatus{
     font-size: 12px;
     color: rgba(0,0,0,0.5);
+}
+.smltown_playerStatus::before{
+    content: " - ";
 }
 
 .smltown_player > div{
@@ -214,12 +217,12 @@
     /*text-shadow: none;*/
 }
 
-#smltown_body:not(.smltown_night) #smltown_cardConsole{
+#smltown_body:not(.smltown_night) #smltown_nightConsole{
     display:none !important;
 }
 
-#smltown_cardConsole{
-    display: none;
+#smltown_nightConsole, .smltown_night #smltown_console{
+    /*display: none;*/
     border-top: 2px solid rgb(50,50,50);
 
     background-color: rgb(220,240,175);
@@ -230,10 +233,10 @@
     background: linear-gradient(rgb(200,200,200), rgb(150,150,150));
 }
 
-#smltown_cardConsole > *:first-child{
+#smltown_nightConsole > *:first-child{
     margin-top: 20px;
 }
-#smltown_cardConsole *{
+#smltown_nightConsole *{
     text-align: center;
 }
 
@@ -249,11 +252,12 @@
     background: linear-gradient(rgb(200,220,155), rgb(195,220,130));
 
     -webkit-transition: -webkit-transform 150ms;
+    transition: transform 150ms;
     /*display: table;*/
     /*height: 80% !important;*/
 }
 
-#smltown_console, #smltown_cardConsole{
+#smltown_console, #smltown_nightConsole{
     width: 100%;
     position: absolute;
     bottom: 0;
@@ -297,14 +301,15 @@
 }
 #smltown_consoleLog{
     height: 100%;
-    position: relative;
-    overflow: hidden;
+    position: relative;    
 }
 /**/
-#smltown_consoleLog > div{     
+#smltown_consoleLog > div{
     position: absolute;
     bottom: 0;
     margin: 0 10px;
+    left: 0;
+    right: 0;
 }
 #smltown_consoleLog > div:empty:after{
     content: attr(empty-content);
@@ -312,10 +317,13 @@
 }
 #smltown_consoleLog > div > div{     
     line-height: 20px;
+    /*text-shadow: 1px 1px rgb(230,255,210);*/
 }
 
-#smltown_consoleText span{     
-    text-shadow: 1px 1px rgb(220,220,220);
+#smltown_consoleText span{
+    text-shadow: none;
+    vertical-align: bottom;
+    font-family: sans-serif;
 }
 
 #smltown_console .smltown_time{
@@ -333,12 +341,7 @@
     -o-transition: -o-transform 250ms, height 250ms;
     transition: transform 250ms, height 250ms;
 }
-.smltown_consoleExtended #smltown_consoleText{
-    /*    height: calc(100% - 50px);
-        width: 100%;
-        bottom: 50px;
-        position: absolute;*/
-}
+
 .smltown_consoleExtended #smltown_chatForm{
     display: table-row;  
 }
@@ -347,6 +350,11 @@
     /*background-color: rgba(170,220,0, 0.5);*/
     background-color: rgb(184,216,108);
     background-image: url(../img/player_green.gif);
+}
+.smltown_night #smltown_user .smltown_player{
+    /*background-color: rgba(170,220,0, 0.5);*/
+    background-color: rgb(184,216,108);
+    background-image: url(../img/player_night.gif);
 }
 #smltown_user .smltown_name{
     color: black !important;
@@ -391,7 +399,7 @@
 
 #smltown_menu, #smltown_card{
     position: absolute;
-    /*    width: 100%;*/
+    width: 100%;
     height: 100%;
     z-index: 19;
     top:0;
@@ -444,6 +452,8 @@
 #smltown_cardFront .smltown_cardImage{
     background-size: 100%;
     padding-bottom: 100%;
+    border-radius: 20px;
+    overflow: hidden;
 }
 
 #smltown_cardFront {
@@ -471,7 +481,6 @@
     text-align: center;
     width: 100%;
     position: relative;
-    overflow: hidden;
 }
 @font-face {
     font-family: 'ChineseRocksRg-Regular';
@@ -508,9 +517,10 @@
     background-size: 100% 100%;
 }
 
-.smltown_cardShadow{    
+.smltown_cardShadow, #smltown_cardFront{  
     border-radius: 15px;
-
+}
+.smltown_cardShadow{
     -webkit-box-shadow: inset 1px 1px white,
         inset 1px 1px rgb(99,99,99), 
         inset 1px -1px rgb(99,99,99), 
@@ -553,7 +563,7 @@
 }
 
 #smltown_menu{
-    width: 100%;
+    left: 0;
 
     -webkit-transform: translateX(-100%);
     -moz-transform: translateX(-100%);
@@ -561,16 +571,38 @@
     -o-transform: translateX(-100%);
     transform: translateX(-100%);    
 }
-#smltown_menuContent, #smltown_menuContent > div{
+/*#smltown_menuContent, #smltown_menuContent > div{
     background-color: rgb(250,250,250);
-}
+}*/
 #smltown_menuContent{
     position: absolute;
-    width: calc(100% - 53px);
+    top: 0;
+    bottom: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    background-color: rgb(250,250,250);
+
     max-width: 370px;
     min-width: 200px;
-    top: 0;
-    bottom: 0;    
+    position: absolute;
+    margin-right: 60px;
+}
+
+#smltown_menuAll{
+    min-height: 100%;
+    height: auto !important; /* This line and the next line are not necessary unless you need IE6 support */
+    height: 100%;
+    margin: 0 auto -50px; /* the bottom margin is the negative value of the footer's height */
+}
+
+#smltown_menuAll::after{    
+    content: "";
+    display: block;
+    height: 50px;
+    width: 100%;
+    position: relative;
 }
 
 #smltown_menuContent > div{
@@ -584,16 +616,16 @@
     height: 20px;
 }
 #smltown_menu .smltown_selector > div{
-    padding: 15px 15px 15px 40px;    
+    padding: 15px 15px 15px 35px;    
     cursor: pointer;
     overflow: hidden; /*prevent inner div movements*/    
 }
 #smltown_menu .smltown_selector > div:hover{
-    background-color: rgba(0,0,0,0.03)
+    background-color: rgb(235,235,235);
 }
 
 #smltown_menu .smltown_selector > div.active{
-    background-color: rgba(0,0,0,0.05);
+    background-color: rgb(225,225,225);
 }
 
 #smltown_menu .text{
@@ -605,11 +637,7 @@
     color: rgb(50,50,50) !important;
     text-align:left !important;
 }
-#smltown_menu hr{
-    margin: 0px 10px 0px 40px;
-    border-style: none;
-    border-top: solid 1px rgba(0,0,0,0.2);
-}
+
 #smltown_menu .smltown_action{
     padding-top: 13px;
     padding-bottom: 7px;
@@ -620,10 +648,10 @@
     width: 100%;
     text-align: right;
     font-weight: normal;
-    margin-top: 4px;
+    margin-top: 2px;
 }
 #smltown_menu small, #smltown_menu input, #smltown_menu form *, .smltown_admin{
-    color: rgba(0,0,0,0.3);
+    color: rgb(170,170,170);
     font-weight: normal;
 }
 #smltown_menu input, #smltown_menu form *{
@@ -633,12 +661,12 @@
 #smltown_menu input[type=text]{
     background-color: transparent;
     border-color: transparent;
-    width: 100px; /*name*/    
+    /*width: 100px;*/
 }
 
 #smltown_menu input:focus{
     outline: 0;
-    background-color: rgba(0,0,0,0.05);
+    background-color: rgb(225,225,225);
     color: black;
 }
 
@@ -654,7 +682,7 @@
     font-size: 20px;
     position: absolute;
     left: 0;
-    top: 12px;
+    top: 8px;
     color: rgb(236,236,236);
     width: 30px;
     text-align: center;
@@ -666,7 +694,7 @@
 }
 
 #smltown_menu .smltown_auto{
-    background-color: rgba(0,0,0,0.03);
+    background-color: rgb(242,242,242);
 }
 
 #smltown_menu .smltown_selector{
@@ -717,9 +745,9 @@
 .smltown_preselect{
     background-color: rgba(255,210,0,0.4);
 
-    -webkit-box-shadow: inset 0px 1px 3px black;
-    -moz-box-shadow: inset 0px 1px 3px black;
-    box-shadow: inset 0px 1px 3px black;
+    -webkit-box-shadow: inset 0 2px 0 black;
+    -moz-box-shadow: inset 0 2px 0 black;
+    box-shadow: inset 0 2px 0 black;
 }
 .smltown_preselect:before{
     content: attr(preselect-content);
@@ -738,11 +766,11 @@
 }
 
 .smltown_votes{
-    color:red;
+    color: rgb(200,0,0);
     position: absolute;
     bottom: 0;
     right: 0;
-    margin-right: 45px;
+    margin-right: 55px;
     float:right;
     font-size: 30px;
     line-height: 38px;
@@ -808,10 +836,13 @@
 }
 .smltown_player .smltown_picture img{
     height: 100%;
-    border-radius: 100%;
+    width: 100%;
     border: 1px solid rgb(60,60,60);
     margin-top: -1px; /*prevent border move*/
-    width: 100%;
+
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
 }
 
 .smltown_quit, .smltown_waitingPlayer{
@@ -826,22 +857,23 @@
 }
 
 .smltown_quit{
-    display: none;
     right: 2px;
     color: red;
     font-weight: bold;
     text-decoration: underline;
 }
+.smltown_waiting .smltown_quit{
+    display: initial;
+}
 
 .smltown_waitingPlayer{
-    /*pointer-events: none;*/
     right: 0;
     left: 0;
     margin: auto;
 }
 
 #smltown_user .smltown_spectator::before{
-    content: "click to play here";
+    content: "spectatorMode";
     text-align: center;
     width: 100%;
     position: absolute;
@@ -849,22 +881,29 @@
     font-size: 20px;
     color: grey;
 }
-#smltown_user .smltown_spectator{
+.smltown_spectator{
     background: none !important;
+}
+.smltown_spectator .smltown_name{
+    text-shadow: none !important;
+}
+
+.smltown_spectator .smltown_extra, #smltown_listSpectator .smltown_extra{    
+    display: none !important;
 }
 
 #smltown_popup{
     display: none;
     z-index: 9;
-    margin-top:100px;
+    margin-top:120px;
     width:100%;
     padding: 15px 0;
     text-align: center;
     font-weight: bold;
-    border-top: 1px solid rgba(0,0,0,0.5);
-    border-bottom: 1px solid rgba(0,0,0,0.5);
+    border-top: 1px solid rgb(99,99,99);
+    border-bottom: 1px solid rgb(170,170,170);
     opacity: 1;
-    pointer-events:auto;
+    /*pointer-events:auto;*/
 
     background-color:rgb(160,195,0);
     background: -webkit-linear-gradient(rgb(180,220,0), rgb(155,200,0)); /* For Safari 5.1 to 6.0 */
@@ -872,17 +911,35 @@
     background: -moz-linear-gradient(rgb(180,220,0), rgb(155,200,0)); /* For Firefox 3.6 to 15 */
     background: linear-gradient(rgb(180,220,0), rgb(155,200,0));
 
-    -webkit-box-shadow: 0 2px rgb(99,99,99), 0 -1px rgb(99,99,99), inset 0 1px white;
-    -moz-box-shadow: 0 2px rgb(99,99,99), 0 -1px rgb(99,99,99), inset 0 1px white;
-    box-shadow: 0 2px rgb(99,99,99), 0 -1px rgb(99,99,99), inset 0 1px white;
+    -webkit-box-shadow: inset 0 -1px black, inset 0 1px white;
+    -moz-box-shadow: inset 0 -1px black, inset 0 1px white;
+    box-shadow: inset 0 -1px black, inset 0 1px white;
 }
-#smltown_filter.smltown_notification #smltown_popup{ /*if filter is notification*/
+#smltown_notification #smltown_popup{ /*if filter is notification*/
     display: block;
+    position: relative;
+}
+
+.smltown_night #smltown_popup{
+    color: rgb(100, 0, 0);
+    background-color:rgb(170,170,170);
+    background: -webkit-linear-gradient(rgb(200, 200, 200), rgb(150, 150, 150)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgb(200, 200, 200), rgb(150, 150, 150)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgb(200, 200, 200), rgb(150, 150, 150)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgb(200, 200, 200), rgb(150, 150, 150));
 }
 
 #smltown_popupText{
-    padding-bottom: 10px;
+    padding-bottom: 32px;    
+    margin: auto;
+    display: table;
+    /*position: relative;*/
     /*text-shadow: -1px -1px 1px white;*/
+}
+#smltown_popupText .smltown_imageText{
+    padding: 0 65px;
+    height: 50px;
+    display: table-cell;
 }
 #smltown_popupText p{
     font-weight: normal;
@@ -897,13 +954,46 @@
     /* votes */
     padding: 0 5px;
 }
+#smltown_popupText img{
+    width: 50px;
+    position: absolute;
+    left: 10px;
+}
+#smltown_popupText span{
+    vertical_align: top;
+}
 
 #smltown_popup .smltown_button{
-    border-radius: 100px;
-    width:80%;
+    border-radius: 100px;    
     margin: auto;
     box-shadow: inset 0 -1px white, 1px 1px rgb(200,240,150);
+    width:65%;
 }
+.smltown_night #smltown_popup .smltown_button{
+    box-shadow: inset 0 -1px white, 1px 1px rgb(200,200,200);
+}
+
+#smltown_popup .smltown_close{
+    position: absolute;
+    top: -18px;
+    right: 17px;
+    line-height: 35px;
+    width: 35px;
+    background-color: white;
+    border-radius: 30px;
+    border: 3px solid rgb(150,200,0);
+    box-shadow: 1px 1px 0 rgb(60,60,60), -1px -1px 0 white;
+    font-size: 20px;
+    cursor: pointer;
+}
+#smltown_popup .smltown_close:hover{
+    background-color: rgb(220,220,220);
+    box-shadow: 1px 1px 0 rgb(60,60,60), inset 1px 1px rgb(99,99,99);
+}
+#smltown_popup .smltown_close::before{
+    content: "✘";
+}
+
 
 .smltown_sleep{
     background-image: url('../img/zzz.png');
@@ -915,21 +1005,20 @@
 }
 
 .smltown_dead{
-    /*background-color: rgba(0,0,0,0.15) !important;*/
-    background-color: rgb(153,161,164) !important;
+    /*background-color: rgb(153,161,164) !important;*/
+    background-color: rgb(185, 185, 185) !important
 }
 .smltown_dead .smltown_extra{
-    color: red;
-    font-size: 40px;
-    text-shadow: 2px 2px 1px black;
+    color: transparent;
+    text-shadow: none;
 }
 .smltown_dead .smltown_extra::before{
     /*content: "☠";*/
     content: "✗";
-}
-
-.smltown_dead .smltown_name{
-    opacity:0.35;
+    display: block;
+    font-size: 40px;
+    text-shadow: 2px 2px 1px black;
+    color: red;
 }
 
 #smltown_inputName{
@@ -1043,8 +1132,8 @@
     content:attr(class) " ";
 }
 #smltown_playingCards{
-    padding-right:15px;
-    padding-left: 10px;
+    padding-right: 12px;
+    padding-left: 5px;
     margin-top: 15px;
     text-align: right;
     margin: 0;
@@ -1175,12 +1264,12 @@ smltown_name{
     margin:0;
 }
 
-#smltown_backButton{
+/*#smltown_backButton{
     position: absolute !important;
     top: auto !important;
     bottom: 0 !important;
     z-index: 0 !important;
-}
+}*/
 
 #smltown_help{
     position: absolute;
@@ -1199,14 +1288,14 @@ smltown_name{
     cursor: pointer;
     text-shadow: 1px 1px rgb(50,50,50);
 
-    -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.5);
-    -moz-box-shadow: 0 0 4px rgba(0,0,0,0.5);
-    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 1px 1px 0 gainsboro;
+    -moz-box-shadow: 1px 1px 0 gainsboro;
+    box-shadow: 1px 1px 0 gainsboro;
 }
 #smltown_help:hover{
-    -webkit-box-shadow: inset 1px 1px 3px black;
-    -moz-box-shadow: inset 1px 1px 3px black;
-    box-shadow: inset 1px 1px 3px black;
+    -webkit-box-shadow: inset 1px 1px 0 black;
+    -moz-box-shadow: inset 1px 1px 0 black;
+    box-shadow: inset 1px 1px 0 black;
 }
 #smltown_helpMessage{
     position: absolute;
@@ -1236,13 +1325,30 @@ smltown_name{
     z-index: 1;
 }
 
-#smltown_sun > div{
+#smltown_sun > div{    
     background-image: url(../img/sun.png);
     width: 128px;
     height: 128px;
     position: absolute;
     top: 0;
     left: 0;
+}
+.smltown_night #smltown_sun{
+    /*    background-image: url(../img/moon.png), url(../img/stars.png);
+        background-repeat: no-repeat, repeat;
+        background-size: 65%, 100%;
+        background-position: 50% 20%;*/
+    background: linear-gradient(to bottom, #020111 10%,#3a3a52 100%);
+}
+.smltown_night #smltown_sun > div{
+    background-image: url(../img/moon.png);
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: 50%;
+    margin: auto;
+    right: 0;
+    left: 0;
+    top: 10%;
 }
 
 .smltown_night #smltown_list{
@@ -1258,14 +1364,14 @@ smltown_name{
     height: 100%;
     pointer-events: none;
 
-    background-image: url(../img/stars.png);
-    /*    background-image: url(../img/stars.png), url(../img/moon.png);
+    /*    background-image: url(../img/stars.png);
+        background-image: url(../img/stars.png), url(../img/moon.png);
         background-repeat: repeat, no-repeat;
         background-size: auto, 100%;*/
 }
 .smltown_night#smltown_body{
     /*TODO: DARK BACKGROUND*/
-    background-image: url(../img/stars.png);    
+    /*background-image: url(../img/stars.png);*/    
 }
 
 #smltown_phpCard{
@@ -1290,20 +1396,6 @@ smltown_name{
     display: inherit !important;
 }
 
-.smltown_helpDiv{
-    position: absolute;
-    background-color: rgba(0,0,0,0.3);
-    color: white;
-    border: 1px solid black;
-    padding: 10px;
-    z-index: 99;
-    max-width: 38%;    
-    font-size: 15px;
-}
-.smltown_helpDiv small{
-    display:block;
-    text-align: justify;
-}
 /*.daylight1{
     background: linear-gradient(to bottom, #020111 10%,#3a3a52 100%);
 }
@@ -1369,10 +1461,107 @@ smltown_name{
     display: none;
     position: absolute;
     background-color: white;
-    width: 100px;
-    height: 100px;
     border: 1px solid grey;
 }
-#smltown_addFriend{
-
+#smltown_pictureContextMenu > div{
+    border: 1px solid black;
+    padding: 10px;
+    cursor: pointer;
 }
+#smltown_pictureContextMenu > div:hover{
+    background-color: gainsboro;
+}
+
+#smltown_shareMenu{
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    background-color: white;
+    z-index: 25;
+
+    transition: 200ms;
+}
+#smltown_shareMenu.smltown_swipe{
+    transform: translateY(-100%);
+}
+#smltown_shareMenu > div{
+    padding: 15px;
+    cursor: pointer;
+    position: relative;
+}
+#smltown_shareMenu > div{
+    padding: 15px;
+    position: relative;
+}
+#smltown_shareMenu > div:first-child{
+    color:grey;
+}
+#smltown_shareMenu > div:not(:first-child){
+    cursor: pointer;
+}
+#smltown_shareMenu > div:not(:first-child):hover{
+    background-color: gainsboro;
+}
+#smltown_shareMenu img, #smltown_shareMenu .smltown_img{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+
+    width: 25px;
+    height: 25px;
+    background-size: 100%;
+}
+#smltown_shareMenu span{
+    margin-left: 30px;
+}
+
+.smltown_mouse #smltown_consoleLog > div{
+    max-height: 100%;
+    position: absolute;
+    right: 0;
+    left: 0;
+}
+
+#smltown_notes{
+    padding: 5px 15px !important;
+    margin: 0 !important; 
+    height: auto !important;
+}
+
+#smltown_notes textarea{
+    width: 100%;    
+    resize: none;
+}
+
+.smltown_userSelectable{
+    pointer-events: auto !important;
+}
+
+#playerAdd{
+    /*text-align: center;*/
+    line-height: 38px;
+    font-size: 20px;
+    color: rgb(100,150,0);
+    font-weight: bold;
+    font-family: sans-serif;
+    padding-left: 10px;
+}
+#playerAdd small{
+    margin-left: 5px;
+    font-size: 12px;
+    font-weight: normal;
+}
+#playerAdd small::before{
+    content: "(";
+}
+#playerAdd small::after{
+    content: ")";
+}
+#playerAdd .smltown_extra{
+    background-color: rgb(210,240,60);
+}
+#playerAdd .smltown_extra::after{
+    content: "+";
+}
+

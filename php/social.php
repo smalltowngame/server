@@ -14,7 +14,7 @@ function findFriends($obj) {
     $array = json_decode($obj->friends);
     //echo $obj->friends;
     
-    $coincidences = petition("SELECT * FROM smltown_players WHERE socialId "
+    $coincidences = petition("SELECT socialId, name, picture FROM smltown_players WHERE socialId "
             . "IN (" . implode(',', $array) . ")");
         
     echo json_encode($coincidences);

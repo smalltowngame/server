@@ -9,7 +9,7 @@ SMLTOWN.Server = {
     ,
     slowPing: 3000
     ,
-    handleConnection: function () {
+    handleConnection: function() {
         console.log("handle connection");
         var $this = this;
 
@@ -21,7 +21,7 @@ SMLTOWN.Server = {
             return;
         }
 
-        SMLTOWN.Server.websocketConnection(function (done) {
+        SMLTOWN.Server.websocketConnection(function(done) {
             if (!done) {
                 SMLTOWN.Server.startAjaxConnection();
                 $(".smltown_allowWebsocket").text("NOT");
@@ -33,7 +33,7 @@ SMLTOWN.Server = {
         });
     }
     ,
-    websocketConnection: function (callback) {
+    websocketConnection: function(callback) {
         var $this = this;
 //        console.log("websocket server config: " + SMLTOWN.config.websocket_server);
 //        if (!SMLTOWN.config.websocket_server) {
@@ -60,21 +60,20 @@ SMLTOWN.Server = {
         console.log("connecting to: " + wsUri);
         try {
             var websocket = new WebSocket(wsUri);
-            websocket.onopen = function (ev) {
+            websocket.onopen = function(ev) {
                 console.log("WEBSOCKET open");
                 $this.startTime = new Date().getTime();
 
                 //w8 10 secs. to check if connection persist. prevent infinite looping
-                setTimeout(function () {
+                setTimeout(function() {
                     $this.reconnection = false;
                 }, 10000); //10 secs.
 
                 //SMLTOWN.Message.setLog("websocket connected");
                 $this.request ? null : this.request = {};
-                $this.request.send = function (obj, over, callback) {
-                    SMLTOWN.Load.lastCall = obj;
+                $this.request.send = function(obj, over, callback) {
                     if (!over) {
-                        $this.loading(obj.action);
+                        $this.loading();
                     }
                     console.log(obj);
                     obj = $this.addGameInfo(obj);
@@ -87,16 +86,16 @@ SMLTOWN.Server = {
                 };
                 callback(true);
             };
-            websocket.onmessage = function (ev) {
+            websocket.onmessage = function(ev) {
                 $this.loaded();
                 $this.parseResponse(ev.data);
             };
-            websocket.onerror = function (ev) {
+            websocket.onerror = function(ev) {
                 smltown_error("websocket error:");
                 console.log(ev);
                 websocket.close();
             };
-            websocket.onclose = function (ev) {
+            websocket.onclose = function(ev) {
                 console.log(ev);
 
                 var endTime = new Date().getTime();
@@ -116,7 +115,7 @@ SMLTOWN.Server = {
                     return;
                 }
 
-                $this.ajax("", function (connected) {
+                $this.ajax("", function(connected) {
                     console.log("websocket reconnection?: " + connected);
                     connected = parseInt(connected);
                     $this.reconnection = "websocket";
@@ -144,14 +143,14 @@ SMLTOWN.Server = {
 //            }
     }
     ,
-    connected: function () {
+    connected: function() {
         console.log("connected");
         SMLTOWN.Transform.windowResize();
         //DEFINE WAY TO NAVIGATE
 
         if (!this.isPlugin()) { //as MAIN webpage game
 
-            window.onhashchange = function () {
+            window.onhashchange = function() {
                 SMLTOWN.Load.end();
                 SMLTOWN.Load.divLoad(window.location.hash.split("#")[1] || "");
             };
@@ -161,7 +160,28 @@ SMLTOWN.Server = {
                 return;
             }
 
-            this.addUser();
+            //SMLTOWN.Server.request.addUser();
+            SMLTOWN.Server.ajax({
+                action: "addUser",
+                userId: SMLTOWN.user.userId,
+                name: SMLTOWN.user.name,
+                lang: SMLTOWN.lang
+            }, function(user) {
+                for (var key in user) {
+                    if ("friends" == key && user[key]) {
+                        try {
+//                            user[key] = user[key].split("|");
+                            user.friends = JSON.parse(user.friends);
+                        } catch (e) {
+                            console.log("error on parse friends: " + user.friends);
+                            user.friends = null;
+                        }
+                    }
+                    if (user[key]) {
+                        SMLTOWN.user[key] = user[key];
+                    }
+                }
+            });
 
             if (!window.location.hash) {
                 console.log("hash = 'gameList'");
@@ -171,7 +191,7 @@ SMLTOWN.Server = {
 
         } else { //as PLUGIN
             console.log("plugin");
-            this.addUser();
+            SMLTOWN.Server.request.addUser();
 
             var gameId = SMLTOWN.Util.getCookie("smltown_gameId");
             if (gameId) {
@@ -186,7 +206,7 @@ SMLTOWN.Server = {
     ,
     HttpRequest: new XMLHttpRequest()
     ,
-    startPing: function () { //only ajax
+    startPing: function() { //only ajax
         console.log("start ping");
         var $this = this;
 
@@ -196,14 +216,14 @@ SMLTOWN.Server = {
 
         if (!SMLTOWN.Game.info.id) {
             smltown_error("wrong game id: " + SMLTOWN.Game.info.id + ", leaving...");
-            setTimeout(function () {
+            setTimeout(function() {
                 SMLTOWN.Load.showPage("gameList");
             }, 1500);
             return;
         }
         this.url = SMLTOWN.path + "smltown_ajax.php?id=" + SMLTOWN.Game.info.id;
         //PING
-        HttpRequest.onreadystatechange = function () {
+        HttpRequest.onreadystatechange = function() {
             /////////DEBUG
 //            if (HttpRequest.responseText) {
 //            console.log(HttpRequest.readyState);
@@ -218,7 +238,7 @@ SMLTOWN.Server = {
             }
 
             //next interval
-            $this.pingTimeout = setTimeout(function () {
+            $this.pingTimeout = setTimeout(function() {
                 $this.pingRequest();
             }, $this.ping);
 
@@ -228,34 +248,33 @@ SMLTOWN.Server = {
         this.pingRequest();
     }
     ,
-    stopPing: function () {
+    stopPing: function() {
         clearTimeout(this.pingTimeout);
         this.ping = -1;
         this.pinging = false;
         console.log("ping = " + this.ping);
     }
     ,
-    pingRequest: function () {
+    pingRequest: function() {
         this.HttpRequest.open("POST", this.url, true);
         this.HttpRequest.send();
     }
     ,
-    startAjaxConnection: function () { //1st connection
+    startAjaxConnection: function() { //1st connection
         var $this = this;
         console.log("start ajax connection");
         localStorage.setItem("onlyAjax", (new Date()).getTime() + 36000000); //10 hours        
         this.url = SMLTOWN.path + "smltown_ajax.php";
 
         //w8 10 secs. to check if connection persist. prevent infinite looping
-        setTimeout(function () {
+        setTimeout(function() {
             $this.reconnection = false;
         }, 10000); //10 secs.
 
-        //create ajax request function
-        this.request.send = function (obj, over, callback, message, time) {
-            SMLTOWN.Load.lastCall = obj;
+        //ajax request function
+        this.request.send = function(obj, over, callback) {
             if (!over) {
-                $this.loading(message, time);
+                $this.loading();
             }
             console.log(obj);
             obj = $this.addGameInfo(obj);
@@ -263,7 +282,7 @@ SMLTOWN.Server = {
             sendXmlHttpRequest.open("POST", $this.url, true);
             sendXmlHttpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             sendXmlHttpRequest.send(JSON.stringify(obj));
-            sendXmlHttpRequest.onreadystatechange = function () {
+            sendXmlHttpRequest.onreadystatechange = function() {
 
                 if (sendXmlHttpRequest.readyState != 4) {
                     return;
@@ -291,52 +310,48 @@ SMLTOWN.Server = {
         };
     }
     ,
-    parseResponse: function (string) {
-//        console.log(string)
+    parseResponse: function(string) {
+        //console.log(string)
         string = unescape(encodeURIComponent(string)); //decode backslashes special chars
 
         var array = string.split("|");
         for (var i = 0; i < array.length; i++) {
-            var json = array[i];
-            if (json) {
+            if (array[i]) {
 //                console.log(array[i]);
-                var obj;
+                var json;
                 try {
-                    obj = JSON.parse(json);
+                    json = JSON.parse(array[i]);
                 } catch (e) {
-                    console.log(e);
-                    console.log(json);
+//                    console.log(e);
+                    console.log(array[i]);
                     try {
-                        eval(json);
+                        eval(array[i]);
                     } catch (e) {
-                        smltown_debug("error on parse request: " + json); //not setLog
+                        smltown_debug("error on parse request: " + array[i]); //not setLog
                     }
 
                     continue;
                 }
-                this.onmessage(obj);
+                this.onmessage(json);
             }
         }
         this.loaded();
     }
     ,
     // LOADING SCREEN
-    loading: function (text, time) {
-        if (text) {
-            $("#smltown_textLoader").smltown_text(text);
-        }
-        SMLTOWN.Load.start(time);
+    loading: function() {
+        SMLTOWN.Load.start();
         this.storedPing = this.ping;
         this.ping = this.fastPing;
     }
     ,
-    loaded: function () {
+    loaded: function() {
         SMLTOWN.Load.end();
         this.ping = Math.max(this.normalPing, this.storedPing);
     }
     ,
 // JSON HANDLE
-    onmessage: function (res) {
+    onmessage: function(res) {
         console.log(res);
         if ("flash" == res.type) {
             SMLTOWN.Message.flash(res.data, res.gameId);
@@ -364,7 +379,7 @@ SMLTOWN.Server = {
         }
 
         if ("extra" == res.type) {
-            SMLTOWN.Action.wakeUpCard(function () {
+            SMLTOWN.Action.wakeUpCard(function() {
                 SMLTOWN.Action.night.extra(res.data); //like witch
             });
             return;
@@ -381,7 +396,7 @@ SMLTOWN.Server = {
         }
     }
     ,
-    addGameInfo: function (obj) {
+    addGameInfo: function(obj) {
         if (SMLTOWN.Game.info.id) {
             obj.gameId = SMLTOWN.Game.info.id;
         }
@@ -396,7 +411,7 @@ SMLTOWN.Server = {
     ,
     ajaxReq: new XMLHttpRequest()
     ,
-    ajax: function (request, callback, url) {
+    ajax: function(request, callback, url) {
         console.log(request);
         var $this = this;
         SMLTOWN.Load.loading = true;
@@ -414,7 +429,7 @@ SMLTOWN.Server = {
 
         req.send(json);
 
-        req.onreadystatechange = function () {
+        req.onreadystatechange = function() {
             if (req.readyState != 4) {
                 return;
             }
@@ -440,7 +455,7 @@ SMLTOWN.Server = {
         };
     }
     ,
-    checkAjaxError: function (XMLHttpRequest) {
+    checkAjaxError: function(XMLHttpRequest) {
         if ("" == XMLHttpRequest.response && XMLHttpRequest.status == 0) {
             var $this = this;
             this.stopPing();
@@ -448,14 +463,14 @@ SMLTOWN.Server = {
             smltown_debug("trying reconnection every 2 min.");
 
             clearTimeout(this.ajaxReconnect);
-            this.ajaxReconnect = setTimeout(function () {
+            this.ajaxReconnect = setTimeout(function() {
                 $this.reconnection = "ajax";
                 $this.handleConnection();
             }, 120000); //try reconnect every 2 min
         }
     }
     ,
-    isPlugin: function () {
+    isPlugin: function() {
         //is iframe
         var iframe = true;
         try {
@@ -465,29 +480,5 @@ SMLTOWN.Server = {
         }
 
         return ($("body").attr("id") != "smltown" || iframe);
-    }
-    ,
-    addUser: function () {
-        SMLTOWN.Server.ajax({
-            action: "addUser",
-            userId: SMLTOWN.user.userId,
-            name: SMLTOWN.user.name,
-            lang: SMLTOWN.lang
-        }, function (user) {
-            for (var key in user) {
-                if ("friends" == key && user[key]) {
-                    try {
-//                            user[key] = user[key].split("|");
-                        user.friends = JSON.parse(user.friends);
-                    } catch (e) {
-                        console.log("error on parse friends: " + user.friends);
-                        user.friends = null;
-                    }
-                }
-                if (user[key]) {
-                    SMLTOWN.user[key] = user[key];
-                }
-            }
-        });
     }
 };

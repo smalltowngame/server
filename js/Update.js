@@ -1,6 +1,6 @@
 
 SMLTOWN.Update = {
-    all: function (res) {
+    all: function(res) {
 
         if (res.user) {
             this.user(res.user);
@@ -99,7 +99,7 @@ SMLTOWN.Update = {
         clearTimeout(SMLTOWN.temp.wakeUpInterval);
     }
     ,
-    user: function (user) {
+    user: function(user) {
         if (user.userId) {
             //only here smltown_userId cookie
             SMLTOWN.Util.setPersistentCookie("smltown_userId", user.userId);
@@ -140,7 +140,7 @@ SMLTOWN.Update = {
         }
     }
     ,
-    game: function (game) {
+    game: function(game) {
 
         if (game.name) {
             $("#smltown_gameName").text(game.name);
@@ -180,9 +180,15 @@ SMLTOWN.Update = {
         }
 
         SMLTOWN.Add.icons(game, $("#smltown_header .smltown_content"));
+
+        //on Players names Load -> if not yet
+        if (!$("#smltown_console").hasClass('smltown_loaded')) {
+            SMLTOWN.Message.addChats();
+            $("#smltown_console").addClass('smltown_loaded');
+        }
     }
     ,
-    gameLoad: function () {
+    gameLoad: function() {
         this.gameStatus();
 
         //after game status
@@ -192,13 +198,14 @@ SMLTOWN.Update = {
         }
     }
     ,
-    gameStatus: function () {
+    gameStatus: function() {
         //OVERRIDE
         console.log("EMPTY gameStatus");
     }
     ,
-    players: function () {
+    players: function() {
         var players = SMLTOWN.players;
+        var playersCount = 0; 
         var newPlayers = 0;
 
         //1st GET USER PLAYER VALUES
@@ -208,6 +215,7 @@ SMLTOWN.Update = {
 
                 if (player.name && SMLTOWN.user.name != player.name) {
                     localStorage.setItem("smltown_userName", player.name);
+                    SMLTOWN.user.name = player.name;
                 }
 
                 //only not null values
@@ -219,7 +227,13 @@ SMLTOWN.Update = {
                 //
 
                 if (!SMLTOWN.user.name) {
-                    SMLTOWN.Message.login("noName");
+                    var localName = localStorage.getItem("smltown_userName");
+                    if (localName) {
+                        console.log("SET NAME REQUEST");
+                        SMLTOWN.Server.request.setName(localName);
+                    } else {
+                        SMLTOWN.Message.login("noName");
+                    }
                 } else {
                     $("#smltown_updateName input").attr("placeholder", SMLTOWN.user.name);
                 }
@@ -229,6 +243,7 @@ SMLTOWN.Update = {
                     $("#smltown_becomeAdmin").hide();
                 }
             }
+            playersCount++;
         }
 
         //REMOVE UNUSED PLAYERS
@@ -254,18 +269,18 @@ SMLTOWN.Update = {
 
             var div;
             if ($("#" + id).length) {
-                div = $("#" + id);
+                div = player.div = $("#" + id);
                 div.removeClass("smltown_spectator smltown_dead");
             } else {
-                div = $("<div>");
+                div = player.div = $("<div>");
                 var up = $("<div class='smltown_up'>");
                 var down = $("<div class='smltown_down'>");
                 div.append("<symbol class='smltown_playerSymbol'>U</symbol>");
                 div.append(up);
                 div.append(down);
                 up.append("<span class='smltown_name'>");
-                down.append($("<span class='smltown_playerStatus'>"));
-                down.append($("<span class='smltown_votes'>"));
+                up.append($("<span class='smltown_playerStatus'>"));
+                div.append($("<span class='smltown_votes'>"));
                 div.append("<div class='smltown_extra'>");
                 div.append($("<div class='smltown_waitingPlayer smltown_icon64 smltown_hourglass'>"));
                 div.attr("id", player.id);
@@ -276,12 +291,10 @@ SMLTOWN.Update = {
                 div.append(picture);
                 var url = this.getPicture(player);
                 if (url) {
-                    console.log(111)
-                    picture.append("<image src='" + url + "'></img>");
-                    console.log(222)
+                    picture.append("<img src='" + url + "'></img>");
                 }
 
-                player.div = div;
+                //player.div = div;
                 SMLTOWN.Events.playerEvents(player);
 
                 newPlayers++;
@@ -309,16 +322,22 @@ SMLTOWN.Update = {
                 $("#smltown_listDead").append(div);
                 div.addClass("smltown_dead");
                 div.find(".smltown_playerStatus").smltown_text("dead");
-            } else {
+
+            } else if (player.status) {
                 $("#smltown_listAlive").append(div);
                 div.find(".smltown_playerStatus").smltown_text("alive");
                 div.find(".smltown_extra").text("");
+            }else{
+                $("#smltown_listSpectator").append(div);
             }
+            //else nothing
 
             //only user player values width div relation
             if (player.id != SMLTOWN.user.id) {
                 $('<style>.id' + player.id + ' {color: ' + this.userColors[iColor++] + '}</style>').appendTo('head');
             } else {
+                iColor++
+                
                 $('<style>.id' + player.id + ' {font-weight: bold}</style>').appendTo('head');
                 //spectator user
                 if ("1" == SMLTOWN.user.admin) {
@@ -326,9 +345,12 @@ SMLTOWN.Update = {
                 } else if ("-1" == SMLTOWN.user.admin) {
                     $("#smltown_spectatorMode").hide();
                     div.off(".spectator");
-                    div.one("tap.spectator", function (e) {
+                    div.on("tap.spectator", function(e) {
                         e.preventDefault();
-                        SMLTOWN.Server.request.playGame(SMLTOWN.user.id);
+                        SMLTOWN.Message.notify("playGameQuestion", function() {
+                            div.off(".spectator");
+                            SMLTOWN.Server.request.playGame(SMLTOWN.user.id);
+                        }, true);
                     });
                 } else {
                     $("#smltown_spectatorMode").show();
@@ -340,7 +362,8 @@ SMLTOWN.Update = {
             if (player.admin == -1) {
                 $("#smltown_listSpectator").append(div);
                 div.addClass("smltown_spectator");
-                div.find(".smltown_playerStatus").smltown_text("spectator");
+//                div.find(".smltown_playerStatus").smltown_text("spectator");
+                div.find(".smltown_playerStatus").text("");
                 $("#" + player.id + " .smltown_extra").css("background-image", "none");
             } else {
                 $("#" + player.id + " .smltown_extra").css("background-image", this.innocentBackground);
@@ -384,24 +407,37 @@ SMLTOWN.Update = {
             $("#" + SMLTOWN.user.sel).addClass("smltown_check");
             SMLTOWN.Action.addVote(SMLTOWN.user.sel);
         }
-
-        //on Players names Load -> if not yet
-        if (!$("#smltown_console").hasClass('smltown_loaded')) {
-            SMLTOWN.Message.addChats();
-            $("#smltown_console").addClass('smltown_loaded');
+        
+        if(playersCount < 4){
+            this.insertPlayerAdd();
         }
-
         return newPlayers;
     }
     ,
-    getPicture: function (player) {
-        //social
-        if (player.type == "facebook" && player.socialId) {
+    getPicture: function(player) {
+        if (player.picture) {
+            return player.picture;
+        } else if (player.type == "facebook" && player.socialId) {
             return "https://graph.facebook.com/" + player.socialId + "/picture";
         }
     }
     ,
-    userCard: function () {
+    insertPlayerAdd: function(){
+        console.log("add")
+        $("#playerAdd").remove();
+        var playerAdd = $("<div id='playerAdd' class='smltown_player'>");
+        playerAdd.smltown_text("morePlayers");
+        var helper = $("<small>");
+        helper.smltown_text("morePlayersHelp");
+        playerAdd.append(helper);
+        playerAdd.append("<div class='smltown_extra'>");
+        playerAdd.on("tap", function(){
+            SMLTOWN.Social.showFriends();
+        });
+        $("#smltown_list > div").append(playerAdd);
+    }
+    ,
+    userCard: function() {
         console.log("user-Card update");
         var $this = this;
         SMLTOWN.cardLoading = true;
@@ -443,7 +479,7 @@ SMLTOWN.Update = {
 
         //load card
         var gamePath = SMLTOWN.path + "games/" + SMLTOWN.Game.info.type;
-        $("#smltown_phpCard").load(gamePath + "/cards/" + SMLTOWN.user.card + ".php", function (response) { //card could be changed
+        $("#smltown_phpCard").load(gamePath + "/cards/" + SMLTOWN.user.card + ".php", function(response) { //card could be changed
             SMLTOWN.cardLoading = false;
             if (response.indexOf("Fatal error") > -1) { //catch error
                 smltown_error(response);
@@ -454,7 +490,7 @@ SMLTOWN.Update = {
         });
     }
     ,
-    updateCards: function () {
+    updateCards: function() {
         console.log("update Cards");
 
         $("#smltown_playingCards").html("");
@@ -525,7 +561,7 @@ SMLTOWN.Update = {
         }
     }
     ,
-    playingCards: function (cards) { //active game cards
+    playingCards: function(cards) { //active game cards
         $(".smltown_rulesCard").addClass("smltown_cardOut");
         for (var cardName in cards) {
             var cardNumber = cards[cardName];
@@ -539,7 +575,7 @@ SMLTOWN.Update = {
     }
     ,
     //http://stackoverflow.com/questions/309149/generate-distinctly-different-rgb-colors-in-graphs
-    userColors: ['#00FF00', '#0000FF', '#FF0000', '#01FFFE', '#FFA6FE', '#FFDB66', '#006401', '#010067', '#95003A', '#007DB5', '#FF00F6', '#FFEEE8', '#774D00', '#90FB92', '#0076FF', '#D5FF00', '#FF937E', '#6A826C', '#FF029D', '#FE8900', '#7A4782', '#7E2DD2', '#85A900', '#FF0056', '#A42400', '#00AE7E', '#683D3B', '#BDC6FF', '#263400', '#BDD393', '#00B917', '#9E008E', '#001544', '#C28C9F', '#FF74A3', '#01D0FF', '#004754', '#E56FFE', '#788231', '#0E4CA1', '#91D0CB', '#BE9970', '#968AE8', '#BB8800', '#43002C', '#DEFF74', '#00FFC6', '#FFE502', '#620E00', '#008F9C', '#98FF52', '#7544B1', '#B500FF', '#00FF78', '#FF6E41', '#005F39', '#6B6882', '#5FAD4E', '#A75740', '#A5FFD2', '#FFB167', '#009BFF', '#E85EBE']
+    userColors: ['#0000FF', '#DA0000', '#009C9C', '#006401', '#95003A', '#A937A5', '#774D00', '#00CC5C', '#0076FF', '#FF937E', '#6A826C', '#FF029D', '#7E2DD2', '#85A900', '#00B917', '#C28C9F', '#FF74A3', '#01D0FF', '#004754', '#788231', '#0E4CA1', '#BE9970', '#968AE8', '#BB8800', '#FFE500', '#620E00', '#008F9C', '#7544B1', '#B500FF', '#FF6E41', '#005F39', '#5FAD4E', '#A75740', '#009BFF', '#E85EBE', '#010067', '#E400E2', '#FF4300', '#7A4782', "#FE8900", '#00AE7E', '#683D3B']
     ,
     innocentBackground: "url(games/mafia-werewolf/cards/game_innocent.jpg)"
 };

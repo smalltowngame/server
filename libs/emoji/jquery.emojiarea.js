@@ -32,7 +32,7 @@
         icons: {},
         defaults: {
             button: null,
-            buttonLabel: 'Emojis',
+//            buttonLabel: 'Emojis',
             buttonPosition: 'after'
         }
     };
@@ -56,7 +56,6 @@
     util.restoreSelection = (function () {
         if (window.getSelection) {            
             return function (savedSelection) {
-                console.log(33)
                 var sel = window.getSelection();
                 sel.removeAllRanges();
                 for (var i = 0, len = savedSelection.length; i < len; ++i) {
@@ -94,7 +93,6 @@
     util.replaceSelection = (function () {
         if (window.getSelection) {            
             return function (content) {
-                console.log(55)
                 var range, sel = window.getSelection();
                 //console.log(sel)
                 var node = typeof content === 'string' ? document.createTextNode(content) : content;
@@ -128,16 +126,12 @@
     })();
 
     util.insertAtCursor = function (text, el) {
-        console.log(111)
         text = ' ' + text;
         var val = el.value, endIndex, startIndex, range;
         if (typeof el.selectionStart != 'undefined' && typeof el.selectionEnd != 'undefined') {
             startIndex = el.selectionStart;
             endIndex = el.selectionEnd + text.length + 1;
             el.value = val.substring(0, startIndex) + text + val.substring(el.selectionEnd);
-
-            //PATCH:
-            //el.selectionStart = el.selectionEnd = startIndex + text.length;
             el.selectionStart = el.selectionEnd = startIndex + text.length;
 
         } else if (typeof document.selection != 'undefined' && typeof document.selection.createRange != 'undefined') {
@@ -245,7 +239,6 @@
     };
 
     EmojiArea_Plain.prototype.insert = function (group, emoji) {
-        console.log(222);
         if (!$.emojiarea.icons[group]['icons'].hasOwnProperty(emoji))
             return;
         util.insertAtCursor(emoji, this.$textarea[0]);
@@ -315,7 +308,6 @@
     };
 
     EmojiArea_WYSIWYG.prototype.insert = function (group, emoji) {
-        console.log(666)
         var content;
         var $img = $(EmojiArea.createIcon(group, emoji));
         if ($img[0].attachEvent) {

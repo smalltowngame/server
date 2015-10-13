@@ -78,7 +78,7 @@ $card->extra = function() {
         }
     };
 
-    $("#smltown_witchButton .smltown_button").click(function () {
+    $("#smltown_witchButton .smltown_button").on("tap", function () {
         var save = $("#smltown_witchSave").closest(".smltown_player").attr("id");
         var kill = $("#smltown_witchKill").closest(".smltown_player").attr("id");
         SMLTOWN.temp.endTurn(save, kill);
@@ -94,8 +94,8 @@ $card->extra = function() {
 
     SMLTOWN.Action.night.extra = function (dying) {
         console.log(dying);
-        $("#smltown_cardConsole").show();
-        $("#smltown_cardConsole").html($("#smltown_witchButton"));
+//        $("#smltown_nightConsole").show();
+        $("#smltown_nightConsole").html($("#smltown_witchButton"));
 
         for (var i = 0; i < dying.length; i++) {
             var id = dying[i].id;

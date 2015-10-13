@@ -28,8 +28,10 @@ SMLTOWN.Util = {
         return ~~(time / 60) + ":" + (secs < 10 ? "0" : "") + secs;
     }
     ,
-    setPersistentCookie: function(key, value) { // 1 year
+    setPersistentCookie: function(key, value) { // for 1 year
         console.log(key + " cookie = " + value);
+        //prevent duplications (websocket and ajax will find different ones)
+        this.deleteCookie(key);
         // Build the expiration date string:
         var expiration_date = new Date();
         expiration_date.setFullYear(expiration_date.getFullYear() + 1);
@@ -40,8 +42,15 @@ SMLTOWN.Util = {
     getCookie: function(name) {
         var value = "; " + document.cookie;
         var parts = value.split("; " + name + "=");
-        if (parts.length > 1) // not == 2; (if duplicate cookie bug) get last.
+        if (parts.length > 1) { // not == 2; (if duplicate cookie bug) get last.
             return parts.pop().split(";").shift();
+        }
+    }
+    ,
+    deleteCookie: function(name) {
+        if (this.getCookie(name)) {
+            document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        }
     }
     ,
     setLocalStorage: function(key, value) {
@@ -93,7 +102,7 @@ SMLTOWN.Game.askPassword = function(log) {
         $(".smltown_dialog").remove();
         return false;
     });
-    $(".smltown_dialog #smltown_cancel").click(function() {
+    $(".smltown_dialog #smltown_cancel").on("tap", function() {
         console.log("cancel password");
         $(".smltown_dialog").remove();
         SMLTOWN.Load.showPage("gameList");

@@ -1,6 +1,6 @@
 .emoji-wysiwyg-editor {
     border: 1px solid #d0d0d0;
-    overflow: auto;
+    /*overflow: auto;*/
     outline: none;
 }
 .emoji-wysiwyg-editor img {
@@ -158,15 +158,12 @@
 .emoji-wysiwyg-editor{
     position: relative;
     left: 45px;
-    width: calc(100% - 90px);
+    /*width: calc(100% - 90px);*/
     display: inline-block;    
     border: none;
     font-size: 16px;
     margin-top: 16px;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none; 
 }
-
 
 .emoji-menu{
     top: inherit ! important;
@@ -237,7 +234,7 @@
     background-image: url('../../img/ic_emoji_symbols.png');
 }
 
-#smltown_consoleLog img{
+#smltown_consoleLog img, .smltown_down img{
     width: 20px;
     height: 20px;
     margin: -3px 0 0 0;

@@ -23,11 +23,13 @@ if (isset($_COOKIE['smalltownURL'])) {
 include_once 'php/DB.php';
 $type = "";
 
-//TODO, NOT WORK !!!!!!!
 try {
+    if (intval($gameId) < 1) {
+        throw new Exception("game id is not an integer.");
+    }
     $games = petition("SELECT type FROM smltown_games WHERE id = $gameId");
 } catch (Exception $e) {
-    echo "<script>SMLTOWN.Load.showPage('gameList', 'not valid id, mysql error');</script>";
+    echo "<script>SMLTOWN.Load.showPage('gameList', 'not valid game id');</script>";
     exit;
 }
 
@@ -66,11 +68,11 @@ if (count($games)) {
         </div>
 
         <div id="smltown_filter">
-            <div id="smltown_popup">
-                <div id="smltown_popupText"></div>
-                <div id="smltown_popupOk" class="smltown_button">OK</div>
-                <div id="smltown_popupCancel" class="smltown_button">Cancel</div>
-            </div>
+            <!--            <div id="smltown_popup">
+                            <div id="smltown_popupText"></div>
+                            <div id="smltown_popupOk" class="smltown_button">OK</div>
+                            <div id="smltown_popupCancel" class="smltown_button">Cancel</div>
+                        </div>-->
             <div class="smltown_countdown"></div>
         </div>
 
@@ -78,9 +80,9 @@ if (count($games)) {
 
     <div id="smltown_menu" class="smltown_swipe">
         <div id="smltown_menuContent">
-            <div>
+            <div id="smltown_menuAll">
                 <div class="smltown_selector smltown_admin">					
-                    <div>
+                    <div id="smltown_adminMenu">
                         <symbol class="icon">R</symbol>
                         <span>Admin</span>
                         <small>adminHelp</small>
@@ -114,6 +116,11 @@ if (count($games)) {
                         <form>
                             <input type="text"/>
                         </form>					
+                    </div>
+
+                    <div id="smltown_gamePublic" class="input smltown_admin smltown_gameover">
+                        <span>GamePublic</span> <symbol>R</symbol>
+                        <input class="" type="checkbox"/>
                     </div>
 
                     <div id="smltown_dayTime" class="input smltown_admin smltown_gameover">
@@ -154,11 +161,15 @@ if (count($games)) {
                         <span>Name</span>
                         <form>
                             <input type="text"/>
-                        </form>					
+                        </form>
+                    </div>
+                    <div id="smltown_updateImage" class="smltown_action">
+                        <span>Image</span>
+                        <img>
                     </div>
                     <div id="smltown_spectatorMode" class="smltown_action">
-                        <span>EspectatorMode</span>
-                        <small>espectatorModeHelp</small>
+                        <span>SpectatorMode</span>
+                        <small>spectatorModeHelp</small>
                     </div>
                     <div id="smltown_cleanErrors" class="smltown_action">
                         <span>CleanErrors</span>
@@ -166,13 +177,14 @@ if (count($games)) {
                     </div>
                 </div>
 
-                <div id="smltown_friendsMenu" class="smltown_selector" style="display: none">
+                <div id="smltown_friendsMenu" class="smltown_selector">
                     <div>
                         <div class="icon">i</div>
                         <span>Friends</span>
                         <small>friendsHelp</small>
                     </div>
-                    <div id="smltown_showFriends" class="smltown_action" style="display: none">
+                    <!--Display at least 1 option -->
+                    <div id="smltown_showFriends" class="smltown_action">
                         <span>Invite</span>
                         <small>inviteHelp</small>
                     </div>
@@ -188,13 +200,28 @@ if (count($games)) {
                         <span>Info</span>
                         <small>infoHelp</small>
                     </div>
-                    <div id="smltown_currentUrl" class="text">
+                    <div id="smltown_currentUrl" class="input">
+                        <span>CurrentURL</span>
+                        <small></small>
                     </div>
 
                     <div id="smltown_disclaimer" class="text">
                     </div>
                 </div>
 
+                <div id="smltown_notesMenu" class="smltown_selector">
+                    <div class="smltown_falseSelector">
+                        <div class="icon">i</div>
+                        <span>Notes</span>
+                        <small>infoNotes</small>
+                    </div>
+                    <div id="smltown_notes">
+                        <textarea></textarea>
+                    </div>
+                </div>
+
+                <!--sticky footer PUSH-->
+                <!--<div style="height:50px"></div>-->
             </div>
 
             <div id="smltown_backButton" class="smltown_selector">
@@ -223,6 +250,7 @@ if (count($games)) {
                 <div id="smltown_consoleLog">
                     <p class="smltown_errorLog"></p>
                     <div></div>
+                    <div class="smltown_night"></div>
                 </div>
             </div>
 
@@ -236,27 +264,32 @@ if (count($games)) {
         </div>
     </div>
 
-    <div id="smltown_cardConsole"></div>
+    <!--<div id="smltown_nightConsole"></div>-->
 
     <!--friends selector-->
     <div id=smltown_friendSelector>
         <div id='smltown_friendsTitle'>
-            <p>Invite your friends</p>
+            <p>InviteFriends</p>
             <div class="smltown_update">Update</div>
 
         </div>
         <div id='smltown_friendsContent'>
             <!--demo social friend-->
-            <div class='smltown_invitableFriend'><img src=''><p>demo user</p></div>
+            <div class='smltown_invitableFriend'><img src=''><p>demoUser</p></div>
         </div>
         <div id='smltown_friendsFooter'>
-            <div class="smltown_submit">Send Invitation</div>
+            <div class="smltown_submit">SendInvitation</div>
             <div class="smltown_cancel">Cancel</div>            
         </div>
     </div>
 
+    <!--login to find friend selector-->
+    <div id='smltown_shareMenu'>
+        <div>ShareBy</div>
+    </div>
+
     <div id='smltown_pictureContextMenu'>
-        <div id="smltown_addFriend">add friend</div>
+        <div id="smltown_addFriend">addFriend</div>
     </div>
 
     <!--visuals card-->
@@ -269,19 +302,37 @@ if (count($games)) {
 
 <script>
     $('.emojis-wysiwyg').emojiarea({wysiwyg: true});
-    $("#smltown_sendInput").click(function() {
+    $("#smltown_sendInput").on("tap", function() {
         $("#smltown_chatForm").submit();
-        $("#smltown_chatInput").val("");
-        $(".emoji-wysiwyg-editor").html("");
     });
 
     $(".emoji-wysiwyg-editor").blur(function(e) {
         if ($(e.target).parents("#smltown_chatForm").length > 0) {
-//            e.preventDefault();  //prevent default DOM action
-//            e.stopPropagation();   //stop bubbling
-
             $(".emoji-wysiwyg-editor").trigger('focus');
             $("#smltown_chatInput").trigger('change');
+        }
+    });
+
+    $(".emoji-wysiwyg-editor").on("tap", function(e) {
+        if ($(e.target).is("img")) {
+            var index = $(e.target).index();
+
+            var caret = 0;
+            $(".emoji-wysiwyg-editor").contents().each(function() {
+                caret++;
+                if (index == $(this).index()) {
+                    console.log("return on index = " + index);
+                    return false;
+                }
+            });
+
+            var textNode = $(".emoji-wysiwyg-editor")[0];
+            var range = document.createRange();
+            range.setStart(textNode, caret);
+            range.setEnd(textNode, caret);
+            var sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
         }
     });
 
@@ -327,9 +378,12 @@ if (count($games)) {
 
     //info
     $("#smltown_disclaimer").load(SMLTOWN.path + "./game_disclaimer.html");
-    $("#smltown_currentUrl").append("<b>Current URL:</b> <br/><br/> <small>" + window.location.href + "</small>");
+    $("#smltown_currentUrl small").html(window.location.href);
 
     //cookie
     SMLTOWN.Util.setPersistentCookie("smltown_gameId", SMLTOWN.Game.info.id);
+
+    $("#smltown_notes textarea").val(localStorage.getItem("notes" + SMLTOWN.Game.info.id));
+    $("#smltown_notes textarea").css('height', $("#smltown_notes textarea")[0].scrollHeight + "px");
 
 </script>

@@ -41,3 +41,10 @@ config
 config.php
 /config.php
 
+\old.*
+
+picture/
+pictures/
+
+\*.log
+

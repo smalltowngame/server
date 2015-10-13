@@ -142,7 +142,8 @@ trait BackEnd {
         $gameId = $this->gameId;
 
         //alive only. distinct: not duplicated
-        $plays = petition("SELECT DISTINCT card FROM smltown_plays WHERE gameId = $gameId AND status > -1 AND card > ''");
+        $plays = petition("SELECT DISTINCT card FROM smltown_plays WHERE gameId = $gameId AND status > -1 "
+                . "AND card > '' AND card IS NOT NULL");
 
         $lowestInitiative = 100;
         $next = null;

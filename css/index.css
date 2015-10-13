@@ -49,12 +49,15 @@ a:hover{
     font-weight: bold;
 }
 #smltown_games{
-    min-height: calc(100% - 99px);
-    margin: 0 auto;    
+    min-height: 100%;
+    height: auto !important; /* This line and the next line are not necessary unless you need IE6 support */
+    height: 100%;
+    margin: 0 auto -85px; /* the bottom margin is the negative value of the footer's height */
 }
+
 #smltown_games > div{
     position: relative;
-    margin: 7px;
+    padding: 4px 7px;
     /*max-width: 550px;*/
     /*text-shadow: 1px 1px 1px white;*/
 }
@@ -80,6 +83,13 @@ a:hover{
     overflow:hidden;
     padding: 0 10px;
 }
+#smltown_newGame.smltown_disable{
+    color: rgb(150,150,150);
+    background-color: rgb(240,240,240);
+}
+#smltown_newGame:hover{
+    background-color: rgb(220,220,220) !important;
+}
 
 .smltown_game{
     position: relative;
@@ -99,6 +109,7 @@ a:hover{
     font-weight: bold;
     z-index: 1;
     cursor: pointer;
+    box-shadow: inset -1px -1px 0 rgb(230,230,230);
 }
 .smltown_fixedGame .smltown_content{
     opacity: 1 !important;
@@ -211,7 +222,15 @@ a:hover{
     color: grey;
 }
 
+
+#smltown_games::after{
+    content: "";
+    display: block;
+    height: 85px;
+    width: 100%;
+    position: relative;
+}
 #smltown_footer{
     height: 85px;
+    padding: 0 10px;
 }
-

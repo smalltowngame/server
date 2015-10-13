@@ -61,11 +61,11 @@ $card->cupidRules = function($me, $to) {
     $loving = $text['loving'];
     $ifDies = $text['ifDies'];
     $idDiv = "$('#" . $to . "')";
-    $js = "$idDiv.bind('click.smltown_rules',function(){"
+    $js = "$idDiv.bind('tap.smltown_rules',function(){"
             . "if(3==SMLTOWN.Game.info.status){" //day status
             . "return false"
             . "}});" //prevent vote
-            . "$idDiv.bind('click.smltown_rules',function(){"
+            . "$idDiv.bind('tap.smltown_rules',function(){"
             . "SMLTOWN.Message.flash('$loving $toName $ifDies')"
             . "});"; //remember is in love
 

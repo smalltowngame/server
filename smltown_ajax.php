@@ -1,5 +1,7 @@
 <?php
 
+header('Access-Control-Allow-Origin: *');
+
 $GLOBALS['ROOT'] = dirname(__FILE__);
 session_start();
 
@@ -87,7 +89,7 @@ trait Connection {
 
     function send_social_response($obj, $socialId) {
         global $websocket_server;
-        
+
         $gameId = $this->gameId;
         $obj['gameId'] = $gameId;
         $json = json_encode($obj);
@@ -131,9 +133,16 @@ trait Connection {
         $gameId = $this->gameId;
 
         if (isset($playId)) {
-            //warning: cant echo here. every individual messages will arrive before game updates. like 1st night before update
-            //only in playing game
             $json = json_encode($obj);
+            
+            //MYSELF
+            if ($this->playId == $playId) {
+                echo "|$json";
+                return;
+            }
+
+            //warning: cant echo here. every individual messages will arrive before game updates. like 1st night before update
+            //only in playing game            
             $values = array('reply' => $json); //escape \ from utf-8 special chars
             $sth = sql("UPDATE smltown_plays SET reply = CONCAT(reply , '|' , :reply)"
                     . " WHERE smltown_plays.id = $playId AND smltown_plays.admin != -2 AND"
@@ -186,7 +195,14 @@ trait Connection {
 
                 sql("UPDATE smltown_players SET reply = CONCAT(reply , '|' , :reply) WHERE"
                         . " id = (SELECT userId FROM smltown_plays WHERE gameId = $gameId)"
+                        . " AND playId != $this->playId"
                         . " AND websocket = 0", $values);
+                
+                //MYSELF
+                if ($this->gameId == $gameId) {
+                    echo $json;
+                    return;
+                }
             }
 
             if (!$websocket_server || isset($_SESSION['onlyAjax'])) {

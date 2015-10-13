@@ -27,7 +27,7 @@ SMLTOWN.Message = {
         this.inputDialog("set your name", function(name) { //ok callback
             for (var id in SMLTOWN.players) {
                 if (SMLTOWN.players[id].name == name) {
-                    $("#smltown_login .smltown_log").smltown_text("duplicatedName");
+                    $("#smltown_login .smltown_log").smltown_text("duplicatedUserName");
                     return false;
                 }
             }
@@ -78,37 +78,12 @@ SMLTOWN.Message = {
         });
     }
     ,
-    phone: function() {
-        var note;
-        if (!SMLTOWN.user.socialId) {
-            note = "Your phone number won't be saved anywhere,<br/>"
-                    + "only will share an unidirectional hash of it.";
-        } else {
-            note = "You will override other entered phone number. <br/>"
-                    + "That means your actual friends will not see you. <br/>"
-                    + "(this application doesn't check number veracity)<br/>";
-        }
-
-        SMLTOWN.Message.bottomDialog("set your phone to find friends", function(phone) { /*ok callback*/
-            if (!phone) {
-                callDeviceFunction("savePreference", "phoneId", ""); /*store in prefs*/
-            }
-
-            var hash = callDeviceFunction("setPhone", phone);
-            SMLTOWN.Server.request.addUser("android", hash);
-
-            if (!SMLTOWN.Social.friends) {
-                SMLTOWN.Social.android.findFriends();
-            }
-        }, note);
-    }
-    ,
     bottomDialog: function(placeholder, okCallback, log) {
-        $("#smltown_bottomDialog").remove(); //clean
-        $("#smltown_html").append("<div id='smltown_bottomDialog'><form class='smltown_dialogForm'>"
+        $("#smltown_bottomDialog").remove(); /*clean*/
+        $("#smltown_html").parent().append("<div id='smltown_bottomDialog'><form class='smltown_dialogForm'>"
                 + "<table><tr>"
                 + "<td><input type='text' class='smltown_dialogInput' placeholder='" + placeholder + "'>"
-                + "<td><input type='submit' class='smltown_dialogSubmit' value='Not now'></td>"
+                + "<td><input type='submit' class='smltown_dialogSubmit' value='Ok'></td>"
                 + "</tr></table>"
                 + "</form>"
                 + "<div class='smltown_log'></div>"
@@ -121,43 +96,26 @@ SMLTOWN.Message = {
             $("#smltown_bottomDialog .smltown_dialogInput").focus();
         }, 1000);
 
-        var val;
-        $("#smltown_bottomDialog").keyup(function() {
-            val = $(this).find(".smltown_dialogInput").val().replace(/ /g,'');
-            if (val) {
-                if (SMLTOWN.Util.isNumeric(val)) {
-                    if (val.length < 7) {
-                        $(this).find(".smltown_dialogSubmit").removeClass("smltown_dialogSend").val("too short");
-                    } else {
-                        $(this).find(".smltown_dialogSubmit").addClass("smltown_dialogSend").val("Ok");
-                    }
-                } else {
-                    $(this).find(".smltown_dialogSubmit").removeClass("smltown_dialogSend").val("wrong");
-                }
-            } else {
-                $(this).find(".smltown_dialogSubmit").removeClass("smltown_dialogSend").val("Not now");
-            }
-        });
-
         if (log) {
             $("#smltown_bottomDialog .smltown_log").html(log);
         }
 
-        //EVENTS
+        /*EVENTS*/
         $("#smltown_bottomDialog form").submit(function() {
             if ($("#smltown_bottomDialog .smltown_dialogSend").length) {
+                var val = $(this).find(".smltown_dialogInput").val().replace(/ /g, '');
                 okCallback(val);
             } else {
                 okCallback(false);
             }
             $("#smltown_bottomDialog").remove();
-            return false; //prevent submit
+            return false; /*prevent submit*/
         });
     }
     ,
     setMessage: function(data) { //PERMANENT MESSAGES
         var t = this.translate;
-        var text;
+        var text, card;
 
         var textArray = data.split(":");
         var action = data;
@@ -169,7 +127,15 @@ SMLTOWN.Message = {
                 text = textArray.join(":");
             }
         } else {
-            text = t(action);
+            //like votations and kills?
+            var res = t(action);
+            if (typeof res == "string") {
+                text = res;
+            } else {
+                text = res[0];
+                card = res[1];
+                text += card;
+            }
         }
 
         clearTimeout(SMLTOWN.Action.wakeUpTimeout); //prevent asyncronic wakeup's after
@@ -199,6 +165,7 @@ SMLTOWN.Message = {
     }
     ,
     notify: function(text, okCallback, cancelCallback, gameId) {
+        console.log("notify")
         //console.log(gameId);
         if (gameId && SMLTOWN.Game.info.id != gameId) {
             this.external(text, gameId);
@@ -206,28 +173,39 @@ SMLTOWN.Message = {
         }
 
         var $this = this;
-        $("#smltown_popupOk").off("tap");
-        $("#smltown_popupCancel").off("tap");
 
         if (text === "") { //===, not false
+            this.removeNotification();
             console.log("empty text");
-            //$this.removeNotification();
             return;
         }
+
+        if ($("#smltown_notification").length) {
+            $("#smltown_notification").show();
+        } else {
+            var notification = $("<div id='smltown_notification'>"
+                    + "<div id='smltown_popup'>"
+                    + "<div id='smltown_popupText'></div>"
+                    + "<div id='smltown_popupOk' class='smltown_button'>OK</div>"
+                    + "<div id='smltown_popupCancel' class='smltown_close'></div>"
+                    + "</div>"
+                    + "</div>");
+            $("#smltown_html > div").append(notification);
+        }
+
         if (false === text) {
             okCallback();
         }
-
         console.log("text = " + text)
 
         $("#smltown_popupText").html(text);
-        //show
-        $("#smltown_filter").addClass("smltown_notification");
         $("#smltown_popupOk, #smltown_popupCancel").hide();
 
+        //remove lost popup events
+        $("#smltown_popup > div").off(".popup");
         if (okCallback) { //!= false
             $("#smltown_popupOk").show();
-            $("#smltown_popupOk").one("tap", function(e) {
+            $("#smltown_popupOk").one("tap.popup", function(e) {
                 e.preventDefault(); //prevent player select
                 //hide
                 $this.removeNotification(true);
@@ -240,7 +218,7 @@ SMLTOWN.Message = {
 
         if (cancelCallback) { //!= false
             $("#smltown_popupCancel").show();
-            $("#smltown_popupCancel").one("tap", function(e) {
+            $("#smltown_popupCancel").one("tap.popup", function(e) {
                 e.preventDefault(); //prevent player select
                 //hide
                 $this.removeNotification(true);
@@ -252,11 +230,11 @@ SMLTOWN.Message = {
     }
     ,
     removeNotification: function(force) {
-        var filter = $("#smltown_filter");
-        if (!force && filter.hasClass("smltown_message")) {
+        var notification = $("#smltown_notification");
+        if (!force && notification.hasClass("smltown_message")) {
             return;
         }
-        filter.removeClass("smltown_notification");
+        notification.hide();
     }
     ,
     setLog: function(text, type) {
@@ -283,6 +261,10 @@ SMLTOWN.Message = {
 //    }
     ,
     flash: function(text, gameId) {
+        if (!text) {
+            //smltown_debug(text + " flash text");
+            return;
+        }
 
         if (gameId && SMLTOWN.Game.info.id != gameId) {
             this.external(text, gameId);
@@ -291,7 +273,7 @@ SMLTOWN.Message = {
 
         $("#smltown_flash").remove();
         var div = $("<div id='smltown_flash'><div>" + this.translate(text) + "</div></div>");
-        $("#smltown_html").append(div);
+        $("#smltown_html").parent().append(div);
         setTimeout(function() {
             div.remove();
         }, text.length * 80);
@@ -302,18 +284,36 @@ SMLTOWN.Message = {
     }
     ,
     addChats: function() {
-        var chatName = "chat" + SMLTOWN.Game.info.id;
-        var chats = localStorage.getItem(chatName);
-        if (!chats) {
-            return;
+        var chatName, chats, arrayChats, values, i;
+
+        //day
+        chatName = "chat" + SMLTOWN.Game.info.id;
+        chats = localStorage.getItem(chatName);
+        if (chats) {
+            arrayChats = chats.split("·");
+            values;
+            for (i = 0; i < arrayChats.length; i++) {
+                values = arrayChats[i].split("~");
+                this.writeChat(values[0], values[1]);
+            }
         }
 
-        var arrayChats = chats.split("·");
-        var values;
-        for (var i = 0; i < arrayChats.length; i++) {
-            values = arrayChats[i].split("~");
-            this.writeChat(values[0], values[1]);
+        //night
+        chatName = "nightChat" + SMLTOWN.Game.info.id;
+        chats = localStorage.getItem(chatName);
+        if (chats) {
+            arrayChats = chats.split("·");
+            values;
+            for (i = 0; i < arrayChats.length; i++) {
+                values = arrayChats[i].split("~");
+                this.writeChat(values[0], values[1], true);
+            }
         }
+
+//        if (!chats) {
+//            return;
+//        }
+
         SMLTOWN.Transform.chatUpdate();
         SMLTOWN.Add.userNamesByClass();
     }
@@ -323,22 +323,32 @@ SMLTOWN.Message = {
             playId = null;
         }
 
-        var chatName = "chat" + SMLTOWN.Game.info.id;
-        var chat = localStorage.getItem(chatName);
-        if (!chat) {
-            chat = "";
-        }
-        localStorage.setItem(chatName, chat + "·" + text + "~" + playId);
-
         if (gameId && SMLTOWN.Game.info.id != gameId) {
             this.external(text, gameId, name);
             return;
         }
 
-        this.writeChat(text, playId);
+        //if night chat
+        var chatName;
+        var night = SMLTOWN.Game.info.night;
+        if (SMLTOWN.players[playId] && SMLTOWN.Game.info.night &&
+                (night == SMLTOWN.players[playId].card || (night == SMLTOWN.user.card && SMLTOWN.user.id == playId))) {
+            console.log(666);
+            this.writeChat(text, playId, true);
+            chatName = "nightChat" + SMLTOWN.Game.info.id;
+        } else {
+            this.writeChat(text, playId);
+            chatName = "chat" + SMLTOWN.Game.info.id;
+        }
+
+        var chat = localStorage.getItem(chatName);
+        if (!chat) {
+            chat = "";
+        }
+        localStorage.setItem(chatName, chat + "·" + text + "~" + playId);
     }
     ,
-    writeChat: function(text, playId) {
+    writeChat: function(text, playId, night) {
         var name = "";
         if (typeof SMLTOWN.players[playId] != "undefined") { //if player no longer exists
             name = SMLTOWN.players[playId].name + ": ";
@@ -357,7 +367,17 @@ SMLTOWN.Message = {
         });
 
         var chat = $("<div><span class='id" + playId + "'>" + name + "</span>" + text + "</div>");
-        $("#smltown_consoleLog > div").append(chat);
+
+        if ("undefined" != typeof SMLTOWN.players[playId]) {
+            console.log(playId + " , " + SMLTOWN.players[playId].card)
+        }
+
+        if (night) {
+            $("#smltown_consoleLog > .smltown_night").append(chat);
+        } else {
+            $("#smltown_consoleLog > div:not(.smltown_night)").append(chat);
+            $("#" + playId + " .smltown_down").html('- "' + text + '"');
+        }
     }
     ,
     clearChat: function() {
@@ -365,12 +385,23 @@ SMLTOWN.Message = {
 //        localStorage.clear();
     }
     ,
-    translate: function(some, attr) {
+    translate: function(some) {
         if (!lang[some]) {
-//            if (attr) {
-//                return attr + " " + some;
-//            }
             console.log("not translation: " + some);
+            if (null !== lang[some]) {
+//                if (!this.checkedTranslations) {
+                var kind = null;
+                var someArray = some.split("_");
+                if (someArray.length > 1) {
+                    kind = someArray.shift();
+                }
+                SMLTOWN.Server.request.checkTranslation(SMLTOWN.lang, kind, some);
+//                    this.checkedTranslations = true;
+//                } else {
+//                    console.log("checked Translations");
+//                }
+            }
+
             return some;
         }
         return lang[some];
@@ -382,10 +413,10 @@ SMLTOWN.Message = {
 
         $("#smltown_external").remove();
         var div = $("<div id='smltown_external'>" + text + "</div>");
-        div.click(function() {
+        div.on("tap", function() {
             window.location.hash = "game?" + gameId;
         });
-        $("#smltown_html").append(div);
+        $("#smltown_html").parent().append(div);
 
         setTimeout(function() {
             $("#smltown_external").addClass("smltown_visible");

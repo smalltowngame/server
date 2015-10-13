@@ -3,7 +3,7 @@
 class Tables {
 
     //TABLES OBJECT
-    public $tables = array(
+    private $tables = array(
         'smltown_games' => array(
             'id' => "int(11) UNSIGNED NOT NULL AUTO_INCREMENT",
             'name' => "varchar(255) UNIQUE not null",
@@ -27,8 +27,10 @@ class Tables {
             'id' => "varchar(255) UNIQUE NOT NULL",
             'name' => "varchar(255)",
             'lang' => "varchar(255)",
+            'picture' => "varchar(255)",
             'type' => "varchar(255)",
             'socialId' => "varchar(255) UNIQUE",
+            'facebook' => "varchar(255) UNIQUE",
             'gameId' => "int(11)",
             'friends' => "text NOT NULL DEFAULT ''",
             'reply' => "text NOT NULL DEFAULT ''",
@@ -53,9 +55,26 @@ class Tables {
         )
     );
 
-    function createDB() {
+    private function getTables() {
+        //add dinamical values
+        require_once 'config.php';
+        if (!isset($publicGames)) {
+            $publicGames = 1;
+        }
+        $this->tables['smltown_games']['public'] = "int(1) DEFAULT $publicGames";
+        return $this->tables;
+    }
+
+    public function createDB() {
+        $config = 'config.php';
+        if (!file_exists($config)) {
+            echo "console.log('updating config.php?')";
+            return;
+        }
+        
         //require -> inside this function
         require 'config.php';
+        
         $enlace = mysqli_connect("localhost", $database_user, $database_pass);
         if (!$enlace) {
             echo 'IS YOUR MYSQL WORKING? - WRONG DB CREDENTIALS?';
@@ -70,8 +89,9 @@ class Tables {
         }
     }
 
-    function createTables() {
-        foreach ($this->tables as $tablename => $array) {
+    public function createTables() {
+        $tables = $this->getTables();
+        foreach ($tables as $tablename => $array) {
             $sth = sql($this->createTableSring($tablename, $array));
             echo $this->createTableSring($tablename, $array);
             if ($sth->rowCount() > 0) { //nothing changes
@@ -80,7 +100,7 @@ class Tables {
         }
     }
 
-    function createTableSring($tablename, $array) {
+    public function createTableSring($tablename, $array) {
         $sql = "CREATE TABLE IF NOT EXISTS $tablename(";
         $last_key = end(array_keys($array));
         foreach ($array as $key => $value) {
@@ -92,19 +112,17 @@ class Tables {
         return "$sql)";
     }
 
-    function addColumn($columnName) {
-        foreach ($this->tables as $tablename => $array) {
+    public function addColumn($columnName) {
+        $tables = $this->getTables();
+        foreach ($tables as $tablename => $array) {
             foreach ($array as $colNames => $value) {
                 if ($columnName == $colNames) {
-                    echo 666;
                     $sth = sql("SHOW COLUMNS FROM $tablename LIKE '$columnName'");
                     $exists = ($sth->rowCount()) ? TRUE : FALSE;
-                    
-                    if(!$exists){
-                        echo 777;
+
+                    if (!$exists) {
                         petition("ALTER TABLE $tablename ADD $columnName $value");
                     }
-                    echo 888;
                 }
             }
         }

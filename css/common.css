@@ -11,6 +11,9 @@ symbol{
     font-family: web-symbols;
     margin: 0 5px;
 }
+#smltown_menu symbol{
+    margin: 0 3px !important;
+}
 
 html, body{
     /*margin: 0 auto;*/
@@ -50,19 +53,30 @@ html, body{
     border-collapse: collapse;
 }
 
-#smltown_loading{
+#smltown_loader{
+    display: none;
     position: absolute;
     width: 100%;
     height: 100%;
-    left:0;
-    top:0;
-    text-align: center;
-    font-size: 80px;
+    top: 0;
+    left: 0;
     background-color: rgba(255,255,255,0.5);
     z-index: 99;
 }
-.smltown_loader{
-    background-image: url("../img/loader.gif");
+.smltown_loading{
+    display: inherit !important;
+}
+
+#smltown_textLoader{
+    font-size: 12px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    text-align: center;
 }
 
 #smltown_dialog{
@@ -153,6 +167,7 @@ html, body{
 }
 #smltown_bottomDialog .smltown_log{
     padding: 7px;
+    font-size: 13px;
 }    
 
 .smltown_absolute{
@@ -239,11 +254,11 @@ html, body{
 
 
 .smltown_errorLog{
-    /*color: red;*/
     color: grey;
     text-align: right;
     margin: 0 10px;
     min-height: 1px; //display
+    z-index: 100;
 }
 
 .smltown_animated{
@@ -276,4 +291,20 @@ html, body{
 
 .smltown_hide{
     display: none !important;
+}
+
+#smltown_notification{
+    /*pointer-events: none;*/
+    position:absolute !important;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0
+}
+
+#smltown_popup > div{
+    max-width: 600px;
+}
+.smltown_static #smltown_notification{
+    z-index: 20;
 }

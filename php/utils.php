@@ -45,8 +45,8 @@ trait Utils {
 
     protected function setChat($text, $sqlId, $playId = null, $name = null) {
       
-        $plays = petition("SELECT id FROM smltown_plays "
-                . "WHERE $sqlId");
+        $plays = petition("SELECT id FROM smltown_plays"
+                . " WHERE $sqlId");
 
         for ($i = 0; $i < count($plays); $i++) {
             $res = array(
@@ -205,6 +205,9 @@ trait Utils {
 
         //include_once "php/utils.php";
         $cards = $this->loadCards(true); //all
+        if(false == $cards){
+            return false;
+        }
         $returnCards = array();
         foreach ($cards as $cardName => $card) { //important
             $returnCard = array();
@@ -272,7 +275,7 @@ trait Utils {
 
             //IF CARDS EMPTY OR CURRUPTED
             if (empty($string)) {
-                setGameStatus(0); //if user try restart
+                $this->setGameStatus(0); //if user try restart
                 echo "SMLTOWN.Message.flash('noCardsSelected')";
                 return false;
             }

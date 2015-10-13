@@ -3,8 +3,11 @@
 
 //Modernizr
 if (Modernizr.touch) {
+    $("#smltown_html").addClass("smltown_touch");
+    SMLTOWN.touch = true;
     console.log("TOUCH");
-    $("#smltown_list, #smltown_menuContent, #smltown_console").css("overflow-y", "hidden");
+} else {
+    $("#smltown_html").addClass("smltown_mouse");
 }
 
 var touchstart = ('ontouchstart' in document.documentElement ? "touchstart" : "touchstart mousedown");
@@ -12,15 +15,15 @@ var touchmove = ('ontouchmove' in document.documentElement ? "touchmove" : "touc
 var touchend = ('ontouchend' in document.documentElement ? "touchend" : "touchend mouseup");
 
 //jQuery
-(function ($) { //unify touchstart and mousedown to prevent double events
+(function($) { //unify touchstart and mousedown to prevent double events
 
-    $.fn.touchstart = function (event) {
+    $.fn.touchstart = function(event) {
         if ('ontouchstart' in document.documentElement) {
-            this.bind("touchstart", function (e) {
+            this.bind("touchstart", function(e) {
                 event.call(this, e);
             });
         } else { //if not touch
-            this.bind("mousedown", function (e) {
+            this.bind("mousedown", function(e) {
                 event.call(this, e);
             });
         }
@@ -29,27 +32,27 @@ var touchend = ('ontouchend' in document.documentElement ? "touchend" : "touchen
 })(jQuery);
 
 //?
-$('input').bind('focus', function () {
-    $(window).scrollTop(10);
-    var keyboard_shown = $(window).scrollTop() > 0;
-    $(window).scrollTop(0);
+//$('input').bind('focus', function() {
+//    $(window).scrollTop(10);
+//    var keyboard_shown = $(window).scrollTop() > 0;
+//    $(window).scrollTop(0);
+//
+//    $('body').prepend(keyboard_shown ? 'keyboard ' : 'nokeyboard ');
+//});
 
-    $('body').prepend(keyboard_shown ? 'keyboard ' : 'nokeyboard ');
-});
-
-$(window).resize(function () {
+$(window).resize(function() {
     SMLTOWN.Transform.windowResize();
     SMLTOWN.Transform.gameResize();
 });
 
 SMLTOWN.Events = {
     //ADMIN CARDS EVENTS //////////////////////////////////////////////////////
-    cards: function () {
+    cards: function() {
         var tapped = false;
         var mousedown = false;
         var card = null;
 
-        $(".smltown_rulesCard").touchstart(function () {
+        $(".smltown_rulesCard").touchstart(function() {
             if (!SMLTOWN.user.admin) {
                 return;
             }
@@ -60,10 +63,10 @@ SMLTOWN.Events = {
             }
             if (!tapped) { //if tap is not set, set up single tap
                 mousedown = true;
-                tapped = setTimeout(function () {
+                tapped = setTimeout(function() {
                     tapped = null; //insert things you want to do when single tapped
                 }, 300);   //wait then run single click code
-                mousedown = setTimeout(function () {
+                mousedown = setTimeout(function() {
                     // TAPHOLD//////////////////////////////////////////////
                     if (!mousedown || $this.hasClass("smltown_cardOut")) {
                         return false;
@@ -82,9 +85,14 @@ SMLTOWN.Events = {
 
             // DOUBLE TAP (tapped within 300ms of last tap)/////////////////
             if (SMLTOWN.Game.playing()) {
-                SMLTOWN.Message.flash("cannot toggle cards in game");
+                SMLTOWN.Message.flash("cannotCardsGame");
                 return;
             }
+            if (SMLTOWN.user.admin < 1) {
+                SMLTOWN.Message.flash("cannotCardsAdmin");
+                return;
+            }
+
             clearTimeout(tapped); //stop single tap callback
             tapped = null;
             $(this).toggleClass("smltown_cardOut"); //insert things you want to do when double tapped
@@ -101,14 +109,14 @@ SMLTOWN.Events = {
             }
             SMLTOWN.Server.request.saveCards(cards);
 
-        }).on("mouseup", function () {
+        }).on("mouseup", function() {
             mousedown = false;
 
-        }).bind("taphold", function (e) {
+        }).bind("taphold", function(e) {
             e.preventDefault();
             return false;
 
-        }).on("focusout", function () { //input number
+        }).on("focusout", function() { //input number
             var cards = SMLTOWN.Game.info.cards;
             var card = $(this).attr("smltown_card");
 
@@ -128,16 +136,16 @@ SMLTOWN.Events = {
             }
         });
 
-        $(".smltown_rulesCard form").submit(function () {
+        $(".smltown_rulesCard form").submit(function() {
             $(this).find("input").blur();
             return false;
         });
 
         //plain user events
-        $(".smltown_rulesCard").on("tap", function () {
+        $(".smltown_rulesCard").on("tap", function() {
             var $this = $(this);
-            setTimeout(function () { //w8 documents events
-                $(document).one("tap", function () {
+            setTimeout(function() { //w8 documents events
+                $(document).one("tap", function() {
                     $this.removeClass("smltown_selectedRulesCard");
                     $("#smltown_infoSelectedCard").remove();
                 });
@@ -150,40 +158,47 @@ SMLTOWN.Events = {
     }
     ,
     //GAME EVENTS //////////////////////////////////////////////////////////////
-    game: function () { //1 time load
+    game: function() { //1 time load
         var $this = this;
         this.menuEvents();
 
-        //
-        $("#smltown_chatForm").on("swiperight swipeleft", function (e) {
-            e.preventDefault();
-        });
-
         //SWIPES ACTIONS GAME
-        $("#smltown_menuIcon").on("click", function () {
+        $("#smltown_menuIcon").on("tap", function() {
             $this.swipeRight();
         });
-        $("#smltown_cardIcon").on("click", function () {
+        $("#smltown_cardIcon").on("tap", function() {
             $this.swipeLeft();
         });
 
-        $("#smltown_game").on("swiperight", function (e) {
-            if ("smltown_chatInput" == $(e.target).attr("id")) {
-                return;
-            }
-            e.preventDefault();
-            $this.swipeRight();
-        });
-        $("#smltown_game").on("swipeleft", function (e) {
-            if ("smltown_chatInput" == $(e.target).attr("id")) {
-                return;
-            }
-            e.preventDefault();
-            $this.swipeLeft();
-        });
+        $("#smltown_game")
+                //SWIPE RIGHT
+                .on("swiperight", function(e) {
+                    if ($(e.target).parents("#smltown_chatForm").length) {
+                        return;
+                    }
+                    e.preventDefault();
+                    $this.swipeRight();
+                })
+                //SWIPE LEFT
+                .on("swipeleft", function(e) {
+                    if ($(e.target).parents("#smltown_chatForm").length) {
+                        return;
+                    }
+                    e.preventDefault();
+                    $this.swipeLeft();
+                })
+                //CLICK anywhere to unselect player
+                .on("tap", function(e) {
+                    var preselect = $(".smltown_preselect");
+                    if (preselect.length
+                            && !$(e.target).parents(".smltown_player").length
+                            && !$(e.target).hasClass("smltown_player")) {
+                        preselect.removeClass("smltown_preselect");
+                    }
+                });
 
         // ANY setTimeout for Android 2.3 focus !
-        $("#smltown_console").on("mouseup", function (e) {
+        $("#smltown_console").on("mouseup", function(e) {
             if ($(e.target).attr("id") == "smltown_chatForm" || $(e.target).parents('#smltown_chatForm').length > 0) {
                 return;
             }
@@ -197,28 +212,42 @@ SMLTOWN.Events = {
 //            }, 300);
         });
 
-        $("#smltown_chatInput").on("focusout", function () {
+        $("#smltown_chatInput").on("focusout", function() {
             if ($("#smltown_console").hasClass("smltown_consoleExtended")) {
                 return;
             }
             SMLTOWN.Transform.chatUpdate();
         });
 
-        $("#smltown_chatForm").keypress(function (e) {
+        //enter press
+        $("#smltown_chatForm").keypress(function(e) {
             if (e.which == 13) {
-                $("#smltown_chatForm").submit();
+                //let enters
+                if (e.shiftKey) {
+                    this.value += "\n";
+                } else {
+                    $("#smltown_chatForm").submit();
+                }
             }
         });
 
-        $("#smltown_chatForm").submit(function () {
+        //input height change
+        $("#smltown_chatForm").change(function() {
+            SMLTOWN.Transform.chatUpdate();
+        });
+
+        $("#smltown_chatForm").submit(function() {
             $("#smltown_console").trigger("mouseup");
-//            $('#smltown_chatInput').blur();
             var text = $('#smltown_chatInput').val();
-            if (text.length) {
+
+            //if some text
+            if (text.trim().length) {
                 SMLTOWN.Message.addChat(text, SMLTOWN.user.id);
                 SMLTOWN.Server.request.chat(text);
             }
+
             $('#smltown_chatInput').val("");
+            $(".emoji-wysiwyg-editor").html("");
             SMLTOWN.Transform.chatFocusOut();
             return false;
         });
@@ -229,12 +258,12 @@ SMLTOWN.Events = {
         this.touchScroll($("#smltown_consoleText > div"), "bottom");
 
         //ONLY COMPUTER EVENTS ////////////////////////////////////////////////////
-        $("#smltown_list").scroll(function () {
+        $("#smltown_list").scroll(function() {
             SMLTOWN.Transform.updateHeader();
         });
 
         //TAP MENUS
-        $("#smltown_card").on("tap", function () {
+        $("#smltown_card").on("tap", function() {
             if ($("#smltown_card > div").hasClass("smltown_rotate")) {
                 SMLTOWN.Transform.cardRotateSwipe();
             } else {
@@ -242,36 +271,47 @@ SMLTOWN.Events = {
             }
         });
 
-        $("#smltown_menu").on("tap", function (e) {
+        $("#smltown_menu").on("tap", function(e) {
             if ($(e.target).attr("id") == "smltown_menu") {
                 e.preventDefault(); //prevent background clicks
                 $(this).removeClass("smltown_visible");
             }
         });
 
-        $("#smltown_help").on("tap", function () {
+        $("#smltown_help").on("tap", function() {
             $("#smltown_helpMessage").remove();
             var message = $("<div id='smltown_helpMessage'>");
             var tour = $("<div class='smltown_tour'>tour</div>");
-            tour.click(function () {
-                SMLTOWN.Add.nextHelp(0);
+            tour.on("tap", function() {
+                SMLTOWN.Help.tour();
             });
             message.html("<div class='smltown_text'></div>").append(tour);
             $("#smltown_body").append(message);
-            SMLTOWN.Add.help();
-            $(document).one("tap", function (e) {
+            SMLTOWN.Help.help();
+            $(document).one("tap", function(e) {
                 e.preventDefault();
                 message.remove();
             });
         });
 
         //FRIENDS
-        $("#smltown_friendsFooter > div").click(function () {
+        $("#smltown_friendsFooter > div").on("tap", function() {
             $("#smltown_friendSelector").hide();
+        });
+
+        $("#smltown_addFriend").on("tap", function() {
+            var socialId = $("#smltown_pictureContextMenu").attr("socialId");
+            if (!socialId) {
+                SMLTOWN.Message.flash("missingSocialId");
+                return;
+            }
+            SMLTOWN.Server.request.addFriend(socialId);
+            SMLTOWN.Message.flash("friendAdded");
+            $("#smltown_pictureContextMenu").hide();
         });
     }
     ,
-    swipeRight: function () {
+    swipeRight: function() {
         if ($("#smltown_card").hasClass("smltown_visible")) {
             SMLTOWN.Transform.cardSwipeRotate();
         } else if ($("#smltown_menu").hasClass("smltown_swipe")) {
@@ -279,7 +319,7 @@ SMLTOWN.Events = {
         }
     }
     ,
-    swipeLeft: function () {
+    swipeLeft: function() {
         if ($("#smltown_menu").hasClass("smltown_visible")) {
             $("#smltown_menu").removeClass("smltown_visible");
         } else {
@@ -293,33 +333,30 @@ SMLTOWN.Events = {
     }
     ,
     //ALL SCROLLS GAME
-    touchScroll: function (div, side) { //side: top or bottom        
+    touchScroll: function(div, side) { //side: top or bottom        
         var element = div.attr("id");
-        //android 2.3 bug on height content div
-        var $this = div.find(">div");
+        var $this = div.find(" > div");
 
         if ($this.css("transform") == "none") {
             $this.css("transform", "translateY(0px)");
         }
 
         var finalPosition, x, y, pageX, pageY, originScrollY, position, moved;
-        var divHeight = div.height(); //can't change, update on widnow transform
-
-        //let night scroll etc..
-        if ("smltown_list" == element) {
-            div = $("#smltown_body"); //global scroll events
-        }
+        var gameContent = $("#smltown_game");
 
         div.off("touchstart");
-        div.on("touchstart", function (e) { //necessary top != auto
+        div.on("touchstart", function(e) { //necessary top != auto
 
             position = null; //reset final position to prevent calculations 
-            var maxScroll = divHeight - $this.height(); //see bottom list
-            //console.log(element + " , " + maxScroll)
+            var thisHeight = 0;
+            $this.each(function() {
+                thisHeight += $(this).height();
+            });
+            var maxScroll = div.height() - thisHeight; //see bottom list
 
             //not scrolling
             if (maxScroll > -10) {
-                //console.log("not scroll " + element);
+                console.log("not scroll " + element);
                 $this.css("transform", "translateY(0px)"); //important
                 return;
             }
@@ -329,7 +366,7 @@ SMLTOWN.Events = {
             var Y = parseInt($this.css('transform').split(',')[5]);
             originScrollY = Y - pageY;
 
-            $(this).on("touchmove", function (e) {
+            $(this).on("touchmove", function(e) {
                 e.preventDefault(); //faster (test on 2.3 android)    
                 moved = true;
 
@@ -362,7 +399,7 @@ SMLTOWN.Events = {
 
                 if ("smltown_list" == element && finalPosition > maxScroll) { //not at bottom
                     clearTimeout(SMLTOWN.Events.consoleTimeout);
-                    $("#smltown_game").addClass("smltown_reduced");
+                    gameContent.addClass("smltown_reduced");
                 }
 
                 //prevent extra calculations
@@ -378,7 +415,7 @@ SMLTOWN.Events = {
                     SMLTOWN.Transform.updateHeader();
                 }
 
-            }).one("touchend", function () {
+            }).one("touchend", function() {
                 $(this).off("touchmove");
                 if (!moved) {
                     return;
@@ -402,9 +439,9 @@ SMLTOWN.Events = {
                 }
 
                 if ("smltown_list" == element) {
-                    $this.consoleTimeout = setTimeout(function () { //let some time to continue scroling
-                        $("#smltown_game").removeClass("smltown_reduced");
-                    }, 800);
+                    $this.consoleTimeout = setTimeout(function() { //let some time to continue scroling
+                        gameContent.removeClass("smltown_reduced");
+                    }, 1000);
 
                 } else if ("smltown_menu" == element) {
                     if ($(this).height() - $this.height() > 0) {//client see bottom list                        
@@ -416,31 +453,40 @@ SMLTOWN.Events = {
     }
     ,
     //MENU EVENTS ////////////////////////////////////////////////////////////
-    menuEvents: function () {
+    menuEvents: function() {
         //ON GAME
-        this.menuInput("password", function (val) {
+        this.menuInput("password", function(val) {
             SMLTOWN.Server.request.setPassword(val);
         }, true); //can be empty
 
-        this.menuInput("dayTime", function (val) {
+        $("#smltown_gamePublic input").change(function() {
+            var checked = $(this).is(':checked');
+            SMLTOWN.Server.request.setPublicGameRule(checked ? 1 : 0);
+        });
+
+        this.menuInput("dayTime", function(val) {
             SMLTOWN.Server.request.setDayTime(val);
         });
 
-        $("#smltown_openVoting input").change(function () {
+        $("#smltown_openVoting input").change(function() {
             var checked = $(this).is(':checked');
             SMLTOWN.Server.request.setOpenVoting(checked ? 1 : 0);
         });
 
-        $("#smltown_endTurn input").change(function () {
+        $("#smltown_endTurn input").change(function() {
             var checked = $(this).is(':checked');
             SMLTOWN.Server.request.setEndTurnRule(checked ? 1 : 0);
         });
 
+        $("#smltown_endTurnButton").on("tap", function() {
+            SMLTOWN.Server.request.endTurn();
+        });
+
         //ON USER SETTINGS
-        this.menuInput("updateName", function (val) {
+        this.menuInput("updateName", function(val) {
             for (var id in SMLTOWN.players) {
                 if (SMLTOWN.players[id].name == val) {
-                    SMLTOWN.Message.flash("duplicatedName");
+                    SMLTOWN.Message.flash("duplicatedUserName");
                     return;
                 }
             }
@@ -448,65 +494,105 @@ SMLTOWN.Events = {
             SMLTOWN.Message.flash("name saved");
         });
 
-        $("#smltown_spectatorMode").on("tap", function () {
+        $("#smltown_updateImage").on("tap", function() {
+            var input = $("<input type='file' accept='image/*'>");
+            input.trigger("tap");
+            input.change(function(e) {
+                var file = this.files[0];
+                var reader = new FileReader();
+                reader.onload = function(event) {
+                    var data = event.target.result;
+                    SMLTOWN.Social.setPicture(data);
+                };
+                //fire
+                reader.readAsDataURL(file);
+            });
+        });
+
+        $("#smltown_spectatorMode").on("tap", function() {
             SMLTOWN.Server.request.spectatorMode(SMLTOWN.user.id);
         });
 
-        $("#smltown_cleanErrors").on("tap", function () {
+        $("#smltown_cleanErrors").on("tap", function() {
             if ($(this).hasClass("active")) {
                 SMLTOWN.Load.cleanGameErrors();
             }
         });
 
+        //NOTES
+        $("#smltown_notesMenu").on("tap", function(e) {
+            //
+        });
+
+        $("#smltown_notes textarea").on("keyup", function() {
+            localStorage.setItem("notes" + SMLTOWN.Game.info.id, $(this).val());
+            $(this).css('height', "5px");
+            $(this).css('height', this.scrollHeight + "px");
+        });
+
         //ON FRIENDS
-        $("#smltown_showFriends").on("tap", function () {
+        $("#smltown_showFriends").on("tap", function() {
             SMLTOWN.Social.showFriends();
         });
-        $("#smltown_addSocialId").on("tap", function () {
+        $("#smltown_addSocialId").on("tap", function() {
             SMLTOWN.Social.addSocialId();
         });
+        if (SMLTOWN.user.socialId) {
+            $("#smltown_addSocialId span").smltown_text("EditSocialId");
+        }
 
         if (document.location.hostname == "localhost") {
             var becomeAdmin = $("<div id='smltown_becomeAdmin'><span>BecomeAdmin</span></div>")
             $("#smltown_updateName").after(becomeAdmin);
-            becomeAdmin.on("tap", function () {
+            becomeAdmin.on("tap", function() {
+                console.log("become admin")
                 SMLTOWN.Server.request.becomeAdmin();
             });
         }
 
         //ON BACK BUTTON
-        $("#smltown_backButton").click(function () {
+        $("#smltown_backButton").on("tap", function() {
             SMLTOWN.Load.back();
         });
 
         // MENU NAVIGATION EVENTS
-        $("#smltown_startButton").on("tap", function () {
+        $("#smltown_startButton").on("tap", function() {
             SMLTOWN.user.sleeping = true;
+            if ($(".smltown_spectator").length) {
+                SMLTOWN.Message.notify("someSpectator", function() {
+                    SMLTOWN.Server.request.startGame();
+                }, true);
+                return;
+            }
             SMLTOWN.Server.request.startGame();
         });
 
-        $("#smltown_restartButton").on("tap", function () {
+        $("#smltown_restartButton").on("tap", function() {
+            //ask
+            if (SMLTOWN.user.card) {
+                SMLTOWN.Message.notify("restartGame?", function() {
+                    SMLTOWN.Server.request.restartGame();
+                }, true);
+                return;
+            }
+            
             SMLTOWN.Server.request.restartGame();
         });
 
-        $("#smltown_endTurnButton").on("tap", function () {
-            SMLTOWN.Server.request.endTurn();
-        });
-
         //BY KIND
-        $(".smltown_action").on("tap", function () {
+        $(".smltown_action").on("tap", function() {
             $(".smltown_visible").removeClass("smltown_visible");
             SMLTOWN.Transform.removeAuto($("#smltown_menu .smltown_auto"));
         });
 
         // ( all this starts cose a IE bug on :active when click text (and android 2.3) )
         var node;
-        $("#smltown_menu .smltown_selector > div").touchstart(function () {
+        $("#smltown_menu .smltown_selector > div").touchstart(function() {
             node = this.nodeValue;
             var selector = this;
             $(selector).addClass("active");
 
-            $(document).on("touchmove.menu mousemove.menu", function (event) {
+            $(document).on("touchmove.menu mousemove.menu", function(event) {
                 var eventDiv = document.elementFromPoint(event.clientX, event.clientY);
                 var div = $(eventDiv).closest('div')[0];
                 if (eventDiv != selector && div != selector) {
@@ -514,11 +600,11 @@ SMLTOWN.Events = {
                     $(selector).removeClass("active");
                 }
             });
-        }).on("mouseup", function (event) {
+        }).on("mouseup", function(event) {
             //visuals
             $(document).off("touchmove.menu mousemove.menu");
             var $this = $(this);
-            setTimeout(function () {
+            setTimeout(function() {
                 $this.removeClass("active");
             }, 1);
 
@@ -545,7 +631,7 @@ SMLTOWN.Events = {
             }
 
             var div = $(this);
-            var animation = function () {
+            var animation = function() {
                 //undefined function
             };
             if ($(this).hasClass("smltown_falseSelector")) { //if is cards
@@ -570,7 +656,7 @@ SMLTOWN.Events = {
             } else { //add auto (expand)
                 var parent = div.parent();
                 parent.not("#smltown_menu > div").css("height", "auto");
-                animation(div, function (height) {
+                animation(div, function(height) {
                     if (height > SMLTOWN.Transform.contentHeights.menuContent) {
                         console.log("translateY(" + -div.position().top + ")");
                         $("#smltown_menuContent > div").css("transform", "translateY(" + -div.position().top + "px)");
@@ -583,17 +669,17 @@ SMLTOWN.Events = {
         });
     }
     ,
-    menuInput: function (id, callback, empty) { //menu cell with input
+    menuInput: function(id, callback, empty) { //menu cell with input
         var value = $("#smltown_" + id + " input").val();
         $("#smltown_" + id + " input").attr("original", value);
-        $("#smltown_" + id + " form").submit(function () {
+        $("#smltown_" + id + " form").submit(function() {
             var input = $(this).find("input");
             if (input.is(":focus")) {
                 input.blur();
             }
             return false;
         });
-        $("#smltown_" + id + " input").on('blur', function () {
+        $("#smltown_" + id + " input").on('blur', function() {
             var original = $(this).attr("original");
             var val = $(this).val();
             if (val === original) {
@@ -611,69 +697,87 @@ SMLTOWN.Events = {
     }
     ,
     // SET SELECT EVENTS TO 1 PLAYER
-    playerEvents: function (player) {
+    playerEvents: function(player) {
         //set CHECKABLES players
         var id = player.id;
-        player.div.on("tap", function () {
+        player.div.on("tap", function(e) {
+            if ($(e.target).parents(".smltown_picture").length || $(e.target).hasClass("smltown_picture")) {
+                return;
+            }
             SMLTOWN.Action.playerSelect(id);
         });
 
-        var timer;
-        player.div.find(".smltown_picture").on(touchstart, function (e) {
+        //
+        player.div.find(".smltown_picture").on("tap", function(e) {
             var $this = $(this);
-            timer = setTimeout(function () {
-                $(document).on(touchstart, function (e) {
-                    if (!$(e.target).parents("#smltown_pictureContextMenu").length && $(e.target).attr("id") != "smltown_pictureContextMenu") {
-                        $(document).off(touchstart);
-                        $("#smltown_pictureContextMenu").hide();
-                    }
-                });
+            $("#smltown_addFriend").show();
 
-                //FRIEND BUTTON 
-                if (player.socialId) {
-                    var isFriend = false;
+            if (player.admin == -2) {
+                SMLTOWN.Message.flash("isBot");
+                return;
+            }
 
-                    //smalltown friends
-                    for (var i = 0; i < SMLTOWN.user.friends; i++) {
-                        if (SMLTOWN.user.friends[i] == player.socialId) {
-                            $("#smltown_addFriend").hide();
-                            isFriend = true;
-                            break;
-                        }
-                    }
-                    //social friends
-                    var socialFriends = SMLTOWN.Social.friends;
-                    for (var i = 0; i < socialFriends; i++) {
-                        if (socialFriends[i] == player.socialId) {
-                            $("#smltown_addFriend").hide();
-                            isFriend = true;
-                            break;
-                        }
-                    }
+            if (!player.socialId) {
+                SMLTOWN.Message.flash("cantFriend");
+                return;
+            }
 
-                    if (!isFriend) {
-                        $("#smltown_addFriend").show();
-                    }
-                } else {
-                    $("#smltown_addFriend").hide();
+            //exit menu
+            $(document).on(touchstart, function(e) {
+                if (!$(e.target).parents("#smltown_pictureContextMenu").length && $(e.target).attr("id") != "smltown_pictureContextMenu") {
+                    $(document).off(touchstart);
+                    $("#smltown_pictureContextMenu").hide();
                 }
+            });
 
-                //CONTEXT MENU
-                $("#smltown_pictureContextMenu").attr("socialId", player.socialId);
-                var offset = $this.offset();
-                $("#smltown_pictureContextMenu").css({
-                    top: offset.top + $this.height(),
-                    left: offset.left + $this.width()
-                }).show();
+            //FRIEND BUTTON
+            if (player.id == SMLTOWN.user.id) {
+                //SMLTOWN.Message("yourPicture");
+                return;
+            }
 
-            }, 1000);
-        }).on("mouseup mouseleave", function () {
-            clearTimeout(timer);
-        });
+            //smalltown friends
+            if (SMLTOWN.user.friends) {
+                for (var i = 0; i < SMLTOWN.user.friends.length; i++) {
+                    if (SMLTOWN.user.friends[i].socialId == player.socialId) {
+                        SMLTOWN.Message.flash("isFriend");
+                        $("#smltown_addFriend").hide();
+                        break;
+                    }
+                }
+            }
 
-        $("#smltown_addFriend").click(function () {
-            var socialId = $("#smltown_pictureContextMenu").attr("socialId");
-            SMLTOWN.Server.request.addFriend(socialId);
+            //other social friends
+            var socialFriends = SMLTOWN.Social.friends;
+            if (socialFriends) {
+                for (var i = 0; i < socialFriends; i++) {
+                    if (socialFriends[i] == player.socialId) {
+                        SMLTOWN.Message.flash("isFriend");
+                        $("#smltown_addFriend").hide();
+                        break;
+                    }
+                }
+            }
+
+            var something = false;
+            $('#smltown_pictureContextMenu > div').each(function() {
+                if ("none" != $(this).css("dislpay")) {
+                    something = true;
+                }
+            });
+
+            if (!something) {
+                return;
+            }
+
+            //CONTEXT MENU
+            $("#smltown_pictureContextMenu").attr("socialId", player.socialId);
+            var offset = $this.offset();
+            $("#smltown_pictureContextMenu").css({
+                top: offset.top + $this.height(),
+                left: offset.left + $this.width()
+            }).show();
+
         });
     }
 };

@@ -3,12 +3,13 @@
 SMLTOWN.Action = {
     wakeUp: function(message, instantlyWakeUp, callback) {
         var $this = this;
-        
+        $("#smltown_sun").css("z-index", 0);
+
         //not wakeup on instantly reconnection
-        if(SMLTOWN.Server.websocketReconnection){
+        if (SMLTOWN.Server.websocketReconnection) {
             return;
         }
-        
+
         if (undefined == typeof message) {
             $("#smltown_filter").removeClass("smltown_sleep");
             SMLTOWN.user.sleeping = false;
@@ -35,11 +36,12 @@ SMLTOWN.Action = {
                 callback();
             }
 
-            $this.startTurn();
+            $this.startNightTurn();
         }, wait);
     }
     ,
     wakeUpCard: function(callback) {
+        this.nightConsoleOn();
         if (this.night.wakeUp) { //like seer salected id's wakeup
             this.night.wakeUp();
         }
@@ -47,16 +49,16 @@ SMLTOWN.Action = {
         var t = SMLTOWN.Message.translate;
         var name = SMLTOWN.cards[SMLTOWN.user.card].name;
 
-        this.wakeUp(t("wakeUp") + " " + name.toUpperCase()
-                + "... " + t("yourTurn"), null, function() {
+        var message = t("wakeUp") + " " + name.toUpperCase() + "... " + t("yourTurn");
+        this.wakeUp(message, null, function() {
+            if (SMLTOWN.user.card) {
+                SMLTOWN.Add.backgroundCard($("#" + SMLTOWN.user.id + " .smltown_extra"), SMLTOWN.user.card);
+            }
+
             if (callback) {
                 callback();
             }
         });
-
-        if (SMLTOWN.user.card) {
-            SMLTOWN.Add.backgroundCard($("#" + SMLTOWN.user.id + " .smltown_extra"), SMLTOWN.user.card);
-        }
     }
     ,
     sleep: function() {
@@ -66,7 +68,7 @@ SMLTOWN.Action = {
         this.endTurn();
 
         SMLTOWN.Message.flash("closeEyes");
-        $("#smltown_cardConsole").hide();
+        this.nightConsoleOff();
 
         $("#smltown_filter").addClass("smltown_sleep");
         SMLTOWN.user.sleeping = true;
@@ -86,7 +88,9 @@ SMLTOWN.Action = {
         if (!SMLTOWN.Game.info.status && SMLTOWN.Game.info.status > 4) { //out of game
             return;
         } else if ("undefined" == typeof SMLTOWN.user.status || null == SMLTOWN.user.status) {
-            SMLTOWN.Message.flash("youSpectator");
+            if (id != SMLTOWN.user.id) {
+                SMLTOWN.Message.flash("youSpectator");
+            }
             return;
         } else if (SMLTOWN.user.status < 0) {
             SMLTOWN.Message.flash("youDead");
@@ -179,7 +183,7 @@ SMLTOWN.Action = {
     }
     ,
     //turn actions
-    startTurn: function() { //from wakeUp
+    startNightTurn: function() { //from wakeUp
         console.log("start turn");
         for (var id in SMLTOWN.players) {
             var player = SMLTOWN.players[id];
@@ -220,7 +224,7 @@ SMLTOWN.Action = {
         console.log("removeCards");
         for (var id in SMLTOWN.players) {
             SMLTOWN.players[id].card = null;
-            if (SMLTOWN.players[id].admin != -1) {
+            if (SMLTOWN.players[id].admin != -1 && SMLTOWN.players[id].status > -1) {
                 $("#" + id + " .smltown_extra").css("background-image", SMLTOWN.Update.innocentBackground);
             }
         }
@@ -252,11 +256,24 @@ SMLTOWN.Action = {
                 var div = player.div;
                 div.find(".smltown_extra").html("");
                 if (player.admin != -1) {
-                    console.log(999)
                     div.find(".smltown_extra").css("background-image", SMLTOWN.Update.innocentBackground);
                 }
             }
         }
+    }
+    ,
+    nightConsoleOn: function() {
+//        $("#smltown_nightConsole").show();
+//        $("#smltown_console").addClass("smltown_nightConsole");
+        $("#smltown_consoleLog > div").hide();
+        $("#smltown_consoleLog .smltown_night").show();
+    }
+    ,
+    nightConsoleOff: function() {
+//        $("#smltown_nightConsole").hide();
+//        $("#smltown_console").removeClass("smltown_nightConsole");
+        $("#smltown_consoleLog > div").hide();
+        $("#smltown_consoleLog > div:not(.smltown_night)").show();
     }
     ,
     night: {}

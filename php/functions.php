@@ -2,6 +2,83 @@
 
 //////////////////////////////////////////////////////////////////////////////////
 //DB RQUESTS
+//USER REQUESTS
+function addUser($obj) {
+    $userId = null;
+    if (isset($obj->userId)) {
+        $userId = $obj->userId;
+    }
+    $userName = "";
+    if (isset($obj->name)) {
+        $userName = $obj->name;
+    }
+    $lang = "en";
+    if (isset($obj->lang)) {
+        $lang = $obj->lang;
+    }
+    if (isset($obj->socialId)) {
+        $socialId = $obj->socialId;
+    }
+    if (isset($obj->type)) {
+        $type = $obj->type;
+    }
+
+    //add user
+    $exists = false;
+
+    if (null == $userId) {
+        $userId = getRandomUserId();
+    }
+    $values = array('id' => $userId, 'name' => $userName, 'lang' => $lang);
+    $sqlRows = "id, name, lang, socialId";
+    $sqlValues = ":id, :name, :lang, :socialId";
+
+    if (isset($socialId)) {
+        //check socialId exists
+        $value = array('socialId' => $socialId);
+        $players = petition("SELECT id FROM smltown_players WHERE socialId = :socialId", $value);
+        if (count($players) > 0) {
+            $exists = true;
+            $userId = $players[0]->id;
+        }
+    } else {
+        $socialId = md5($userId);
+    }
+    $values['socialId'] = $socialId;
+
+    if (isset($type)) {
+        $values['type'] = $type;
+        $sqlRows .= ",type";
+        $sqlValues .= ",:type";
+    }
+
+    if (!$exists) {
+        //echo json_encode($values);
+        sql("INSERT INTO smltown_players ($sqlRows) VALUES ($sqlValues) "
+                . "ON DUPLICATE KEY UPDATE name=VALUES(name), lang=VALUES(lang), "
+                . "type=VALUES(type), socialId=VALUES(socialId)", $values);
+    }
+
+    //if not exists
+    setcookie('smltown_userId', $userId);
+
+    $players = petition("SELECT name, facebook, type, socialId, lang, websocket, friends FROM smltown_players WHERE id = '$userId'");
+    if (count($players)) {
+        $user = $players[0];
+
+        if (isset($user->friends) && !empty($user->friends)) {
+            $coincidences = petition("SELECT socialId, name, picture FROM smltown_players WHERE socialId "
+                    . "IN (" . $user->friends . ")");
+            $user->friends = json_encode($coincidences);
+            //IF ERROR
+            //sql("UPDATE smltown_players SET friends = '' WHERE id = '$userId'");
+        }
+
+        echo json_encode($user);
+    } else {
+        echo "user error";
+    }
+}
 
 function getRandomUserId() {
     $id = mt_rand();
@@ -86,10 +163,6 @@ function whereArray($array, &$values) { //for responses and cadUtils
     return $sql;
 }
 
-//function setCookieValue($key, $value) {
-//    setcookie($key, $value, time() + 864000, "/"); //10 days
-//}
-//
 ////////////////////////////////////////////////////////////////////////////////
 // RESPONSE UTILS
 function nullFilter($var) { //NULL and none filter to responses
@@ -97,9 +170,12 @@ function nullFilter($var) { //NULL and none filter to responses
 }
 
 //public
-function getGamesInfo($obj) { //all game selector page
+function getGamesInfo($obj, $reload = false) { //all game selector page
     if (isset($obj->userId)) {
         $userId = $obj->userId;
+    } else {
+        echo "can't get games without user";
+        return;
     }
     if (isset($obj->name)) {
         $name = $obj->name;
@@ -108,50 +184,69 @@ function getGamesInfo($obj) { //all game selector page
     $start = 0;
     if (isset($obj->offset)) {
         $start = $obj->offset;
-//        if("0" != $start){
-//            echo $start;
-//        }
     }
 
     $values = array();
     $sql = "SELECT id, name, status, dayTime, openVoting, endTurn"
             . ", CASE WHEN password IS NOT NULL THEN 1 END AS password"
-            . ", (SELECT name FROM smltown_players WHERE id = (SELECT userId FROM smltown_plays WHERE gameId = smltown_games.id AND admin = 1 LIMIT 1) ) AS admin"
+            . ", (SELECT name FROM smltown_players WHERE id = (SELECT userId FROM smltown_plays WHERE gameId = smltown_games.id AND admin = 1 LIMIT 1)  LIMIT 1) AS admin"
             . ", (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id) AS players";
 
-    if (isset($userId)) { //if is playing game
-        $sql .= ", (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '$userId') AS playing";
-        $sql .= ", (SELECT message FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '$userId') AS message";
-        $sql .= ", (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '$userId' AND admin = 1) AS own";
-    } else {
-        $sql .= ", '0' AS playing";
-        $sql .= ", '' AS message";
-    }
+    $sql .= ", (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '$userId') AS playing";
+    $sql .= ", (SELECT message FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '$userId' LIMIT 1) AS message";
+    $sql .= ", (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '$userId' AND admin = 1) AS own";
 
     $sql .= " FROM smltown_games ";
 
+    $where = false;
     if (!isset($name) || empty($name)) {
         //$sql .= " WHERE name like :name";
         //remove plays without game
         sql("DELETE FROM smltown_plays WHERE 0 = (SELECT count(*) FROM smltown_games WHERE id = smltown_plays.gameId)");
 
-        //remove players without plays
-        sql("DELETE FROM smltown_players WHERE 0 = (SELECT count(*) FROM smltown_plays WHERE userId = smltown_players.id) AND lastConnection < (NOW() - INTERVAL 1 HOUR)");
-
+//        //remove players without plays
+//        sql("DELETE FROM smltown_players WHERE 0 = (SELECT count(*) FROM smltown_plays WHERE userId = smltown_players.id)"
+//                . " AND lastConnection < (NOW() - INTERVAL 1 HOUR)"
+//                . " AND NULL = socialId");
         //remove games
-        sql("DELETE FROM smltown_games WHERE "
-                //remove empty games
-                . "(0 = (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id) AND lastConnection < (NOW() - INTERVAL 10 SECOND))"
-                //remove 36h inactivity
-                . "OR lastConnection < (NOW() - INTERVAL 36 HOUR)");
+//        sql("DELETE FROM smltown_games WHERE "
+//                //default local game
+//                . " 1 != id "
+//                //public
+//                . " AND public = 1"
+//                //remove empty games
+//                . " AND ( (0 = (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id) AND lastConnection < (NOW() - INTERVAL 10 SECOND))"
+//                //remove 36h inactivity
+//                . " OR lastConnection < (NOW() - INTERVAL 36 HOUR) )");
     } else {
         $values["name"] = $name;
         $sql .= " WHERE LOWER(name) like :name";
+        $where = true;
     }
-    $sql .= " ORDER BY playing DESC, message DESC, status LIMIT $start, 15";
-    $games = json_encode(petition($sql, $values));
 
-    echo $games;
+    //IF ARE PUBLIC GAMES
+    require_once "config.php";
+    global $publicGames;
+    if (0 == $publicGames) {
+        if ($where) {
+            $sql .= " AND ";
+        } else {
+            $sql .= " WHERE ";
+        }
+        $values["userId"] = $userId;
+        $sql .= " ((SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = smltown_games.id) > 0 OR 1 = public)";
+    }
+
+    $sql .= " ORDER BY playing DESC, message DESC, status LIMIT $start, 15";
+
+    $games = petition($sql, $values);
+
+    if (!$reload && (!isset($name) || empty($name)) && (0 == count($games) && "::1" == $_SERVER['REMOTE_ADDR'])) {
+        sql("INSERT INTO smltown_games (id) VALUES (1)");
+        getGamesInfo($obj, true);
+    }
+
+    echo json_encode($games);
 }
 
 function createGame($obj = null, $id = null) {
@@ -162,9 +257,7 @@ function createGame($obj = null, $id = null) {
         "werewolf_classic_witch" => 0
     );
 
-    //echo "; cards = " . json_encode($cards) . "; ";
     $values = array(
-        'cards' => json_encode($cards),
         'name' => ""
     );
     if (null != $obj) {
@@ -183,14 +276,28 @@ function createGame($obj = null, $id = null) {
 //    }
     //check
     if (!isset($id)) {
-        $sth = sql('INSERT IGNORE INTO smltown_games (name, cards) VALUES (:name, :cards)', $values);
-        global $pdo;
-        $id = $pdo->lastInsertId();
-        if ($sth->rowCount() == 0) { //nothing changes
-            return false;
+        $res = petition("SELECT (SELECT id FROM smltown_games WHERE name = :name) as idGame,"
+                . " (SELECT count(*) FROM smltown_plays WHERE gameId = idGame) as count", $values);
+        $countGames = $res[0]->count;
+
+        if ($countGames > 0) {
+            echo -1;
+            return;
+        }
+
+        if (isset($res[0]->idGame)) {
+            $id = $res[0]->idGame;
+            
+        } else {
+            $values['cards'] = json_encode($cards);
+            sql('INSERT IGNORE INTO smltown_games (name, cards) VALUES (:name, :cards)', $values);
+
+            global $pdo;
+            $id = $pdo->lastInsertId();
         }
     } else {
-        sql('INSERT INTO smltown_games (id, name, cards) VALUES (1, :name, :cards)', $values);
+        $values['cards'] = json_encode($cards);
+        sql("INSERT INTO smltown_games (id, name, cards) VALUES ($id, :name, :cards)", $values);
     }
 
     //return

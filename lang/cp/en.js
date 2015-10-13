@@ -1,9 +1,5 @@
 
 var lang = {
-    //INDEX ///////////////////////////////////////////////////////////////////
-    //
-    startingConnection: "starting connection.."
-    ,
     //GAME LIST TEXTS//////////////////////////////////////////////////////////
     GameList: "Game List:"
     ,
@@ -46,8 +42,6 @@ var lang = {
     endTurnHelp: "End day turn"
     ,
     //options
-    Game: "Game"
-    ,
     Password: "Password"
     ,
     GamePublic: "Game is public"
@@ -66,17 +60,9 @@ var lang = {
     cardsHelp: "card list"
     ,
     //user
-    Name: "Name"
-    ,
     UserSettings: "User Settings"
     ,
     userHelp: "personal options"
-    ,
-    SpectatorMode: "Spectator mode"
-    ,
-    spectatorModeHelp: "be spectator to chat whitout playing"
-    ,
-    Image: "Image"
     ,
     VibrationStrength: "Vibration Strength"
     ,
@@ -85,33 +71,12 @@ var lang = {
     cleanHelp: "reload game"
     ,
     //friends
-    Friends: "Friends"
-    ,
-    friendsHelp: "find your friends"
-    ,
-    Invite: "Invite"
-    ,
-    inviteHelp: "invite saved friends"
-    ,
-    AddSocialId: "Add identificator"
-    ,
-    EditSocialId: "Edit your identificator"
-    ,
-    addSocialIdHelp: "add your identificator to become findable"
-    ,
     //info
     Info: "Info"
     ,
     infoHelp: "help and game manual"
     ,
-    CurrentURL: "Current URL"
-    ,
     //notes
-    Notes: "Notes"
-    ,
-    infoNotes: "save notes to next turns of game"
-    ,
-    //back
     Back: "Back"
     ,
     backHelp: "back to game list"
@@ -136,7 +101,7 @@ var lang = {
     ,
     //
     //PLAYER LIST
-    waiting: "waiting"
+    waiting: "en espera"
     ,
     alive: "alive"
     ,
@@ -233,35 +198,8 @@ var lang = {
     cannotCardsAdmin: "only admin can toggle game cards"
     ,
     //
-    //SOCIAL
-    //invite 
-    InviteFriends: "Invite friends"
-    ,
-    Update: "Update"
-    ,
-    addFriend: "add friend"
-    ,
-    SendInvitation: "Send Invitation"
-    ,
-    demoUser: "demo user"
-    ,
-    //share
+    //SOCIAL SHARE
     winner: "You won the game!"
     ,
     Share: "Share!"
-    ,
-    ShareBy: "Share by"
-    ,
-    //
-    //ERRORS
-    error_tutorialPlayers: "Can't start tutorial on game with players"
-            //
-, 
- reload: null //TODO 
- , 
- ' was killed': null //TODO 
- , 
- 'ending day': null //TODO 
- , 
- ' was killed': null //TODO 
- };
+};

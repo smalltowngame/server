@@ -74,7 +74,7 @@ trait Response {
         $this->send_response($res, $playId);
     }
 
-// SQL
+    // SQL
     protected function getUserInfo($playId, $select = null) {
         $sql = "SELECT ";
         if ($select) {
@@ -107,7 +107,7 @@ trait Response {
             //full request
         } else {
             $turns = count($this->TURNS);
-            $sql .= " smltown_players.name, smltown_players.type, smltown_players.socialId, admin"
+            $sql .= " smltown_players.name, smltown_players.picture, smltown_players.type, smltown_players.socialId, admin"
                     //plays.sel when openVoting
                     . ", CASE WHEN 1 = (SELECT openVoting FROM smltown_games WHERE id = $gameId) THEN sel END AS sel"
                     //status 1 when is 0
@@ -134,7 +134,7 @@ trait Response {
                 . " LEFT OUTER JOIN smltown_players"
                 . " ON smltown_plays.userId = smltown_players.id"
                 //
-                . " WHERE smltown_plays.gameId = $gameId ";
+                . " WHERE smltown_plays.gameId = $gameId AND smltown_plays.admin < 9";
         $values = array();
         if (is_array($playId)) { //not userId but wheres
             $wheres = $playId;

@@ -1,7 +1,13 @@
 <?php
 
+$config = getcwd() . '/config.php';
+if(!file_exists($config)){
+    echo "console.log('updating config.php?')";
+    return;
+}
+    
 // create default config.php if not exists
-include_once getcwd() . '/config.php';
+include_once $config;
 
 global $pdo;
 

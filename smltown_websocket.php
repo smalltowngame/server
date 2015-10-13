@@ -23,6 +23,7 @@ class echoServer extends WebSocketServer {
     }
 
     protected function connected($user) {
+        global $users;
         echo "connected: \n";
         //$this->send($user, "websocket connected");
 
@@ -39,19 +40,25 @@ class echoServer extends WebSocketServer {
             //recover lost socket with userId
             if (isset($cookies["smltown_userId"])) {
                 $userId = $cookies["smltown_userId"];
-                global $users;
 
                 if (isset($users[$userId])) { //recover!
                     $u = $users[$userId];
                     $user->val = $u->val; //copy stored values
                     $this->disconnect($u->socket); //disconnect old
                 }
-                $user->userId = $userId; //important
+                
+                //$user->userId = $userId; //important
+                
                 //$users[$userId] = $user;
 
                 sql("UPDATE smltown_players SET websocket = 1 WHERE id = '$userId'");
+                $user->userId = $userId;
             }
         }
+        
+        echo "stored userId: $userId \n";
+        $users[$userId] = $user;
+        
 
         //TODO: get reply (maybe in smltown_player?)
         //$this->send($user, $json);
@@ -61,8 +68,9 @@ class echoServer extends WebSocketServer {
         global $users;
         echo "close: \n";
         //$this->send($user, "websocket closed");
-        if (isset($user->userId)) {
-            unset($users[$user->userId]);
+        $userId = $user->userId;
+        if (isset($userId)) {
+            unset($users[$userId]);
             sql("UPDATE smltown_players SET websocket = 0 WHERE id = '$userId'");
         }
     }
@@ -169,7 +177,7 @@ trait Connection {
             $user = $users[$userId];
             $echo->public_send($user, $json);
             //
-        }else if ($users[$userId]->val->gameId != $gameId) { //4 ajax petition, store on reply
+        } else if ($users[$userId]->val->gameId != $gameId) { //4 ajax petition, store on reply
             $values['reply'] = $json; //escape \ from utf-8 special chars
             sql("UPDATE smltown_players SET reply = CONCAT(reply , '|' , :reply) WHERE socialId = :socialId", $values);
         }

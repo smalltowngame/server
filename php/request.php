@@ -4,76 +4,8 @@ include_once 'php/PingRequest.php';
 
 trait Request {
 
-    //USER REQUESTS
-    function addUser() {
-        $userId = null;
-        if (isset($this->userId)) {
-            $userId = $this->userId;
-        }
-        $userName = "";
-        if (isset($this->requestValue['name'])) {
-            $userName = $this->requestValue['name'];
-        }
-        $lang = "en";
-        if (isset($this->requestValue['lang'])) {
-            $lang = $this->requestValue['lang'];
-        }
-
-        //add user
-        $exists = false;
-
-        if (null == $userId) {
-            $userId = getRandomUserId();
-            $this->userId = $userId;
-        }
-        $values = array('name' => $userName, 'lang' => $lang);
-        $sqlRows = "name, lang";
-        $sqlValues = ":name, :lang";
-
-        if (isset($this->requestValue['type'])) {
-            $values['type'] = $this->requestValue['type'];
-            $sqlRows .= ",type";
-            $sqlValues .= ",:type";
-        }
-
-        if (isset($this->requestValue['socialId'])) {
-            $values['socialId'] = $this->requestValue['socialId'];
-            $sqlRows .= ",socialId";
-            $sqlValues .= ",:socialId";
-
-            //check socialId exists
-            $values = array('socialId' => $this->requestValue['socialId']);
-            $players = petition("SELECT id FROM smltown_players WHERE socialId = :socialId", $values);
-            if (count($players) > 0) {
-                $exists = true;
-                $this->userId = $players[0]->id;
-                //
-            } else {
-                $sqlRows .= ",id";
-                $sqlValues .= ",:id";
-                $values['id'] = $this->userId;
-            }
-        }
-
-        if (!$exists) {
-            sql("INSERT INTO smltown_players ($sqlRows) VALUES ($sqlValues) "
-                    . "ON DUPLICATE KEY UPDATE name=VALUES(name), lang=VALUES(lang), "
-                    . "type=VALUES(type), socialId=VALUES(socialId)", $values);
-        }
-
-        //WEBSOCKET
-        if (isset($this->requestValue['socket'])) {
-            global $users;
-            $users[$userId] = $this->requestValue['socket'];
-            $this->requestValue['socket']->userId = $userId;
-        }
-
-        //if not exists
-        setcookie('smltown_userId', $userId);
-    }
-
     //special userId but playId
-    public function addUserInGame() { //and create game        
+    public function addUserInGame() { //and create game
         if (!isset($this->gameId)) {
             $gameId = $this->gameId();
         } else {
@@ -83,12 +15,18 @@ trait Request {
         //$userId
         if (isset($this->userId) && !empty($this->userId) && "null" != $this->userId) {
             $values = array('userId' => $this->userId);
-            $count = petition("SELECT count(*) FROM smltown_players WHERE id = :userId", $values);
-            if (count($count)) {
-                $this->addUser();
+            $count = petition("SELECT count(*) as count FROM smltown_players WHERE id = :userId", $values)[0]->count;
+            if (0 == $count) {
+                //$this->addUser();
+                addUser(array(
+                    'userId' => $this->userId
+                ));
             }
         } else {
-            $this->addUser();
+            //$this->addUser();
+            addUser(array(
+                'userId' => $this->userId
+            ));
         }
         $userId = $this->userId;
 
@@ -103,12 +41,14 @@ trait Request {
                         . " FROM smltown_games WHERE id = :gameId", $values)[0]; //game checked in Ping-Request
         //if password game (1st time for game)
         if (isset($select->password) && !isset($_SESSION["game$gameId"])) {
-            if (!isset($this->requestValue->password)) {
+            if (!isset($this->requestValue['password'])) {
+                //TODO: implement websocket
                 echo "SMLTOWN.Game.askPassword();";
                 return;
             }
 
-            if ($select->password != $this->requestValue->password) {
+            if ($select->password != $this->requestValue['password']) {
+                //TODO: implement websocket
                 echo "SMLTOWN.Game.askPassword('wrong passord');";
                 return;
             }
@@ -125,20 +65,27 @@ trait Request {
 //                . " FROM DUAL" //from ANY TABLE (read table only 1 time)
 //                . " WHERE (SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = :gameId) = 0", $values);
 
-        $transactions = array(
-            "UPDATE smltown_players SET gameId = :gameId WHERE id = :userId"
-        );
+        sql("UPDATE smltown_players SET gameId = :gameId WHERE id = :userId", $values);
 
-        if (!isset($select->playId)) {
-            array_push($transactions, "INSERT INTO smltown_plays (userId, gameId, admin) SELECT :userId, :gameId,"
-                    . " CASE WHEN (SELECT count(*) FROM smltown_plays WHERE admin = 1 AND gameId = :gameId) = 0 THEN 1 ELSE -1 END" //admin
-                    . " FROM DUAL" //from ANY TABLE (read table only 1 time)
-                    . " WHERE (SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = :gameId) = 0"
-            );
+        if (isset($select->playId)) {
+            $this->playId = $select->playId;
+            //
+        } else {
+            $sql = "INSERT INTO smltown_plays (userId, gameId, admin) SELECT :userId, :gameId,";
+            if (isset($_COOKIE['smltown_spectator'])) {
+                $sql .= "9";
+            } else {
+                $sql .= " CASE WHEN (SELECT count(*) FROM smltown_plays WHERE admin = 1 AND gameId = :gameId) = 0 THEN 1 ELSE -1 END"; //admin
+            }
+            $sql .= " FROM DUAL" //from ANY TABLE (read table only 1 time)
+                    . " WHERE (SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = :gameId) = 0";
+
+            sql($sql, $values);
+
+            //4 store in socket
+            global $pdo;
+            $this->playId = $pdo->lastInsertId();
         }
-
-        transaction($transactions, $values);
-        $this->playId = $select->playId;
 
         //WEBSOCKET
         if (isset($this->requestValue['socket'])) {
@@ -153,6 +100,15 @@ trait Request {
         }
 
         $this->loadGame(isset($select->playId));
+    }
+
+    public function addFacebookUser() {
+//        $userId = $this->userId;
+//        $facebookId = $this->requestValue['facebookId'];
+//        $values = array(
+//            'facebookId' => $facebookId
+//        );
+//        sql("UPDATE IGNORE smltown_players SET facebook = :facebookId WHERE id = '$userId'", $values);
     }
 
     public function loadGame($current) {
@@ -178,7 +134,7 @@ trait Request {
 
         $sth = sql("UPDATE smltown_plays SET admin = 0 WHERE id = $playId AND userId = '$userId'");
         if ($sth->rowCount() == 0) {
-            echo "error: can't playGame with this credentials";
+            echo "error: can't playGame with this credentials: playId = $playId, userId = $userIid";
         } else {
             $this->updatePlayer($playId, "admin"); //way to update new players to other people
         }
@@ -273,11 +229,32 @@ trait Request {
 //    }
     }
 
+    public function setPicture() {
+        $userId = $this->userId;
+        $playId = $this->playId;
+        $picture = $this->requestValue['picture'];
+
+        $path = "pictures";
+        $hash = md5($userId);
+        $file = "$hash.png";
+        if (!is_dir($path)) {
+            mkdir($path);
+        }
+        file_put_contents("$path/$file", base64_decode($picture));
+
+        $timestamp = (new DateTime())->getTimestamp();
+        $lastmod = "lastmod=" + $timestamp;
+
+        $values = array('picture' => "$path/$file?$lastmod");
+        sql("UPDATE smltown_players SET picture = :picture WHERE id = '$userId'", $values);
+        $this->updatePlayer($playId, "picture");
+    }
+
     public function becomeAdmin() {
         $gameId = $this->gameId;
         $playId = $this->playId;
 
-        sql("UPDATE smltown_plays SET admin = CASE WHEN id = $playId THEN 1 ELSE 0 END WHERE gameId = $gameId");
+        sql("UPDATE smltown_plays SET admin = CASE WHEN admin = 1 THEN 0 WHEN id = $playId THEN 1 END WHERE gameId = $gameId");
         $this->setFlash("adminRole", array("id" => $playId));
 //        $this->reloadClientGame($playId);
     }
@@ -292,6 +269,22 @@ trait Request {
         if (isset($this->playId)) {
             $sqlId .= " AND id <> $this->playId";
         }
+
+        $this->setChat($text, $sqlId, $playId, $name);
+    }
+
+    public function nightChat() {
+        $gameId = $this->gameId;
+        $playId = $this->playId;
+        $name = $this->requestValue['name'];
+        $text = $this->requestValue['text'];
+
+        $sqlId = "gameId = $gameId";
+        if (isset($this->playId)) {
+            $sqlId .= " AND id <> $this->playId";
+        }
+        $sqlId .= " AND card = (SELECT night FROM smltown_games WHERE id = $gameId)"
+                . " AND card = (SELECT * FROM (SELECT card FROM smltown_plays WHERE id = $playId) as playCard)";
 
         $this->setChat($text, $sqlId, $playId, $name);
     }
@@ -371,9 +364,26 @@ trait Request {
         $userId = $this->userId;
         $socialId = $this->requestValue['socialId'];
         $values = array(
-            'socialId' => $socialId
+            'socialId' => "'$socialId'"
         );
-        sql("UPDATE smltown_players SET friends = CONCAT(friends , '|' , :socialId) WHERE id = '$userId'", $values);
+        sql("UPDATE smltown_players SET friends = CONCAT_WS(',', "
+                . "IF(LENGTH(friends), friends, NULL), "
+                . ":socialId) WHERE id = '$userId'", $values);
+    }
+    
+    public function checkTranslation(){
+        $kind = $this->requestValue['kind'];
+        $lang = $this->requestValue['lang'];
+        $text = $this->requestValue['text'];
+        
+        include_once("utils/update_lang.php");
+        if(isset($kind) && "help" == $kind){
+            $path = "games/mafia-werewolf/lang/";
+        }else{
+            $path = "lang/";
+        }
+        $path .= "$lang.js";
+        updateFile($path, $text);
     }
 
 }

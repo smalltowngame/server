@@ -20,10 +20,8 @@ window.fbAsyncInit = function() {
         xfbml: true, // parse social plugins on this page
         version: 'v2.4'
     });
-
-    FB.getLoginStatus(function(response) {
-        SMLTOWN.Social.facebook.statusChangeCallback(response);
-    });
+    
+    SMLTOWN.Social.facebook.checkLoginState();
 };
 
 SMLTOWN.Social.facebook = {
@@ -40,8 +38,10 @@ SMLTOWN.Social.facebook = {
         var $this = this;
         console.log('statusChangeCallback');
         $("#smltown_facebookButton").remove();
-        
+
+        SMLTOWN.facebook = false;
         if (response.status === 'connected') {
+            SMLTOWN.facebook = true;
             console.log("connected in facebook");
             this.onConnect();
         } else if (response.status === 'not_authorized') {
@@ -50,11 +50,8 @@ SMLTOWN.Social.facebook = {
 //                    "<fb:login-button scope='public_profile,user_friends' onlogin='SMLTOWN.Social.facebook.checkLoginState();'></fb:login-button>");
             $("#smltown_footer").append("<div id='smltown_facebookButton'><div>login via facebook</div></div>");
 
-            $("#smltown_facebookButton div").click(function() {
-                FB.login(function(response) {
-                    console.log(response);
-                    $this.statusChangeCallback(response);
-                }, {scope: 'user_friends'});
+            $("#smltown_facebookButton div").on("tap", function() {
+                $this.login();
             });
 
         } else {
@@ -63,65 +60,46 @@ SMLTOWN.Social.facebook = {
         this.reload();
     }
     ,
+    login: function(callback) {
+        var $this = this;
+        FB.login(function(response) {
+            console.log(response);
+            $this.statusChangeCallback(response);
+            if (callback) {
+                callback();
+            }
+        }, {scope: 'user_friends'});
+    }
+    ,
     // Here we run a very simple test of the Graph API after login is successful.
     onConnect: function() {
         var $this = this;
         // Your like button code //not .show() because !important
-        $(".fb-like").addClass("smltown_show");
+        //$(".fb-like").addClass("smltown_show");
 
         //friends
         $("#smltown_html").addClass("smltown_facebook");
-        SMLTOWN.Social.invite = function() {
 
-            FB.ui({
-                method: "apprequests",
-                title: "Werewolf invitation",
-                message: "Let's play a game",
-                data: SMLTOWN.Game.info.id
-            });
-        };
+        //OVERRIDES:
+//        SMLTOWN.Social.showFriends = function () {
+//            $this.showFriends();
+//        };
         SMLTOWN.Social.winFeed = function() {
-            if ("feeded" == SMLTOWN.user.social) {
-                console.log("game was already feeded");
-                return;
-            }
-
-            var url = document.location.href + SMLTOWN.Add.getCardUrl(SMLTOWN.user.card);
-            console.log(url)
-            var winnerText = SMLTOWN.Message.translate("winner");
-            var shareText = SMLTOWN.Message.translate("Share");
-
-            $("#smltown_filter").addClass("smltown_hide");
-            $("#smltown_win").remove();
-            $("#smltown_game").append("<div id='smltown_win'><div>"
-                    + "<div class='smltown_image' style='background-image:url(" + url + ")'></div>"
-                    + "<div class='smltown_text'>" + winnerText + "</div>"
-                    + "<div class='smltown_footer'>"
-                    + "<div class='smltown_feed'>" + shareText + "</div>"
-                    + "<div>Ok</div>"
-                    + "</div>"
-                    + "</div></div>");
-
-            $("#smltown_win .smltown_footer > div").click(function() {
-                $("#smltown_win").remove();
-                $("#smltown_filter").removeClass("smltown_hide");
-            });
-            $("#smltown_win .smltown_footer .smltown_feed").click(function() {
-                $this.winFeed(url);
-            });
+            $this.winFeed();
         };
+        //
 
-        FB.api("/me/apprequests", function(response) {
-            if (!response.data) {
-                return;
-            }
-            console.log(response)
-            var data = $this.getRequestData(response);
-            console.log(data);
-            if (data) {
-                SMLTOWN.Games.access(data.data);
-            }
-        });
+        /*FB.api("/me/apprequests", function (response) {
+         if (!response.data) {
+         return;
+         }
+         console.log(response)
+         var data = $this.getRequestData(response);
+         console.log(data);
+         if (data) {
+         SMLTOWN.Games.access(data.data);
+         }
+         });*/
 
         FB.api('/me?fields=name,third_party_id', function(user) {
             console.log('Successful login for: ' + user.name);
@@ -131,7 +109,8 @@ SMLTOWN.Social.facebook = {
             localStorage.setItem("smltown_userName", user.name);
 
             SMLTOWN.user.name = user.name;
-            SMLTOWN.Server.request.addUser("facebook", user.id);
+//            SMLTOWN.Server.request.addUser("facebook", user.id);
+            SMLTOWN.Server.request.addFacebookUser(user.id);
             //TODO remove credentials when not logued ?
         });
     }
@@ -161,7 +140,51 @@ SMLTOWN.Social.facebook = {
         }
     }
     ,
-    winFeed: function(url) {
+    //Overrided
+    showFriends: function() {
+        FB.ui({
+            method: "apprequests",
+            title: "Werewolf invitation",
+            message: "Let's play a game",
+            data: SMLTOWN.Game.info.id
+        });
+    }
+    ,
+    //Overrided
+    winFeed: function() {
+        var $this = this;
+
+        if ("feeded" == SMLTOWN.user.social) {
+            console.log("game was already feeded");
+            return;
+        }
+
+        var url = document.location.origin + document.location.pathname + SMLTOWN.Add.getCardUrl(SMLTOWN.user.card);
+        console.log(url)
+        var winnerText = SMLTOWN.Message.translate("winner");
+        var shareText = SMLTOWN.Message.translate("Share");
+
+        $("#smltown_filter").addClass("smltown_hide");
+        $("#smltown_win").remove();
+        $("#smltown_game").append("<div id='smltown_win'><div>"
+                + "<div class='smltown_image' style='background-image:url(" + url + ")'></div>"
+                + "<div class='smltown_text'>" + winnerText + "</div>"
+                + "<div class='smltown_footer'>"
+                + "<div class='smltown_feed'>" + shareText + "</div>"
+                + "<div>Ok</div>"
+                + "</div>"
+                + "</div></div>");
+
+        $("#smltown_win .smltown_footer > div").on("tap", function() {
+            $("#smltown_win").remove();
+            $("#smltown_filter").removeClass("smltown_hide");
+        });
+        $("#smltown_win .smltown_footer .smltown_feed").on("tap", function() {
+            $this.feedGameWin(url);
+        });
+    }
+    ,
+    feedGameWin: function(url) {
         console.log("win feed: ");
         var cardName = SMLTOWN.user.card.split("_").pop();
 
@@ -181,7 +204,7 @@ SMLTOWN.Social.facebook = {
     }
     ,
     events: function() {
-        $("#smltown_facebookButton").click(function() {
+        $("#smltown_facebookButton").on("tap", function() {
             if ($(this).is(":hover")) {
                 SMLTOWN.Social.facebook.checkLoginState();
             }

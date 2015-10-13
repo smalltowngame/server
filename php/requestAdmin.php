@@ -1,8 +1,5 @@
 <?php
 
-//only mecessary on websocket?
-//include_once 'games/mafia-werewolf/backEnd.php';
-
 include_once 'PingRequest.php';
 
 class AdminRequest extends PingRequest {
@@ -27,7 +24,6 @@ class AdminRequest extends PingRequest {
             }
             sql($sql);
             $this->updatePlayers();
-            //return;
         }
 
         //start game
@@ -40,13 +36,16 @@ class AdminRequest extends PingRequest {
         $gameId = $this->gameId;
 
         //clean
-        sql("DELETE FROM smltown_plays WHERE gameId = $gameId AND admin = 2");
+        sql("DELETE FROM smltown_plays WHERE gameId = $gameId AND admin = -2");
         sql("UPDATE smltown_plays SET status = 1, sel = null, rulesJS = '', rulesPHP = '', reply = '', message = null WHERE gameId = $gameId");
         sql("UPDATE smltown_games SET status = 0, night = null, timeStart = null, time = null WHERE id =  $gameId");
 
-        $players = petition("SELECT * FROM smltown_plays WHERE admin != -2 AND gameId = $gameId");
+        $players = petition("SELECT * FROM smltown_plays WHERE admin != -1 AND gameId = $gameId");
 
         $cards = $this->loadCards();
+        if(false == $cards){
+            return false;
+        }
         $playerCount = count($players);
 
         $quantityCards = $this->getCards($cards, $playerCount);
@@ -131,6 +130,20 @@ class AdminRequest extends PingRequest {
 
 ////////////////////////////////////////////////////////////////////////////////
 // SET MENU OPTIONS GAME
+
+    public function setPublicGameRule() {
+        $gameId = $this->gameId;
+        $public = $this->requestValue['value'];
+
+        $values = array('public' => $public);
+        sql("UPDATE smltown_games SET public = :public WHERE id = $gameId", $values);
+        $this->updateGame(null, "public");
+        if ($public == 1) {
+            $this->setFlash("gamePublic");
+        } else {
+            $this->setFlash("gameNotPublic");
+        }
+    }
 
     public function setDayTime() {
         $gameId = $this->gameId;
