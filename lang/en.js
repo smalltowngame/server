@@ -288,4 +288,6 @@ var lang = {
     timeByPlayer: "seconds of day time by player"
     ,
     gameWithPassword: "game with password"
+    ,
+    tutorialQuestion: "Make the tutorial to know how this it works."
 };

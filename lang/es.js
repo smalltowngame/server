@@ -288,4 +288,6 @@ var lang = {
     timeByPlayer: "segundo de día por jugador"
     ,
     gameWithPassword: "partida con contraseña"
+    ,
+    tutorialQuestion: "Con este tutorial aprenderás a jugar a esta app."
 };

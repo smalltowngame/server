@@ -27,6 +27,7 @@ if (isset($_COOKIE['smltown_userId'])) {
 
             <!--http://ryanfait.com/sticky-footer/-->
             <div id="smltown_footer">
+                <div id="prueba">prueba</div>
                 <div id="smltown_loadingGames"></div>
                 <br/>
                 <div class="smltown_log" style="position:absolute; z-index:99"></div>
@@ -43,6 +44,13 @@ if (isset($_COOKIE['smltown_userId'])) {
 </div>
 
 <script>
+
+    $("#prueba").click(function () {
+        $.ajax({
+            url: "prueba.php"
+        });
+    });
+
     SMLTOWN.Server.stopPing();
 
     $("#smltown_nameGame input").attr("placeholder", "🔍 " + SMLTOWN.Message.translate("gameName"));
@@ -67,7 +75,7 @@ if (isset($_COOKIE['smltown_userId'])) {
 
     //TUTORIAL?
     if ("todo" == localStorage.getItem("tutorial")) {
-        SMLTOWN.Message.notify("_tutorial?", function () {
+        SMLTOWN.Message.notify("_tutorialQuestion", function () {
             SMLTOWN.Help.tour();
         }, function () {
             localStorage.setItem("tutorial", "done");
