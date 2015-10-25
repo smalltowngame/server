@@ -84,7 +84,7 @@ SMLTOWN.Add = {
         if (game.password) {
             var icon = $("<div class='smltown_passwordIcon'>");
             icon.on("tap", function () {
-                SMLTOWN.Message.flash("game with password");
+                SMLTOWN.Message.flash("_gameWithPassword");
             });
             content.append(icon);
         }
@@ -95,7 +95,7 @@ SMLTOWN.Add = {
             div.append("<div class='smltown_clockIcon'>");
             div.append(game.dayTime);
             div.on("tap", function () {
-                SMLTOWN.Message.flash("seconds of day time by player");
+                SMLTOWN.Message.flash("_timeByPlayer");
             });
             content.append(div);
         }
@@ -104,7 +104,7 @@ SMLTOWN.Add = {
         if ("1" == game.openVoting) {
             var div = $("<div class='smltown_openVotingIcon'>");
             div.on("tap", function () {
-                SMLTOWN.Message.flash("let players vote during the day");
+                SMLTOWN.Message.flash("_letVoteDay");
             });
             content.append(div);
         }
@@ -113,7 +113,7 @@ SMLTOWN.Add = {
         if ("1" == game.endTurn) {
             var div = $("<div class='smltown_endTurnIcon'>");
             div.on("tap", function () {
-                SMLTOWN.Message.flash("admin can end turn immediately");
+                SMLTOWN.Message.flash("_adminCanEndTurn");
             });
             content.append(div);
         }

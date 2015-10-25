@@ -202,7 +202,7 @@ class CardUtils {
         $values = array(
             'rules' => $rules
         );
-        
+
         $playSQL = "";
         if (true !== $playId) { // TRUE == to ALL PLAYERS
             $values['playId'] = $playId;
@@ -230,13 +230,17 @@ class CardUtils {
     }
 
     public function kill($playId) {
+        //record
+        $file = fopen("record/$this->$gameId.txt");
+        fwrite($file, $this->$playId . " kills $playId");
+
         return $this->hurtPlayer($playId);
     }
 
-    public function suicide() {
-        $playId = $this->playId;
-        return $this->killPlayer($playId);
-    }
+//    public function suicide() {
+//        $playId = $this->playId;
+//        return $this->killPlayer($playId);
+//    }
 
     public function endGame() {
         $gameId = $this->gameId;
@@ -246,7 +250,7 @@ class CardUtils {
         $this->updatePlayers(null, array("status", "card")); //let inject from ending card
         sql("UPDATE smltown_games SET status = $endStatus WHERE id = $gameId");
         $this->updateGame();
-        
+
         //left before inject end-game graphics
         $this->updateUsers(null, "rulesJS");
     }
@@ -271,9 +275,9 @@ class CardUtils {
         $this->saveMessage($message, $id);
     }
 
-    public function update_players($value) {
-        $this->updatePlayers(null, $value);
-    }
+//    public function update_players($value) {
+//        $this->updatePlayers(null, $value);
+//    }
 
     public function setGame($array) {
         $gameId = $this->gameId;

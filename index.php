@@ -204,7 +204,7 @@ echo $script;
         var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
         if (isAndroid) {
             if (!localStorage.getItem("androidAsked")) {
-                SMLTOWN.Message.notify("open with android app?", function () { //ok callback
+                SMLTOWN.Message.notify("_open with android app?", function () { //ok callback
                     window.location = "https://play.google.com/store/apps/details?id=town.sml";
                 }, function () {
                     localStorage.setItem("androidAsked", 1);

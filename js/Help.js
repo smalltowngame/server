@@ -49,7 +49,7 @@ SMLTOWN.Help = {
         for (var id in SMLTOWN.players) {
             if (id != SMLTOWN.user.id && SMLTOWN.players[id].admin > -1) {
                 console.log(id + " , " + SMLTOWN.user.id + " , " + SMLTOWN.players[id].admin);
-                SMLTOWN.Message.flash("error_tutorialPlayers");
+                SMLTOWN.Message.flash("_error_tutorialPlayers");
                 return;
             }
         }
@@ -79,7 +79,7 @@ SMLTOWN.Help = {
     ,
     done: function () {
         this.stop();
-        SMLTOWN.Message.notify("tutorialDone");
+        SMLTOWN.Message.notify("_tutorialDone");
     }
     ,
     stop: function () {

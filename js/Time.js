@@ -57,7 +57,7 @@ SMLTOWN.Time = {
         }
         if (0 < SMLTOWN.user.status) {
             SMLTOWN.Server.request.dayEnd();
-            SMLTOWN.Message.notify(SMLTOWN.Message.translate("lynch"), true);
+            SMLTOWN.Message.notify("_lynch", true);
             $("#smltown_sun").css("z-index", 0); //let vote
         }
     }

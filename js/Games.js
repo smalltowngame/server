@@ -29,7 +29,7 @@ SMLTOWN.Games = {
             var length = games.length;
             if (!length) {
                 $("#smltown_loadingGames").append(SMLTOWN.Message.translate("noMoreGames"));
-                //SMLTOWN.Message.flash("noMoreGames");
+                //SMLTOWN.Message.flash("_noMoreGames");
                 $this.over = true;
                 return;
             }
@@ -166,12 +166,12 @@ SMLTOWN.Games = {
         SMLTOWN.Local.stopRequests();
         var name = $("#smltown_nameGame input").val();
         if (name.length < 3) {
-            SMLTOWN.Message.flash("nameMustLength");
+            SMLTOWN.Message.flash("_nameMustLength");
             return;
         }
         for (var i = 0; i < this.array; i++) {
             if (name.toLowerCase() == this.array[i].name.toLowerCase()) {
-                SMLTOWN.Message.flash("game name exists");
+                SMLTOWN.Message.flash("_gameNameExists");
                 return;
             }
         }
@@ -185,7 +185,7 @@ SMLTOWN.Games = {
             SMLTOWN.Server.loaded();
 
             if (-1 == id) {
-                SMLTOWN.Message.flash("gameNameAlreadyExists");
+                SMLTOWN.Message.flash("_gameNameAlreadyExists");
                 return false;
             }
 

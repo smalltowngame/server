@@ -24,6 +24,6 @@ $card->nightBefore = function() {
         $this->setPlayer(['card' => $cardName, 'status' => 1]); //first for future checks
         $this->setMessage("You have been attacked by the werewolfs, but you only have hurt. You become a werewolf!", $playId);
         
-        $this->response("SMLTOWN.uer.card = '$cardName'");
+        $this->response("SMLTOWN.user.card = '$cardName'");
     }
 };

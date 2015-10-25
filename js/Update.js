@@ -123,7 +123,7 @@ SMLTOWN.Update = {
                 eval(user.rulesJS); //like a cupid lover
             }
         }
-        if (typeof user.message != "undefined" && user.message) {
+        if (user.message) {
             if (jQuery.isEmptyObject(SMLTOWN.players)) {
                 SMLTOWN.Message.message = user.message;
             } else {
@@ -347,7 +347,7 @@ SMLTOWN.Update = {
                     div.off(".spectator");
                     div.on("tap.spectator", function(e) {
                         e.preventDefault();
-                        SMLTOWN.Message.notify("playGameQuestion", function() {
+                        SMLTOWN.Message.notify("_playGameQuestion", function() {
                             div.off(".spectator");
                             SMLTOWN.Server.request.playGame(SMLTOWN.user.id);
                         }, true);

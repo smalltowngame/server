@@ -256,4 +256,36 @@ var lang = {
     //ERRORS
     error_tutorialPlayers: "No puedes iniciar el tutorial en una partida con jugadores"
             //
+    ,
+    reload: "actualizar"
+    ,
+    endingDay: "finalizando día"
+    ,
+    nameMustLength: "el nombre debe contener mínimo 3 letras"
+    ,
+    adminCanEndTurn: "el master puede acabar el turno en cualquier momento"
+    ,
+    backAgain: "atrás ptra vez para salir"
+    ,
+    addUserInGame: "añade a alguien a la partida"
+    ,
+    gamePublic: "partida pública"
+    ,
+    helpStop: "finalizar tutorial"
+    ,
+    playGame: "jugar partida"
+    ,
+    setName: "nombre"
+    ,
+    savedName: "nombre guardado"
+    ,
+    cannotModifyCardsInGame: "no puedes modificar las cartas de juego durante una partida"
+    ,
+    gameNameExists: "este nombre ya existe"
+    ,
+    letVoteDay: "permite a los jugadores votar durante el día"
+    ,
+    timeByPlayer: "segundo de día por jugador"
+    ,
+    gameWithPassword: "partida con contraseña"
 };

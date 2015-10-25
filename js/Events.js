@@ -72,7 +72,7 @@ SMLTOWN.Events = {
                         return false;
                     }
                     if (SMLTOWN.Game.playing()) {
-                        SMLTOWN.Message.flash("cannot modify cards in game");
+                        SMLTOWN.Message.flash("_cannotModifyCardsInGame");
                         return;
                     }
 
@@ -85,11 +85,11 @@ SMLTOWN.Events = {
 
             // DOUBLE TAP (tapped within 300ms of last tap)/////////////////
             if (SMLTOWN.Game.playing()) {
-                SMLTOWN.Message.flash("cannotCardsGame");
+                SMLTOWN.Message.flash("_cannotCardsGame");
                 return;
             }
             if (SMLTOWN.user.admin < 1) {
-                SMLTOWN.Message.flash("cannotCardsAdmin");
+                SMLTOWN.Message.flash("_cannotCardsAdmin");
                 return;
             }
 
@@ -302,11 +302,11 @@ SMLTOWN.Events = {
         $("#smltown_addFriend").on("tap", function() {
             var socialId = $("#smltown_pictureContextMenu").attr("socialId");
             if (!socialId) {
-                SMLTOWN.Message.flash("missingSocialId");
+                SMLTOWN.Message.flash("_missingSocialId");
                 return;
             }
             SMLTOWN.Server.request.addFriend(socialId);
-            SMLTOWN.Message.flash("friendAdded");
+            SMLTOWN.Message.flash("_friendAdded");
             $("#smltown_pictureContextMenu").hide();
         });
     }
@@ -324,7 +324,7 @@ SMLTOWN.Events = {
             $("#smltown_menu").removeClass("smltown_visible");
         } else {
             if (!SMLTOWN.user.card) {
-                SMLTOWN.Message.flash("noCard");
+                SMLTOWN.Message.flash("_noCard");
             }
             else if ($("#smltown_card").hasClass("smltown_swipe")) {
                 $("#smltown_card").addClass("smltown_visible");
@@ -486,12 +486,12 @@ SMLTOWN.Events = {
         this.menuInput("updateName", function(val) {
             for (var id in SMLTOWN.players) {
                 if (SMLTOWN.players[id].name == val) {
-                    SMLTOWN.Message.flash("duplicatedUserName");
+                    SMLTOWN.Message.flash("_duplicatedUserName");
                     return;
                 }
             }
             SMLTOWN.Server.request.setName(val);
-            SMLTOWN.Message.flash("name saved");
+            SMLTOWN.Message.flash("_savedName");
         });
 
         $("#smltown_updateImage").on("tap", function() {
@@ -559,7 +559,7 @@ SMLTOWN.Events = {
         $("#smltown_startButton").on("tap", function() {
             SMLTOWN.user.sleeping = true;
             if ($(".smltown_spectator").length) {
-                SMLTOWN.Message.notify("someSpectator", function() {
+                SMLTOWN.Message.notify("_someSpectator", function() {
                     SMLTOWN.Server.request.startGame();
                 }, true);
                 return;
@@ -570,7 +570,7 @@ SMLTOWN.Events = {
         $("#smltown_restartButton").on("tap", function() {
             //ask
             if (SMLTOWN.user.card) {
-                SMLTOWN.Message.notify("restartGame?", function() {
+                SMLTOWN.Message.notify("_restartGame?", function() {
                     SMLTOWN.Server.request.restartGame();
                 }, true);
                 return;
@@ -713,12 +713,12 @@ SMLTOWN.Events = {
             $("#smltown_addFriend").show();
 
             if (player.admin == -2) {
-                SMLTOWN.Message.flash("isBot");
+                SMLTOWN.Message.flash("_isBot");
                 return;
             }
 
             if (!player.socialId) {
-                SMLTOWN.Message.flash("cantFriend");
+                SMLTOWN.Message.flash("_cantFriend");
                 return;
             }
 
@@ -740,7 +740,7 @@ SMLTOWN.Events = {
             if (SMLTOWN.user.friends) {
                 for (var i = 0; i < SMLTOWN.user.friends.length; i++) {
                     if (SMLTOWN.user.friends[i].socialId == player.socialId) {
-                        SMLTOWN.Message.flash("isFriend");
+                        SMLTOWN.Message.flash("_isFriend");
                         $("#smltown_addFriend").hide();
                         break;
                     }
@@ -752,7 +752,7 @@ SMLTOWN.Events = {
             if (socialFriends) {
                 for (var i = 0; i < socialFriends; i++) {
                     if (socialFriends[i] == player.socialId) {
-                        SMLTOWN.Message.flash("isFriend");
+                        SMLTOWN.Message.flash("_isFriend");
                         $("#smltown_addFriend").hide();
                         break;
                     }

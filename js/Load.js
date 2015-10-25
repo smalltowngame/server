@@ -116,7 +116,7 @@ SMLTOWN.Load = {
         clearTimeout(this.timeout);
         this.timeout = setTimeout(function() {
             $this.end();
-            SMLTOWN.Message.flash("warnServer");
+            SMLTOWN.Message.flash("_warnServer");
             //last call
             if("object" == typeof $this.lastCall){
                 $this.lastCall = JSON.stringify($this.lastCall);

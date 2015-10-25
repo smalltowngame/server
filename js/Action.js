@@ -67,7 +67,7 @@ SMLTOWN.Action = {
         }
         this.endTurn();
 
-        SMLTOWN.Message.flash("closeEyes");
+        SMLTOWN.Message.flash("_closeEyes");
         this.nightConsoleOff();
 
         $("#smltown_filter").addClass("smltown_sleep");
@@ -89,17 +89,17 @@ SMLTOWN.Action = {
             return;
         } else if ("undefined" == typeof SMLTOWN.user.status || null == SMLTOWN.user.status) {
             if (id != SMLTOWN.user.id) {
-                SMLTOWN.Message.flash("youSpectator");
+                SMLTOWN.Message.flash("_youSpectator");
             }
             return;
         } else if (SMLTOWN.user.status < 0) {
-            SMLTOWN.Message.flash("youDead");
+            SMLTOWN.Message.flash("_youDead");
             return;
         } else if (!player.status) {
-            //SMLTOWN.Message.flash("player is a espectator");
+            //SMLTOWN.Message.flash("_player is a espectator");
             return;
         } else if (player.status < 1) {
-            //SMLTOWN.Message.flash("player is dead");
+            //SMLTOWN.Message.flash("_player is dead");
             return;
         }
 

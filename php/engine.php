@@ -99,6 +99,7 @@ trait Engine {
     ////////////////////////////////////////////////////////////////////////////////
     //AUTOMATIC REQUESTS
     public function messageReceived() {
+//        echo "messageReceived";
         $gameId = $this->gameId;
         $playId = $this->playId;
         $stop = false;
@@ -138,7 +139,6 @@ trait Engine {
     ////////////////////////////////////////////////////////////////////////////////
     //DAY SELECTS
     public function selectPlayer() {
-        $gameId = $this->gameId;
         $playId = $this->playId;
         $id = $this->requestValue['id'];
 
@@ -148,7 +148,6 @@ trait Engine {
     }
 
     public function unSelectPlayer() {
-        $gameId = $this->gameId;
         $playId = $this->playId;
         sql("UPDATE smltown_plays SET sel = null WHERE id = $playId");
         $this->selectPlayerResponse();
@@ -210,7 +209,7 @@ trait Engine {
         if ($data) { //end turn 4 all players with card
             $plays = petition("SELECT id FROM smltown_plays WHERE gameId = $gameId AND card = '$cardName' AND status > -1");
             for ($i = 0; $i < count($plays); $i++) {
-                $this->saveMessage($data, $plays[$i]->id);
+                $this->_saveMessage($data, $plays[$i]->id);
             }
             return;
         }
@@ -223,7 +222,6 @@ trait Engine {
     }
 
     public function nightUnselect() {
-        $gameId = $this->gameId;
         $playId = $this->playId;
 
         $play = $this->getCard();
@@ -253,6 +251,7 @@ trait Engine {
     }
 
     protected function setNextTurn($ini = null) {
+//        echo "setNextTurn";
         if (!$this->checkMessages()) {
             //DEBUG
             //echo "bad next-turn request";
@@ -264,6 +263,7 @@ trait Engine {
     }
 
     protected function setNextStatus($ini = null) {
+//        echo "setNextStatus";
         $gameId = $this->gameId;
 
         $status = $this->getTurn() + 1;

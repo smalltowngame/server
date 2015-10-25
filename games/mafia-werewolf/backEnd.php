@@ -37,7 +37,7 @@ trait BackEnd {
     protected function night($initiative = null) { //1 (every night turn)
         $gameId = $this->gameId;
 
-//EVERY NIGHT TURN
+        //EVERY NIGHT TURN
         if (!$initiative) {
             //if comes from statuschange card action 
             $initiative = $this->getInitiative(); //utils
@@ -57,7 +57,7 @@ trait BackEnd {
 
             $kills = $this->getDying();
             $this->saveMessage("kills:" . json_encode($kills));
-            //$this->updatePlayers(null, array("status")); //status like 4 hunter
+            $this->updatePlayers(null, array("status")); //status like 4 hunter
             //
         } else {
             sql("UPDATE smltown_games SET night = '$cardName' WHERE id = $gameId");

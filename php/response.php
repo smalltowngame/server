@@ -204,7 +204,7 @@ trait Response {
             $sql .= selectArray($array);
             //full request
         } else {
-            $sql .= " id,name,password,type,status,timeStart,time,dayTime,openVoting,endTurn,cards";
+            $sql .= " id,name,password,type,timeStart,time,dayTime,openVoting,endTurn,cards,status";
             if ($playId) {
                 $sql .= ","
                         . " CASE WHEN"

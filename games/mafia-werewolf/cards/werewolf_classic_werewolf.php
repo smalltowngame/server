@@ -44,7 +44,7 @@ $card->nightSelect = function() {
     if (null == $deadId) {
         return false; //not end turn
     }
-
+    
     //RESOLVE TURN
     $this->kill($deadId); //witch or girl can interact
     $name = $this->getPlayerName($deadId);
@@ -70,12 +70,12 @@ $card->statusGameChange = function() { //checkWolfsEndGame
     //if game is over
     if ($werewolves == 0 || $other == 0) {
         $this->setPlayers(array("status = -1"), array("status = 0"));
-        if($werewolves == 0){
+        if ($werewolves == 0) {
             $this->setPlayers(array("status = 0"), array("card NOT LIKE '%_werewolf'", "status < 0"));
-        }else{
+        } else {
             $this->setPlayers(array("status = 0"), array("card LIKE '%_werewolf'", "status < 0"));
         }
-        
+
         $this->endGame();
         return false;
     }

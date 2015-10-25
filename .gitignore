@@ -43,8 +43,8 @@ config.php
 
 \old.*
 
-picture/
 pictures/
+record/
 
 \*.log
 

@@ -5,11 +5,17 @@ $card->text = array(
     "en" => array(
         "name" => "witch",
         "rules" => "use a health and death potions once per game",
-        "quote" => "do you want to play?"
+        "quote" => "do you want to play?",
+        "wasKilled" => "was killed",
+        "wasSaved" => "was saved",
+        "goesSleep" => "Witch goes to sleep."
     ),
     "es" => array(
         "name" => "bruja",
-        "rules" => "2 pociones.."
+        "rules" => "2 pociones..",
+        "wasKilled" => "ha sido envenenado",
+        "wasSaved" => "ha revivido",
+        "goesSleep" => "La bruja se va a dormir."
     )
 );
 
@@ -23,22 +29,24 @@ $card->nightSelect = function() {
     $saveId = $this->requestValue["save"];
     $killId = $this->requestValue["kill"];
 
+    $text = $this->getText();
+
     $res = "";
 
     if (isset($saveId)) {
         $this->setPlayer(array('status' => 1), $saveId);
         $this->addPlayerRulesJS('SMLTOWN.temp.witchUsedSave=true');
         $savedName = $this->getPlayerName($saveId);
-        $res = $res . "$savedName was saved. ";
+        $res = $res . "$savedName " . $text['wasSaved'] . ".";
     }
     if (isset($killId)) {
         $this->kill($killId);
         $this->addPlayerRulesJS('SMLTOWN.temp.witchUsedKill=true');
         $savedName = $this->getPlayerName($killId);
-        $res = $res . "$savedName was killed. ";
+        $res = $res . "$savedName " . $text['wasKilled'] . ".";
     }
 
-    return $res . "Witch goes to sleep. ";
+    return $res . $text['goesSleep'];
 };
 
 $card->extra = function() {

@@ -1,13 +1,13 @@
 
 //MULTILANGIAGE DETECTION
-(function($) {
-    $.fn.smltown_text = function(text) {
+(function ($) {
+    $.fn.smltown_text = function (text) {
         this.text(check(text));
     };
-    $.fn.smltown_append = function(text) {
+    $.fn.smltown_append = function (text) {
         this.append(check(text));
     };
-    $.fn.smltown_prepend = function(text) {
+    $.fn.smltown_prepend = function (text) {
         this.prepend(check(text));
     };
     function check(text) {
@@ -22,9 +22,9 @@
 })(jQuery);
 
 SMLTOWN.Message = {
-    login: function(log) {
+    login: function (log) {
 
-        this.inputDialog("set your name", function(name) { //ok callback
+        this.inputDialog("set your name", function (name) { //ok callback
             for (var id in SMLTOWN.players) {
                 if (SMLTOWN.players[id].name == name) {
                     $("#smltown_login .smltown_log").smltown_text("duplicatedUserName");
@@ -33,14 +33,14 @@ SMLTOWN.Message = {
             }
             SMLTOWN.Server.request.setName(name);
 
-        }, function() {  //cancel callback
+        }, function () {  //cancel callback
             SMLTOWN.Server.request.deletePlayer(SMLTOWN.user.id);
             SMLTOWN.Load.showPage("gameList");
 
         }, log);
     }
     ,
-    inputDialog: function(placeholder, okCallback, cancelCallback, log) {
+    inputDialog: function (placeholder, okCallback, cancelCallback, log) {
         if (typeof log == "object") {
             log = log.log; //server side
         }
@@ -60,7 +60,7 @@ SMLTOWN.Message = {
         $("#smltown_dialogForm .smltown_dialogInput").focus();
 
         //EVENTS
-        $("#smltown_dialogForm").submit(function() { //submit 4 device buttons
+        $("#smltown_dialogForm").submit(function () { //submit 4 device buttons
             var value = $(this).find(".smltown_dialogInput").val();
             if (!value || !/\S/.test(value)) { //not only whitespaces
                 $("#smltown_dialog .smltown_log").smltown_text("cannot empty!");
@@ -70,7 +70,7 @@ SMLTOWN.Message = {
             $("#smltown_dialog").remove();
             return false; //prevent submit
         });
-        $("#smltown_dialogForm .smltown_cancel").on("tap", function() {
+        $("#smltown_dialogForm .smltown_cancel").on("tap", function () {
             if (cancelCallback) {
                 cancelCallback();
             }
@@ -78,7 +78,7 @@ SMLTOWN.Message = {
         });
     }
     ,
-    bottomDialog: function(placeholder, okCallback, log) {
+    bottomDialog: function (placeholder, okCallback, log) {
         $("#smltown_bottomDialog").remove(); /*clean*/
         $("#smltown_html").parent().append("<div id='smltown_bottomDialog'><form class='smltown_dialogForm'>"
                 + "<table><tr>"
@@ -89,10 +89,10 @@ SMLTOWN.Message = {
                 + "<div class='smltown_log'></div>"
                 + "<div>");
 
-        setTimeout(function() {
+        setTimeout(function () {
             $("#smltown_bottomDialog").addClass("display");
         }, 1);
-        setTimeout(function() {
+        setTimeout(function () {
             $("#smltown_bottomDialog .smltown_dialogInput").focus();
         }, 1000);
 
@@ -101,7 +101,7 @@ SMLTOWN.Message = {
         }
 
         /*EVENTS*/
-        $("#smltown_bottomDialog form").submit(function() {
+        $("#smltown_bottomDialog form").submit(function () {
             if ($("#smltown_bottomDialog .smltown_dialogSend").length) {
                 var val = $(this).find(".smltown_dialogInput").val().replace(/ /g, '');
                 okCallback(val);
@@ -113,7 +113,7 @@ SMLTOWN.Message = {
         });
     }
     ,
-    setMessage: function(data) { //PERMANENT MESSAGES
+    setMessage: function (data) { //PERMANENT MESSAGES
         var t = this.translate;
         var text, card;
 
@@ -145,7 +145,7 @@ SMLTOWN.Message = {
         this.showMessage(text, action);
     }
     ,
-    showMessage: function(text, action) { //overrided
+    showMessage: function (text, action) { //overrided
 //        var $this = this;
 //        var time = 0;
 //        var stop = false;
@@ -164,9 +164,8 @@ SMLTOWN.Message = {
 //        }, time);
     }
     ,
-    notify: function(text, okCallback, cancelCallback, gameId) {
-        console.log("notify")
-        //console.log(gameId);
+    notify: function (text, okCallback, cancelCallback, gameId) {
+        console.log("notify");
         if (gameId && SMLTOWN.Game.info.id != gameId) {
             this.external(text, gameId);
             return;
@@ -205,7 +204,7 @@ SMLTOWN.Message = {
         $("#smltown_popup > div").off(".popup");
         if (okCallback) { //!= false
             $("#smltown_popupOk").show();
-            $("#smltown_popupOk").one("tap.popup", function(e) {
+            $("#smltown_popupOk").one("tap.popup", function (e) {
                 e.preventDefault(); //prevent player select
                 //hide
                 $this.removeNotification(true);
@@ -218,7 +217,7 @@ SMLTOWN.Message = {
 
         if (cancelCallback) { //!= false
             $("#smltown_popupCancel").show();
-            $("#smltown_popupCancel").one("tap.popup", function(e) {
+            $("#smltown_popupCancel").one("tap.popup", function (e) {
                 e.preventDefault(); //prevent player select
                 //hide
                 $this.removeNotification(true);
@@ -229,7 +228,7 @@ SMLTOWN.Message = {
         }
     }
     ,
-    removeNotification: function(force) {
+    removeNotification: function (force) {
         var notification = $("#smltown_notification");
         if (!force && notification.hasClass("smltown_message")) {
             return;
@@ -237,7 +236,7 @@ SMLTOWN.Message = {
         notification.hide();
     }
     ,
-    setLog: function(text, type) {
+    setLog: function (text, type) {
         var log = $("#smltown_consoleText > div > div");
         var div = $("<div>");
         if (SMLTOWN.isNight) {
@@ -260,7 +259,7 @@ SMLTOWN.Message = {
 //        $("#smltown_console .text").prepend("<div><span class='time'>" + new Date().toLocaleTimeString() + " </span>" + text + "</div>");
 //    }
     ,
-    flash: function(text, gameId) {
+    flash: function (text, gameId) {
         if (!text) {
             //smltown_debug(text + " flash text");
             return;
@@ -270,11 +269,15 @@ SMLTOWN.Message = {
             this.external(text, gameId);
             return;
         }
+        
+        if("_" == text[0]){
+            text = this.translate(text.substr(1));
+        }
 
         $("#smltown_flash").remove();
-        var div = $("<div id='smltown_flash'><div>" + this.translate(text) + "</div></div>");
+        var div = $("<div id='smltown_flash'><div>" + text + "</div></div>");
         $("#smltown_html").parent().append(div);
-        setTimeout(function() {
+        setTimeout(function () {
             div.remove();
         }, text.length * 80);
 
@@ -283,7 +286,7 @@ SMLTOWN.Message = {
         }
     }
     ,
-    addChats: function() {
+    addChats: function () {
         var chatName, chats, arrayChats, values, i;
 
         //day
@@ -318,7 +321,7 @@ SMLTOWN.Message = {
         SMLTOWN.Add.userNamesByClass();
     }
     ,
-    addChat: function(text, playId, gameId, name) { //from server
+    addChat: function (text, playId, gameId, name) { //from server
         if (typeof playId == "undefined") {
             playId = null;
         }
@@ -333,7 +336,6 @@ SMLTOWN.Message = {
         var night = SMLTOWN.Game.info.night;
         if (SMLTOWN.players[playId] && SMLTOWN.Game.info.night &&
                 (night == SMLTOWN.players[playId].card || (night == SMLTOWN.user.card && SMLTOWN.user.id == playId))) {
-            console.log(666);
             this.writeChat(text, playId, true);
             chatName = "nightChat" + SMLTOWN.Game.info.id;
         } else {
@@ -348,7 +350,7 @@ SMLTOWN.Message = {
         localStorage.setItem(chatName, chat + "·" + text + "~" + playId);
     }
     ,
-    writeChat: function(text, playId, night) {
+    writeChat: function (text, playId, night) {
         var name = "";
         if (typeof SMLTOWN.players[playId] != "undefined") { //if player no longer exists
             name = SMLTOWN.players[playId].name + ": ";
@@ -380,12 +382,12 @@ SMLTOWN.Message = {
         }
     }
     ,
-    clearChat: function() {
+    clearChat: function () {
         localStorage.removeItem("chat" + SMLTOWN.Game.info.id);
 //        localStorage.clear();
     }
     ,
-    translate: function(some) {
+    translate: function (some) {
         if (!lang[some]) {
             console.log("not translation: " + some);
             if (null !== lang[some]) {
@@ -407,22 +409,22 @@ SMLTOWN.Message = {
         return lang[some];
     }
     ,
-    external: function(text, gameId, name) {
+    external: function (text, gameId, name) {
 
         text = "<small>" + name + ": </small> " + this.translate(text);
 
         $("#smltown_external").remove();
         var div = $("<div id='smltown_external'>" + text + "</div>");
-        div.on("tap", function() {
+        div.on("tap", function () {
             window.location.hash = "game?" + gameId;
         });
         $("#smltown_html").parent().append(div);
 
-        setTimeout(function() {
+        setTimeout(function () {
             $("#smltown_external").addClass("smltown_visible");
         }, 100);
 
-        setTimeout(function() {
+        setTimeout(function () {
             $("#smltown_external").removeClass("smltown_visible");
         }, 4000);
     }

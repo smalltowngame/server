@@ -255,7 +255,7 @@ trait Request {
         $playId = $this->playId;
 
         sql("UPDATE smltown_plays SET admin = CASE WHEN admin = 1 THEN 0 WHEN id = $playId THEN 1 END WHERE gameId = $gameId");
-        $this->setFlash("adminRole", array("id" => $playId));
+        $this->setFlash("_adminRole", array("id" => $playId));
 //        $this->reloadClientGame($playId);
     }
 

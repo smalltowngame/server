@@ -28,8 +28,12 @@ class AdminRequest extends PingRequest {
 
         //start game
         sql("UPDATE smltown_games SET status = 1, night = -100 WHERE id = $gameId");
-        $this->updateGame(null, "status");
+//        $this->updateGame(null, "status");
         $this->saveMessage("gameWillStart"); //second saveMessage
+        
+        //RECORD
+        $file = fopen("record/$gameId.txt", "w");
+        fwrite($file, "Game start: players($countPlayers)");
     }
 
     public function restartGame() {
@@ -139,9 +143,9 @@ class AdminRequest extends PingRequest {
         sql("UPDATE smltown_games SET public = :public WHERE id = $gameId", $values);
         $this->updateGame(null, "public");
         if ($public == 1) {
-            $this->setFlash("gamePublic");
+            $this->setFlash("_gamePublic");
         } else {
-            $this->setFlash("gameNotPublic");
+            $this->setFlash("_gameNotPublic");
         }
     }
 
@@ -151,7 +155,7 @@ class AdminRequest extends PingRequest {
         $values = array('dayTime' => $obj->time);
         sql("UPDATE smltown_games SET dayTime = :dayTime WHERE id = $gameId", $values);
         $this->updateGame(null, "dayTime");
-        $this->setFlash("updatedDayTime");
+        $this->setFlash("_updatedDayTime");
     }
 
     public function setOpenVoting() {
@@ -162,9 +166,9 @@ class AdminRequest extends PingRequest {
         sql("UPDATE smltown_games SET openVoting = :openVoting WHERE id = $gameId", $values);
         $this->updateGame($gameId, null, "openVoting");
         if ($openVotations == 1) {
-            $this->setFlash("openVotingEnabled");
+            $this->setFlash("_openVotingEnabled");
         } else {
-            $this->setFlash("openVotingDisabled");
+            $this->setFlash("_openVotingDisabled");
         }
     }
 
@@ -176,9 +180,9 @@ class AdminRequest extends PingRequest {
         sql("UPDATE smltown_games SET endTurn = :endTurn WHERE id = $gameId", $values);
         $this->updateGame(null, "endTurn");
         if ($endTurn == 1) {
-            $this->setFlash("adminEndTurnEnabled");
+            $this->setFlash("_adminEndTurnEnabled");
         } else {
-            $this->setFlash("adminEndTurnDisabled");
+            $this->setFlash("_adminEndTurnDisabled");
         }
     }
 
@@ -194,9 +198,9 @@ class AdminRequest extends PingRequest {
         sql("UPDATE smltown_games SET password = :password WHERE id = $gameId", $values);
         $this->updateGame(null, "password");
         if (empty($password)) {
-            $this->setFlash("passwordRemoved");
+            $this->setFlash("_passwordRemoved");
         } else {
-            $this->setFlash("passwordUpdated");
+            $this->setFlash("_passwordUpdated");
         }
     }
 

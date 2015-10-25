@@ -5,7 +5,7 @@ SMLTOWN.Update.gameStatus = function() {
     console.log("update game");
     //INPUTS
     SMLTOWN.Time.clearCountdowns();
-    
+
     //hide
     $("#smltown_game").attr("class", "");
     $(".smltown_gameover").removeClass("smltown_selectable");
@@ -37,7 +37,7 @@ SMLTOWN.Update.gameStatus = function() {
             if (SMLTOWN.Game.info.night && SMLTOWN.user.status > -1 && SMLTOWN.user.card == SMLTOWN.Game.info.night) {
                 if (SMLTOWN.Action.night.extra) { //if extra
                     SMLTOWN.Server.request.nightExtra(); //1st call
-                } else if (SMLTOWN.Action.night.select) { //or if select                        
+                } else if (SMLTOWN.Action.night.select && !SMLTOWN.user.message) { //or if select                        
                     SMLTOWN.Action.wakeUpCard();
                 }
             } else {
@@ -74,7 +74,7 @@ SMLTOWN.Update.gameStatus = function() {
             break;
         case 4:
             if (statusChange) { // 1st time
-                $("#smltown_statusGame").smltown_text("ending day");
+                $("#smltown_statusGame").smltown_text("_endingDay");
                 this.onStatusChange();
             }
             break;
@@ -133,10 +133,11 @@ SMLTOWN.Update.gameStatus = function() {
     //localStorage.setItem("status" + SMLTOWN.Game.info.id, SMLTOWN.Game.info.status);
     $("#smltown_game").attr("status", SMLTOWN.Game.info.status);
 
-//    if (SMLTOWN.Message.message) {
-//        SMLTOWN.Message.setMessage(SMLTOWN.Message.message);
-//        SMLTOWN.Message.message = null;
-//    }
+    //update user stored message!
+    if (SMLTOWN.Message.message) {
+        SMLTOWN.Message.setMessage(SMLTOWN.Message.message);
+        SMLTOWN.Message.message = null;
+    }
 };
 
 //mafia-werewolf only function
@@ -206,9 +207,7 @@ SMLTOWN.Message.showMessage = function(text, action) {
 
     setTimeout(function() {
         $this.notify(text, function() {
-            if (SMLTOWN.user.status > -1
-                    && SMLTOWN.Game.info.status == 1 //night
-                    ) {
+            if (SMLTOWN.user.status > -1 && SMLTOWN.Game.info.status == 1) {  //night 
                 SMLTOWN.Action.sleep();
             }
             if (doCallback) {
@@ -217,7 +216,7 @@ SMLTOWN.Message.showMessage = function(text, action) {
             }
         }, false);
     }, time);
-}
+};
 
 //FROM SMLTOWN.Message.setMessage() (custom message functions FROM SERVER)
 SMLTOWN.Message.votations = function(json) {

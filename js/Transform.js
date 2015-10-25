@@ -31,13 +31,20 @@ SMLTOWN.Transform = {
         //game width persistent style
         var totalWidth = $("#smltown_html").width();
         var cols = parseInt(totalWidth / 350);
-        var width = totalWidth / cols - 14;
+        var width;
+        if (cols) {
+            width = totalWidth / cols - 14 + "px";
+        } else {
+            width: "inherit"
+        }
+
         $("#gameWidth").remove();
-        $("<style id='gameWidth' type='text/css'> .smltown_game{ width:" + width + "px} </style>").appendTo("head");
+        $("<style id='gameWidth' type='text/css'> .smltown_game{ width:" + width + "} </style>").appendTo("head");
     }
     ,
     gameResize: function() {
 
+        //SCROLL
         if (SMLTOWN.touch) {
             console.log("SMLTOWN.touch = " + SMLTOWN.touch)
             $("#smltown_list, #smltown_menuContent, #smltown_consoleLog").css("overflow-y", "hidden");
@@ -130,6 +137,13 @@ SMLTOWN.Transform = {
         $("#smltown_filter").css({
             'width': $("#smltown_list").width()
         });
+        
+        //remove menu margin on very small screens
+        if ($(window).width() < 250) {
+            $("#smltown_menuContent").addClass("smltown_removeMenuMargin");
+        } else {
+            $("#smltown_menuContent").removeClass("smltown_removeMenuMargin");
+        }
 
         //RESIZE CARD
         var height = $("#smltown_html").height();

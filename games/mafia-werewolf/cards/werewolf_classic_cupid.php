@@ -143,7 +143,16 @@ $card->statusGameChange = function() { //statusGameChange have empty userId
 
 <script>
 
-    SMLTOWN.Action.night.select = function(selectedId) {
+    SMLTOWN.temp.text = {
+        en: {
+            "nowInLove": "are now in love"
+        },
+        es: {
+            "nowInLove": "están ahora enamorados"
+        }
+    };
+
+    SMLTOWN.Action.night.select = function (selectedId) {
         console.log(selectedId)
         var first = $(".smltown_check"); //check if exists
 
@@ -160,7 +169,7 @@ $card->statusGameChange = function() { //statusGameChange have empty userId
         var name2 = SMLTOWN.players[id2].name;
 
         //cupid needs end turn manually!
-        SMLTOWN.Message.notify(name1 + " and " + name2 + " are now in love", function() {
+        SMLTOWN.Message.notify(name1 + " & " + name2 + SMLTOWN.temp.text[SMLTOWN.lang].nowInLove, function () {
             SMLTOWN.Action.sleep();
             SMLTOWN.Action.cleanVotes();
 
@@ -173,7 +182,7 @@ $card->statusGameChange = function() { //statusGameChange have empty userId
         return false; //not let add votes
     };
 
-    SMLTOWN.Action.night.unselect = function() {
+    SMLTOWN.Action.night.unselect = function () {
         if (!$(".smltown_preselect").length) { //remove selection if unselect same
             $(".smltown_check").removeClass("smltown_check");
             $(".smltown_votes").html("");

@@ -585,9 +585,13 @@
     background-color: rgb(250,250,250);
 
     max-width: 370px;
-    min-width: 200px;
+    /*min-width: 200px;*/
     position: absolute;
     margin-right: 60px;
+    word-break: break-all;
+}
+#smltown_menuContent.smltown_removeMenuMargin{
+    margin-right: 0 !important;
 }
 
 #smltown_menuAll{
