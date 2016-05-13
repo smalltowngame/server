@@ -105,9 +105,9 @@ $.extend(lang, {
     help_popupShare: "The game is over and the <b>werewolf has won! </b>"
             + "<b>Congratulations</b>, you have completed the tutorial. "
             + "<b>Share</b> it with your friends to join a new game."
-, 
- help_typeNameGame: null //TODO 
- , 
- help_createGame: null //TODO 
- });
+    ,
+    help_typeNameGame: null //TODO 
+    ,
+    help_createGame: null //TODO 
+});
 

@@ -214,14 +214,14 @@ trait Request {
         $statusCount = count($this->TURNS);
         $sth = sql("UPDATE smltown_plays SET card = NULL WHERE gameId = $gameId "
                 . "AND (SELECT status FROM smltown_games WHERE id = $gameId) IN (NULL, 0, 5)");
-        
+
         $this->updatePlayers(null, "admin"); //way to update new players to other people
         $this->updateUsers(null, "card");
         $this->updateGame(null, "status"); //way to remove 'start game' button and maybe reset others
 
         if ($sth->rowCount() > 0) { //something changes
 //            sql("UPDATE smltown_games SET status = $statusCount"); //if status = 0, auto-starts game on last message accept!            
-            $this->setNotifications("gameRestartForPlayersChange", null, $playId);            
+            $this->setNotifications("gameRestartForPlayersChange", null, $playId);
         }
     }
 

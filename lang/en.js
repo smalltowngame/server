@@ -329,7 +329,7 @@ var lang = {
     ,
     friendAdded: "friend added"
     ,
-    OrCopyLink: "..or copy and share this link: " 
+    OrCopyLink: "..or copy and share this link: "
     ,
     cantPlaySpectator: "You can't join to game if has already begun!"
     ,
@@ -342,12 +342,4 @@ var lang = {
     shareThisError: "Please let us know this error on 'sml.town' webpage, thanks."
     ,
     lookingGames: "looking for games.."
-, 
- 'http://sml.town/452': null //TODO 
- , 
- 'http://sml.town/452': null //TODO 
- , 
- 'http://sml.town/452': null //TODO 
- , 
- 'http://sml.town/452': null //TODO 
- };
+};

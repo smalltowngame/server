@@ -57,14 +57,14 @@ SMLTOWN.Local = {
                                 && this.smalltownHeader == $this.gameRequests["localhost"].smalltownHeader) {
                             console.log("game name: " + $this.gameRequests["localhost"].smalltownHeader + " repeated");
                             return;
-                        }                        
+                        }
                         url += this.smalltownHeader + "/";
                     }
-                    
+
                     //if LOCALHOST found
                     var nameHeader = "";
                     var headers = this.getAllResponseHeaders();
-                    if(headers.indexOf("smltown_name") > -1){
+                    if (headers.indexOf("smltown_name") > -1) {
                         nameHeader = this.getResponseHeader('smltown_name');
                     } else {
                         console.log("not smltown_name header found on local game");

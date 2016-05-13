@@ -93,6 +93,8 @@
     background-color: rgba(0,0,0,0.7);
     color: white;
     z-index: 100;
+    /*color: rgb(125,125,125);*/
+    /*z-index: 99;*/ 
     line-height: 50px;
     font-size: 22px;
     pointer-events: auto;

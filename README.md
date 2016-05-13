@@ -42,5 +42,3 @@ Werewolf card images by **liberlibelula** (Libertad Delgado Rodríguez)
 * [artstation](https://www.artstation.com/artist/liberlibelula)
 * [tumblr (Art)](https://www.tumblr.com/blog/liberlibelulaart)
 * [tumblr (Personal)](https://www.tumblr.com/blog/liberlibelula)
-
-

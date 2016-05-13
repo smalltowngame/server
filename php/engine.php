@@ -24,7 +24,7 @@ trait Engine {
                 if (is_numeric($overrideStatus)) {
 //                    sql("UPDATE smltown_games SET status = $overrideStatus WHERE id = $gameId");
 //                    $this->updateGame(null, "status");
-                    //
+                //
                 } else if (false != $overrideStatus) { //string
                     sql("UPDATE smltown_games SET night = '$cardName' WHERE id = $gameId");
                     //update night turn to this players make stop
@@ -274,7 +274,7 @@ trait Engine {
             $status = 1;
         } else if ($statusCount < $status) {
             //game is over
-            return;            
+            return;
         }
 
         sql("UPDATE smltown_games SET status = $status, night = null WHERE id = $gameId");

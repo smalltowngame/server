@@ -1,7 +1,7 @@
 //USER GAME ACTIONS
 
 SMLTOWN.Action = {
-    wakeUp: function(message, instantlyWakeUp, callback) {
+    wakeUp: function (message, instantlyWakeUp, callback) {
         var $this = this;
 
         //not wakeup on instantly reconnection
@@ -27,8 +27,8 @@ SMLTOWN.Action = {
         }
 
         SMLTOWN.user.sleeping = false; // warns players will be awake
-        this.wakeUpTimeout = setTimeout(function() { // WAIT 2 SECONDS TO ALLOW PLAYERS CLOSE EYES
-            SMLTOWN.Message.notify(message, function() {
+        this.wakeUpTimeout = setTimeout(function () { // WAIT 2 SECONDS TO ALLOW PLAYERS CLOSE EYES
+            SMLTOWN.Message.notify(message, function () {
                 $("#smltown_filter").removeClass("smltown_sleep");
             }, false);
             if (callback) {
@@ -39,7 +39,7 @@ SMLTOWN.Action = {
         }, wait);
     }
     ,
-    wakeUpCard: function(callback) {
+    wakeUpCard: function (callback) {
         this.nightConsoleOn();
         if (this.night.wakeUp) { //like seer salected id's wakeup
             this.night.wakeUp();
@@ -54,7 +54,7 @@ SMLTOWN.Action = {
         }
 
         var message = t("wakeUp") + " " + name + "... " + t("yourTurn");
-        this.wakeUp(message, null, function() {
+        this.wakeUp(message, null, function () {
             $("#smltown_sun").css("z-index", 0);
 
             if (SMLTOWN.user.card) {
@@ -67,7 +67,7 @@ SMLTOWN.Action = {
         });
     }
     ,
-    sleep: function() {
+    sleep: function () {
         console.log("sleep");
         if (isNaN(SMLTOWN.user.status) || -1 == SMLTOWN.user.status) {
             return;
@@ -82,15 +82,15 @@ SMLTOWN.Action = {
         SMLTOWN.user.sleeping = true;
     }
     ,
-    selectFunction: function() {
+    selectFunction: function () {
         return false;
     }
     ,
-    unselectFunction: function() {
+    unselectFunction: function () {
         return false;
     }
     ,
-    playerSelect: function(id) {
+    playerSelect: function (id) {
 
         var player = SMLTOWN.players[id];
         if (!SMLTOWN.Game.info.status && SMLTOWN.Game.info.status > 4) { //out of game
@@ -146,13 +146,13 @@ SMLTOWN.Action = {
         }
     }
     ,
-    defineSelectFunctions: function() {
+    defineSelectFunctions: function () {
         //override from game rules
         this.selectFunction = SMLTOWN.Server.request.selectPlayer;
         this.unselectFunction = SMLTOWN.Server.request.unSelectPlayer;
     }
     ,
-    unselect: function() {
+    unselect: function () {
         var id = SMLTOWN.user.sel;
         if (this.unselectFunction && this.unselectFunction(id) != false) {
             $("#" + id).removeClass("smltown_check");
@@ -163,7 +163,7 @@ SMLTOWN.Action = {
         }
     }
     ,
-    addVote: function(id) {
+    addVote: function (id) {
         var span = $("#" + id + " .smltown_votes");
         span.append("<span> &#x2718; </span>");
         //TODO: conflict with cleanVotes and killed players
@@ -171,7 +171,7 @@ SMLTOWN.Action = {
         //$("#" + id + " .smltown_extra").text(count);
     }
     ,
-    removeVote: function(id) {
+    removeVote: function (id) {
         if (!id) {
             id = SMLTOWN.user.sel;
             if (!id) {
@@ -191,7 +191,7 @@ SMLTOWN.Action = {
     }
     ,
     //turn actions
-    startNightTurn: function() { //from wakeUp
+    startNightTurn: function () { //from wakeUp
         console.log("start turn");
         for (var id in SMLTOWN.players) {
             var player = SMLTOWN.players[id];
@@ -202,14 +202,14 @@ SMLTOWN.Action = {
         }
     }
     ,
-    endTurn: function() { //sleep
+    endTurn: function () { //sleep
         console.log("end turn (sleep)");
         this.cleanVotes();
         //not remove Game.info.night -> let status change roles to play!        
         this.clearCards();
     }
     ,
-    endNight: function() {
+    endNight: function () {
         console.log("end night");
         for (var id in SMLTOWN.players) {
             var player = SMLTOWN.players[id];
@@ -223,13 +223,13 @@ SMLTOWN.Action = {
         this.clearCards();
     }
     ,
-    resetGame: function() {
+    resetGame: function () {
         console.log("reset game");
         SMLTOWN.user.rulesJS = "";
         $("*").unbind(".smltown_rules");
     }
     ,
-    removeCards: function() {
+    removeCards: function () {
         console.log("remove cards");
         for (var id in SMLTOWN.players) {
             SMLTOWN.players[id].card = null;
@@ -240,7 +240,7 @@ SMLTOWN.Action = {
         $(".smltown_extra").html("");
     }
     ,
-    cleanVotes: function() {
+    cleanVotes: function () {
         console.log("clean votes");
 
         SMLTOWN.user.sel = null;
@@ -257,7 +257,7 @@ SMLTOWN.Action = {
         $(".smltown_preselect").removeClass("smltown_preselect");
     }
     ,
-    clearCards: function() {
+    clearCards: function () {
         console.log("clear cards");
         for (var id in SMLTOWN.players) {
             var player = SMLTOWN.players[id];
@@ -272,14 +272,14 @@ SMLTOWN.Action = {
         }
     }
     ,
-    nightConsoleOn: function() {
+    nightConsoleOn: function () {
 //        $("#smltown_nightConsole").show();
 //        $("#smltown_console").addClass("smltown_nightConsole");
         $("#smltown_consoleLog > div").hide();
         $("#smltown_consoleLog .smltown_night").show();
     }
     ,
-    nightConsoleOff: function() {
+    nightConsoleOff: function () {
 //        $("#smltown_nightConsole").hide();
 //        $("#smltown_console").removeClass("smltown_nightConsole");
         $("#smltown_consoleLog > div").hide();

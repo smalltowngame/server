@@ -134,7 +134,7 @@ trait Connection {
 
         if (isset($playId)) {
             $json = json_encode($obj);
-            
+
             //MYSELF
             if ($this->playId == $playId) {
                 echo "|$json";
@@ -192,15 +192,15 @@ trait Connection {
                 $obj['gameId'] = $gameId;
                 $json = json_encode($obj);
                 $values = array('reply' => $json); //escape \ from utf-8 special chars
-                
+
                 $sql = "UPDATE smltown_players SET reply = CONCAT(reply , '|' , :reply) WHERE"
                         . " id = (SELECT userId FROM smltown_plays WHERE gameId = $gameId)"
                         . " AND websocket = 0";
-                
+
                 //MYSELF
                 if ($this->gameId == $gameId) {
                     echo $json;
-                }else{
+                } else {
                     $sql .= " AND playId != $this->playId";
                 }
                 sql($sql, $values);

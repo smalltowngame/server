@@ -1,7 +1,7 @@
 <?php
 
 include_once "config.php";
-if(!isset($websocket_autoload) || !$websocket_autoload){
+if (!isset($websocket_autoload) || !$websocket_autoload) {
     echo -3;
     return;
 }

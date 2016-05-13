@@ -2,9 +2,9 @@
 SMLTOWN.Transform = {
 //ON WINDOW RESIZE AND LOAD ////////////////////////////////////////////////
     contentHeights: {//android 2.3 BUG on height content div
-        updateConsole: function() {
+        updateConsole: function () {
             var $this = this;
-            setTimeout(function() {
+            setTimeout(function () {
                 $this.smltown_consoleLog = $("#smltown_consoleText").height();
             }, 500);
         }
@@ -12,7 +12,7 @@ SMLTOWN.Transform = {
         smltown_consoleLog: 0
     }
     ,
-    windowResize: function() {
+    windowResize: function () {
         //DEFINE HTML HEIGHT FOR PLUGINS
         if (!$("#smltown").length) {
             var rest = SMLTOWN.Util.getViewport().height - $("#smltown_html").offset().top;
@@ -42,7 +42,7 @@ SMLTOWN.Transform = {
         $("<style id='gameWidth' type='text/css'> .smltown_game{ width:" + width + "} </style>").appendTo("head");
     }
     ,
-    gameResize: function() {
+    gameResize: function () {
 
         //SCROLL
         if (SMLTOWN.touch) {
@@ -97,7 +97,7 @@ SMLTOWN.Transform = {
             $("smltown_menuIcon").hide();
             //chat
             this.chatFocusOutSave = this.chatFocusOut;
-            this.chatFocusOut = function() {
+            this.chatFocusOut = function () {
                 //
             };
             $("#smltown_chatInput").focus();
@@ -128,7 +128,7 @@ SMLTOWN.Transform = {
             $("smltown_menuIcon").hide();
             //chat
             this.chatFocusOutSave = this.chatFocusOut;
-            this.chatFocusOut = function() {
+            this.chatFocusOut = function () {
                 //
             };
             $("#smltown_chatInput").focus();
@@ -137,7 +137,7 @@ SMLTOWN.Transform = {
         $("#smltown_filter").css({
             'width': $("#smltown_list").width()
         });
-        
+
         //remove menu margin on very small screens
         if ($("#smltown_html").width() < 250) {
             $("#smltown_menuContent").addClass("smltown_removeMenuMargin");
@@ -165,13 +165,13 @@ SMLTOWN.Transform = {
     }
     ,
     //ON INPUT CHAT FOCUS OUT ////////////////////////////////////////////////
-    chatFocusOut: function() { //LET DEVICES FUNCTION CALL!!!
+    chatFocusOut: function () { //LET DEVICES FUNCTION CALL!!!
         $('#smltown_chatInput').blur();
         $("#smltown_console").removeClass("smltown_consoleExtended");
         this.chatUpdate();
     }
     ,
-    chatUpdate: function() {
+    chatUpdate: function () {
         if (!SMLTOWN.touch) {
             var Y = $("#smltown_consoleLog > div").height();
             //$('#smltown_consoleLog > div').animate({scrollTop: Y});
@@ -182,23 +182,23 @@ SMLTOWN.Transform = {
     }
     ,
     //GAME EVENTS FUNCTIONS ///////////////////////////////////////////////////
-    cardSwipeRotate: function() {
+    cardSwipeRotate: function () {
         $("#smltown_card").removeClass("smltown_visible");
-        setTimeout(function() {
+        setTimeout(function () {
             $("#smltown_card > div").removeClass("smltown_rotate");
         }, 400);
     }
     ,
-    cardRotateSwipe: function() {
+    cardRotateSwipe: function () {
         if ($("#smltown_card > div").hasClass("smltown_rotate")) {
             $("#smltown_card > div").removeClass("smltown_rotate");
         }
-        setTimeout(function() {
+        setTimeout(function () {
             $("#smltown_card").removeClass("smltown_visible");
         }, 200);
     }
     ,
-    updateHeader: function() { //only touch
+    updateHeader: function () { //only touch
         var Y = parseInt($("#smltown_list > div").css('transform').split(',')[5]);
         if (Y < 0) {
             $("#smltown_game").addClass("smltown_thinHeader");
@@ -207,7 +207,7 @@ SMLTOWN.Transform = {
         }
     }
     ,
-    animateAuto: function(div, callback) {
+    animateAuto: function (div, callback) {
         var elem = div.clone().css({"height": "auto"}).appendTo(div.parent());
         var height = elem.css("height");
         elem.remove();
@@ -217,12 +217,12 @@ SMLTOWN.Transform = {
         }
     }
     ,
-    animateButtons: function(div) {
+    animateButtons: function (div) {
         var childs = div.find(" > div:visible").length;
         div.css("height", childs * 50);
     }
     ,
-    removeAuto: function(sel) { //remove auto height
+    removeAuto: function (sel) { //remove auto height
         sel.removeClass("smltown_auto");
         sel.stop().css("height", ""); //stop animations
     }

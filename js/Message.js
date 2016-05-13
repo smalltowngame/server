@@ -242,10 +242,10 @@ SMLTOWN.Message = {
                 + "<div id='smltown_popupCancel' class='smltown_close'></div>"
                 + "</div>"
                 + "</div>");
-        if(false === ok){
+        if (false === ok) {
             div.find("#smltown_popupOk").hide();
         }
-        if(!cancel){
+        if (!cancel) {
             div.find("#smltown_popupCancel").hide();
         }
         return div;
