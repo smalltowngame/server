@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# EVENTS
+
+# ctr-c php
+trap revert 2
+revert(){
+    echo "reverting .."
+    # revert autoload
+    sed -i -e "s/\(websocket_autoload.*=\).*/\1 $autoload/" $file
+
+    # revert websocket
+    sed -i -e "s/\(websocket_server.*=\).*/\1 $websocket/" $file
+
+    echo "reverted values"
+}
+
+
+# START
+
+# change config
+file=../config.php
+
+#autoload value
+autoload=$(sed -n -e '/$websocket_autoload/ s/.*\= *//p' $file)
+#autoload value to 0
+sed -i -e "s/\(websocket_autoload.*=\).*/\1 0;/" $file
+
+# store websocket value
+websocket=$(sed -n -e '/$websocket_server/ s/.*\= *//p' $file)
+echo "websocket_server config value was: $websocket"
+# websocket value to 1
+sed -i -e "s/\(websocket_server.*=\).*/\1 1;/" $file
+
+# kill
+fuser -k 9000/tcp
+# run
+php -q ../smltown_websocket.php > utils/websocket.log 2> utils/websocket.err

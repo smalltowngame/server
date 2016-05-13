@@ -1,0 +1,1629 @@
+
+/*fixed to prevent scroll on devices*/
+#smltown_game{
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    /*position fixed breaks wordrpress like version*/
+    /*position: fixed;*/
+}
+
+#smltown_body{
+    position: relative;
+    box-sizing: border-box;    
+    outline: none;
+    /*text-shadow: 1px 1px 1px rgba(255,255,255,0.4);*/
+
+    /*let swipe all screen ?Â¿*/
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    /*    background: -webkit-radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
+        background: -o-radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
+        background: -moz-radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));
+        background: radial-gradient(transparent 50%, rgba(0,0,0,0.13) 80%, rgba(0,0,0,0.3));*/
+}
+
+/*scroll on events touch detection*/
+#smltown_list, #smltown_menuContent, #smltown_consoleLog{
+    overflow-y: auto;
+}
+
+#smltown_filter{
+    display: none;
+    height:100%;
+    width: 100%;
+    z-index: 8;
+    font-size: 16px;
+    position: absolute;
+    top: 0;
+}
+
+#smltown_filter.rules > div{
+    display: block !important;
+}
+
+#smltown_filter .smltown_ip{
+    font-weight: bold;
+}
+
+#smltown_notification.smltown_sleep{
+    display: inherit;
+}
+
+#smltown_notification{    
+    background-color: rgba(255,255,255,0.5);
+
+    -webkit-transition: 300ms;
+    -moz-transition: 300ms;
+    -ms-transition: 300ms;
+    -o-transition: 300ms;
+    transition: 300ms;
+}
+
+#smltown_header{
+    overflow: hidden;
+    position: relative;
+    height:55px;
+    border-bottom: 1px solid rgb(0,50,0);
+    z-index: 11;
+
+    background: rgb(160,195,0);
+    background: -webkit-linear-gradient(rgb(155,200,0), rgb(180,220,0));
+    background: -o-linear-gradient(rgb(155,200,0), rgb(180,220,0));
+    background: -moz-linear-gradient(rgb(155,200,0), rgb(180,220,0));
+    background: linear-gradient(rgb(155,200,0), rgb(180,220,0));    
+
+    -webkit-box-shadow: 0 1px 0 rgb(110,110,110), inset 0 1px gainsboro;
+    -moz-box-shadow: 0 1px 0 rgb(110,110,110), inset 0 1px gainsboro;
+    box-shadow: 0 1px 0 rgb(110,110,110), inset 0 1px gainsboro;
+}
+
+.smltown_thinHeader #smltown_header{
+    height:30px;
+}
+.smltown_thinHeader #smltown_header #smltown_menuIcon, .smltown_thinHeader  #smltown_header #smltown_cardIcon{    
+    opacity: 0;
+}
+
+.smltown_thinHeader #smltown_list{
+    top: 30px !important;
+}
+
+#smltown_menuIcon, #smltown_cardIcon{
+    position: absolute;
+    display: inline-block;
+    cursor: pointer;
+
+    -webkit-transition: opacity 300ms;
+    -moz-transition: opacity 300ms;
+    -ms-transition: opacity 300ms;
+    -o-transition: opacity 300ms;
+    transition: opacity 300ms;
+}
+#smltown_menuIcon{
+    width: 34px;
+    height: 34px;
+    top: 9px;
+    left: 13px;
+}
+
+#smltown_header .smltown_content{
+    height: 18px;
+    position: absolute;
+    left: 50px;
+    right: 50px;
+    /*    top: 0;
+        bottom: 0;*/
+    margin: auto;
+
+    bottom: 32px;
+}
+
+#smltown_header .smltown_content div{
+    float: left;
+    margin-left: 3px; /* not "0 3px" */
+    margin-right: 3px;
+}
+#smltown_header .smltown_content > div{
+    font-size: 14px;
+    margin-left:5px;
+}
+
+#smltown_list{
+    width: 100%;
+    /*height: 100%;*/
+    position: absolute;
+    top: 55px;
+    bottom: 25%;
+    margin-bottom: -10px;
+    padding-bottom: 15px;
+}
+
+#smltown_list > div{
+    position: relative;
+
+    /*    -webkit-box-shadow: rgba(0,0,0,0.5) 0 2px 3px, rgba(0,0,0,0.5) 0 -2px 3px;   Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ 
+        -moz-box-shadow: rgba(0,0,0,0.5) 0 2px 3px, rgba(0,0,0,0.5) 0 -2px 3px;   Firefox 3.5 - 3.6 
+        box-shadow: rgba(0,0,0,0.5) 0 2px 3px, rgba(0,0,0,0.5) 0 -2px 3px;*/
+}
+
+/*#smltown_listSpectator{*/    
+.smltown_userSpectator{
+    pointer-events: none;
+}
+.smltown_userSpectator #smltown_user{
+    pointer-events: auto;
+}
+.smltown_spectator{   
+    background: transparent !important;    
+}
+.smltown_spectatorText{
+    display: none;
+    cursor: pointer;
+}
+.smltown_spectatorJoinable .smltown_spectatorText{
+    display: initial;
+}
+
+.smltown_spectator .smltown_playerStatus, #playerAdd{
+    background: none;
+}
+.smltown_player.smltown_spectator{
+    cursor: auto !important;
+}
+
+.smltown_player{
+    position: relative;
+    height: 40px;    
+    border: solid rgb(99,99,99);
+    border-top: solid rgb(250,250,250);
+    border-width: 1px 0;
+    padding: 5px 2px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.smltown_player .smltown_name{
+    font-weight: bold;
+    /*text-shadow: 1px 1px rgb(220,220,220);*/
+    font-family: sans-serif;
+}
+.smltown_player .smltown_name symbol{
+    font-size: 8px;
+    vertical-align: middle;
+}
+.smltown_player .smltown_status{
+    color: rgba(0,0,0,0.35);
+}
+
+.smltown_player .smltown_up, .smltown_player .smltown_down{
+    left: 55px;
+    right: 0;
+}
+.smltown_player .smltown_up{
+    top: 4px;    
+}
+.smltown_player .smltown_down{
+    bottom: 5px;
+    color: rgb(99,99,99);
+    font-size: 14px;
+}
+
+.smltown_playerStatus{
+    font-size: 12px;
+    color: rgba(0,0,0,0.5);
+}
+.smltown_playerStatus::before{
+    content: " - ";
+}
+
+.smltown_player > div{
+    position: absolute;
+}
+.smltown_playerSymbol{
+    display: none;
+    position: absolute;
+    top: -2px;
+    font-size: 40px;
+    color: rgba(255,255,255, 0.3);
+    /*text-shadow: none;*/
+}
+
+#smltown_body:not(.smltown_night) #smltown_nightConsole{
+    display:none !important;
+}
+
+#smltown_nightConsole, .smltown_night #smltown_console{
+    /*display: none;*/
+    border-top: 2px solid rgb(50,50,50);
+
+    background-color: rgb(220,240,175);
+    background: -webkit-linear-gradient(rgb(200,200,200), rgb(150,150,150)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgb(200,200,200), rgb(150,150,150)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgb(200,200,200), rgb(150,150,150)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgb(200,200,200), rgb(150,150,150));
+    background: linear-gradient(rgb(200,200,200), rgb(150,150,150));
+}
+
+#smltown_nightConsole > *:first-child{
+    margin-top: 20px;
+}
+#smltown_nightConsole *{
+    text-align: center;
+}
+
+#smltown_console{
+    border-top: 2px solid rgb(140,210,0);
+    cursor: pointer;
+
+    background-color: rgb(220,240,175);
+    background: -webkit-linear-gradient(rgb(215,235,155), rgb(215,235,130)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgb(215,235,155), rgb(215,235,130)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgb(215,235,155), rgb(215,235,130)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgb(215,235,155), rgb(215,235,130));
+    background: linear-gradient(rgb(200,220,155), rgb(195,220,130));
+
+    -webkit-transition: -webkit-transform 150ms;
+    transition: transform 150ms;
+    /*display: table;*/
+    /*height: 80% !important;*/
+}
+
+#smltown_console, #smltown_nightConsole{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    top: 75%;
+    font-size: 14px;
+    border-radius: 14px 14px 0 0;    
+    overflow: hidden;
+    z-index: 11;
+
+    -webkit-box-shadow: 0 -1px 0 rgb(90,90,90), inset 0 1px white;
+    -moz-box-shadow: 0 -1px 0 rgb(90,90,90), inset 0 1px white;
+    box-shadow: 0 -1px 0 rgb(90,90,90), inset 0 1px white;
+}
+
+#smltown_console:hover{
+    background-color: rgb(230,250,175);
+}
+
+#smltown_game.smltown_reduced #smltown_console{
+    -webkit-transform: translateY(80%);
+    -moz-transform: translateY(80%);
+    -ms-transform: translateY(80%);
+    -o-transform: translateY(80%);
+    transform: translateY(80%);
+
+    -webkit-transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+    transition: none;
+}
+
+#smltown_game.smltown_reduced #smltown_list{
+    bottom: 0;
+}
+
+#smltown_consoleText{
+    /*height: 100%;*/
+    display: table-row;
+    height: 100%;
+}
+#smltown_consoleLog{
+    height: 100%;
+    position: relative;    
+}
+/**/
+#smltown_consoleLog > div{
+    position: absolute;
+    bottom: 0;
+    margin: 0 10px;
+    left: 0;
+    right: 0;
+}
+#smltown_consoleLog > div:empty:after{
+    content: attr(empty-content);
+    color: rgb(99,99,99);
+}
+#smltown_consoleLog > div > div{     
+    line-height: 20px;
+    /*text-shadow: 1px 1px rgb(230,255,210);*/
+}
+
+#smltown_consoleText span{
+    text-shadow: none;
+    vertical-align: bottom;
+    font-family: sans-serif;
+}
+
+#smltown_console .smltown_time{
+    font-size: 10px;
+    color: rgb(100,100,100);
+}
+
+.smltown_consoleExtended{
+    z-index: 12;
+    height: auto !important;
+    top: 5px !important;
+    -webkit-transition: -webkit-transform 250ms, height 250ms;
+    -moz-transition: -moz-transform 250ms, height 250ms;
+    -ms-transition: -ms-transform 250ms, height 250ms;
+    -o-transition: -o-transform 250ms, height 250ms;
+    transition: transform 250ms, height 250ms;
+}
+
+.smltown_consoleExtended #smltown_chatForm{
+    display: table-row;  
+}
+
+#smltown_user .smltown_player{
+    /*background-color: rgba(170,220,0, 0.5);*/
+    background-color: rgb(184,216,108);
+}
+.smltown_night #smltown_user .smltown_player{
+    /*background-color: rgba(170,220,0, 0.5);*/
+    background-color: rgb(184,216,108);
+}
+#smltown_user .smltown_name{
+    color: black !important;
+}
+
+#smltown_consoleTitle{
+    color: rgb(50,50,50);
+    font-size: 14px;
+    color: green;
+    height: 18px;
+    position: absolute;
+    left: 35px;
+    right: 35px;    
+    bottom: 5px;
+    margin: auto 20px;
+}
+
+#smltown_gameName{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.smltown_gameName{
+    float:right;	
+    padding: 0 10px;
+    font-weight:bold;
+}
+
+#smltown_buttons{
+    width: 100%;
+    table-layout: fixed;
+    position: absolute;
+    bottom: 0;
+}
+#smltown_buttons td { 
+    overflow: hidden;
+}
+#smltown_buttons .smltown_button{
+    padding: 0 5px;
+}
+
+#smltown_menu, #smltown_card{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 19;
+    top:0;
+
+    /*background-color transition makes animation choppy!*/
+    -webkit-transition: -webkit-transform ease-in 0.2s;
+    -moz-transition: -moz-transform ease-in 0.2s;
+    -ms-transition:  -ms-transform ease-in 0.2s;
+    -o-transition: -o-transform ease-in 0.2s;
+    transition: transform ease-in 0.2s;
+}
+
+#smltown_card{
+    /*width: 100%;*/
+    /*left: 100%;*/
+    right: -100%;
+    color: white;
+    cursor: pointer;
+}
+
+#smltown_card.smltown_visible{
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    -o-transform: translateX(-100%);
+    transform: translateX(-100%);
+}
+#smltown_menu.smltown_visible{
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+    transform: translateX(0);    
+}
+
+#smltown_card > div {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    cursor: pointer;
+
+    -webkit-transition: -webkit-transform 0.4s;
+    -moz-transition: -moz-transform 0.4s;
+    -ms-transition: -ms-transform 0.4s;
+    -o-transition: -o-transform 0.4s;
+    transition: transform 0.4s;
+}
+#smltown_cardFront .smltown_cardImage{
+    background-size: 100%;
+    padding-bottom: 100%;
+    border-radius: 20px;
+    /*not shown bug*/
+    /*overflow: hidden;*/
+}
+
+#smltown_cardFront {
+    /*z-index: -1;*/
+    position: absolute;
+    top: 0;
+    -webkit-transform: rotateY( -180deg );
+    -ms-transform: rotateY( -180deg );
+    transform: rotateY( -180deg ); 
+    height: 100%;
+
+    /*vetical?*/
+    width:50%;
+}
+
+#smltown_cardFront .smltown_cardShadow{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+}
+
+.smltown_cardText{
+    font-size: 42px;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    /*default height before update*/
+    height: 25%;
+}
+@font-face {
+    font-family: 'ChineseRocksRg-Regular';
+    src: url('../webfonts/2D31BA_0_0.eot');
+    src: url('../webfonts/2D31BA_0_0.eot?#iefix') format('embedded-opentype'),url('../webfonts/2D31BA_0_0.woff2') format('woff2'),url('../webfonts/2D31BA_0_0.woff') format('woff'),url('../webfonts/2D31BA_0_0.ttf') format('truetype');
+}
+.smltown_cardText > div{
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translateX(-50%) translateY(-50%);/* IE 9 */
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    font-family: ChineseRocksRg-Regular;
+}
+.smltown_cardText .smltown_desc{ /*description*/
+    margin: 0 20px;
+    font-size: 18px;
+    color: rgb(150,150,150);
+    /*text-shadow: none;*/
+}
+
+.smltown_cardText .smltown_quote{ /*description*/
+    font-style: italic;
+    margin-top: 30px !important;
+    font-family: serif;
+    font-size: 14px;
+    color: rgb(100,100,100)
+}
+
+#smltown_cardBack {
+    background-size: 100% 100%;
+}
+
+.smltown_cardShadow, #smltown_cardFront{  
+    border-radius: 15px;
+}
+.smltown_cardShadow{
+    -webkit-box-shadow: inset 1px 1px white,
+        inset 1px 1px rgb(99,99,99), 
+        inset 1px -1px rgb(99,99,99), 
+        inset -1px -1px rgb(99,99,99), 
+        inset -1px 1px rgb(99,99,99), 
+        inset 14px 14px rgb(180,180,180), 
+        inset 14px -14px rgb(180,180,180), 
+        inset -14px -14px rgb(180,180,180), 
+        inset -14px 14px rgb(180,180,180), 
+        inset 16px 16px rgb(30,30,30), 
+        inset 16px -16px rgb(30,30,30), 
+        inset -16px -16px rgb(30,30,30), 
+        inset -16px 16px rgb(30,30,30);
+    -moz-box-shadow: inset 1px 1px white,
+        inset 1px 1px rgb(99,99,99), 
+        inset 1px -1px rgb(99,99,99), 
+        inset -1px -1px rgb(99,99,99), 
+        inset -1px 1px rgb(99,99,99), 
+        inset 14px 14px rgb(180,180,180), 
+        inset 14px -14px rgb(180,180,180), 
+        inset -14px -14px rgb(180,180,180), 
+        inset -14px 14px rgb(180,180,180), 
+        inset 16px 16px rgb(30,30,30), 
+        inset 16px -16px rgb(30,30,30), 
+        inset -16px -16px rgb(30,30,30), 
+        inset -16px 16px rgb(30,30,30);
+    box-shadow: inset 1px 1px white,
+        inset 1px 1px rgb(99,99,99), 
+        inset 1px -1px rgb(99,99,99), 
+        inset -1px -1px rgb(99,99,99), 
+        inset -1px 1px rgb(99,99,99), 
+        inset 14px 14px rgb(180,180,180), 
+        inset 14px -14px rgb(180,180,180), 
+        inset -14px -14px rgb(180,180,180), 
+        inset -14px 14px rgb(180,180,180), 
+        inset 16px 16px rgb(30,30,30), 
+        inset 16px -16px rgb(30,30,30), 
+        inset -16px -16px rgb(30,30,30), 
+        inset -16px 16px rgb(30,30,30);
+}
+
+#smltown_menu{
+    left: 0;
+
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    -o-transform: translateX(-100%);
+    transform: translateX(-100%);    
+}
+/*#smltown_menuContent, #smltown_menuContent > div{
+    background-color: rgb(250,250,250);
+}*/
+#smltown_menuContent{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    background-color: rgb(250,250,250);
+
+    max-width: 370px;
+    /*min-width: 200px;*/
+    position: absolute;
+    margin-right: 60px;
+    word-break: break-all;
+}
+#smltown_menuContent.smltown_removeMenuMargin{
+    margin-right: 0 !important;
+}
+.smltown_removeMenuMargin symbol{
+    display: none !important;
+}
+.smltown_removeMenuMargin #smltown_menu .smltown_selector > div{
+    padding-left: 20px !important;
+}
+.smltown_removeMenuMargin #smltown_menu .smltown_selector > div:first-child{
+    padding-left: 10px !important;
+}
+
+#smltown_menuAll{
+    min-height: 100%;
+    height: auto !important; /* This line and the next line are not necessary unless you need IE6 support */
+    height: 100%;
+    margin: 0 auto -50px; /* the bottom margin is the negative value of the footer's height */
+}
+
+#smltown_menuAll::after{    
+    content: "";
+    display: block;
+    height: 50px;
+    width: 100%;
+    position: relative;
+}
+
+#smltown_menuContent > div{
+    width:100%; /*back button*/
+}
+
+#smltown_menu .smltown_selector, #smltown_menu .smltown_selector > div{
+    overflow: hidden;
+    font-size: 14px;
+    position: relative;
+    height: 20px;
+}
+#smltown_menu .smltown_selector > div{
+    height: 30px;
+    padding: 10px 15px 10px 35px;    
+    cursor: pointer;
+    overflow: hidden; /*prevent inner div movements*/    
+}
+#smltown_menu .smltown_selector > div:hover{
+    background-color: rgb(235,235,235);
+}
+
+#smltown_menu .smltown_selector > div.active{
+    background-color: rgb(225,225,225);
+}
+
+#smltown_menu .text{
+    word-wrap: break-word;
+    padding-top: 21px !important;
+    padding-bottom: 9px !important;
+}
+#smltown_menu .text small{
+    color: rgb(50,50,50) !important;
+    text-align:left !important;
+}
+
+#smltown_menu .smltown_action{
+    padding-top: 13px;
+    padding-bottom: 7px;
+    font-weight: bold;
+}
+#smltown_menu small{
+    display: block;
+    width: 100%;
+    text-align: right;
+    font-weight: normal;
+    margin-top: 2px;
+}
+#smltown_menu small, #smltown_menu input, #smltown_menu form *, .smltown_admin{
+    color: rgb(170,170,170);
+    font-weight: normal;
+}
+#smltown_menu input, #smltown_menu form *{
+    float: right;
+}
+
+#smltown_menu input[type=text]{
+    background-color: transparent;
+    border-color: transparent;
+    /*width: 100px;*/
+}
+
+#smltown_menu input:focus{
+    outline: 0;
+    background-color: rgb(225,225,225);
+    color: black;
+}
+
+#smltown_menu .input input{
+    line-height: inherit !important;
+    height: inherit !important;
+    text-align: right;
+    margin-top: -2px;
+    pointer-events: none;
+}
+
+#smltown_menu .icon{
+    font-size: 20px;
+    position: absolute;
+    left: 0;
+    top: 8px;
+    color: rgb(236,236,236);
+    width: 30px;
+    text-align: center;
+    vertical-align: bottom;
+    line-height: 30px;
+    /*    -webkit-text-shadow: -1px -1px rgba(0,0,0,0.4);   Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ 
+        -moz-text-shadow: -1px -1px rgba(0,0,0,0.4);   Firefox 3.5 - 3.6 
+        text-shadow: -1px -1px rgba(0,0,0,0.4);*/
+}
+
+#smltown_menu .smltown_auto{
+    background-color: rgb(242,242,242);
+}
+
+#smltown_menu .smltown_selector{
+    min-height: 50px;
+    padding: 0 !important;
+    font-weight: bold;
+
+    -webkit-transition: height 300ms;
+    -moz-transition: height 300ms;
+    -ms-transition: height 300ms;
+    -o-transition: height 300ms;
+    transition: height 300ms;
+}
+
+#smltown_menu .smltown_selector > div:not(:first-child){
+    padding-left: 55px;
+}
+
+.smltown_selectedMenu{
+    min-height: 50px;
+    height: auto !important;
+}
+
+#smltown_updateName input{
+    font-size: 13px !important;
+}
+
+#smltown_cardBack.smltown_rotate{    
+    -webkit-transform: rotateY(-180deg);
+    -moz-transform: rotateY(-180deg);
+    -ms-transform: rotateY(-180deg);
+    -o-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+}
+#smltown_cardFront.smltown_rotate{
+    /*z-index: 0;*/
+    -webkit-transform: rotateY(0);
+    -moz-transform: rotateY(0);
+    -ms-transform: rotateY(0);
+    -o-transform: rotateY(0);
+    transform: rotateY(0);
+}
+
+.smltown_check{
+    /*background-color: rgb(255,180,180);*/
+    background-color: rgba(255,0,0,0.2);
+
+    -webkit-box-shadow: inset 0px 1px 5px black;
+    -moz-box-shadow: inset 0px 1px 5px black;
+    box-shadow: inset 0px 1px 5px black;
+}
+.smltown_preselect{
+    background-color: rgba(255,210,0,0.4);
+
+    -webkit-box-shadow: inset 0 2px 0 black;
+    -moz-box-shadow: inset 0 2px 0 black;
+    box-shadow: inset 0 2px 0 black;
+}
+.smltown_preselect:before{
+    content: attr(preselect-content);
+    line-height: 44px;
+    font-size: 18px;
+    position: absolute;
+    color: rgba(0,0,0,0.25);
+
+    right: 0;
+    left: 0;
+    text-align: center;
+}
+
+.smltown_lastSeconds{
+    color: red;
+}
+
+.smltown_votes{
+    color: rgb(200,0,0);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-right: 55px;
+    float:right;
+    font-size: 30px;
+    line-height: 38px;
+}
+.smltown_dead .smltown_votes{
+    color: rgb(120,120,120) !important;
+}
+.smltown_votes span{
+    float: right;
+}
+.smltown_extra{
+    width: 46px;
+    height: 46px;
+    text-align: center;
+    line-height: 46px;
+    background-size: 100%;
+    position: absolute;
+    right: 4px;
+    top: 2px;
+    text-shadow: 1px 1px white;
+
+    -webkit-box-shadow: inset 1px 1px 0 rgb(50,50,50), inset -1px -1px rgb(220,220,220);
+    -moz-box-shadow: inset 1px 1px 0 rgb(50,50,50), inset -1px -1px rgb(220,220,220);
+    box-shadow: inset 1px 1px 0 rgb(50,50,50), inset -1px -1px rgb(220,220,220);
+    font-size: 40px;
+    border-radius: 10px;
+}
+
+.smltown_extra > *{
+    margin: auto;
+}
+
+/*SEPARATED: http://stackoverflow.com/questions/2610497/change-an-inputs-html5-placeholder-color-with-css*/
+.smltown_extra::-webkit-input-placeholder {
+    color: rgba(255,255,255, 0.3);
+    /*text-shadow: none;*/
+    font-size: 30px;
+    font-weight: bold;
+}
+.smltown_extra:-moz-placeholder { /*FF 4-18*/ 
+    color: rgba(255,255,255, 0.3);
+    /*text-shadow: none;*/
+    font-size: 30px;
+    font-weight: bold;
+}
+.smltown_extra::-moz-placeholder { /*FF 19+ */ 
+    color: rgba(255,255,255, 0.3);
+    /*    text-shadow: none;*/
+    font-size: 30px;
+    font-weight: bold;
+}
+.smltown_extra:-ms-input-placeholder { /*IE 10+ */ 
+    color: rgba(255,255,255, 0.3);
+    /*text-shadow: none;*/
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.smltown_player .smltown_picture{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: 3px;
+    /*width: 100%;*/
+    width: 44px;
+}
+.smltown_player .smltown_picture img{
+    height: 100%;
+    width: 100%;
+    border: 1px solid rgb(60,60,60);
+    margin-top: -1px; /*prevent border move*/
+
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+}
+
+.smltown_quit, .smltown_waitingPlayer{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 46px;
+    background-size: 100%;     
+    top: 0;
+    display: none;
+}
+
+.smltown_quit{
+    right: 2px;
+    color: red;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.smltown_waiting .smltown_quit{
+    display: initial;
+}
+
+.smltown_waitingPlayer{
+    right: 0;
+    left: 0;
+    margin: auto;
+}
+
+#smltown_user .smltown_spectatorText{
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    margin-top: 14px;
+    font-size: 20px;
+    color: grey;
+}
+
+/*.smltown_extra, #smltown_listSpectator .smltown_extra{*/    
+#smltown_listSpectator .smltown_extra{    
+    display: none !important;
+}
+
+#smltown_popup{
+    display: none;    
+    margin-top:120px;
+    width:100%;
+    padding: 15px 0;
+    text-align: center;
+    font-weight: bold;
+    border-top: 1px solid rgb(99,99,99);
+    border-bottom: 1px solid rgb(170,170,170);
+    opacity: 1;
+    /*pointer-events:auto;*/
+
+    background-color:rgb(160,195,0);
+    background: -webkit-linear-gradient(rgb(180,220,0), rgb(155,200,0)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgb(180,220,0), rgb(155,200,0)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgb(180,220,0), rgb(155,200,0)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgb(180,220,0), rgb(155,200,0));
+
+    -webkit-box-shadow: inset 0 -1px black, inset 0 1px white;
+    -moz-box-shadow: inset 0 -1px black, inset 0 1px white;
+    box-shadow: inset 0 -1px black, inset 0 1px white;
+}
+#smltown_notification #smltown_popup{ /*if filter is notification*/
+    display: block;
+    position: relative;
+}
+
+.smltown_night #smltown_popup{
+    color: rgb(100, 0, 0);
+    background-color:rgb(170,170,170);
+    background: -webkit-linear-gradient(rgb(200, 200, 200), rgb(150, 150, 150)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgb(200, 200, 200), rgb(150, 150, 150)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgb(200, 200, 200), rgb(150, 150, 150)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgb(200, 200, 200), rgb(150, 150, 150));
+}
+
+#smltown_popupText{
+    padding-bottom: 32px;    
+    margin: auto;
+    display: table;
+    /*position: relative;*/
+    /*text-shadow: -1px -1px 1px white;*/
+}
+#smltown_popupText .smltown_imageText{
+    padding: 0 65px;
+    height: 50px;
+    display: table-cell;
+}
+#smltown_popupText p{
+    font-weight: normal;
+    margin: 5px 0 0 0;
+}
+
+#smltown_popupText table {
+    margin: auto;
+}
+
+#smltown_popupText td {
+    /* votes */
+    padding: 0 5px;
+}
+#smltown_popupText img{
+    width: 50px;
+    position: absolute;
+    left: 10px;
+}
+#smltown_popupText span{
+    vertical_align: top;
+}
+
+#smltown_popup .smltown_button{
+    border-radius: 100px;    
+    margin: auto;
+    box-shadow: inset 0 -1px white, 1px 1px rgb(200,240,150);
+    width:65%;
+}
+.smltown_night #smltown_popup .smltown_button{
+    box-shadow: inset 0 -1px white, 1px 1px rgb(200,200,200);
+}
+
+#smltown_popup .smltown_close{
+    position: absolute;
+    top: -18px;
+    right: 17px;
+    line-height: 35px;
+    width: 35px;
+    background-color: white;
+    border-radius: 30px;
+    border: 3px solid rgb(150,200,0);
+    box-shadow: 1px 1px 0 rgb(60,60,60), -1px -1px 0 white;
+    font-size: 20px;
+    cursor: pointer;
+}
+#smltown_popup .smltown_close:hover{
+    background-color: rgb(220,220,220);
+    box-shadow: 1px 1px 0 rgb(60,60,60), inset 1px 1px rgb(99,99,99);
+}
+#smltown_popup .smltown_close::before{
+    content: "✘";
+}
+
+
+.smltown_sleep{
+    display: block !important;
+    pointer-events: inherit !important;
+
+    background-size: 80% 70%;
+    background-repeat: no-repeat;
+    background-position: 50% 25%;
+}
+
+.smltown_dead{
+    background-color: rgb(185, 185, 185) !important;
+}
+.smltown_dead .smltown_extra{
+    color: transparent;
+    text-shadow: none;
+}
+.smltown_dead .smltown_extra::before{
+    /*content: "☠";*/
+    content: "✗";
+    display: block;
+    font-size: 40px;
+    text-shadow: 2px 2px 1px black;
+    color: red;
+}
+
+#smltown_inputName{
+    width: 100%;
+}
+
+.smltown_enemy{
+    /*color: red !important;*/
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+#smltown_flash{
+    z-index: 100;
+    position:absolute;
+    top: 35%;
+    color: white;	
+    /*text-shadow: 1px 1px 1px black;*/
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+
+    -webkit-transition: 200ms;
+    -moz-transition: 200ms;
+    -ms-transition: 200ms;
+    -o-transition: 200ms;
+    transition: 200ms;
+}
+#smltown_flash > div{
+    display: inline-block;
+    background-color: rgba(0,0,0,0.4);
+    padding: 10px;
+}
+
+#smltown_external{    
+    position:absolute;
+    bottom: 20px;
+    transform: translateX(-100%);
+    padding: 16px 8px; 
+    border-width: 2px 0;
+    border-color: green;
+    border-style: solid;
+    background-color: rgb(155,200,0);  
+    z-index: 19;
+
+    -webkit-transition: 300ms;
+    -moz-transition: 300ms;
+    -ms-transition: 300ms;
+    -o-transition: 300ms;
+    transition: 300ms;
+}
+
+#smltown_external.smltown_visible{
+    transform: translateX(0);
+}
+
+#smltown_chatForm{
+    display: none;
+    /*margin:0;*/
+    /*position: fixed;*/
+    /*position: absolute;*/
+    /*bottom: 0;*/
+    /*background-color: rgb(207,225,157);*/
+    position: relative;
+    /*display: table-row !important;*/
+    background-color: white;
+}
+#smltown_chatForm > div{
+    border-top: 1px solid grey;
+    min-height: 50px;
+}
+
+#smltown_chatInput{    
+    line-height: inherit !important;
+    font-size: 16px;
+    outline: 0;
+    border: none;
+    background-color: transparent;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+#smltown_chatForm, #smltown_chatInput{
+    width:100%;
+}
+#smltown_chatForm .smltown_send{
+    float:right;
+    position:absolute;
+    top: 0;
+    right: 0;
+    z-index:10;
+    cursor: pointer;
+    background-color:white;
+    width: 20px;
+    height:20px;
+}
+
+.smltown_admin.selector{
+    display:none;
+}
+.smltown_admin > div{
+    pointer-events: none;
+}
+#smltown_html.smltown_isAdmin .smltown_admin > div{
+    /*!important value conflicts with helpers!*/
+    /*pointer-events: inherit !important;*/
+    pointer-events: inherit;
+    color: black;
+    font-weight: bold;
+}
+
+.smltown_selectable{
+    display:inherit !important;
+    pointer-events: inherit !important;
+}
+
+#smltown_playingCards > p:before{
+    content:attr(class) " ";
+}
+#smltown_playingCards{
+    padding-right: 12px;
+    padding-left: 5px;
+    margin-top: 15px;
+    text-align: right;
+    margin: 0;
+}
+
+#smltown_playingCards .smltown_cardGroupName{
+    border-top: 1px solid rgb(100,100,100);
+    margin-left: 30px;
+    color: grey;
+    margin-bottom: 0;
+    margin-top: 7px;
+}
+
+#smltown_playingCards > table{
+    width: 100%;
+}
+
+.smltown_rulesCard{
+    width:80px;
+    height:80px;
+    /*display: inline-block;*/    
+    float: right;
+    background-size: 100%;
+    position: relative; 
+    font-weight: bold;
+    margin: 0 0 5px 5px;
+    color: white;
+    /*text-shadow: 1px 1px 1px black;*/
+    /*-webkit-touch-callout: none !important;*/ 
+
+    background-color: rgb(200,200,200);
+    vertical-align: top;
+    text-align: center;
+    line-height: 82px;
+    border-radius: 4px;
+    font-size: 20px;
+
+    -webkit-box-shadow: 0 0 2px black;
+    -moz-box-shadow: 0 0 2px black;
+    box-shadow: 0 0 2px black;
+}
+
+.smltown_rulesCard > span{
+    position:absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    line-height: 20px;
+}
+
+.smltown_rulesCard form{
+    position: absolute;
+    left: 0;
+}
+
+.smltown_rulesCard input, .smltown_rulesCard input:focus{
+    display: none;
+    font-size: 30px !important;
+    width: 100%;
+    /*height: 100%;*/
+    text-align: center !important;
+    border: none !important;
+    /*background: transparent;*/
+    background: none !important;
+    color:white !important;
+    /*text-shadow: 1px 1px 1px black, -1px -1px 1px black, -1px 1px 1px black, 1px -1px 1px black;*/
+    margin-top: 48px;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.smltown_selectedRulesCard{
+    -webkit-box-shadow: 2px 2px 7px black, 3px 3px 20px yellow, 
+        -1px -1px 5px black, -3px -3px 20px yellow !important;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow:    2px 2px 7px black, 3px 3px 20px yellow, 
+        -1px -1px 5px black, -3px -3px 20px yellow !important;  /* Firefox 3.5 - 3.6 */
+    box-shadow: 2px 2px 7px black, 3px 3px 20px yellow, 
+        -1px -1px 5px black, -3px -3px 20px yellow !important;
+}
+
+.smltown_textCard{    
+    line-height: inherit !important;
+    display: table;
+}
+.smltown_extra.smltown_textCard{
+    display: table;
+    background-color: rgb(200,200,200); 
+    border-radius: 5px;
+    color: rgba(255,255,255,0.8);
+
+    -webkit-box-shadow: inset 0 0 3px black, 0 0 1px black;    
+    -moz-box-shadow: inset 0 0 3px black, 0 0 1px black;    
+    box-shadow: inset 0 0 3px black, 0 0 1px black;    
+}
+.smltown_rulesCard.smltown_textCard{
+    -webkit-box-shadow: inset 0 0 5px black;
+    -moz-box-shadow: inset 0 0 5px black;
+    box-shadow: inset 0 0 5px black;
+}
+
+smltown_name{
+    vertical-align: middle;
+    display: table-cell;    
+}
+
+.smltown_cardOut{
+    opacity: 0.2;
+}
+
+#smltown_infoSelectedCard{
+    background-color: rgba(0,0,0,0.7);
+    position:absolute;
+    bottom: 0;
+    width: 100%;
+    color: white;    
+    z-index: 20;
+    text-align: center;
+    padding: 10px;
+    font-size:18px;
+    /*text-shadow: 1px 1px 1px black;*/
+}
+#smltown_infoSelectedCard p{
+    font-size:14px;
+    margin:0;
+}
+
+/*#smltown_backButton{
+    position: absolute !important;
+    top: auto !important;
+    bottom: 0 !important;
+    z-index: 0 !important;
+}*/
+
+#smltown_help{
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    margin: auto;
+    left: 0;
+    right: 0;    
+    background-color: rgba(50,150,0,0.5);
+    border-radius: 9px;
+    border: 1px solid rgb(80,80,80);
+    text-align: center;
+    color: gainsboro;
+    font-weight: bold;
+    cursor: pointer;
+    text-shadow: 1px 1px rgb(50,50,50);
+
+    -webkit-box-shadow: 1px 1px 0 gainsboro;
+    -moz-box-shadow: 1px 1px 0 gainsboro;
+    box-shadow: 1px 1px 0 gainsboro;
+}
+#smltown_help:hover{
+    -webkit-box-shadow: inset 1px 1px 0 black;
+    -moz-box-shadow: inset 1px 1px 0 black;
+    box-shadow: inset 1px 1px 0 black;
+}
+#smltown_helpMessage{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 80%;
+    height: 80%;
+    background-color: rgba(0,0,0,0.5);
+    border: 1px solid black;
+    color: rgb(200,200,200);
+    padding: 15px;
+    margin: auto;
+    z-index: 99;
+}
+
+#smltown_sun{
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.35;
+    z-index: 1;
+}
+
+#smltown_sun > div{    
+    width: 128px;
+    height: 128px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.smltown_night #smltown_sun{
+    /*    background-image: url(../img/moon.png), url(../img/stars.png);
+        background-repeat: no-repeat, repeat;
+        background-size: 65%, 100%;
+        background-position: 50% 20%;*/
+    background: linear-gradient(to bottom, #020111 10%,#3a3a52 100%);
+}
+.smltown_night #smltown_sun > div{
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: 50%;
+    margin: auto;
+    right: 0;
+    left: 0;
+    top: 10%;
+}
+
+.smltown_night #smltown_list{
+    /*background-image: url(../img/stars.png);*/
+    background-size: 100%;
+}
+.smltown_night #smltown_list > div::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+
+    /*    background-image: url(../img/stars.png);
+        background-image: url(../img/stars.png), url(../img/moon.png);
+        background-repeat: repeat, no-repeat;
+        background-size: auto, 100%;*/
+}
+.smltown_night#smltown_body{
+    /*TODO: DARK BACKGROUND*/
+    /*background-image: url(../img/stars.png);*/    
+}
+
+#smltown_phpCard{
+    display: none;
+}
+
+.smltown_tour{
+    position: absolute;
+    bottom: 30px;
+    color: blue;
+    text-decoration: underline;
+    left: 0;
+    right: 0;
+    text-align: center;
+    cursor: pointer;
+}
+
+#smltown_body.smltown_waiting .smltown_gameover, #smltown_body.smltown_gameover .smltown_gameover{
+    display: inherit !important;
+}
+#smltown_body.smltown_waiting .smltown_waiting{
+    display: inherit !important;
+}
+
+/*.daylight1{
+    background: linear-gradient(to bottom, #020111 10%,#3a3a52 100%);
+}
+.daylight2{
+    background: linear-gradient(to bottom, #20202c 0%,#515175 100%);
+}
+.daylight3{
+    background: linear-gradient(to bottom, #40405c 0%,#6f71aa 80%,#8a76ab 100%);
+}*/
+.daylight1{
+    background: linear-gradient(to bottom, #4a4969 0%,#7072ab 50%,#cd82a0 100%);
+}
+.daylight2{
+    background: linear-gradient(to bottom, #757abf 0%,#8583be 60%,#eab0d1 100%);
+}
+.daylight3{
+    background: linear-gradient(to bottom, #82addb 0%,#ebb2b1 100%);
+}
+.daylight4{
+    background: linear-gradient(to bottom, #94c5f8 1%,#a6e6ff 70%,#b1b5ea 100%);
+}
+.daylight5{
+    background: linear-gradient(to bottom, #b7eaff 0%,#94dfff 100%);
+}
+.daylight6{
+    background: linear-gradient(to bottom, #9be2fe 0%,#67d1fb 100%);
+}
+.daylight7{
+    background: linear-gradient(to bottom, #90dffe 0%,#38a3d1 100%);
+}
+.daylight8{
+    background: linear-gradient(to bottom, #57c1eb 0%,#246fa8 100%);
+}
+.daylight9{
+    background: linear-gradient(to bottom, #2d91c2 0%,#1e528e 100%);
+}
+.daylight10{
+    background: linear-gradient(to bottom, #2473ab 0%,#1e528e 70%,#5b7983 100%);
+}
+.daylight11{
+    background: linear-gradient(to bottom, #1e528e 0%,#265889 50%,#9da671 100%);
+}
+.daylight12{
+    background: linear-gradient(to bottom, #1e528e 0%,#728a7c 50%,#e9ce5d 100%);
+}
+.daylight13{
+    background: linear-gradient(to bottom, #154277 0%,#576e71 30%,#e1c45e 70%,#b26339 100%);
+}
+.daylight14{
+    background: linear-gradient(to bottom, #163C52 0%,#4F4F47 30%,#C5752D 60%,#B7490F 80%, #2F1107 100%);
+}
+.daylight15{
+    background: linear-gradient(to bottom, #071B26 0%,#071B26 30%,#8A3B12 80%,#240E03 100%);
+}
+.daylight16{
+    background: linear-gradient(to bottom, #010A10 30%,#59230B 80%,#2F1107 100%);
+}
+/*.daylight17{
+    background: linear-gradient(to bottom, #090401 50%,#4B1D06 100%);
+}*/
+
+#smltown_pictureContextMenu{
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid grey;
+}
+#smltown_pictureContextMenu > div{
+    border: 1px solid black;
+    padding: 10px;
+    cursor: pointer;
+}
+#smltown_pictureContextMenu > div:hover{
+    background-color: gainsboro;
+}
+
+#smltown_shareMenu{
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    background-color: white;
+    z-index: 25;
+
+    transition: 200ms;
+}
+#smltown_shareMenu.smltown_swipe{
+    transform: translateY(-100%);
+}
+#smltown_shareMenu > div{
+    padding: 15px;
+    cursor: pointer;
+    position: relative;
+}
+#smltown_shareMenu > div{
+    padding: 15px;
+    position: relative;
+}
+#smltown_shareMenu > div:first-child{
+    color:grey;
+}
+#smltown_shareMenu > div:not(:first-child){
+    cursor: pointer;
+}
+#smltown_shareMenu > div:not(:first-child):hover{
+    background-color: gainsboro;
+}
+#smltown_shareMenu img, #smltown_shareMenu .smltown_img{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+
+    width: 25px;
+    height: 25px;
+    background-size: 100%;
+}
+#smltown_shareMenu span{
+    margin-left: 30px;
+}
+
+.smltown_mouse #smltown_consoleLog > div{
+    max-height: 100%;
+    position: absolute;
+    right: 0;
+    left: 0;
+}
+
+#smltown_notes{
+    padding: 5px 15px !important;
+    margin: 0 !important; 
+    height: auto !important;
+}
+
+#smltown_notes textarea{
+    width: 100%;    
+    resize: none;
+}
+
+.smltown_userSelectable{
+    pointer-events: auto !important;
+}
+
+#playerAdd{
+    /*text-align: center;*/
+    line-height: 38px;
+    font-size: 20px;
+    color: rgb(100,150,0);
+    font-weight: bold;
+    font-family: sans-serif;
+    padding-left: 10px;
+}
+#playerAdd small{
+    margin-left: 5px;
+    font-size: 12px;
+    font-weight: normal;
+}
+#playerAdd small::before{
+    content: "(";
+}
+#playerAdd small::after{
+    content: ")";
+}
+#playerAdd .smltown_extra{
+    background-color: rgb(210,240,60);
+}
+#playerAdd .smltown_extra::after{
+    content: "+";
+}
+
+#smltown_menuInfo{
+    margin: 30px;
+    color: grey;
+    font-size: 12px;
+}
+
+.defaultSelect{
+    color: rgb(255,100,0) !important;
+}
+#smltown_menuIcon.defaultSelect:before{
+    border-color: rgb(230,130,0);
+}
+#smltown_menuIcon.defaultSelect:after{
+    background: rgb(230,130,0);
+}
+
+#smltown_friendsLink{
+    cursor: initial !important;
+
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+#smltown_friendsLink:hover{
+    background: none !important;
+}

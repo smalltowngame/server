@@ -1,0 +1,256 @@
+
+#smltown_friendSelector{
+    display: none;
+    position: absolute;
+    top: 25px;
+    bottom: 25px;
+    left: 10px;
+    right: 10px;
+    background-color: white;
+    border: 1px solid rgb(100,100,100);
+    z-index: 99;
+    font-family: sans-serif;
+    font-size: 14px;
+}
+
+#smltown_friendsContent{
+    border: 1px solid rgb(200,200,200);
+    margin: 15px 10px;
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 50px;
+    top: 50px;
+}
+
+#smltown_friendsTitle > *{
+    margin: 20px 10px;
+}
+#smltown_friendsTitle p{
+    color: rgb(150,150,150);
+}
+#smltown_friendsTitle .smltown_update{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.smltown_invitableFriend{
+    width: 33%;
+    margin-right: -5px;
+    min-width: 85px;
+    max-width: 150px;
+    display: inline-block;
+    padding: 4px 0;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: small;
+    cursor: pointer;
+    text-align: center;
+}
+.smltown_invitableFriend img{
+    border-radius: 3px;
+    width: 60px;
+    height: 60px;
+}
+
+.smltown_invitableFriend.active{
+    background-color: rgb(59, 89, 152);
+    color: white;    
+}
+.smltown_invitableFriend.active img{
+    background-color: rgb(175, 189, 212);
+}
+
+.smltown_invitableFriend img{
+    border: 1px solid rgb(200,200,200);
+    padding: 3px;
+    background-size: auto 80%;
+}
+.smltown_invitableFriend p{
+    margin: 5px;
+    text-align: center;
+}
+
+#smltown_friendsFooter{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+#smltown_friendsFooter > div{
+    float: left;
+    margin: 10px;
+}
+
+#smltown_friendsFooter > div, #smltown_friendsTitle .smltown_update{    
+    background-color: rgb(200,200,200);
+    padding: 10px 15px;
+    border: 1px solid grey;
+    cursor: pointer;
+}
+#smltown_friendsFooter .smltown_submit{    
+    background-color: #5b74a8;
+    color: gainsboro;
+    font-weight: bold;
+    border: 1px solid black;
+}
+
+#smltown_friendsFooter > div:hover, #smltown_friendsTitle .smltown_update:hover{
+    box-shadow: inset 1px 1px 0 black, inset -1px -1px 0 gainsboro;
+}
+#smltown_friendsFooter > div:active, #smltown_friendsTitle .smltown_update:active{
+    box-shadow: inset 2px 2px 0 black, inset -1px -1px 0 white;
+}
+
+/*******************************************/
+
+.fb-like{
+    display: none !important;
+    position: absolute !important;
+    right: 10px;
+    top: 0;
+}
+
+.fb-like.smltown_show{
+    display: inline-block !important;
+}
+
+.fb-like{
+    overflow: hidden;
+}
+.fb_edge_widget_with_comment span.fb_edge_comment_widget iframe.fb_ltr {
+    display: none !important;
+}
+
+.smltown_facebook #smltown_friendsMenu{
+    display: inherit !important;
+}
+
+#smltown_win{
+    position:absolute;
+    width: 100%;
+    height:100%;
+    background-color: rgba(255,255,255,0.6);
+    z-index: 99;
+}
+
+#smltown_win > div{
+    position: absolute;
+    margin: auto;    
+    border: 1px solid grey;
+    left: 0;
+    right: 0;
+    width: 250px;
+    margin-top: 20%;
+    padding: 20px;
+    box-shadow: 1px 1px rgb(190,190,190), 9px 9px rgb(210,210,210), inset 1px 1px white;
+
+    background: rgb(160,195,0);
+    background: -webkit-linear-gradient(rgb(180,220,0), rgb(155,200,0));
+    background: -o-linear-gradient(rgb(180,220,0), rgb(155,200,0));
+    background: -moz-linear-gradient(rgb(180,220,0), rgb(155,200,0));
+    background: linear-gradient(rgb(180,220,0), rgb(155,200,0));
+}
+
+#smltown_win .smltown_image{
+    width: 250px;
+    height: 250px;
+    margin: auto;
+    margin-bottom: 15px;
+    border: 1px solid rgb(130,150,100);
+    background-color: rgb(190, 230, 99);
+    background-size: 95%;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    box-shadow: 1px 1px white, inset 1px 1px rgb(170,200,150);
+}
+
+#smltown_win .smltown_text{
+    font-weight: bold;
+    text-align: center;
+}
+
+#smltown_win .smltown_footer{
+    text-align: center;
+}
+#smltown_win .smltown_footer > div{
+    display: inline-block;
+    margin: 15px;
+    background-color: gainsboro;
+    padding: 10px 15px;
+    cursor:pointer;    
+    border: 1px solid black;
+    cursor: pointer;
+    box-shadow: 1px 1px rgb(120,120,120), inset 1px 1px white;
+    min-width: 35px;
+}
+#smltown_win .smltown_footer .smltown_feed{
+    background-color: #5b74a8;
+    color: white;
+    font-weight: bold;
+}
+#smltown_win .smltown_footer > div:hover{
+    box-shadow: inset -1px -1px 0 rgb(180,180,180);
+}
+#smltown_win .smltown_footer > div:active{
+    box-shadow: inset -1px -1px 0 black;
+}
+
+#smltown_facebookButton{
+    position: relative;
+    overflow: hidden;
+    max-width: 45px;
+    min-width: 45px;
+    height: 45px;
+    background-image: url('../img/facebook.png');
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+    margin: 5px 10px;
+    border: 1px solid black;
+    box-shadow: inset 1px 1px white;
+    cursor: pointer;
+    float: right;
+    background-color: #5b74a8;
+    white-space: nowrap;
+
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    -ms-transition: 1s;
+    -o-transition: 1s;
+    transition: 1s;
+}
+
+#smltown_facebookButton div{
+    display: none;
+}
+#smltown_facebookButton:hover div{
+    display: inline-block;
+    color: white;
+    line-height: 45px;
+    font-weight: bold;
+    margin-left: 45px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-left: 1px solid rgb(60,60,60);
+    transition: max-width 1s ease-in-out;
+}
+
+#smltown_facebookButton:hover{
+    max-width: 300px;
+}
+
+#smltown_facebookButton:active{
+    box-shadow: inset -1px -1px black; 
+}
+
+/*prevent facebook estupidity*/
+#smltown{
+    width: 100% !important; 
+}
+#fb-root{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}

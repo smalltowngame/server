@@ -1,0 +1,238 @@
+
+<div id="smltown_header">
+    <div id="smltown_menuIcon"></div>            
+    <div class="smltown_content">
+        <span id="smltown_help">?</span>
+    </div>
+    <div id="smltown_consoleTitle">
+        <span id="smltown_statusGame"></span>
+        <span id="smltown_gameName"></span>
+    </div>
+    <div id="smltown_cardIcon"></div>
+</div>
+
+<div id="smltown_body">
+
+    <div id='smltown_sun'><div></div></div>
+
+    <div id="smltown_list">
+        <div>
+            <div id="smltown_user"></div>
+            <div id="smltown_listAlive"></div>
+            <div id="smltown_listDead"></div>
+            <div id="smltown_listSpectator"></div>
+        </div>
+    </div>
+
+    <div id="smltown_filter">
+        <!--            <div id="smltown_popup">
+                        <div id="smltown_popupText"></div>
+                        <div id="smltown_popupOk" class="smltown_button">OK</div>
+                        <div id="smltown_popupCancel" class="smltown_button">Cancel</div>
+                    </div>-->
+        <div class="smltown_countdown"></div>
+    </div>
+
+</div>
+
+<div id="smltown_menu" class="smltown_swipe">
+    <div id="smltown_menuContent">
+        <div id="smltown_menuAll">
+            <div class="smltown_selector smltown_admin">
+                <div id="smltown_adminMenu">
+                    <symbol class="icon">R</symbol>
+                    <span>Admin</span>
+                    <small>adminHelp</small>
+                </div>
+
+                <div id="smltown_restartButton" class="smltown_action">
+                    <span>NewCards</span> <symbol>R</symbol>
+                    <small>newCardsHelp</small>
+                </div>
+
+                <div id="smltown_startButton" class="smltown_action">
+                    <span>StartGame</span> <symbol>R</symbol>
+                    <small>startGameHelp</small>
+                </div>
+
+                <div id="smltown_endTurnButton" class="smltown_action">
+                    <span>EndTurn</span> <symbol>R</symbol>
+                    <small>endTurnHelp</small>
+                </div>
+            </div>
+
+            <div class="smltown_selector smltown_admin">
+                <div>
+                    <symbol class="icon">S</symbol>
+                    <span>Game</span>
+                    <small>gameHelp</small>
+                </div>
+
+                <!--SIMPLIFICATION FOR STARTING-->
+                <!--<div id="smltown_password" class="input smltown_admin">-->
+                <!--<span>Password</span> <symbol>R</symbol>-->
+                <!--<form>-->
+                <!--<input type="text"/>-->
+                <!--</form>-->					
+                <!--</div>-->
+
+                <div id="smltown_gamePublic" class="input smltown_admin smltown_gameover">
+                    <span>GamePublic</span> <symbol>R</symbol>
+                    <input class="" type="checkbox"/>
+                </div>
+
+                <!--SIMPLIFICATION FOR STARTING-->
+                <!--<div id="smltown_dayTime" class="input smltown_admin smltown_gameover">-->
+                <!--<span>DayTime</span> <symbol>R</symbol>-->
+                <!--<form>-->
+                <!--<span>sec_p</span>-->
+                <!--<input type="text" placeholder="60"/>-->
+                <!--</form>-->					
+                <!--</div>-->
+
+                <div id="smltown_openVoting" class="input smltown_admin smltown_gameover">
+                    <span>OpenVoting</span> <symbol>R</symbol>
+                    <input class="" type="checkbox"/>
+                </div>
+
+                <div id="smltown_endTurn" class="input smltown_admin smltown_gameover">
+                    <span>AdminEndTurn</span> <symbol>R</symbol>
+                    <input class="" type="checkbox"/>
+                </div>
+            </div>
+
+            <div class="smltown_selector">
+                <div class="smltown_falseSelector">
+                    <symbol class="icon">U</symbol>
+                    <span>PlayingCards</span>
+                    <small>cardsHelp</small>
+                </div>
+                <p id='smltown_playingCards'></p>
+            </div>
+
+            <div class="smltown_selector">
+                <div>
+                    <symbol class="icon">U</symbol>
+                    <span>UserSettings</span>
+                    <small>userHelp</small>
+                </div>
+                <div id="smltown_updateName" class="input smltown_gameover">                    
+                    <span>Name</span>
+                    <form>
+                        <input type="text"/>
+                    </form>
+                </div>
+                <div id="smltown_updateImage" class="smltown_action">
+                    <span>Image</span>
+                    <img>
+                </div>                    
+                <div id="smltown_spectatorMode" class="smltown_action">
+                    <span>SpectatorMode</span>
+                    <small>spectatorModeHelp</small>
+                </div>
+                <div id="smltown_cleanErrors" class="smltown_action">
+                    <span>CleanErrors</span>
+                    <small>cleanHelp</small>
+                </div>
+            </div>
+
+            <div id="smltown_friendsMenu" class="smltown_selector">
+                <div>
+                    <div class="icon">i</div>
+                    <span>Friends</span>
+                    <small id="smltown_currentUrl"></small>
+                </div>
+                <!--Display at least 1 option -->
+                <div id="smltown_showFriends" class="smltown_action">
+                    <span>Invite</span>
+                    <small>inviteHelp</small>
+                </div>
+                <div id="smltown_addSocialId" class="smltown_action" style="display: none">
+                    <span>AddSocialId</span>
+                    <small>addSocialIdHelp</small>
+                </div>
+            </div>
+
+            <!--SIMPLIFICATION FOR STARTING-->
+            <!--<div id="smltown_notesMenu" class="smltown_selector">-->
+            <!--<div class="smltown_falseSelector">-->
+            <!--<div class="icon">i</div>-->
+            <!--<span>Notes</span>-->
+            <!--<small>infoNotes</small>-->
+            <!--</div>-->
+            <!--<div id="smltown_notes">-->
+            <!--<textarea></textarea>-->
+            <!--</div>-->
+            <!--</div>-->
+        </div>
+
+        <div id="smltown_backButton" class="smltown_selector">
+            <div>
+                <span>Back</span>
+                <small>backHelp</small>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="smltown_card" class="smltown_swipe">
+    <div id="smltown_cardBack" class="smltown_cardImage smltown_cardShadow"></div>
+    <div id="smltown_cardFront">
+        <div class="smltown_cardImage"></div>
+        <div class="smltown_cardText"><div></div></div>
+        <div class="smltown_cardShadow"></div>
+    </div>
+</div>
+
+<div id="smltown_console">
+    <div style="display: table; height: 100%; width: 100%">
+        <div id="smltown_consoleText">
+            <!--id 4 scroll detection-->
+            <div id="smltown_consoleLog">
+                <p class="smltown_errorLog"></p>
+                <div></div>
+                <div class="smltown_night"></div>
+            </div>
+        </div>
+
+        <form id="smltown_chatForm">
+            <div style="position: relative">
+                <!--<input type="text" id="smltown_chatInput" class="emojis-wysiwyg"/>-->
+                <textarea type="text" id="smltown_chatInput" class="emojis-wysiwyg"></textarea>
+                <div id="smltown_sendInput"></div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--<div id="smltown_nightConsole"></div>-->
+
+<!--friends selector-->
+<div id=smltown_friendSelector>
+    <div id='smltown_friendsTitle'>
+        <p>InviteFriends</p>
+        <div class="smltown_update">Update</div>
+
+    </div>
+    <div id='smltown_friendsContent'>
+        <!--demo social friend-->
+        <div class='smltown_invitableFriend'><img src=''><p>demoUser</p></div>
+    </div>
+    <div id='smltown_friendsFooter'>
+        <div class="smltown_submit">SendInvitation</div>
+        <div class="smltown_cancel">Cancel</div>            
+    </div>
+</div>
+
+<!--login to find friend selector-->
+<div id='smltown_shareMenu'>
+    <div>ShareBy</div>
+</div>
+
+<div id='smltown_pictureContextMenu'>
+    <div id="smltown_addFriend">addFriend</div>
+</div>
+
+<!--visuals card-->
+<div id='smltown_phpCard'></div>

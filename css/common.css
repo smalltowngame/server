@@ -1,0 +1,340 @@
+
+@font-face{
+    font-family: "web-symbols";
+    src: url('../webfonts/WebSymbols-Regular.otf'),
+        url('../webfonts/WebSymbols-Regular.eot?#iefix') format('embedded-opentype'); /* IE */
+}
+
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('../fonts/fontawesome-webfont.eot?v=4.5.0');
+    src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.5.0') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff2?v=4.5.0') format('woff2'), url('../fonts/fontawesome-webfont.woff?v=4.5.0') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.5.0') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.5.0#fontawesomeregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*@import url("//hello.myfonts.net/count/2d31ba");*/
+
+symbol{
+    font-family: web-symbols;
+    margin: 0 5px;
+}
+#smltown_menu symbol{
+    margin: 0 3px !important;
+}
+
+#smltown{
+    /*height: 100%;*/
+    position: absolute;    
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    top: 0;
+    bottom: 0;
+    /*position: fixed;*/
+}
+
+#smltown_html, #smltown_body{    
+    /*width: 100%;*/
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+#smltown_html{
+    color: black;
+    /*height: 100%;*/
+    background-color: white;
+    /*position: relative;*/
+    position: absolute;
+    box-shadow: inset 2px 0 black, inset -2px 0 black;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#smltown_html table{
+    border-collapse: collapse;
+}
+
+#smltown_loader{
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(255,255,255,0.5);
+    z-index: 99;
+}
+.smltown_loading{
+    display: inherit !important;
+}
+
+#smltown_textLoader{
+    font-size: 12px;
+    position: absolute;
+    width: 100%;
+    height: 0;
+    top: 25px;
+    bottom: 0;
+    margin: auto;
+    text-align: center;
+}
+
+#smltown_dialog{
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 101;
+    text-align: center;
+}
+#smltown_dialog form{    
+    width: 90%;
+    margin: auto;
+    margin-top: 5%;
+    background-color: rgba(0,0,0,0.7);
+    border: 1px solid black;
+    padding: 10px;
+    color: white;
+    -webkit-box-shadow: 5px 0 20px rgba(0,0,0,0.4), -5px 0 20px rgba(0,0,0,0.4);
+    -moz-box-shadow: 5px 0 20px rgba(0,0,0,0.4), -5px 0 20px rgba(0,0,0,0.4);
+    box-shadow: 5px 0 20px rgba(0,0,0,0.4), -5px 0 20px rgba(0,0,0,0.4);
+}
+#smltown_dialog form > *{
+    font-weight: bold;
+}
+#smltown_dialog input{
+    width: 100%;
+    margin-top: 10px;
+    text-align: center;
+}
+#smltown_dialog .smltown_log{
+    color: grey;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+#smltown_bottomDialog{
+    background: white;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    background-color: rgb(99,99,99);
+    color: rgb(200,200,200);
+    text-align: center;
+    z-index: 30;
+    box-shadow: 0 -1px whitesmoke;
+
+    -webkit-transition: -webkit-transform 0.7s;
+    -moz-transition: -moz-transform 0.7s;
+    -ms-transition: -ms-transform 0.7s;
+    -o-transition: -o-transform 0.7s;
+    transition: transform 0.7s;
+}
+
+#smltown_bottomDialog.display{
+    -webkit-transform: -webkit-translateY(-100%);
+    -moz-transform: -moz-translateY(-100%);
+    -ms-transform: -ms-translateY(-100%);
+    -o-transform: -o-translateY(-100%);
+    transform: translateY(-100%);
+}
+#smltown_bottomDialog.display table{
+    width: 100%;
+}
+#smltown_bottomDialog.display td{
+    padding: 0;
+}
+#smltown_bottomDialog.display td:first-child{
+    width: 100%;
+}
+#smltown_bottomDialog .smltown_dialogForm{
+
+}
+#smltown_bottomDialog .smltown_dialogInput{
+    width: 100%;
+}
+#smltown_bottomDialog .smltown_dialogSubmit{
+    width: 100px !important;
+    /*float: right;*/
+    display: table-cell;
+}
+#smltown_bottomDialog .smltown_dialogSend{
+    color: white;
+    background-color: #5b74a8;
+    font-weight: bold;
+}
+#smltown_bottomDialog .smltown_log{
+    padding: 7px;
+    font-size: 13px;
+}    
+
+.smltown_absolute{
+    position: absolute;
+    top:0;
+    left:0;
+}
+
+#smltown_inputName{
+    width: 100%;
+}
+
+.smltown_unselect{
+    pointer-events: none;
+}
+
+.smltown_button, #smltown_html input[type=text], #smltown_html input[type=submit], #smltown_html input[type=button],
+#smltown input[type=text], #smltown input[type=submit], #smltown input[type=button]{ /* not checkbox */
+    padding: 0 10px;
+    height: 50px;
+    width: 100%;
+    font-size: 16px;    
+    -webkit-box-sizing: border-box;  
+    -moz-box-sizing: border-box; 
+    box-sizing: border-box;
+}
+.smltown_button, #smltown_html input, #smltown input{
+    background-color: white;
+    border: 1px solid grey;
+    color: rgb(50,50,50);
+}
+.smltown_button{
+    cursor: pointer;
+    text-align: center;
+    line-height: 50px;
+}
+
+.smltown_button:hover, #smltown_html input[type=submit]:hover, #smltown_html input[type=button]:hover,
+#smltown input[type=submit]:hover, #smltown input[type=button]:hover{ /* not checkbox */
+    background-color: rgb(225,225,225);
+}
+.smltown_button:active,#smltown_html input[type=submit]:active, #smltown_html input[type=button]:active,
+#smltown input[type=submit]:active, #smltown input[type=button]:active{
+    -webkit-box-shadow: inset 1px 1px 2px rgb(100,100,100);
+    -moz-box-shadow: inset 1px 1px 2px rgb(100,100,100);
+    box-shadow: inset 1px 1px 2px rgb(100,100,100), inset 0 -1px white;
+}
+
+#smltown_dialog input, #smltown_dialog .smltown_button{
+    margin-bottom:15px;
+}
+
+.smltown_icons{
+    display:inline-block;
+    vertical-align: top;
+    margin: 0 10px;
+}
+.smltown_icons > div{
+    display: inline-block;
+    margin: 0 5px;
+}
+
+/*android 2.3*/
+#smltown_html *{
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0); 
+    -webkit-tap-highlight-color: transparent;  /* i.e. Nexus5/Chrome and Kindle Fire HD 7'' */
+}
+#smltown_html -webkit-scrollbar {
+    width: 5px; 
+}
+#smltown_html -webkit-scrollbar-track {
+    background: rgba(0,0,0,0.5);
+}
+
+/*android 2.3 input visibility bug*/
+/*but causing errors on chat input Â¿? */ 
+#smltown_html input{
+    position:relative;
+    top: -10000px;
+    -webkit-transform: translate3d(0, 10000px, 0);
+    moz-transform: translate3d(0, 10000px, 0);
+    transform: translate3d(0, 10000px, 0);
+}
+
+/*individual error css is not so bad!*/
+.smltown_errorLog{
+    color: grey;
+    text-align: right;
+    margin: 0 10px;
+    min-height: 1px; /*display*/
+    z-index: 100;
+}
+
+.smltown_animated{
+    -webkit-transition: 300ms;
+    -moz-transition: 300ms;
+    -ms-transition: 300ms;
+    -o-transition: 300ms;
+    transition: 300ms;
+}
+
+/* Overthrow CSS: Enable overflow: auto on elements with overthrow class when html element has overthrow class too */
+.overthrow-enabled .overthrow {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+::-webkit-scrollbar {
+    max-width: 8px;
+}
+::-webkit-scrollbar-track {
+    /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/ 
+    /*border-radius: 10px;*/
+    background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: rgba(0,0,0,0.15);
+    /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);*/ 
+}
+
+.smltown_hide{
+    display: none !important;
+}
+
+#smltown_notification{
+    /*pointer-events: none;*/
+    position:absolute !important;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    z-index: 9;
+}
+
+#smltown_popup > div{
+    max-width: 600px;
+}
+.smltown_static #smltown_notification{
+    z-index: 20;
+}
+
+#androidAd{
+    width: 100%;
+    height: 80px;
+    position: absolute;
+    bottom: 0;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+#smltown_iframe{
+    position:absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 8;
+    border: 0;
+}

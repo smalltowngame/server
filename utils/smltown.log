@@ -1,0 +1,1640 @@
+[05-03-2016 14:14:11]warn: Key 'kills:[{"id":"1308","sel":null,"card":null},{"id":"1310","sel":null,"card":null},{"id":"1323","sel":null,"card":null},{"id":"1324","sel":null,"card":null},{"id":"1325","sel":null,"card":null}]' hasn't translation on english lang file. (userId: 1598419530; play id: 1310;) 
+[05-03-2016 14:14:11]can't save quotes string on lang file (userId: 1598419530; play id: 1310;) 
+[05-03-2016 14:14:11](only debug) error on parse request: eval(warn: warn: Key 'kills:[{"id":"1308","sel":null,"card":null},{"id":"1310","sel":null,"card":null},{"id":"1323","sel":null,"card":null},{"id":"1324","sel":null,"card":null},{"id":"1325","sel":null,"card":null}]' hasn't translation on english lang file.warn: can't save quotes string on lang file)::  (userId: 1598419530;) 
+[05-03-2016 14:25:23](only debug) error on parse request: eval(bad select card request)::  (userId: 1526374567;) 
+[05-03-2016 23:27:53](only debug) websocket error:undefined::  (userId: f915eb2ed6e1974;) 
+[05-03-2016 23:27:53](only debug) websocket close: undefined. NaN seconds.::  (userId: f915eb2ed6e1974;) 
+[05-03-2016 23:27:53](only debug) websocket close:undefined::  (userId: f915eb2ed6e1974;) 
+[06-03-2016 10:23:09](only debug) websocket close: undefined. NaN seconds.::  (userId: c6dfefce779a3759;) 
+[06-03-2016 10:23:09](only debug) websocket error:undefined::  (userId: c6dfefce779a3759;) 
+[06-03-2016 10:23:09](only debug) websocket close:undefined::  (userId: c6dfefce779a3759;) 
+[06-03-2016 10:23:39](only debug) websocket error:undefined::  (userId: 9e9b6f39c2b6bf4;) 
+[06-03-2016 10:23:39](only debug) websocket close:undefined::  (userId: 9e9b6f39c2b6bf4;) 
+[06-03-2016 10:23:39](only debug) websocket close: undefined. NaN seconds.::  (userId: 9e9b6f39c2b6bf4;) 
+[06-03-2016 10:25:08](only debug) websocket error:undefined::  () 
+[06-03-2016 10:25:08](only debug) websocket close: undefined. NaN seconds.::  () 
+[06-03-2016 10:25:08](only debug) websocket close:undefined::  () 
+[06-03-2016 10:25:08](only debug) trying reconnection every 2 min.::  () 
+[06-03-2016 11:52:35](only debug) websocket close:undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+[06-03-2016 11:52:35](only debug) websocket error:undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+[06-03-2016 11:52:36](only debug) websocket close: undefined. NaN seconds.::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+[06-03-2016 11:52:39](only debug) trying reconnection every 2 min.::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+[06-03-2016 11:54:33](only debug) websocket error:undefined::  (userId: 1049567730;) 
+[06-03-2016 11:54:33](only debug) websocket close: undefined. NaN seconds.::  (userId: 1049567730;) 
+[06-03-2016 11:54:33](only debug) websocket close:undefined::  (userId: 1049567730;) 
+[06-03-2016 11:54:34](only debug) trying reconnection every 2 min.::  (userId: 1049567730;) 
+[06-03-2016 17:51:17](only debug) websocket close:undefined::  (userId: c81ce4bff8f44c;) 
+[06-03-2016 17:51:17](only debug) websocket error:undefined::  (userId: c81ce4bff8f44c;) 
+[06-03-2016 17:51:17](only debug) websocket close: undefined. NaN seconds.::  (userId: c81ce4bff8f44c;) 
+[06-03-2016 22:40:59](only debug) websocket close: undefined. NaN seconds.::  (userId: 1428270643;) 
+[06-03-2016 22:40:59](only debug) websocket close:undefined::  (userId: 1428270643;) 
+[06-03-2016 22:41:00](only debug) trying reconnection every 2 min.::  (userId: 1428270643;) 
+[06-03-2016 22:41:00](only debug) websocket error:undefined::  (userId: 1428270643;) 
+[07-03-2016 08:23:10](only debug) trying reconnection every 2 min.::  (userId: c6dfefce779a3759;) 
+[07-03-2016 08:45:39](only debug) websocket error:undefined::  (userId: 1526374567;) 
+[07-03-2016 08:45:39](only debug) websocket close:undefined::  (userId: 1526374567;) 
+[07-03-2016 08:45:39](only debug) websocket close: undefined. NaN seconds.::  (userId: 1526374567;) 
+[07-03-2016 08:45:40](only debug) trying reconnection every 2 min.::  (userId: 1526374567;) 
+[07-03-2016 08:46:04](only debug) websocket error:undefined::  (userId: 65bcaf3fcf705f3f;) 
+[07-03-2016 08:46:04](only debug) websocket close:undefined::  (userId: 65bcaf3fcf705f3f;) 
+[07-03-2016 08:46:04](only debug) websocket close: undefined. NaN seconds.::  (userId: 65bcaf3fcf705f3f;) 
+[07-03-2016 09:17:07]waiting for: {"action":"restartGame","gameId":"358","playId":"1353","gameType":"mafia-werewolf"}::  (userId: 65bcaf3fcf705f3f;) 
+[07-03-2016 12:28:40](only debug) websocket error:undefined::  (userId: 1003092931;) 
+[07-03-2016 12:28:40](only debug) websocket close:undefined::  (userId: 1003092931;) 
+[07-03-2016 12:28:40](only debug) websocket close: undefined. NaN seconds.::  (userId: 1003092931;) 
+[07-03-2016 12:28:40](only debug) trying reconnection every 2 min.::  (userId: 1003092931;) 
+[07-03-2016 12:28:45](only debug) websocket error:undefined::  (userId: 1598419530;) 
+[07-03-2016 12:28:45](only debug) websocket close:undefined::  (userId: 1598419530;) 
+[07-03-2016 12:28:45](only debug) websocket close: undefined. NaN seconds.::  (userId: 1598419530;) 
+[07-03-2016 12:28:45](only debug) trying reconnection every 2 min.::  (userId: 1598419530;) 
+[07-03-2016 18:21:05]; Error: Uncaught TypeError: Cannot call method 'clearCountdowns' of undefined
+url: 
+line: 1
+column: 33
+error: TypeError: Cannot call method 'clearCountdowns' of undefined; ::  (userId: 1c793b862f1f3f34;) 
+[07-03-2016 18:21:06](only debug) websocket error:undefined::  (userId: 1c793b862f1f3f34;) 
+[07-03-2016 18:21:06](only debug) websocket close:undefined::  (userId: 1c793b862f1f3f34;) 
+[07-03-2016 18:21:06](only debug) websocket close: undefined. NaN seconds.::  (userId: 1c793b862f1f3f34;) 
+[07-03-2016 18:38:38]waiting for: {"action":"playGame","gameId":"360","playId":"1354","gameType":"mafia-werewolf"}::  (userId: 1c793b862f1f3f34;) 
+[07-03-2016 20:12:26]server connection is not established yet::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[07-03-2016 20:12:26](only debug) websocket close:undefined::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[07-03-2016 20:12:26](only debug) websocket close: undefined. NaN seconds.::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[07-03-2016 20:12:26](only debug) websocket error:undefined::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[07-03-2016 20:12:26](only debug) trying reconnection every 2 min.::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[07-03-2016 23:38:13](only debug) websocket error:undefined::  (userId: 1428270643;) 
+[07-03-2016 23:38:13](only debug) websocket close:undefined::  (userId: 1428270643;) 
+[07-03-2016 23:38:13](only debug) websocket close: undefined. NaN seconds.::  (userId: 1428270643;) 
+[07-03-2016 23:38:14](only debug) trying reconnection every 2 min.::  (userId: 1428270643;) 
+[08-03-2016 08:30:10](only debug) websocket error:undefined::  (userId: 93664696703550d6;) 
+[08-03-2016 08:30:10](only debug) websocket close:undefined::  (userId: 93664696703550d6;) 
+[08-03-2016 08:30:10](only debug) websocket close: undefined. NaN seconds.::  (userId: 93664696703550d6;) 
+[08-03-2016 08:35:14](only debug) websocket error:undefined::  (userId: 93664696703550d6;) 
+[08-03-2016 08:35:14](only debug) websocket close:undefined::  (userId: 93664696703550d6;) 
+[08-03-2016 08:35:14](only debug) websocket close: undefined. NaN seconds.::  (userId: 93664696703550d6;) 
+[08-03-2016 08:37:23]waiting for: {"action":"playGame","gameId":"354","playId":"1355","gameType":"mafia-werewolf"}::  (userId: 93664696703550d6;) 
+[08-03-2016 08:37:27]waiting for: {"action":"playGame","gameId":"354","playId":"1355","gameType":"mafia-werewolf"}::  (userId: 93664696703550d6;) 
+[08-03-2016 08:37:28]waiting for: {"action":"playGame","gameId":"354","playId":"1355","gameType":"mafia-werewolf"}::  (userId: 93664696703550d6;) 
+[08-03-2016 08:43:24]trying again..::  (userId: 93664696703550d6;) 
+[08-03-2016 14:34:43](only debug) websocket error:undefined::  (userId: e2f288e246c096b2;) 
+[08-03-2016 14:34:43](only debug) websocket close:undefined::  (userId: e2f288e246c096b2;) 
+[08-03-2016 14:34:43](only debug) websocket close: undefined. NaN seconds.::  (userId: e2f288e246c096b2;) 
+[08-03-2016 15:43:55](only debug) websocket error:undefined::  (userId: c78a4a45474f73b9;) 
+[08-03-2016 15:43:55](only debug) websocket close:undefined::  (userId: c78a4a45474f73b9;) 
+[08-03-2016 15:43:55](only debug) websocket close: undefined. NaN seconds.::  (userId: c78a4a45474f73b9;) 
+[08-03-2016 16:57:58](only debug) websocket error:undefined::  (userId: 27dbee96dbda6c7;) 
+[08-03-2016 16:57:58](only debug) websocket close:undefined::  (userId: 27dbee96dbda6c7;) 
+[08-03-2016 16:57:58](only debug) websocket close: undefined. NaN seconds.::  (userId: 27dbee96dbda6c7;) 
+[08-03-2016 23:27:21](only debug) websocket error:undefined::  (userId: d1e0db82d6a9cdfa;) 
+[08-03-2016 23:27:21](only debug) websocket close:undefined::  (userId: d1e0db82d6a9cdfa;) 
+[08-03-2016 23:27:21](only debug) websocket close: undefined. NaN seconds.::  (userId: d1e0db82d6a9cdfa;) 
+[08-03-2016 23:33:13]social.js event::  (userId: d1e0db82d6a9cdfa;) 
+[08-03-2016 23:33:13]click event::  (userId: d1e0db82d6a9cdfa;) 
+[09-03-2016 06:05:26](only debug) websocket close:undefined::  (userId: e1ee3732d32893f7;) 
+[09-03-2016 06:05:26](only debug) websocket close: undefined. NaN seconds.::  (userId: e1ee3732d32893f7;) 
+[09-03-2016 15:52:11]trying again..::  (userId: d1e0db82d6a9cdfa;) 
+[09-03-2016 20:33:33](only debug) websocket close: undefined. NaN seconds.::  (userId: 1428270643;) 
+[09-03-2016 20:33:33](only debug) websocket error:undefined::  (userId: 1428270643;) 
+[09-03-2016 20:33:33](only debug) websocket close:undefined::  (userId: 1428270643;) 
+[09-03-2016 20:33:34](only debug) trying reconnection every 2 min.::  (userId: 1428270643;) 
+[10-03-2016 06:56:25](only debug) websocket error:undefined::  (userId: d1e0db82d6a9cdfa;) 
+[10-03-2016 06:56:25](only debug) websocket close:undefined::  (userId: d1e0db82d6a9cdfa;) 
+[10-03-2016 06:56:25](only debug) websocket close: undefined. NaN seconds.::  (userId: d1e0db82d6a9cdfa;) 
+[10-03-2016 11:43:38](only debug) websocket error:undefined::  (userId: 1428270643;) 
+[10-03-2016 11:43:38](only debug) websocket close:undefined::  (userId: 1428270643;) 
+[10-03-2016 11:43:38](only debug) websocket close: undefined. NaN seconds.::  (userId: 1428270643;) 
+[10-03-2016 11:43:39](only debug) trying reconnection every 2 min.::  (userId: 1428270643;) 
+[10-03-2016 17:09:52]Unexpected identifier ON: (function(){ response = Device.setNotification('_playGameQuestion','"let's play!"','364') })::  (userId: 9f621a464c6f9f7;) 
+[10-03-2016 21:12:22](only debug) websocket error:undefined::  (userId: 89120608583e06b3;) 
+[10-03-2016 21:12:22](only debug) websocket close:undefined::  (userId: 89120608583e06b3;) 
+[10-03-2016 21:12:22](only debug) websocket close: undefined. NaN seconds.::  (userId: 89120608583e06b3;) 
+[10-03-2016 21:13:22](only debug) websocket error:undefined::  (userId: 4f7fdd1e0bacf3ed;) 
+[10-03-2016 21:13:22](only debug) websocket close:undefined::  (userId: 4f7fdd1e0bacf3ed;) 
+[10-03-2016 21:13:22](only debug) websocket close: undefined. NaN seconds.::  (userId: 4f7fdd1e0bacf3ed;) 
+[10-03-2016 21:13:28]Unexpected identifier ON: (function(){ response = Device.setNotification('_playGameQuestion','"let's play!"','364') })::  (userId: 89120608583e06b3;) 
+[12-03-2016 00:29:47](only debug) websocket error:undefined::  (userId: afddc908a3d85db5;) 
+[12-03-2016 00:29:47](only debug) websocket close:undefined::  (userId: afddc908a3d85db5;) 
+[12-03-2016 00:29:47](only debug) websocket close: undefined. NaN seconds.::  (userId: afddc908a3d85db5;) 
+[12-03-2016 12:24:44](only debug) websocket close:undefined::  (userId: cc085fc433913eec;) 
+[12-03-2016 12:24:44](only debug) websocket close: undefined. NaN seconds.::  (userId: cc085fc433913eec;) 
+[12-03-2016 12:25:39](only debug) websocket close: undefined. NaN seconds.::  (userId: cc085fc433913eec;) 
+[12-03-2016 12:25:39](only debug) websocket close:undefined::  (userId: cc085fc433913eec;) 
+[12-03-2016 21:47:30](only debug) websocket close:undefined::  (userId: 37c1463007069641;) 
+[12-03-2016 21:47:30](only debug) websocket close: undefined. NaN seconds.::  (userId: 37c1463007069641;) 
+[12-03-2016 21:47:30](only debug) websocket error:undefined::  (userId: 37c1463007069641;) 
+[13-03-2016 01:49:30](only debug) websocket error:undefined::  (userId: ba962b6b814dacbd;) 
+[13-03-2016 01:49:30](only debug) websocket close:undefined::  (userId: ba962b6b814dacbd;) 
+[13-03-2016 01:49:30](only debug) websocket close: undefined. NaN seconds.::  (userId: ba962b6b814dacbd;) 
+[13-03-2016 11:48:47](only debug) websocket error:undefined::  (userId: 8df7cfb104f632e2;) 
+[13-03-2016 11:48:47](only debug) websocket close:undefined::  (userId: 8df7cfb104f632e2;) 
+[13-03-2016 11:48:47](only debug) websocket close: undefined. NaN seconds.::  (userId: 8df7cfb104f632e2;) 
+[13-03-2016 14:04:32](only debug) websocket error:undefined::  (userId: de5a3b52fb70a50d;) 
+[13-03-2016 14:04:32](only debug) websocket close:undefined::  (userId: de5a3b52fb70a50d;) 
+[13-03-2016 14:04:32](only debug) websocket close: undefined. NaN seconds.::  (userId: de5a3b52fb70a50d;) 
+[14-03-2016 01:20:50](only debug) websocket error:undefined::  (userId: bfedf826eb6dbe28;) 
+[14-03-2016 01:20:50](only debug) websocket close:undefined::  (userId: bfedf826eb6dbe28;) 
+[14-03-2016 01:20:50](only debug) websocket close: undefined. NaN seconds.::  (userId: bfedf826eb6dbe28;) 
+[14-03-2016 12:29:18](only debug) websocket close:undefined::  (userId: 4eb955c2df8b0257;) 
+[14-03-2016 12:29:18](only debug) websocket close: undefined. NaN seconds.::  (userId: 4eb955c2df8b0257;) 
+[14-03-2016 14:59:09](only debug) websocket error:undefined::  (userId: c6dfefce779a3759;) 
+[14-03-2016 14:59:09](only debug) websocket close:undefined::  (userId: c6dfefce779a3759;) 
+[14-03-2016 14:59:09](only debug) websocket close: undefined. NaN seconds.::  (userId: c6dfefce779a3759;) 
+[14-03-2016 19:02:34](only debug) trying reconnection every 2 min.::  (userId: c6dfefce779a3759;) 
+[14-03-2016 21:41:35](only debug) websocket error:undefined::  (userId: 29cdc24cbfa2153b;) 
+[14-03-2016 21:41:35](only debug) websocket close: undefined. NaN seconds.::  (userId: 29cdc24cbfa2153b;) 
+[14-03-2016 21:41:35](only debug) websocket close:undefined::  (userId: 29cdc24cbfa2153b;) 
+[15-03-2016 07:13:28](only debug) websocket error:undefined::  (userId: 19baa360dea7223f;) 
+[15-03-2016 07:13:28](only debug) websocket close:undefined::  (userId: 19baa360dea7223f;) 
+[15-03-2016 07:13:28](only debug) websocket close: undefined. NaN seconds.::  (userId: 19baa360dea7223f;) 
+[15-03-2016 12:52:34](only debug) websocket error:undefined::  (userId: cf09648422fb991f;) 
+[15-03-2016 12:52:34](only debug) websocket close:undefined::  (userId: cf09648422fb991f;) 
+[15-03-2016 12:52:34](only debug) websocket close: undefined. NaN seconds.::  (userId: cf09648422fb991f;) 
+[15-03-2016 22:37:17](only debug) websocket error:undefined::  (userId: c6dfefce779a3759;) 
+[15-03-2016 22:37:17](only debug) websocket close:undefined::  (userId: c6dfefce779a3759;) 
+[15-03-2016 22:37:17](only debug) websocket close: undefined. NaN seconds.::  (userId: c6dfefce779a3759;) 
+[15-03-2016 22:39:48](only debug) websocket close:undefined::  () 
+[15-03-2016 22:39:48](only debug) websocket close: undefined. NaN seconds.::  () 
+[15-03-2016 22:39:48](only debug) websocket error:undefined::  () 
+[15-03-2016 22:39:48](only debug) trying reconnection every 2 min.::  () 
+[16-03-2016 02:14:21](only debug) websocket error:undefined::  (userId: 7e2a63477055b2e4;) 
+[16-03-2016 02:14:21](only debug) websocket close:undefined::  (userId: 7e2a63477055b2e4;) 
+[16-03-2016 02:14:21](only debug) websocket close: undefined. NaN seconds.::  (userId: 7e2a63477055b2e4;) 
+[16-03-2016 16:39:25](only debug) websocket close: undefined. NaN seconds.::  (userId: 5ca7b1e0da71ffcd;) 
+[16-03-2016 16:39:25](only debug) websocket close:undefined::  (userId: 5ca7b1e0da71ffcd;) 
+[16-03-2016 20:44:43](only debug) websocket error:undefined::  (userId: 5b23820613c5500a;) 
+[16-03-2016 20:44:43](only debug) websocket close:undefined::  (userId: 5b23820613c5500a;) 
+[16-03-2016 20:44:43](only debug) websocket close: undefined. NaN seconds.::  (userId: 5b23820613c5500a;) 
+[17-03-2016 04:25:25](only debug) websocket error:undefined::  (userId: 652b8601fd788dfd;) 
+[17-03-2016 04:25:25](only debug) websocket close:undefined::  (userId: 652b8601fd788dfd;) 
+[17-03-2016 04:25:25](only debug) websocket close: undefined. NaN seconds.::  (userId: 652b8601fd788dfd;) 
+[17-03-2016 07:48:58](only debug) websocket error:undefined::  (userId: e94d07c1636dc9b7;) 
+[17-03-2016 07:48:58](only debug) websocket close:undefined::  (userId: e94d07c1636dc9b7;) 
+[17-03-2016 07:48:59](only debug) websocket close: undefined. NaN seconds.::  (userId: e94d07c1636dc9b7;) 
+[17-03-2016 11:00:16](only debug) websocket error:undefined::  (userId: 908170862;) 
+[17-03-2016 11:00:16](only debug) websocket close:undefined::  (userId: 908170862;) 
+[17-03-2016 11:00:16](only debug) websocket close: undefined. NaN seconds.::  (userId: 908170862;) 
+[17-03-2016 11:00:16](only debug) trying reconnection every 2 min.::  (userId: 908170862;) 
+[17-03-2016 11:13:27](only debug) websocket close:undefined::  (userId: c6dfefce779a3759;) 
+[17-03-2016 11:13:27](only debug) websocket error:undefined::  (userId: c6dfefce779a3759;) 
+[17-03-2016 11:13:27](only debug) websocket close: undefined. NaN seconds.::  (userId: c6dfefce779a3759;) 
+[17-03-2016 12:07:05]waiting for: {"action":"playGame","gameId":"374","playId":"1396","gameType":"mafia-werewolf"}::  (userId: 908170862;) 
+[17-03-2016 12:19:33](only debug) reload game on smltown_ajax::  () 
+[17-03-2016 12:19:35](only debug) error on parse request: eval(get new user id; 23000Array
+(
+    [0] => 23000
+    [1] => 1048
+    [2] => Column 'email' cannot be null
+)
+ in: INSERT INTO smltown_players (id, socialId, email, name, lang, ISO) VALUES (:id, :socialId, :email, :name, :lang, :ISO) ON DUPLICATE KEY UPDATE name=VALUES(name), lang=VALUES(lang), socialId=VALUES(socialId))::  () 
+[17-03-2016 12:19:39](only debug) websocket close:undefined::  () 
+[17-03-2016 12:19:39](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 12:19:39](only debug) websocket error:undefined::  () 
+[17-03-2016 12:19:40](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 12:32:58](only debug) reload game on smltown_ajax::  () 
+[17-03-2016 12:32:59](only debug) error on parse request: eval(get new user id; 23000Array
+(
+    [0] => 23000
+    [1] => 1048
+    [2] => Column 'email' cannot be null
+)
+ in: INSERT INTO smltown_players (id, socialId, email, name, lang, ISO) VALUES (:id, :socialId, :email, :name, :lang, :ISO) ON DUPLICATE KEY UPDATE name=VALUES(name), lang=VALUES(lang), socialId=VALUES(socialId))::  () 
+[17-03-2016 12:33:03](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 12:33:03](only debug) websocket close:undefined::  () 
+[17-03-2016 12:33:03](only debug) websocket error:undefined::  () 
+[17-03-2016 12:33:04](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 12:35:08](only debug) reload game on smltown_ajax::  () 
+[17-03-2016 12:35:10](only debug) error on parse request: eval(get new user id; 23000Array
+(
+    [0] => 23000
+    [1] => 1048
+    [2] => Column 'email' cannot be null
+)
+ in: INSERT INTO smltown_players (id, socialId, email, name, lang, ISO) VALUES (:id, :socialId, :email, :name, :lang, :ISO) ON DUPLICATE KEY UPDATE name=VALUES(name), lang=VALUES(lang), socialId=VALUES(socialId))::  () 
+[17-03-2016 12:35:13](only debug) websocket error:undefined::  () 
+[17-03-2016 12:35:13](only debug) websocket close:undefined::  () 
+[17-03-2016 12:35:13](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 12:35:13](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 12:36:21](only debug) reload game on smltown_ajax::  () 
+[17-03-2016 12:36:22](only debug) error on parse request: eval(get new user id; 23000Array
+(
+    [0] => 23000
+    [1] => 1048
+    [2] => Column 'email' cannot be null
+)
+ in: INSERT INTO smltown_players (id, socialId, email, name, lang, ISO) VALUES (:id, :socialId, :email, :name, :lang, :ISO) ON DUPLICATE KEY UPDATE name=VALUES(name), lang=VALUES(lang), socialId=VALUES(socialId))::  () 
+[17-03-2016 12:36:26](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 12:36:26](only debug) websocket error:undefined::  () 
+[17-03-2016 12:36:26](only debug) websocket close:undefined::  () 
+[17-03-2016 12:36:27](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 12:37:25](only debug) websocket error:undefined::  () 
+[17-03-2016 12:37:25](only debug) websocket close:undefined::  () 
+[17-03-2016 12:37:25](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 12:37:25](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 12:37:37](only debug) reload game on smltown_ajax::  () 
+[17-03-2016 12:37:38](only debug) error on parse request: eval(get new user id; 23000Array
+(
+    [0] => 23000
+    [1] => 1048
+    [2] => Column 'email' cannot be null
+)
+ in: INSERT INTO smltown_players (id, socialId, email, name, lang, ISO) VALUES (:id, :socialId, :email, :name, :lang, :ISO) ON DUPLICATE KEY UPDATE name=VALUES(name), lang=VALUES(lang), socialId=VALUES(socialId))::  () 
+[17-03-2016 12:37:40](only debug) reload game on smltown_ajax::  () 
+[17-03-2016 12:37:44](only debug) reload game on smltown_ajax::  () 
+[17-03-2016 12:37:47](only debug) reload game on smltown_ajax::  () 
+[17-03-2016 12:37:48]trying again..::  () 
+[17-03-2016 12:37:53](only debug) websocket error:undefined::  () 
+[17-03-2016 12:37:53](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 12:37:53](only debug) websocket close:undefined::  () 
+[17-03-2016 12:37:53](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 12:38:09](only debug) websocket close:undefined::  () 
+[17-03-2016 12:38:09](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 12:38:09](only debug) websocket error:undefined::  () 
+[17-03-2016 12:38:09](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 12:39:56](only debug) reload game on smltown_ajax::  () 
+[17-03-2016 12:39:58](only debug) error on parse request: eval(get new user id; 23000Array
+(
+    [0] => 23000
+    [1] => 1048
+    [2] => Column 'email' cannot be null
+)
+ in: INSERT INTO smltown_players (id, socialId, email, name, lang, ISO) VALUES (:id, :socialId, :email, :name, :lang, :ISO) ON DUPLICATE KEY UPDATE name=VALUES(name), lang=VALUES(lang), socialId=VALUES(socialId))::  () 
+[17-03-2016 12:40:01](only debug) websocket error:undefined::  () 
+[17-03-2016 12:40:02](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 12:40:02](only debug) websocket close:undefined::  () 
+[17-03-2016 12:40:02](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 12:42:13]trying again..::  (userId: 397183360;) 
+[17-03-2016 12:51:39](only debug) reload game on smltown_ajax::  () 
+[17-03-2016 12:51:40](only debug) error on parse request: eval(get new user id; 23000Array
+(
+    [0] => 23000
+    [1] => 1048
+    [2] => Column 'ISO' cannot be null
+)
+ in: INSERT INTO smltown_players (id, socialId, email, name, lang, ISO) VALUES (:id, :socialId, :email, :name, :lang, :ISO) ON DUPLICATE KEY UPDATE name=VALUES(name), lang=VALUES(lang), socialId=VALUES(socialId))::  () 
+[17-03-2016 12:51:42](only debug) reload game on smltown_ajax::  () 
+[17-03-2016 12:51:45](only debug) reload game on smltown_ajax::  () 
+[17-03-2016 12:51:48](only debug) reload game on smltown_ajax::  () 
+[17-03-2016 12:51:50]trying again..::  () 
+[17-03-2016 12:51:54](only debug) websocket error:undefined::  () 
+[17-03-2016 12:51:54](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 12:51:54](only debug) websocket close:undefined::  () 
+[17-03-2016 12:51:54](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 12:53:55](only debug) reload game on smltown_ajax::  () 
+[17-03-2016 12:53:56](only debug) error on parse request: eval(get new user id; {"id":"1871336488","name":null,"facebook":null,"type":null,"socialId":"96954619d333225d001d495d8cf4b0ae","lang":null,"websocket":"0","friends":""})::  (userId: 1871336488;) 
+[17-03-2016 12:53:57]trying again..::  (userId: 1871336488;) 
+[17-03-2016 12:54:01](only debug) websocket error:undefined::  (userId: 1871336488;) 
+[17-03-2016 12:54:01](only debug) websocket close: undefined. NaN seconds.::  (userId: 1871336488;) 
+[17-03-2016 12:54:01](only debug) websocket close:undefined::  (userId: 1871336488;) 
+[17-03-2016 12:54:02](only debug) trying reconnection every 2 min.::  (userId: 1871336488;) 
+[17-03-2016 12:54:20](only debug) websocket error:undefined::  () 
+[17-03-2016 12:54:20](only debug) websocket close:undefined::  () 
+[17-03-2016 12:54:20](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 12:54:20](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 12:55:57](only debug) reload game on smltown_ajax::  () 
+[17-03-2016 12:55:59](only debug) error on parse request: eval(get new user id; {"id":"573751449","name":null,"facebook":null,"type":null,"socialId":"2491fc8ad02295ee31fe1a18d2cee68a","lang":null,"websocket":"0","friends":""})::  (userId: 573751449;) 
+[17-03-2016 12:56:13](only debug) websocket error:undefined::  (userId: 573751449;) 
+[17-03-2016 12:56:13](only debug) websocket close: undefined. NaN seconds.::  (userId: 573751449;) 
+[17-03-2016 12:56:13](only debug) websocket close:undefined::  (userId: 573751449;) 
+[17-03-2016 12:56:13](only debug) trying reconnection every 2 min.::  (userId: 573751449;) 
+[17-03-2016 12:56:27](only debug) websocket error:undefined::  () 
+[17-03-2016 12:56:27](only debug) websocket close:undefined::  () 
+[17-03-2016 12:56:27](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 12:56:27](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 13:00:21](only debug) websocket close:undefined::  () 
+[17-03-2016 13:00:21](only debug) websocket error:undefined::  () 
+[17-03-2016 13:00:21](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 13:00:22](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 13:19:37]ajax error = 42000Array
+(
+    [0] => 42000
+    [1] => 1064
+    [2] => You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'match FROM smltown_games WHERE true  AND LOWER(name) like 'aaa'  AND ((SELECT co' at line 1
+)
+ in: SELECT id, name, status, public, dayTime, openVoting, endTurn, lastConnection, CASE WHEN password IS NOT NULL THEN 1 END AS password, (SELECT name FROM smltown_players WHERE id = (SELECT userId FROM smltown_plays WHERE gameId = smltown_games.id AND admin = 1 LIMIT 1)  LIMIT 1) AS admin, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id) AS players, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172') AS playing, (SELECT message FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' LIMIT 1) AS message, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' AND admin = 1) AS own, CASE WHEN name = aaa THEN 1 END AS match FROM smltown_games WHERE true  AND LOWER(name) like :name  AND ((SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = smltown_games.id) > 0  OR 1 = public  AND lastConnection > now() - INTERVAL 1 DAY  )  ORDER BY playing DESC, message DESC, status LIMIT 0, 15 ::  (userId: 1284656172;) 
+[17-03-2016 13:19:42]waiting for: undefined::  (userId: 1284656172;) 
+[17-03-2016 13:20:09]ajax error = 42000Array
+(
+    [0] => 42000
+    [1] => 1064
+    [2] => You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'match FROM smltown_games WHERE true  AND LOWER(name) like 'aaa'  AND ((SELECT co' at line 1
+)
+ in: SELECT id, name, status, public, dayTime, openVoting, endTurn, lastConnection, CASE WHEN password IS NOT NULL THEN 1 END AS password, (SELECT name FROM smltown_players WHERE id = (SELECT userId FROM smltown_plays WHERE gameId = smltown_games.id AND admin = 1 LIMIT 1)  LIMIT 1) AS admin, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id) AS players, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172') AS playing, (SELECT message FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' LIMIT 1) AS message, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' AND admin = 1) AS own, CASE WHEN name = 'aaa' THEN 1 END AS match FROM smltown_games WHERE true  AND LOWER(name) like :name  AND ((SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = smltown_games.id) > 0  OR 1 = public  AND lastConnection > now() - INTERVAL 1 DAY  )  ORDER BY playing DESC, message DESC, status LIMIT 0, 15 ::  (userId: 1284656172;) 
+[17-03-2016 13:20:14]waiting for: undefined::  (userId: 1284656172;) 
+[17-03-2016 13:21:52]ajax error = 42000Array
+(
+    [0] => 42000
+    [1] => 1064
+    [2] => You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'match FROM smltown_games WHERE true  AND LOWER(name) like 'aaa'  AND ((SELECT co' at line 1
+)
+ in: SELECT id, name, status, public, dayTime, openVoting, endTurn, lastConnection, CASE WHEN password IS NOT NULL THEN 1 END AS password, (SELECT name FROM smltown_players WHERE id = (SELECT userId FROM smltown_plays WHERE gameId = smltown_games.id AND admin = 1 LIMIT 1)  LIMIT 1) AS admin, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id) AS players, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172') AS playing, (SELECT message FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' LIMIT 1) AS message, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' AND admin = 1) AS own, CASE WHEN name = 'aaa' THEN 1 ELSE 0 END AS match FROM smltown_games WHERE true  AND LOWER(name) like :name  AND ((SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = smltown_games.id) > 0  OR 1 = public  AND lastConnection > now() - INTERVAL 1 DAY  )  ORDER BY playing DESC, message DESC, status LIMIT 0, 15 ::  (userId: 1284656172;) 
+[17-03-2016 13:21:56]waiting for: undefined::  (userId: 1284656172;) 
+[17-03-2016 13:23:21]ajax error = 42000Array
+(
+    [0] => 42000
+    [1] => 1064
+    [2] => You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'match FROM smltown_games WHERE true  AND LOWER(name) like 'aaa'  AND ((SELECT co' at line 1
+)
+ in: SELECT id, name, status, public, dayTime, openVoting, endTurn, lastConnection, CASE WHEN password IS NOT NULL THEN 1 END AS password, (SELECT name FROM smltown_players WHERE id = (SELECT userId FROM smltown_plays WHERE gameId = smltown_games.id AND admin = 1 LIMIT 1)  LIMIT 1) AS admin, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id) AS players, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172') AS playing, (SELECT message FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' LIMIT 1) AS message, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' AND admin = 1) AS own, (SELECT count(*) FROM smltown_games WHERE name = 'aaa') AS match FROM smltown_games WHERE true  AND LOWER(name) like :name  AND ((SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = smltown_games.id) > 0  OR 1 = public  AND lastConnection > now() - INTERVAL 1 DAY  )  ORDER BY playing DESC, message DESC, status LIMIT 0, 15 ::  (userId: 1284656172;) 
+[17-03-2016 13:23:26]waiting for: undefined::  (userId: 1284656172;) 
+[17-03-2016 13:26:02](only debug) websocket error:undefined::  (userId: cf09648422fb991f;) 
+[17-03-2016 13:26:02](only debug) websocket close:undefined::  (userId: cf09648422fb991f;) 
+[17-03-2016 13:26:02](only debug) websocket close: undefined. NaN seconds.::  (userId: cf09648422fb991f;) 
+[17-03-2016 13:27:45]ajax error = 42000Array
+(
+    [0] => 42000
+    [1] => 1064
+    [2] => You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY playing DESC, message DESC, status LIMIT 0, 15' at line 1
+)
+ in: SELECT id, name, status, public, dayTime, openVoting, endTurn, lastConnection, CASE WHEN password IS NOT NULL THEN 1 END AS password, (SELECT name FROM smltown_players WHERE id = (SELECT userId FROM smltown_plays WHERE gameId = smltown_games.id AND admin = 1 LIMIT 1)  LIMIT 1) AS admin, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id) AS players, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172') AS playing, (SELECT message FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' LIMIT 1) AS message, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' AND admin = 1) AS own FROM smltown_games WHERE true  AND ((SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = smltown_games.id) > 0  OR 1 = public  AND lastConnection > now() - INTERVAL 1 DAY  )  OR name =  ORDER BY playing DESC, message DESC, status LIMIT 0, 15 ::  (userId: 1284656172;) 
+[17-03-2016 13:32:58]ajax error = 42000Array
+(
+    [0] => 42000
+    [1] => 1064
+    [2] => You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'name = 'aaa' THEN SET admin = '') ORDER BY playing DESC, message DESC, status LI' at line 1
+)
+ in: SELECT id, name, status, public, dayTime, openVoting, endTurn, lastConnection, CASE WHEN password IS NOT NULL THEN 1 END AS password, (SELECT name FROM smltown_players WHERE id = (SELECT userId FROM smltown_plays WHERE gameId = smltown_games.id AND admin = 1 LIMIT 1)  LIMIT 1) AS admin, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id) AS players, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172') AS playing, (SELECT message FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' LIMIT 1) AS message, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' AND admin = 1) AS own FROM smltown_games WHERE true  AND LOWER(name) like :name  AND ((SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = smltown_games.id) > 0  OR 1 = public  AND lastConnection > now() - INTERVAL 1 DAY  )  OR (IF name = 'aaa' THEN SET admin = '') ORDER BY playing DESC, message DESC, status LIMIT 0, 15 ::  (userId: 1284656172;) 
+[17-03-2016 13:33:03]waiting for: undefined::  (userId: 1284656172;) 
+[17-03-2016 13:50:02]ajax error = 21000Array
+(
+    [0] => 21000
+    [1] => 1241
+    [2] => Operand should contain 1 column(s)
+)
+ in: SELECT (SELECT id, name, status, public, dayTime, openVoting, endTurn, lastConnection, CASE WHEN password IS NOT NULL THEN 1 END AS password, (SELECT name FROM smltown_players WHERE id = (SELECT userId FROM smltown_plays WHERE gameId = smltown_games.id AND admin = 1 LIMIT 1)  LIMIT 1) AS admin, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id) AS players, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172') AS playing, (SELECT message FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' LIMIT 1) AS message, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' AND admin = 1) AS own FROM smltown_games WHERE true  AND ((SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = smltown_games.id) > 0  OR 1 = public  AND lastConnection > now() - INTERVAL 1 DAY  )  ORDER BY playing DESC, message DESC, status LIMIT 0, 15 ) AS merged::  (userId: 1284656172;) 
+[17-03-2016 13:59:09]ajax error = 21000Array
+(
+    [0] => 21000
+    [1] => 1241
+    [2] => Operand should contain 1 column(s)
+)
+ in: SELECT (SELECT id, name, status, public, dayTime, openVoting, endTurn, lastConnection, CASE WHEN password IS NOT NULL THEN 1 END AS password, (SELECT name FROM smltown_players WHERE id = (SELECT userId FROM smltown_plays WHERE gameId = smltown_games.id AND admin = 1 LIMIT 1)  LIMIT 1) AS admin, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id) AS players, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172') AS playing, (SELECT message FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' LIMIT 1) AS message, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' AND admin = 1) AS own FROM smltown_games WHERE true  AND ((SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = smltown_games.id) > 0  OR 1 = public  AND lastConnection > now() - INTERVAL 1 DAY  )  ORDER BY playing DESC, message DESC, status LIMIT 0, 15 ) AS merged::  (userId: 1284656172;) 
+[17-03-2016 13:59:16]ajax error = 21000Array
+(
+    [0] => 21000
+    [1] => 1241
+    [2] => Operand should contain 1 column(s)
+)
+ in: SELECT (SELECT id, name, status, public, dayTime, openVoting, endTurn, lastConnection, CASE WHEN password IS NOT NULL THEN 1 END AS password, (SELECT name FROM smltown_players WHERE id = (SELECT userId FROM smltown_plays WHERE gameId = smltown_games.id AND admin = 1 LIMIT 1)  LIMIT 1) AS admin, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id) AS players, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172') AS playing, (SELECT message FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' LIMIT 1) AS message, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' AND admin = 1) AS own FROM smltown_games WHERE true  AND ((SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = smltown_games.id) > 0  OR 1 = public  AND lastConnection > now() - INTERVAL 1 DAY  )  ORDER BY playing DESC, message DESC, status LIMIT 0, 15 ) AS merged::  (userId: 1284656172;) 
+[17-03-2016 15:08:30](only debug) trying reconnection every 2 min.::  (userId: 652b8601fd788dfd;) 
+[17-03-2016 17:45:56]ajax error = 0Array
+(
+    [0] => HY000
+    [1] => 1221
+    [2] => Incorrect usage of UNION and ORDER BY
+)
+ in: SELECT id, name, status, public, dayTime, openVoting, endTurn, lastConnection, CASE WHEN password IS NOT NULL THEN 1 END AS password, (SELECT name FROM smltown_players WHERE id = (SELECT userId FROM smltown_plays WHERE gameId = smltown_games.id AND admin = 1 LIMIT 1)  LIMIT 1) AS admin, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id) AS players, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172') AS playing, (SELECT message FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' LIMIT 1) AS message, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' AND admin = 1) AS own FROM smltown_games WHERE true  AND LOWER(name) like :name  AND ((SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = smltown_games.id) > 0  OR 1 = public  AND lastConnection > now() - INTERVAL 1 DAY  )  ORDER BY playing DESC, message DESC, status LIMIT 0, 15  UNION SELECT count(*) FROM smltown.games WHERE name = 'aaa'::  (userId: 1284656172;) 
+[17-03-2016 17:46:00]waiting for: undefined::  (userId: 1284656172;) 
+[17-03-2016 17:46:31]ajax error = 42000Array
+(
+    [0] => 42000
+    [1] => 1142
+    [2] => SELECT command denied to user 'smalltown'@'localhost' for table 'games'
+)
+ in: SELECT id, name, status, public, dayTime, openVoting, endTurn, lastConnection, CASE WHEN password IS NOT NULL THEN 1 END AS password, (SELECT name FROM smltown_players WHERE id = (SELECT userId FROM smltown_plays WHERE gameId = smltown_games.id AND admin = 1 LIMIT 1)  LIMIT 1) AS admin, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id) AS players, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172') AS playing, (SELECT message FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' LIMIT 1) AS message, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' AND admin = 1) AS own FROM smltown_games WHERE true  AND LOWER(name) like :name  AND ((SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = smltown_games.id) > 0  OR 1 = public  AND lastConnection > now() - INTERVAL 1 DAY  )  UNION SELECT count(*) FROM smltown.games WHERE name = 'aaa' ORDER BY playing DESC, message DESC, status LIMIT 0, 15 ::  (userId: 1284656172;) 
+[17-03-2016 17:46:35]waiting for: undefined::  (userId: 1284656172;) 
+[17-03-2016 17:47:05]ajax error = 21000Array
+(
+    [0] => 21000
+    [1] => 1222
+    [2] => The used SELECT statements have a different number of columns
+)
+ in: SELECT id, name, status, public, dayTime, openVoting, endTurn, lastConnection, CASE WHEN password IS NOT NULL THEN 1 END AS password, (SELECT name FROM smltown_players WHERE id = (SELECT userId FROM smltown_plays WHERE gameId = smltown_games.id AND admin = 1 LIMIT 1)  LIMIT 1) AS admin, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id) AS players, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172') AS playing, (SELECT message FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' LIMIT 1) AS message, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' AND admin = 1) AS own FROM smltown_games WHERE true  AND LOWER(name) like :name  AND ((SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = smltown_games.id) > 0  OR 1 = public  AND lastConnection > now() - INTERVAL 1 DAY  )  UNION SELECT count(*) FROM smltown_games WHERE name = 'aaa' ORDER BY playing DESC, message DESC, status LIMIT 0, 15 ::  (userId: 1284656172;) 
+[17-03-2016 17:47:10]waiting for: undefined::  (userId: 1284656172;) 
+[17-03-2016 17:49:07]ajax error = 21000Array
+(
+    [0] => 21000
+    [1] => 1222
+    [2] => The used SELECT statements have a different number of columns
+)
+ in: SELECT id, name, status, public, dayTime, openVoting, endTurn, lastConnection, CASE WHEN password IS NOT NULL THEN 1 END AS password, (SELECT name FROM smltown_players WHERE id = (SELECT userId FROM smltown_plays WHERE gameId = smltown_games.id AND admin = 1 LIMIT 1)  LIMIT 1) AS admin, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id) AS players, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172') AS playing, (SELECT message FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' LIMIT 1) AS message, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' AND admin = 1) AS own FROM smltown_games WHERE true  AND LOWER(name) like :name  AND ((SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = smltown_games.id) > 0  OR 1 = public  AND lastConnection > now() - INTERVAL 1 DAY  )  UNION ALL SELECT count(*) FROM smltown_games WHERE name = 'aaa' ORDER BY playing DESC, message DESC, status LIMIT 0, 15 ::  (userId: 1284656172;) 
+[17-03-2016 17:49:13]waiting for: undefined::  (userId: 1284656172;) 
+[17-03-2016 17:49:49]ajax error = 21000Array
+(
+    [0] => 21000
+    [1] => 1222
+    [2] => The used SELECT statements have a different number of columns
+)
+ in: SELECT id, name, status, public, dayTime, openVoting, endTurn, lastConnection, CASE WHEN password IS NOT NULL THEN 1 END AS password, (SELECT name FROM smltown_players WHERE id = (SELECT userId FROM smltown_plays WHERE gameId = smltown_games.id AND admin = 1 LIMIT 1)  LIMIT 1) AS admin, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id) AS players, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172') AS playing, (SELECT message FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' LIMIT 1) AS message, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' AND admin = 1) AS own FROM smltown_games WHERE true  AND LOWER(name) like :name  AND ((SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = smltown_games.id) > 0  OR 1 = public  AND lastConnection > now() - INTERVAL 1 DAY  )  UNION ALL SELECT count(*) AS count FROM smltown_games WHERE name = 'qqq' ORDER BY playing DESC, message DESC, status LIMIT 0, 15 ::  (userId: 1284656172;) 
+[17-03-2016 17:49:53]waiting for: undefined::  (userId: 1284656172;) 
+[17-03-2016 17:53:54]ajax error = 42000Array
+(
+    [0] => 42000
+    [1] => 1064
+    [2] => You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'JOIN SELECT count(*) AS count FROM smltown_games WHERE name = 'aaa' ORDER BY pla' at line 1
+)
+ in: SELECT id, name, status, public, dayTime, openVoting, endTurn, lastConnection, CASE WHEN password IS NOT NULL THEN 1 END AS password, (SELECT name FROM smltown_players WHERE id = (SELECT userId FROM smltown_plays WHERE gameId = smltown_games.id AND admin = 1 LIMIT 1)  LIMIT 1) AS admin, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id) AS players, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172') AS playing, (SELECT message FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' LIMIT 1) AS message, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' AND admin = 1) AS own FROM smltown_games WHERE true  AND LOWER(name) like :name  AND ((SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = smltown_games.id) > 0  OR 1 = public  AND lastConnection > now() - INTERVAL 1 DAY  )  JOIN SELECT count(*) AS count FROM smltown_games WHERE name = 'aaa' ORDER BY playing DESC, message DESC, status LIMIT 0, 15 ::  (userId: 1284656172;) 
+[17-03-2016 17:53:59]waiting for: undefined::  (userId: 1284656172;) 
+[17-03-2016 17:54:37]ajax error = 42000Array
+(
+    [0] => 42000
+    [1] => 1064
+    [2] => You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'JOIN SELECT count(*) AS count FROM smltown_games WHERE name = 'aaa'' at line 1
+)
+ in: SELECT id, name, status, public, dayTime, openVoting, endTurn, lastConnection, CASE WHEN password IS NOT NULL THEN 1 END AS password, (SELECT name FROM smltown_players WHERE id = (SELECT userId FROM smltown_plays WHERE gameId = smltown_games.id AND admin = 1 LIMIT 1)  LIMIT 1) AS admin, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id) AS players, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172') AS playing, (SELECT message FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' LIMIT 1) AS message, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' AND admin = 1) AS own FROM smltown_games WHERE true  AND LOWER(name) like :name  AND ((SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = smltown_games.id) > 0  OR 1 = public  AND lastConnection > now() - INTERVAL 1 DAY  )  ORDER BY playing DESC, message DESC, status LIMIT 0, 15  JOIN SELECT count(*) AS count FROM smltown_games WHERE name = 'aaa'::  (userId: 1284656172;) 
+[17-03-2016 17:54:42]waiting for: undefined::  (userId: 1284656172;) 
+[17-03-2016 18:04:04]ajax error = 42000Array
+(
+    [0] => 42000
+    [1] => 1064
+    [2] => You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'JOIN SELECT count(*), '', '', '', '', '', '', '', '', '', '', '', '', '' AS coun' at line 1
+)
+ in: SELECT id, name, status, public, dayTime, openVoting, endTurn, lastConnection, CASE WHEN password IS NOT NULL THEN 1 END AS password, (SELECT name FROM smltown_players WHERE id = (SELECT userId FROM smltown_plays WHERE gameId = smltown_games.id AND admin = 1 LIMIT 1)  LIMIT 1) AS admin, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id) AS players, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172') AS playing, (SELECT message FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' LIMIT 1) AS message, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' AND admin = 1) AS own FROM smltown_games WHERE true  AND LOWER(name) like :name  AND ((SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = smltown_games.id) > 0  OR 1 = public  AND lastConnection > now() - INTERVAL 1 DAY  )  ORDER BY playing DESC, message DESC, status LIMIT 0, 15  JOIN SELECT count(*), '', '', '', '', '', '', '', '', '', '', '', '', '' AS count FROM smltown_games WHERE name = 'qaa'::  (userId: 1284656172;) 
+[17-03-2016 18:04:09]waiting for: undefined::  (userId: 1284656172;) 
+[17-03-2016 18:04:27]ajax error = 0Array
+(
+    [0] => HY000
+    [1] => 1221
+    [2] => Incorrect usage of UNION and ORDER BY
+)
+ in: SELECT id, name, status, public, dayTime, openVoting, endTurn, lastConnection, CASE WHEN password IS NOT NULL THEN 1 END AS password, (SELECT name FROM smltown_players WHERE id = (SELECT userId FROM smltown_plays WHERE gameId = smltown_games.id AND admin = 1 LIMIT 1)  LIMIT 1) AS admin, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id) AS players, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172') AS playing, (SELECT message FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' LIMIT 1) AS message, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' AND admin = 1) AS own FROM smltown_games WHERE true  AND LOWER(name) like :name  AND ((SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = smltown_games.id) > 0  OR 1 = public  AND lastConnection > now() - INTERVAL 1 DAY  )  ORDER BY playing DESC, message DESC, status LIMIT 0, 15  UNION SELECT count(*), '', '', '', '', '', '', '', '', '', '', '', '', '' AS count FROM smltown_games WHERE name = 'aaa'::  (userId: 1284656172;) 
+[17-03-2016 18:04:32]waiting for: undefined::  (userId: 1284656172;) 
+[17-03-2016 18:04:57]ajax error = 0Array
+(
+    [0] => HY000
+    [1] => 1221
+    [2] => Incorrect usage of UNION and ORDER BY
+)
+ in: SELECT id, name, status, public, dayTime, openVoting, endTurn, lastConnection, CASE WHEN password IS NOT NULL THEN 1 END AS password, (SELECT name FROM smltown_players WHERE id = (SELECT userId FROM smltown_plays WHERE gameId = smltown_games.id AND admin = 1 LIMIT 1)  LIMIT 1) AS admin, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id) AS players, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172') AS playing, (SELECT message FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' LIMIT 1) AS message, (SELECT count(*) FROM smltown_plays WHERE gameId = smltown_games.id AND userId = '1284656172' AND admin = 1) AS own FROM smltown_games WHERE true  AND LOWER(name) like :name  AND ((SELECT count(*) FROM smltown_plays WHERE userId = :userId AND gameId = smltown_games.id) > 0  OR 1 = public  AND lastConnection > now() - INTERVAL 1 DAY  )  ORDER BY playing DESC, message DESC, status LIMIT 0, 15  UNION SELECT count(*) AS count, '', '', '', '', '', '', '', '', '', '', '', '', '' FROM smltown_games WHERE name = 'aaa'::  (userId: 1284656172;) 
+[17-03-2016 18:05:02]waiting for: undefined::  (userId: 1284656172;) 
+[17-03-2016 18:50:32]; Error: Uncaught TypeError: Cannot read property 'length' of undefined
+url: http://sml.town/play/js/Games.js
+line: 231
+column: 66
+error: TypeError: Cannot read property 'length' of undefined; ::  (userId: 1284656172;) 
+[17-03-2016 18:50:32]; Error: Uncaught TypeError: Cannot read property 'length' of undefined
+url: http://sml.town/play/js/Games.js
+line: 231
+column: 66
+error: TypeError: Cannot read property 'length' of undefined; ::  (userId: 1284656172;) 
+[17-03-2016 18:50:32]; Error: Uncaught TypeError: Cannot read property 'length' of undefined
+url: http://sml.town/play/js/Games.js
+line: 231
+column: 66
+error: TypeError: Cannot read property 'length' of undefined; ::  (userId: 1284656172;) 
+[17-03-2016 18:50:45]; Error: Uncaught TypeError: Cannot read property 'length' of undefined
+url: http://sml.town/play/js/Games.js
+line: 231
+column: 66
+error: TypeError: Cannot read property 'length' of undefined; ::  (userId: 1284656172;) 
+[17-03-2016 18:50:46]; Error: Uncaught TypeError: Cannot read property 'length' of undefined
+url: http://sml.town/play/js/Games.js
+line: 231
+column: 66
+error: TypeError: Cannot read property 'length' of undefined; ::  (userId: 1284656172;) 
+[17-03-2016 18:52:58](only debug) websocket error:undefined::  () 
+[17-03-2016 18:52:58](only debug) websocket close:undefined::  () 
+[17-03-2016 18:52:58](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 18:52:59](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 19:01:52](only debug) websocket error:undefined::  () 
+[17-03-2016 19:01:52](only debug) websocket close:undefined::  () 
+[17-03-2016 19:01:52](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 19:01:53](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 20:09:47]warn: Key 'votations:[{"id":"1421","sel":"1423","card":null},{"id":"1422","sel":null,"card":null},{"id":"1423","sel":null,"card":"_villager"},{"id":"1424","sel":null,"card":null}]' hasn't translation on english lang file. (userId: 854037785; play id: 1421; ajax client: 1;) 
+[17-03-2016 20:09:47]can't save quotes string on lang file (userId: 854037785; play id: 1421; ajax client: 1;) 
+[17-03-2016 20:09:47](only debug) error on parse request: eval(warn: warn: Key 'votations:[{"id":"1421","sel":"1423","card":null},{"id":"1422","sel":null,"card":null},{"id":"1423","sel":null,"card":"_villager"},{"id":"1424","sel":null,"card":null}]' hasn't translation on english lang file.warn: can't save quotes string on lang file)::  (userId: 854037785;) 
+[17-03-2016 20:10:23]warn: Key 'votations:[{"id":"1421","sel":"1423","card":null},{"id":"1422","sel":null,"card":null},{"id":"1423","sel":null,"card":"_villager"},{"id":"1424","sel":null,"card":null}]' hasn't translation on english lang file. (userId: 854037785; play id: 1421; ajax client: 1;) 
+[17-03-2016 20:10:23]can't save quotes string on lang file (userId: 854037785; play id: 1421; ajax client: 1;) 
+[17-03-2016 20:10:23](only debug) error on parse request: eval(warn: warn: Key 'votations:[{"id":"1421","sel":"1423","card":null},{"id":"1422","sel":null,"card":null},{"id":"1423","sel":null,"card":"_villager"},{"id":"1424","sel":null,"card":null}]' hasn't translation on english lang file.warn: can't save quotes string on lang file)::  (userId: 854037785;) 
+[17-03-2016 20:21:49]warn: Key '456546' hasn't translation on english lang file. (userId: 854037785; play id: 1421; ajax client: 1;) 
+[17-03-2016 20:21:49]warn: EN LANG file NOT WRITABLE (userId: 854037785; play id: 1421; ajax client: 1;) 
+[17-03-2016 20:21:49]warn: Key 'muu' hasn't translation on english lang file. (userId: 854037785; play id: 1421; ajax client: 1;) 
+[17-03-2016 20:21:49]warn: EN LANG file NOT WRITABLE (userId: 854037785; play id: 1421; ajax client: 1;) 
+[17-03-2016 20:21:49]warn: Key 'classic' hasn't translation on english lang file. (userId: 854037785; play id: 1421; ajax client: 1;) 
+[17-03-2016 20:21:49]warn: EN LANG file NOT WRITABLE (userId: 854037785; play id: 1421; ajax client: 1;) 
+[17-03-2016 20:21:49]warn: Key 'other' hasn't translation on english lang file. (userId: 854037785; play id: 1421; ajax client: 1;) 
+[17-03-2016 20:21:49]warn: EN LANG file NOT WRITABLE (userId: 854037785; play id: 1421; ajax client: 1;) 
+[17-03-2016 20:21:49]warn: Key 'http://sml.town/390' hasn't translation on english lang file. (userId: 854037785; play id: 1421; ajax client: 1;) 
+[17-03-2016 20:21:49]warn: EN LANG file NOT WRITABLE (userId: 854037785; play id: 1421; ajax client: 1;) 
+[17-03-2016 20:21:49]warn: Key 'WEREWOLF' hasn't translation on english lang file. (userId: 854037785; play id: 1421; ajax client: 1;) 
+[17-03-2016 20:21:49]warn: EN LANG file NOT WRITABLE (userId: 854037785; play id: 1421; ajax client: 1;) 
+[17-03-2016 20:21:49](only debug) error on parse request: eval(warn: warn: Key '456546' hasn't translation on english lang file.warn: warn: EN LANG file NOT WRITABLE)::  (userId: 854037785;) 
+[17-03-2016 20:21:49](only debug) error on parse request: eval(warn: warn: Key 'muu' hasn't translation on english lang file.warn: warn: EN LANG file NOT WRITABLE)::  (userId: 854037785;) 
+[17-03-2016 20:21:49](only debug) error on parse request: eval(warn: warn: Key 'classic' hasn't translation on english lang file.warn: warn: EN LANG file NOT WRITABLE)::  (userId: 854037785;) 
+[17-03-2016 20:21:49](only debug) error on parse request: eval(warn: warn: Key 'other' hasn't translation on english lang file.warn: warn: EN LANG file NOT WRITABLE)::  (userId: 854037785;) 
+[17-03-2016 20:21:49](only debug) error on parse request: eval(warn: warn: Key 'WEREWOLF' hasn't translation on english lang file.warn: warn: EN LANG file NOT WRITABLE)::  (userId: 854037785;) 
+[17-03-2016 20:21:49](only debug) error on parse request: eval(warn: warn: Key 'http://sml.town/390' hasn't translation on english lang file.warn: warn: EN LANG file NOT WRITABLE)::  (userId: 854037785;) 
+[17-03-2016 20:33:33](only debug) reload game on smltown_ajax::  () 
+[17-03-2016 20:33:34](only debug) reload game on smltown_ajax::  () 
+[17-03-2016 20:33:34](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 20:33:40](only debug) websocket close: undefined. NaN seconds.::  (userId: 1459345186;) 
+[17-03-2016 20:33:40](only debug) websocket close:undefined::  (userId: 1459345186;) 
+[17-03-2016 20:33:40](only debug) websocket error:undefined::  (userId: 1459345186;) 
+[17-03-2016 20:33:40](only debug) trying reconnection every 2 min.::  (userId: 1459345186;) 
+[17-03-2016 20:34:21](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 20:34:21](only debug) websocket error:undefined::  () 
+[17-03-2016 20:34:21](only debug) websocket close:undefined::  () 
+[17-03-2016 20:34:22](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 20:34:43]; Error: Uncaught TypeError: Cannot read property 'find' of undefined
+url: http://sml.town/play/js/Help.js
+line: 62
+column: 19
+error: TypeError: Cannot read property 'find' of undefined; ::  (userId: 1444156255;) 
+[17-03-2016 20:35:50]; Error: Uncaught TypeError: Cannot read property 'find' of undefined
+url: http://sml.town/play/js/Help.js
+line: 80
+column: 15
+error: TypeError: Cannot read property 'find' of undefined; ::  (userId: 1444156255;) 
+[17-03-2016 20:40:39](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 20:40:39](only debug) websocket error:undefined::  () 
+[17-03-2016 20:40:39](only debug) websocket close:undefined::  () 
+[17-03-2016 20:40:39](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 20:49:23](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 20:49:23](only debug) websocket close:undefined::  () 
+[17-03-2016 20:49:23](only debug) websocket error:undefined::  () 
+[17-03-2016 20:49:23](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 20:51:16](only debug) websocket error:undefined::  () 
+[17-03-2016 20:51:16](only debug) websocket close:undefined::  () 
+[17-03-2016 20:51:16](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 20:51:16](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 20:56:32](only debug) websocket error:undefined::  () 
+[17-03-2016 20:56:32](only debug) websocket close:undefined::  () 
+[17-03-2016 20:56:32](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 20:56:33](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 20:58:06](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 20:58:06](only debug) websocket close:undefined::  () 
+[17-03-2016 20:58:06](only debug) websocket error:undefined::  () 
+[17-03-2016 20:58:07](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 20:58:58](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 20:58:58](only debug) websocket error:undefined::  () 
+[17-03-2016 20:58:58](only debug) websocket close:undefined::  () 
+[17-03-2016 20:58:59](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 21:00:30](only debug) websocket close:undefined::  () 
+[17-03-2016 21:00:30](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 21:00:30](only debug) websocket error:undefined::  () 
+[17-03-2016 21:00:30](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 21:00:43]; Error: Uncaught TypeError: Cannot read property 'find' of undefined
+url: http://sml.town/play/js/Help.js
+line: 80
+column: 15
+error: TypeError: Cannot read property 'find' of undefined; ::  (userId: 908346296;) 
+[17-03-2016 21:01:50](only debug) websocket error:undefined::  () 
+[17-03-2016 21:01:50](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 21:01:50](only debug) websocket close:undefined::  () 
+[17-03-2016 21:01:50](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 21:01:53]; Error: Uncaught TypeError: Cannot read property 'find' of undefined
+url: http://sml.town/play/js/Help.js
+line: 80
+column: 19
+error: TypeError: Cannot read property 'find' of undefined; ::  (userId: 2021499799;) 
+[17-03-2016 21:02:26](only debug) websocket error:undefined::  () 
+[17-03-2016 21:02:26](only debug) websocket close:undefined::  () 
+[17-03-2016 21:02:26](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 21:02:26](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 21:08:34](only debug) websocket error:undefined::  () 
+[17-03-2016 21:08:34](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 21:08:34](only debug) websocket close:undefined::  () 
+[17-03-2016 21:08:35](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 21:10:10](only debug) websocket close:undefined::  () 
+[17-03-2016 21:10:10](only debug) websocket error:undefined::  () 
+[17-03-2016 21:10:10](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 21:10:11](only debug) trying reconnection every 2 min.::  () 
+[17-03-2016 21:10:46](only debug) websocket error:undefined::  () 
+[17-03-2016 21:10:46](only debug) websocket close: undefined. NaN seconds.::  () 
+[17-03-2016 21:10:46](only debug) websocket close:undefined::  () 
+[17-03-2016 21:10:47](only debug) trying reconnection every 2 min.::  () 
+[18-03-2016 00:42:59](only debug) websocket error:undefined::  (userId: 38cdfa2c3ae64064;) 
+[18-03-2016 00:42:59](only debug) websocket close:undefined::  (userId: 38cdfa2c3ae64064;) 
+[18-03-2016 00:42:59](only debug) websocket close: undefined. NaN seconds.::  (userId: 38cdfa2c3ae64064;) 
+[18-03-2016 00:42:59]; Error: Uncaught InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable.
+url: http://sml.town/play/js/Server.js
+line: 457
+column: 59
+error: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable.; ::  (userId: 38cdfa2c3ae64064;) 
+[18-03-2016 00:43:52]; Error: Uncaught TypeError: Cannot call method 'find' of undefined
+url: http://sml.town/play/js/Help.js
+line: 45
+column: 15
+error: TypeError: Cannot call method 'find' of undefined; ::  (userId: 38cdfa2c3ae64064;) 
+[18-03-2016 00:44:04]; Error: Uncaught TypeError: Cannot call method 'find' of undefined
+url: http://sml.town/play/js/Help.js
+line: 45
+column: 15
+error: TypeError: Cannot call method 'find' of undefined; ::  (userId: 38cdfa2c3ae64064;) 
+[18-03-2016 00:44:05]; Error: Uncaught TypeError: Cannot call method 'find' of undefined
+url: http://sml.town/play/js/Help.js
+line: 45
+column: 15
+error: TypeError: Cannot call method 'find' of undefined; ::  (userId: 38cdfa2c3ae64064;) 
+[18-03-2016 00:44:10]; Error: Uncaught TypeError: Cannot call method 'find' of undefined
+url: http://sml.town/play/js/Help.js
+line: 45
+column: 15
+error: TypeError: Cannot call method 'find' of undefined; ::  (userId: 38cdfa2c3ae64064;) 
+[18-03-2016 00:44:56]; Error: Uncaught TypeError: Cannot call method 'find' of undefined
+url: http://sml.town/play/js/Help.js
+line: 45
+column: 15
+error: TypeError: Cannot call method 'find' of undefined; ::  (userId: 38cdfa2c3ae64064;) 
+[18-03-2016 00:45:17]; Error: Uncaught TypeError: Cannot call method 'find' of undefined
+url: http://sml.town/play/js/Help.js
+line: 45
+column: 15
+error: TypeError: Cannot call method 'find' of undefined; ::  (userId: 38cdfa2c3ae64064;) 
+[18-03-2016 00:48:20]click event::  (userId: 38cdfa2c3ae64064;) 
+[18-03-2016 00:48:21]social.js event::  (userId: 38cdfa2c3ae64064;) 
+[18-03-2016 00:49:50]; Error: Uncaught TypeError: Cannot call method 'find' of undefined
+url: http://sml.town/play/js/Help.js
+line: 45
+column: 15
+error: TypeError: Cannot call method 'find' of undefined; ::  (userId: 38cdfa2c3ae64064;) 
+[18-03-2016 03:09:25]; Error: Uncaught TypeError: Cannot call method 'find' of undefined
+url: http://sml.town/play/js/Help.js
+line: 45
+column: 15
+error: TypeError: Cannot call method 'find' of undefined; ::  (userId: 38cdfa2c3ae64064;) 
+[18-03-2016 03:09:57]; Error: Uncaught TypeError: Cannot call method 'find' of undefined
+url: http://sml.town/play/js/Help.js
+line: 45
+column: 15
+error: TypeError: Cannot call method 'find' of undefined; ::  (userId: 38cdfa2c3ae64064;) 
+[18-03-2016 03:10:21]; Error: Uncaught TypeError: Cannot call method 'find' of undefined
+url: http://sml.town/play/js/Help.js
+line: 45
+column: 15
+error: TypeError: Cannot call method 'find' of undefined; ::  (userId: 38cdfa2c3ae64064;) 
+[18-03-2016 13:24:12]1::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[20-03-2016 20:19:41]; Error: Uncaught TypeError: SMLTOWN.Update.gameStatus is not a function
+url: 
+line: 1
+column: 36
+error: TypeError: SMLTOWN.Update.gameStatus is not a function; ::  (userId: c6dfefce779a3759;) 
+[20-03-2016 21:00:53]warn: Key 'lookingGames' hasn't translation on english lang file. (userId: 1228051881;) 
+[20-03-2016 21:00:53](only debug) error on parse request: eval(warn: warn: Key 'lookingGames' hasn't translation on english lang file.)::  (userId: 1228051881;) 
+[20-03-2016 21:54:18](only debug) websocket close:undefined::  (userId: bf9a556b55599ecd;) 
+[20-03-2016 21:54:18](only debug) websocket error:undefined::  (userId: bf9a556b55599ecd;) 
+[20-03-2016 21:54:18](only debug) websocket close: undefined. NaN seconds.::  (userId: bf9a556b55599ecd;) 
+[20-03-2016 21:54:27]waiting for: undefined::  (userId: bf9a556b55599ecd;) 
+[20-03-2016 21:54:44]waiting for: undefined::  (userId: bf9a556b55599ecd;) 
+[20-03-2016 21:54:44]waiting for: undefined::  (userId: bf9a556b55599ecd;) 
+[20-03-2016 21:54:45]waiting for: undefined::  (userId: bf9a556b55599ecd;) 
+[20-03-2016 21:54:46]waiting for: undefined::  (userId: bf9a556b55599ecd;) 
+[20-03-2016 21:54:59]waiting for: undefined::  (userId: bf9a556b55599ecd;) 
+[20-03-2016 21:55:00]waiting for: undefined::  (userId: bf9a556b55599ecd;) 
+[20-03-2016 21:55:14]waiting for: undefined::  (userId: bf9a556b55599ecd;) 
+[20-03-2016 22:21:31]; Error: Uncaught TypeError: SMLTOWN.Update.gameStatus is not a function
+url: 
+line: 1
+column: 36
+error: TypeError: SMLTOWN.Update.gameStatus is not a function; ::  (userId: c6dfefce779a3759;) 
+[20-03-2016 22:27:16]; Error: Uncaught TypeError: SMLTOWN.Update.gameStatus is not a function
+url: 
+line: 1
+column: 36
+error: TypeError: SMLTOWN.Update.gameStatus is not a function; ::  (userId: c6dfefce779a3759;) 
+[20-03-2016 23:46:34](only debug) websocket error:undefined::  () 
+[20-03-2016 23:46:34](only debug) websocket close: undefined. NaN seconds.::  () 
+[20-03-2016 23:46:34](only debug) websocket close:undefined::  () 
+[20-03-2016 23:46:35](only debug) trying reconnection every 2 min.::  () 
+[20-03-2016 23:46:43]waiting for: undefined::  (userId: 119841189;) 
+[20-03-2016 23:46:44]waiting for: undefined::  (userId: 119841189;) 
+[21-03-2016 00:06:26]; Error: Uncaught SyntaxError: Unexpected token )
+url: 
+line: 1
+column: 183
+error: SyntaxError: Unexpected token ); ::  (userId: c6dfefce779a3759;) 
+[21-03-2016 00:38:12](only debug) websocket error:undefined::  () 
+[21-03-2016 00:38:12](only debug) websocket close:undefined::  () 
+[21-03-2016 00:38:13](only debug) websocket close: undefined. NaN seconds.::  () 
+[21-03-2016 00:38:13](only debug) trying reconnection every 2 min.::  () 
+[21-03-2016 02:28:09](only debug) websocket error:undefined::  (userId: c6dfefce779a3759;) 
+[21-03-2016 02:28:09](only debug) websocket close:undefined::  (userId: c6dfefce779a3759;) 
+[21-03-2016 02:28:09](only debug) websocket close: undefined. NaN seconds.::  (userId: c6dfefce779a3759;) 
+[21-03-2016 02:33:02](only debug) websocket close:undefined::  () 
+[21-03-2016 02:33:02](only debug) websocket close: undefined. NaN seconds.::  () 
+[21-03-2016 02:33:02](only debug) websocket error:undefined::  () 
+[21-03-2016 02:33:05](only debug) trying reconnection every 2 min.::  () 
+[21-03-2016 02:49:52]; Error: Uncaught TypeError: Cannot read property 'clearCountdowns' of undefined
+url: 
+line: 1
+column: 33
+error: TypeError: Cannot read property 'clearCountdowns' of undefined; ::  (userId: c6dfefce779a3759;) 
+[21-03-2016 08:59:04]; Error: Uncaught SyntaxError: Unexpected token ,
+url: http://sml.town/play/lang/es.js
+line: 7
+column: 45
+error: SyntaxError: Unexpected token ,; ::  (userId: c306a812644507e2;) 
+[21-03-2016 08:59:05](only debug) websocket error:undefined::  (userId: c306a812644507e2;) 
+[21-03-2016 08:59:05](only debug) websocket close:undefined::  (userId: c306a812644507e2;) 
+[21-03-2016 08:59:05](only debug) websocket close: undefined. NaN seconds.::  (userId: c306a812644507e2;) 
+[21-03-2016 12:27:23](only debug) websocket error:undefined::  (userId: 9d6c81db1ab01821;) 
+[21-03-2016 12:27:23](only debug) websocket close:undefined::  (userId: 9d6c81db1ab01821;) 
+[21-03-2016 12:27:23](only debug) websocket close: undefined. NaN seconds.::  (userId: 9d6c81db1ab01821;) 
+[21-03-2016 20:23:56](only debug) websocket error:undefined::  (userId: 584928775;) 
+[21-03-2016 20:23:56](only debug) websocket close:undefined::  (userId: 584928775;) 
+[21-03-2016 20:23:56](only debug) websocket close: undefined. NaN seconds.::  (userId: 584928775;) 
+[21-03-2016 20:23:56](only debug) trying reconnection every 2 min.::  (userId: 584928775;) 
+[21-03-2016 21:05:33]; Error: Uncaught SyntaxError: Unexpected token ,
+url: http://sml.town/play/lang/es.js
+line: 8
+column: 5
+error: SyntaxError: Unexpected token ,; ::  () 
+[21-03-2016 21:05:35](only debug) websocket close: undefined. NaN seconds.::  () 
+[21-03-2016 21:05:35](only debug) websocket close:undefined::  () 
+[21-03-2016 21:05:35](only debug) websocket error:undefined::  () 
+[21-03-2016 21:05:35](only debug) trying reconnection every 2 min.::  () 
+[21-03-2016 21:12:59](only debug) websocket error:undefined::  (userId: c6dfefce779a3759;) 
+[21-03-2016 21:12:59](only debug) websocket close:undefined::  (userId: c6dfefce779a3759;) 
+[21-03-2016 21:12:59](only debug) websocket close: undefined. NaN seconds.::  (userId: c6dfefce779a3759;) 
+[21-03-2016 21:14:41]waiting for: undefined::  (userId: 584928775;) 
+[21-03-2016 21:14:41]waiting for: undefined::  (userId: 584928775;) 
+[21-03-2016 21:14:48]waiting for: undefined::  (userId: 584928775;) 
+[21-03-2016 21:15:29]waiting for: undefined::  (userId: 584928775;) 
+[21-03-2016 21:16:05]waiting for: undefined::  (userId: 584928775;) 
+[21-03-2016 21:23:48](only debug) error on parse request: eval(get new user id; {"id":"723625657","name":null,"facebook":null,"type":null,"socialId":"1b1c466e80a9a273e90ad24185f1904f","lang":null,"websocket":"0","friends":""})::  (userId: 723625657;) 
+[21-03-2016 21:35:53](only debug) websocket error:undefined::  (userId: 723625657;) 
+[21-03-2016 21:35:53](only debug) websocket close: undefined. NaN seconds.::  (userId: 723625657;) 
+[21-03-2016 21:35:53](only debug) websocket close:undefined::  (userId: 723625657;) 
+[21-03-2016 21:35:53]; Error: Uncaught ReferenceError: error is not defined
+url: http://sml.town/play/js/Load.js
+line: 21
+column: 19
+error: ReferenceError: error is not defined; ::  (userId: 723625657;) 
+[21-03-2016 21:36:50]; Error: Uncaught hi
+url: http://sml.town/play/js/Load.js
+line: 21
+column: 9
+error: hi; ::  (userId: 723625657;) 
+[21-03-2016 21:37:35]; Error: Uncaught hi
+url: http://sml.town/play/js/Load.js
+line: 27
+column: 13
+error: hi; ::  (userId: 723625657;) 
+[21-03-2016 21:40:26]waiting for: undefined::  (userId: 723625657;) 
+[21-03-2016 21:44:33]waiting for: {"action":"addUserInGame","gameId":411,"password":null,"userId":"723625657","gameType":"mafia-werewolf"}::  (userId: 723625657;) 
+[21-03-2016 21:45:27](only debug) websocket error:undefined::  () 
+[21-03-2016 21:45:27](only debug) websocket close:undefined::  () 
+[21-03-2016 21:45:27](only debug) websocket close: undefined. NaN seconds.::  () 
+[21-03-2016 21:45:29](only debug) trying reconnection every 2 min.::  () 
+[21-03-2016 22:21:02]; Error: Uncaught SyntaxError: Unexpected token <
+url: http://sml.town/play/#game?415
+line: 60
+column: 13
+error: SyntaxError: Unexpected token <; ::  (userId: c6dfefce779a3759;) 
+[21-03-2016 22:34:42](only debug) websocket close: undefined. NaN seconds.::  () 
+[21-03-2016 22:34:42](only debug) websocket error:undefined::  () 
+[21-03-2016 22:34:42](only debug) websocket close:undefined::  () 
+[21-03-2016 22:34:43](only debug) trying reconnection every 2 min.::  () 
+[21-03-2016 22:59:05]waiting for: undefined::  (userId: 1168084454;) 
+[21-03-2016 23:00:20]waiting for: undefined::  (userId: 1168084454;) 
+[21-03-2016 23:07:39]waiting for: undefined::  (userId: 1168084454;) 
+[22-03-2016 00:15:57](only debug) websocket error:undefined::  () 
+[22-03-2016 00:15:57](only debug) websocket close:undefined::  () 
+[22-03-2016 00:15:57](only debug) websocket close: undefined. NaN seconds.::  () 
+[22-03-2016 00:15:58](only debug) trying reconnection every 2 min.::  () 
+[22-03-2016 00:50:03]; Error: Uncaught TypeError: Cannot set property 'path_static' of undefined
+url: http://localhost/smalltown/play/js/Help.js
+line: 624
+column: 71
+error: TypeError: Cannot set property 'path_static' of undefined; ::  (userId: 685297655;) 
+[22-03-2016 01:12:31]; Error: Uncaught TypeError: Failed to execute 'appendChild' on 'Node': parameter 1 is not of type 'Node'.
+url: http://localhost/smalltown/play/js/Help.js
+line: 627
+column: 61
+error: TypeError: Failed to execute 'appendChild' on 'Node': parameter 1 is not of type 'Node'.; ::  (userId: 685297655;) 
+[22-03-2016 01:20:01]; Error: Uncaught SyntaxError: Unexpected identifier
+url: http://localhost/smalltown/play/js/Help.js
+line: 629
+column: 53
+error: SyntaxError: Unexpected identifier; ::  (userId: 685297655;) 
+[22-03-2016 01:20:07]; Error: Uncaught SyntaxError: Unexpected identifier
+url: http://localhost/smalltown/play/js/Help.js
+line: 629
+column: 53
+error: SyntaxError: Unexpected identifier; ::  (userId: 685297655;) 
+[22-03-2016 23:20:23](only debug) websocket error:undefined::  () 
+[22-03-2016 23:20:23](only debug) websocket close:undefined::  () 
+[22-03-2016 23:20:23](only debug) websocket close: undefined. NaN seconds.::  () 
+[22-03-2016 23:20:23](only debug) trying reconnection every 2 min.::  () 
+[28-03-2016 00:12:39](only debug) websocket error:undefined::  (userId: dff8aa4d738677d0;) 
+[28-03-2016 00:12:39](only debug) websocket close:undefined::  (userId: dff8aa4d738677d0;) 
+[28-03-2016 00:12:39](only debug) websocket close: undefined. NaN seconds.::  (userId: dff8aa4d738677d0;) 
+[28-03-2016 00:15:55]social.js event::  (userId: dff8aa4d738677d0;) 
+[28-03-2016 00:15:55]click event::  (userId: dff8aa4d738677d0;) 
+[29-03-2016 13:27:34](only debug) websocket error:undefined::  (userId: 8263839fc4ffe8d3;) 
+[29-03-2016 13:27:34](only debug) websocket close:undefined::  (userId: 8263839fc4ffe8d3;) 
+[29-03-2016 13:27:34](only debug) websocket close: undefined. NaN seconds.::  (userId: 8263839fc4ffe8d3;) 
+[29-03-2016 13:29:35]waiting for: undefined::  (userId: 8263839fc4ffe8d3;) 
+[29-03-2016 13:29:40]waiting for: undefined::  (userId: 8263839fc4ffe8d3;) 
+[29-03-2016 13:29:45]waiting for: undefined::  (userId: 8263839fc4ffe8d3;) 
+[29-03-2016 13:29:51]waiting for: undefined::  (userId: 8263839fc4ffe8d3;) 
+[29-03-2016 13:29:55]waiting for: undefined::  (userId: 8263839fc4ffe8d3;) 
+[29-03-2016 14:39:49]waiting for: {"action":"playGame","gameId":"427","playId":"1481","gameType":"mafia-werewolf"}::  (userId: 8263839fc4ffe8d3;) 
+[29-03-2016 18:23:41](only debug) websocket close:undefined::  (userId: 501274146;) 
+[29-03-2016 18:23:41](only debug) websocket close: undefined. NaN seconds.::  (userId: 501274146;) 
+[29-03-2016 18:23:41](only debug) websocket error:undefined::  (userId: 501274146;) 
+[29-03-2016 18:23:42](only debug) trying reconnection every 2 min.::  (userId: 501274146;) 
+[29-03-2016 22:00:04]; Error: Uncaught ReferenceError: $ is not defined
+url: http://sml.town/play/
+line: 82
+column: 13
+error: ReferenceError: $ is not defined; ::  (userId: 501274146;) 
+[29-03-2016 22:00:04]; Error: Uncaught ReferenceError: $ is not defined
+url: http://sml.town/play/
+line: 149
+column: 13
+error: ReferenceError: $ is not defined; ::  (userId: 501274146;) 
+[30-03-2016 09:51:48]; Error: Uncaught TypeError: Cannot call method 'clearCountdowns' of undefined
+url: 
+line: 1
+column: 33
+error: TypeError: Cannot call method 'clearCountdowns' of undefined; ::  (userId: 1231a41e124099f3;) 
+[30-03-2016 09:51:50](only debug) websocket error:undefined::  (userId: 1231a41e124099f3;) 
+[30-03-2016 09:51:52](only debug) websocket close:undefined::  (userId: 1231a41e124099f3;) 
+[30-03-2016 09:51:52](only debug) websocket close: undefined. NaN seconds.::  (userId: 1231a41e124099f3;) 
+[30-03-2016 17:21:51](only debug) websocket error:undefined::  (userId: 21a1f867931956a0;) 
+[30-03-2016 17:21:51](only debug) websocket close:undefined::  (userId: 21a1f867931956a0;) 
+[30-03-2016 17:21:51](only debug) websocket close: undefined. NaN seconds.::  (userId: 21a1f867931956a0;) 
+[30-03-2016 20:45:50](only debug) websocket close: undefined. NaN seconds.::  (userId: 501274146;) 
+[30-03-2016 20:45:50](only debug) websocket error:undefined::  (userId: 501274146;) 
+[30-03-2016 20:45:50](only debug) websocket close:undefined::  (userId: 501274146;) 
+[30-03-2016 20:45:50](only debug) trying reconnection every 2 min.::  (userId: 501274146;) 
+[30-03-2016 21:30:40]; Error: Uncaught SyntaxError: Unexpected token ,
+url: http://sml.town/play/lang/es.js
+line: 7
+column: 45
+error: SyntaxError: Unexpected token ,; ::  (userId: eba1d89abcf390fe;) 
+[30-03-2016 21:30:40](only debug) websocket error:undefined::  (userId: eba1d89abcf390fe;) 
+[30-03-2016 21:30:40](only debug) websocket close:undefined::  (userId: eba1d89abcf390fe;) 
+[30-03-2016 21:30:40](only debug) websocket close: undefined. NaN seconds.::  (userId: eba1d89abcf390fe;) 
+[30-03-2016 22:46:42](only debug) websocket error:undefined::  (userId: c6dfefce779a3759;) 
+[30-03-2016 22:46:42](only debug) websocket close:undefined::  (userId: c6dfefce779a3759;) 
+[30-03-2016 22:46:42](only debug) websocket close: undefined. NaN seconds.::  (userId: c6dfefce779a3759;) 
+[31-03-2016 05:47:27](only debug) websocket error:undefined::  (userId: 9a2fd5f0f3f16ee3;) 
+[31-03-2016 05:47:27](only debug) websocket close: undefined. NaN seconds.::  (userId: 9a2fd5f0f3f16ee3;) 
+[31-03-2016 05:47:27](only debug) websocket close:undefined::  (userId: 9a2fd5f0f3f16ee3;) 
+[31-03-2016 10:11:52](only debug) websocket error:undefined::  (userId: 9f56f6fc87199bc8;) 
+[31-03-2016 10:11:52](only debug) websocket close:undefined::  (userId: 9f56f6fc87199bc8;) 
+[31-03-2016 10:11:52](only debug) websocket close: undefined. NaN seconds.::  (userId: 9f56f6fc87199bc8;) 
+[31-03-2016 10:35:43](only debug) websocket error:undefined::  (userId: 70ea0bf38ab7d3b9;) 
+[31-03-2016 10:35:43](only debug) websocket close:undefined::  (userId: 70ea0bf38ab7d3b9;) 
+[31-03-2016 10:35:43](only debug) websocket close: undefined. NaN seconds.::  (userId: 70ea0bf38ab7d3b9;) 
+[31-03-2016 11:59:50](only debug) websocket close:undefined::  (userId: 68ca0fad1c3336ac;) 
+[31-03-2016 11:59:50](only debug) websocket close: undefined. NaN seconds.::  (userId: 68ca0fad1c3336ac;) 
+[31-03-2016 11:59:50](only debug) websocket error:undefined::  (userId: 68ca0fad1c3336ac;) 
+[31-03-2016 13:46:39](only debug) websocket error:undefined::  (userId: 23196f3c48e2fd23;) 
+[31-03-2016 13:46:39](only debug) websocket close:undefined::  (userId: 23196f3c48e2fd23;) 
+[31-03-2016 13:46:39](only debug) websocket close: undefined. NaN seconds.::  (userId: 23196f3c48e2fd23;) 
+[31-03-2016 16:35:00]; Error: Uncaught SyntaxError: Unexpected token ,
+url: http://sml.town/play/lang/es.js
+line: 8
+column: 5
+error: SyntaxError: Unexpected token ,; ::  (userId: 3bf6cd203b4a06e5;) 
+[31-03-2016 16:35:01](only debug) websocket error:undefined::  (userId: 3bf6cd203b4a06e5;) 
+[31-03-2016 16:35:01](only debug) websocket close:undefined::  (userId: 3bf6cd203b4a06e5;) 
+[31-03-2016 16:35:01](only debug) websocket close: undefined. NaN seconds.::  (userId: 3bf6cd203b4a06e5;) 
+[31-03-2016 16:36:50]; Error: Uncaught SyntaxError: Unexpected token ,
+url: http://sml.town/play/lang/es.js
+line: 8
+column: 5
+error: SyntaxError: Unexpected token ,; ::  (userId: 3bf6cd203b4a06e5;) 
+[01-04-2016 06:00:07](only debug) websocket error:undefined::  (userId: 66949349b29e8218;) 
+[01-04-2016 06:00:08](only debug) websocket close:undefined::  (userId: 66949349b29e8218;) 
+[01-04-2016 06:00:08](only debug) websocket close: undefined. NaN seconds.::  (userId: 66949349b29e8218;) 
+[01-04-2016 06:00:36](only debug) websocket error:undefined::  (userId: 66949349b29e8218;) 
+[01-04-2016 06:00:36](only debug) websocket close:undefined::  (userId: 66949349b29e8218;) 
+[01-04-2016 06:00:36](only debug) websocket close: undefined. NaN seconds.::  (userId: 66949349b29e8218;) 
+[01-04-2016 13:18:43](only debug) websocket error:undefined::  (userId: cf09648422fb991f;) 
+[01-04-2016 13:18:43](only debug) websocket close:undefined::  (userId: cf09648422fb991f;) 
+[01-04-2016 13:18:43](only debug) websocket close: undefined. NaN seconds.::  (userId: cf09648422fb991f;) 
+[01-04-2016 16:54:57](only debug) websocket error:undefined::  (userId: c260f01c41b2d8bb;) 
+[01-04-2016 16:54:57](only debug) websocket close:undefined::  (userId: c260f01c41b2d8bb;) 
+[01-04-2016 16:54:57](only debug) websocket close: undefined. NaN seconds.::  (userId: c260f01c41b2d8bb;) 
+[01-04-2016 23:00:27]; Error: Uncaught SyntaxError: Unexpected token ,
+url: http://sml.town/play/lang/es.js
+line: 8
+column: 5
+error: SyntaxError: Unexpected token ,; ::  (userId: 87acb4d187e19762;) 
+[01-04-2016 23:00:27](only debug) websocket error:undefined::  (userId: 87acb4d187e19762;) 
+[01-04-2016 23:00:27](only debug) websocket close:undefined::  (userId: 87acb4d187e19762;) 
+[01-04-2016 23:00:27](only debug) websocket close: undefined. NaN seconds.::  (userId: 87acb4d187e19762;) 
+[02-04-2016 18:28:14](only debug) websocket error:undefined::  (userId: bb0d582f796cb650;) 
+[02-04-2016 18:28:14](only debug) websocket close:undefined::  (userId: bb0d582f796cb650;) 
+[02-04-2016 18:28:14](only debug) websocket close: undefined. NaN seconds.::  (userId: bb0d582f796cb650;) 
+[02-04-2016 22:49:31](only debug) websocket close:undefined::  (userId: 501274146;) 
+[02-04-2016 22:49:31](only debug) websocket close: undefined. NaN seconds.::  (userId: 501274146;) 
+[02-04-2016 22:49:33](only debug) websocket error:undefined::  (userId: 501274146;) 
+[02-04-2016 22:49:34](only debug) trying reconnection every 2 min.::  (userId: 501274146;) 
+[03-04-2016 02:57:43](only debug) websocket error:undefined::  (userId: b8f450ae470c7420;) 
+[03-04-2016 02:57:43](only debug) websocket close:undefined::  (userId: b8f450ae470c7420;) 
+[03-04-2016 02:57:43](only debug) websocket close: undefined. NaN seconds.::  (userId: b8f450ae470c7420;) 
+[03-04-2016 03:49:30](only debug) websocket error:undefined::  (userId: 1ef7ea83e61bbac3;) 
+[03-04-2016 03:49:30](only debug) websocket close:undefined::  (userId: 1ef7ea83e61bbac3;) 
+[03-04-2016 03:49:30](only debug) websocket close: undefined. NaN seconds.::  (userId: 1ef7ea83e61bbac3;) 
+[03-04-2016 04:20:08](only debug) websocket error:undefined::  (userId: 1ef7ea83e61bbac3;) 
+[03-04-2016 04:20:08](only debug) websocket close: undefined. NaN seconds.::  (userId: 1ef7ea83e61bbac3;) 
+[03-04-2016 04:20:08](only debug) websocket close:undefined::  (userId: 1ef7ea83e61bbac3;) 
+[03-04-2016 04:20:37]; Error: Uncaught TypeError: Cannot read property 'clearCountdowns' of undefined
+url: 
+line: 1
+column: 33
+error: TypeError: Cannot read property 'clearCountdowns' of undefined; ::  (userId: 1ef7ea83e61bbac3;) 
+[03-04-2016 04:20:38](only debug) websocket error:undefined::  (userId: 1ef7ea83e61bbac3;) 
+[03-04-2016 04:20:38](only debug) websocket close:undefined::  (userId: 1ef7ea83e61bbac3;) 
+[03-04-2016 04:20:38](only debug) websocket close: undefined. NaN seconds.::  (userId: 1ef7ea83e61bbac3;) 
+[03-04-2016 04:20:49](only debug) websocket error:undefined::  (userId: 1ef7ea83e61bbac3;) 
+[03-04-2016 04:20:49](only debug) websocket close:undefined::  (userId: 1ef7ea83e61bbac3;) 
+[03-04-2016 04:20:49](only debug) websocket close: undefined. NaN seconds.::  (userId: 1ef7ea83e61bbac3;) 
+[03-04-2016 14:16:00](only debug) websocket error:undefined::  (userId: fce8b98e92b8e37a;) 
+[03-04-2016 14:16:00](only debug) websocket close:undefined::  (userId: fce8b98e92b8e37a;) 
+[03-04-2016 14:16:00](only debug) websocket close: undefined. NaN seconds.::  (userId: fce8b98e92b8e37a;) 
+[04-04-2016 10:54:25](only debug) websocket close:undefined::  (userId: 1879fdd25a1a9da0;) 
+[04-04-2016 10:54:25](only debug) websocket close: undefined. NaN seconds.::  (userId: 1879fdd25a1a9da0;) 
+[05-04-2016 01:47:11](only debug) websocket error:undefined::  (userId: 501274146;) 
+[05-04-2016 01:47:12]server connection is not established yet::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[05-04-2016 01:47:12](only debug) websocket close: undefined. NaN seconds.::  (userId: 501274146;) 
+[05-04-2016 01:47:12](only debug) websocket close:undefined::  (userId: 501274146;) 
+[05-04-2016 01:47:12](only debug) trying reconnection every 2 min.::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[05-04-2016 03:19:36](only debug) websocket close:undefined::  (userId: c847b4a5ee58c71a;) 
+[05-04-2016 03:19:36](only debug) websocket close: undefined. NaN seconds.::  (userId: c847b4a5ee58c71a;) 
+[05-04-2016 03:19:36](only debug) websocket error:undefined::  (userId: c847b4a5ee58c71a;) 
+[06-04-2016 06:34:03](only debug) websocket error:undefined::  (userId: 8ce6a451d5a756f;) 
+[06-04-2016 06:34:03](only debug) websocket close:undefined::  (userId: 8ce6a451d5a756f;) 
+[06-04-2016 06:34:03](only debug) websocket close: undefined. NaN seconds.::  (userId: 8ce6a451d5a756f;) 
+[06-04-2016 06:52:20]social.js event::  (userId: 8ce6a451d5a756f;) 
+[06-04-2016 06:52:20]click event::  (userId: 8ce6a451d5a756f;) 
+[06-04-2016 06:52:21]social.js event::  (userId: 8ce6a451d5a756f;) 
+[06-04-2016 07:28:27](only debug) websocket error:undefined::  (userId: 8ce6a451d5a756f;) 
+[06-04-2016 07:28:27](only debug) websocket close: undefined. NaN seconds.::  (userId: 8ce6a451d5a756f;) 
+[06-04-2016 07:28:27](only debug) websocket close:undefined::  (userId: 8ce6a451d5a756f;) 
+[07-04-2016 12:59:05](only debug) websocket error:undefined::  (userId: 1fe930e232b5fa8b;) 
+[07-04-2016 12:59:05](only debug) websocket close: undefined. NaN seconds.::  (userId: 1fe930e232b5fa8b;) 
+[07-04-2016 12:59:05](only debug) websocket close:undefined::  (userId: 1fe930e232b5fa8b;) 
+[07-04-2016 13:09:24](only debug) websocket error:undefined::  (userId: ab6a3667b5a9acf9;) 
+[07-04-2016 13:09:24](only debug) websocket close:undefined::  (userId: ab6a3667b5a9acf9;) 
+[07-04-2016 13:09:24](only debug) websocket close: undefined. NaN seconds.::  (userId: ab6a3667b5a9acf9;) 
+[07-04-2016 13:10:28](only debug) websocket error:undefined::  (userId: ab6a3667b5a9acf9;) 
+[07-04-2016 13:10:28](only debug) websocket close: undefined. NaN seconds.::  (userId: ab6a3667b5a9acf9;) 
+[07-04-2016 13:10:28](only debug) websocket close:undefined::  (userId: ab6a3667b5a9acf9;) 
+[07-04-2016 13:10:57](only debug) websocket error:undefined::  (userId: ab6a3667b5a9acf9;) 
+[07-04-2016 13:10:57](only debug) websocket close:undefined::  (userId: ab6a3667b5a9acf9;) 
+[07-04-2016 13:10:57](only debug) websocket close: undefined. NaN seconds.::  (userId: ab6a3667b5a9acf9;) 
+[07-04-2016 13:13:16](only debug) websocket error:undefined::  (userId: ab6a3667b5a9acf9;) 
+[07-04-2016 13:13:16](only debug) websocket close:undefined::  (userId: ab6a3667b5a9acf9;) 
+[07-04-2016 13:13:16](only debug) websocket close: undefined. NaN seconds.::  (userId: ab6a3667b5a9acf9;) 
+[07-04-2016 13:17:34](only debug) websocket error:undefined::  (userId: ab6a3667b5a9acf9;) 
+[07-04-2016 13:17:34](only debug) websocket close:undefined::  (userId: ab6a3667b5a9acf9;) 
+[07-04-2016 13:17:34](only debug) websocket close: undefined. NaN seconds.::  (userId: ab6a3667b5a9acf9;) 
+[07-04-2016 13:17:44](only debug) websocket error:undefined::  (userId: ab6a3667b5a9acf9;) 
+[07-04-2016 13:17:44](only debug) websocket close:undefined::  (userId: ab6a3667b5a9acf9;) 
+[07-04-2016 13:17:44](only debug) websocket close: undefined. NaN seconds.::  (userId: ab6a3667b5a9acf9;) 
+[07-04-2016 13:18:00](only debug) websocket error:undefined::  (userId: ab6a3667b5a9acf9;) 
+[07-04-2016 13:18:00](only debug) websocket close: undefined. NaN seconds.::  (userId: ab6a3667b5a9acf9;) 
+[07-04-2016 13:18:00](only debug) websocket close:undefined::  (userId: ab6a3667b5a9acf9;) 
+[08-04-2016 03:07:12](only debug) websocket close:undefined::  (userId: f7692743dffec898;) 
+[08-04-2016 03:07:12](only debug) websocket error:undefined::  (userId: f7692743dffec898;) 
+[08-04-2016 03:07:12](only debug) websocket close: undefined. NaN seconds.::  (userId: f7692743dffec898;) 
+[08-04-2016 16:07:16]; Error: Uncaught SyntaxError: Unexpected token ,
+url: http://sml.town/play/lang/es.js
+line: 7
+column: 44
+error: SyntaxError: Unexpected token ,; ::  (userId: 33e715fd9d3c2953;) 
+[08-04-2016 16:07:17](only debug) websocket error:undefined::  (userId: 33e715fd9d3c2953;) 
+[08-04-2016 16:07:17](only debug) websocket close: undefined. NaN seconds.::  (userId: 33e715fd9d3c2953;) 
+[08-04-2016 16:07:17](only debug) websocket close:undefined::  (userId: 33e715fd9d3c2953;) 
+[08-04-2016 16:08:00]; Error: Uncaught SyntaxError: Unexpected token ,
+url: http://sml.town/play/lang/es.js
+line: 7
+column: 44
+error: SyntaxError: Unexpected token ,; ::  (userId: 33e715fd9d3c2953;) 
+[08-04-2016 16:38:51]; Error: Uncaught SyntaxError: Unexpected token ,
+url: http://sml.town/play/lang/es.js
+line: 7
+column: 44
+error: SyntaxError: Unexpected token ,; ::  (userId: 33e715fd9d3c2953;) 
+[09-04-2016 00:45:21](only debug) websocket error:undefined::  (userId: 89bb33ba0e7182af;) 
+[09-04-2016 00:45:21](only debug) websocket close:undefined::  (userId: 89bb33ba0e7182af;) 
+[09-04-2016 00:45:21](only debug) websocket close: undefined. NaN seconds.::  (userId: 89bb33ba0e7182af;) 
+[09-04-2016 03:35:28](only debug) websocket error:undefined::  (userId: f458147028feda90;) 
+[09-04-2016 03:35:28](only debug) websocket close:undefined::  (userId: f458147028feda90;) 
+[09-04-2016 03:35:28](only debug) websocket close: undefined. NaN seconds.::  (userId: f458147028feda90;) 
+[09-04-2016 16:17:03](only debug) websocket close:undefined::  (userId: c6dfefce779a3759;) 
+[09-04-2016 16:17:03](only debug) websocket close: undefined. NaN seconds.::  (userId: c6dfefce779a3759;) 
+[09-04-2016 16:17:03](only debug) websocket error:undefined::  (userId: c6dfefce779a3759;) 
+[09-04-2016 16:21:11](only debug) websocket close: undefined. NaN seconds.::  (userId: c6dfefce779a3759;) 
+[09-04-2016 16:21:29](only debug) websocket error:undefined::  (userId: c6dfefce779a3759;) 
+[09-04-2016 16:21:29](only debug) websocket close:undefined::  (userId: c6dfefce779a3759;) 
+[09-04-2016 16:30:32](only debug) websocket error:undefined::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[09-04-2016 16:30:32](only debug) websocket close:undefined::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[09-04-2016 16:30:33](only debug) trying reconnection every 2 min.::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[09-04-2016 16:30:36](only debug) websocket close: undefined. NaN seconds.::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[09-04-2016 16:35:17](only debug) websocket error:undefined::  (userId: c6dfefce779a3759;) 
+[09-04-2016 16:35:18](only debug) websocket close: undefined. NaN seconds.::  (userId: c6dfefce779a3759;) 
+[09-04-2016 16:35:32](only debug) websocket close:undefined::  (userId: c6dfefce779a3759;) 
+[09-04-2016 16:36:12](only debug) trying reconnection every 2 min.::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[09-04-2016 23:50:30](only debug) websocket error:undefined::  (userId: 89bb33ba0e7182af;) 
+[09-04-2016 23:50:30](only debug) websocket close:undefined::  (userId: 89bb33ba0e7182af;) 
+[09-04-2016 23:50:30](only debug) websocket close: undefined. NaN seconds.::  (userId: 89bb33ba0e7182af;) 
+[10-04-2016 03:45:57](only debug) websocket error:undefined::  (userId: 78091c357c2f2e07;) 
+[10-04-2016 03:45:57](only debug) websocket close:undefined::  (userId: 78091c357c2f2e07;) 
+[10-04-2016 03:45:57](only debug) websocket close: undefined. NaN seconds.::  (userId: 78091c357c2f2e07;) 
+[10-04-2016 04:33:40](only debug) websocket error:undefined::  (userId: 8ce6a451d5a756f;) 
+[10-04-2016 04:33:40](only debug) websocket close:undefined::  (userId: 8ce6a451d5a756f;) 
+[10-04-2016 04:33:40](only debug) websocket close: undefined. NaN seconds.::  (userId: 8ce6a451d5a756f;) 
+[10-04-2016 10:31:44](only debug) websocket error:undefined::  (userId: 6d45e18a33190d80;) 
+[10-04-2016 10:31:44](only debug) websocket close: undefined. NaN seconds.::  (userId: 6d45e18a33190d80;) 
+[10-04-2016 10:31:44](only debug) websocket close:undefined::  (userId: 6d45e18a33190d80;) 
+[10-04-2016 15:25:18](only debug) websocket error:undefined::  (userId: c6dfefce779a3759;) 
+[10-04-2016 15:25:18](only debug) websocket close:undefined::  (userId: c6dfefce779a3759;) 
+[10-04-2016 15:25:19](only debug) websocket close: undefined. NaN seconds.::  (userId: c6dfefce779a3759;) 
+[10-04-2016 15:25:48](only debug) websocket error:undefined::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 15:25:48](only debug) websocket close:undefined::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 15:25:48](only debug) websocket close: undefined. NaN seconds.::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 15:25:49](only debug) trying reconnection every 2 min.::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 15:57:53]; Error: Uncaught TypeError: Cannot read property 'innerHTML' of null
+url: 
+line: 7
+column: 112
+error: TypeError: Cannot read property 'innerHTML' of null; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 15:58:06]; Error: Uncaught SyntaxError: Failed to execute 'querySelector' on 'Document': '[object HTMLDocument]' is not a valid selector.
+url: 
+line: 7
+column: 87
+error: SyntaxError: Failed to execute 'querySelector' on 'Document': '[object HTMLDocument]' is not a valid selector.; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 16:02:54]; Error: Uncaught InvalidAccessError: Failed to execute 'open' on 'XMLHttpRequest': Synchronous requests from a document must not set a response type.
+url: http://sml.town/play/
+line: 67
+column: 22
+error: InvalidAccessError: Failed to execute 'open' on 'XMLHttpRequest': Synchronous requests from a document must not set a response type.; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 16:12:47]; Error: Uncaught SyntaxError: Failed to execute 'querySelector' on 'Document': '[object HTMLDocument]' is not a valid selector.
+url: 
+line: 7
+column: 87
+error: SyntaxError: Failed to execute 'querySelector' on 'Document': '[object HTMLDocument]' is not a valid selector.; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 16:12:58]; Error: Uncaught TypeError: Cannot read property 'querySelector' of null
+url: 
+line: 7
+column: 86
+error: TypeError: Cannot read property 'querySelector' of null; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 16:13:15]; Error: Uncaught TypeError: Cannot read property 'querySelector' of null
+url: 
+line: 7
+column: 86
+error: TypeError: Cannot read property 'querySelector' of null; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 16:16:40]; Error: Uncaught TypeError: XHRt.response.querySelector is not a function
+url: http://sml.town/play/
+line: 65
+column: 87
+error: TypeError: XHRt.response.querySelector is not a function; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 16:18:01]; Error: Uncaught TypeError: XHRt.response.querySelector is not a function
+url: http://sml.town/play/
+line: 66
+column: 87
+error: TypeError: XHRt.response.querySelector is not a function; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 16:30:03]; Error: Uncaught TypeError: Cannot set property 'innerHTML' of null
+url: 
+line: 6
+column: 79
+error: TypeError: Cannot set property 'innerHTML' of null; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 17:01:49]; Error: Uncaught TypeError: Cannot read property 'setAttribute' of null
+url: 
+line: 6
+column: 68
+error: TypeError: Cannot read property 'setAttribute' of null; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 17:22:33]; Error: Uncaught TypeError: Cannot read property 'setAttribute' of null
+url: 
+line: 6
+column: 68
+error: TypeError: Cannot read property 'setAttribute' of null; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 17:31:17]; Error: Uncaught ReferenceError: $ is not defined
+url: http://sml.town/play/
+line: 61
+column: 21
+error: ReferenceError: $ is not defined; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 17:31:19]; Error: Uncaught TypeError: $(...).append is not a function
+url: 
+line: 6
+column: 31
+error: TypeError: $(...).append is not a function; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 17:34:22]; Error: Uncaught InvalidCharacterError: Failed to execute 'btoa' on 'Window': The string to be encoded contains characters outside of the Latin1 range.
+url: 
+line: 7
+column: 116
+error: InvalidCharacterError: Failed to execute 'btoa' on 'Window': The string to be encoded contains characters outside of the Latin1 range.; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 17:36:40]; Error: Uncaught InvalidCharacterError: Failed to execute 'btoa' on 'Window': The string to be encoded contains characters outside of the Latin1 range.
+url: 
+line: 7
+column: 116
+error: InvalidCharacterError: Failed to execute 'btoa' on 'Window': The string to be encoded contains characters outside of the Latin1 range.; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 17:37:08]; Error: Uncaught ReferenceError: contole is not defined
+url: 
+line: 7
+column: 21
+error: ReferenceError: contole is not defined; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 17:37:22]; Error: Uncaught InvalidCharacterError: Failed to execute 'btoa' on 'Window': The string to be encoded contains characters outside of the Latin1 range.
+url: 
+line: 7
+column: 33
+error: InvalidCharacterError: Failed to execute 'btoa' on 'Window': The string to be encoded contains characters outside of the Latin1 range.; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 17:40:39]; Error: Uncaught InvalidCharacterError: Failed to execute 'btoa' on 'Window': The string to be encoded contains characters outside of the Latin1 range.
+url: http://sml.town/play/
+line: 62
+column: 116
+error: InvalidCharacterError: Failed to execute 'btoa' on 'Window': The string to be encoded contains characters outside of the Latin1 range.; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 17:41:01]; Error: Uncaught TypeError: Cannot read property 'setAttribute' of null
+url: 
+line: 8
+column: 68
+error: TypeError: Cannot read property 'setAttribute' of null; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 17:41:07]; Error: Uncaught ReferenceError: _arrayBufferToBase64 is not defined
+url: 
+line: 8
+column: 116
+error: ReferenceError: _arrayBufferToBase64 is not defined; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 17:41:29]; Error: Uncaught InvalidStateError: Failed to read the 'responseText' property from 'XMLHttpRequest': The value is only accessible if the object's 'responseType' is '' or 'text' (was 'arraybuffer').
+url: 
+line: 8
+column: 141
+error: InvalidStateError: Failed to read the 'responseText' property from 'XMLHttpRequest': The value is only accessible if the object's 'responseType' is '' or 'text' (was 'arraybuffer').; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 17:42:13]; Error: Uncaught InvalidStateError: Failed to read the 'responseText' property from 'XMLHttpRequest': The value is only accessible if the object's 'responseType' is '' or 'text' (was 'arraybuffer').
+url: 
+line: 8
+column: 58
+error: InvalidStateError: Failed to read the 'responseText' property from 'XMLHttpRequest': The value is only accessible if the object's 'responseType' is '' or 'text' (was 'arraybuffer').; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 17:42:32]; Error: Uncaught InvalidStateError: Failed to read the 'responseText' property from 'XMLHttpRequest': The value is only accessible if the object's 'responseType' is '' or 'text' (was 'arraybuffer').
+url: 
+line: 7
+column: 58
+error: InvalidStateError: Failed to read the 'responseText' property from 'XMLHttpRequest': The value is only accessible if the object's 'responseType' is '' or 'text' (was 'arraybuffer').; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 17:42:41]; Error: Uncaught InvalidStateError: Failed to read the 'responseText' property from 'XMLHttpRequest': The value is only accessible if the object's 'responseType' is '' or 'text' (was 'arraybuffer').
+url: 
+line: 6
+column: 58
+error: InvalidStateError: Failed to read the 'responseText' property from 'XMLHttpRequest': The value is only accessible if the object's 'responseType' is '' or 'text' (was 'arraybuffer').; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 17:43:47]; Error: Uncaught InvalidAccessError: Failed to execute 'open' on 'XMLHttpRequest': Synchronous requests from a document must not set a response type.
+url: http://sml.town/play/
+line: 67
+column: 22
+error: InvalidAccessError: Failed to execute 'open' on 'XMLHttpRequest': Synchronous requests from a document must not set a response type.; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 17:46:15]; Error: Uncaught TypeError: Cannot read property 'setAttribute' of null
+url: 
+line: 7
+column: 68
+error: TypeError: Cannot read property 'setAttribute' of null; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 17:46:15]; Error: Uncaught TypeError: Cannot read property 'setAttribute' of null
+url: http://sml.town/play/
+line: 63
+column: 68
+error: TypeError: Cannot read property 'setAttribute' of null; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:00:53]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:00:58]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:01:03]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:01:09]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:01:13]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:01:19]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:01:23]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:01:28]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:01:33]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:01:39]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:01:45]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:01:51]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:01:55]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:02:01]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:02:05]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:02:11]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:02:15]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:02:21]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:02:25]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:02:30]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:02:36]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:02:40]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:02:45]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:02:50]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:02:54]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:03:00]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:03:05]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:03:10]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:03:19]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:03:20]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:03:30]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:03:30]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:03:35]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:03:40]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:03:46]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:03:50]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:03:56]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:04:00]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:04:07]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:04:10]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:04:16]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:04:20]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:04:26]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:04:30]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:04:36]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:04:40]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:04:47]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:04:50]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:04:55]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:05:00]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:05:11]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:05:11]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:05:15]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:05:21]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:05:25]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:05:32]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:05:42]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:05:42]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:05:49]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:05:51]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:05:57]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:06:00]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:06:06]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:06:11]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:06:18]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:06:24]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:06:28]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:06:31]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:06:36]; Error: Uncaught TypeError: Cannot set property 'innerHTML' of null
+url: http://sml.town/play/
+line: 62
+column: 75
+error: TypeError: Cannot set property 'innerHTML' of null; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:06:46]waiting for: undefined::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[10-04-2016 18:06:49]waiting for: undefined::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[11-04-2016 04:52:42](only debug) websocket error:undefined::  (userId: 26d0d1e9c92b9494;) 
+[11-04-2016 04:52:42](only debug) websocket close: undefined. NaN seconds.::  (userId: 26d0d1e9c92b9494;) 
+[11-04-2016 04:52:42](only debug) websocket close:undefined::  (userId: 26d0d1e9c92b9494;) 
+[11-04-2016 06:05:54](only debug) trying reconnection every 2 min.::  (userId: 26d0d1e9c92b9494;) 
+[11-04-2016 06:15:26](only debug) websocket error:undefined::  (userId: dce8990f6a787dd2;) 
+[11-04-2016 06:15:26](only debug) websocket close:undefined::  (userId: dce8990f6a787dd2;) 
+[11-04-2016 06:15:26](only debug) websocket close: undefined. NaN seconds.::  (userId: dce8990f6a787dd2;) 
+[11-04-2016 06:42:58](only debug) websocket error:undefined::  (userId: 7539f9f0c2aa0fc1;) 
+[11-04-2016 06:42:58](only debug) websocket close: undefined. NaN seconds.::  (userId: 7539f9f0c2aa0fc1;) 
+[11-04-2016 06:42:58](only debug) websocket close:undefined::  (userId: 7539f9f0c2aa0fc1;) 
+[11-04-2016 06:43:38](only debug) trying reconnection every 2 min.::  (userId: 7539f9f0c2aa0fc1;) 
+[11-04-2016 14:29:55](only debug) websocket error:undefined::  (userId: abc7dcd41c363335;) 
+[11-04-2016 14:29:55](only debug) websocket close:undefined::  (userId: abc7dcd41c363335;) 
+[11-04-2016 14:29:55](only debug) websocket close: undefined. NaN seconds.::  (userId: abc7dcd41c363335;) 
+[11-04-2016 17:11:21](only debug) websocket error:undefined::  (userId: 83ff4a8b5a8e8198;) 
+[11-04-2016 17:11:21](only debug) websocket close:undefined::  (userId: 83ff4a8b5a8e8198;) 
+[11-04-2016 17:11:21](only debug) websocket close: undefined. NaN seconds.::  (userId: 83ff4a8b5a8e8198;) 
+[11-04-2016 17:11:48](only debug) websocket error:undefined::  (userId: 83ff4a8b5a8e8198;) 
+[11-04-2016 17:11:48](only debug) websocket close:undefined::  (userId: 83ff4a8b5a8e8198;) 
+[11-04-2016 17:11:48](only debug) websocket close: undefined. NaN seconds.::  (userId: 83ff4a8b5a8e8198;) 
+[12-04-2016 11:53:33](only debug) websocket error:undefined::  (userId: 6af690d92e74dc0f;) 
+[12-04-2016 11:53:33](only debug) websocket close:undefined::  (userId: 6af690d92e74dc0f;) 
+[12-04-2016 11:53:33](only debug) websocket close: undefined. NaN seconds.::  (userId: 6af690d92e74dc0f;) 
+[12-04-2016 18:58:21]; Error: SyntaxError: invalid property id
+url: http://sml.town/play/lang/es.js
+line: 8
+column: 4
+error: SyntaxError: invalid property id; ::  () 
+[12-04-2016 18:58:25](only debug) websocket close:undefined::  () 
+[12-04-2016 18:58:25](only debug) websocket error:undefined::  () 
+[12-04-2016 18:58:26](only debug) trying reconnection every 2 min.::  () 
+[12-04-2016 18:58:26](only debug) websocket close: undefined. NaN seconds.::  () 
+[12-04-2016 20:17:39](only debug) websocket error:undefined::  (userId: d3417b5422b3fba;) 
+[12-04-2016 20:17:39](only debug) websocket close:undefined::  (userId: d3417b5422b3fba;) 
+[12-04-2016 20:17:39](only debug) websocket close: undefined. NaN seconds.::  (userId: d3417b5422b3fba;) 
+[12-04-2016 20:19:44]social.js event::  (userId: d3417b5422b3fba;) 
+[12-04-2016 20:21:37]; Error: Uncaught ReferenceError: $ is not defined
+url: 
+line: 299
+column: 13
+error: ReferenceError: $ is not defined; ::  (userId: d3417b5422b3fba;) 
+[13-04-2016 08:34:20](only debug) websocket error:undefined::  (userId: 40845870f5b02dd2;) 
+[13-04-2016 08:34:20](only debug) websocket close:undefined::  (userId: 40845870f5b02dd2;) 
+[13-04-2016 08:34:20](only debug) websocket close: undefined. NaN seconds.::  (userId: 40845870f5b02dd2;) 
+[13-04-2016 20:59:08]; Error: Uncaught SyntaxError: Unexpected token ,
+url: http://sml.town/play/lang/es.js
+line: 7
+column: 44
+error: SyntaxError: Unexpected token ,; ::  (userId: 33e715fd9d3c2953;) 
+[13-04-2016 20:59:09](only debug) websocket error:undefined::  (userId: 33e715fd9d3c2953;) 
+[13-04-2016 20:59:09](only debug) websocket close:undefined::  (userId: 33e715fd9d3c2953;) 
+[13-04-2016 20:59:09](only debug) websocket close: undefined. NaN seconds.::  (userId: 33e715fd9d3c2953;) 
+[13-04-2016 23:11:37](only debug) websocket error:undefined::  (userId: c6dfefce779a3759;) 
+[13-04-2016 23:11:37](only debug) websocket close: undefined. NaN seconds.::  (userId: c6dfefce779a3759;) 
+[13-04-2016 23:11:37](only debug) websocket close:undefined::  (userId: c6dfefce779a3759;) 
+[13-04-2016 23:19:12]; Error: Uncaught SyntaxError: Unexpected token ,
+url: http://sml.town/play/lang/es.js
+line: 8
+column: 5
+error: SyntaxError: Unexpected token ,; ::  (userId: 1286175036;) 
+[13-04-2016 23:19:14](only debug) websocket close:undefined::  (userId: 1286175036;) 
+[13-04-2016 23:19:14](only debug) websocket error:undefined::  (userId: 1286175036;) 
+[13-04-2016 23:19:14](only debug) websocket close: undefined. NaN seconds.::  (userId: 1286175036;) 
+[13-04-2016 23:19:15](only debug) trying reconnection every 2 min.::  (userId: 1286175036;) 
+[13-04-2016 23:20:48]; Error: Uncaught SyntaxError: Unexpected token ,
+url: http://sml.town/play/lang/es.js
+line: 8
+column: 5
+error: SyntaxError: Unexpected token ,; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[14-04-2016 00:55:15](only debug) websocket error:undefined::  () 
+[14-04-2016 00:55:15](only debug) websocket close:undefined::  () 
+[14-04-2016 00:55:15](only debug) websocket close: undefined. NaN seconds.::  () 
+[14-04-2016 00:55:16](only debug) trying reconnection every 2 min.::  () 
+[14-04-2016 00:55:16]ajax error = <br />
+<b>Warning</b>:  mysqli_connect(): (HY000/1045): Access denied for user 'smalltown'@'localhost' (using password: YES) in <b>C:\Users\TroLL\Dropbox\www\smalltown\play\php\tables.php</b> on line <b>83</b><br />
+IS YOUR MYSQL WORKING? - WRONG DB CREDENTIALS?error: !isset($pdo).::  () 
+[14-04-2016 00:55:17](only debug) error on parse request: eval(<br />
+<b>Warning</b>:  mysqli_connect(): (HY000/1045): Access denied for user 'smalltown'@'localhost' (using password: YES) in <b>C:\Users\TroLL\Dropbox\www\smalltown\play\php\tables.php</b> on line <b>83</b><br />
+IS YOUR MYSQL WORKING? - WRONG DB CREDENTIALS?error: !isset($pdo).)::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[14-04-2016 00:57:02]ajax error = <br />
+<b>Warning</b>:  mysqli_connect(): (HY000/1045): Access denied for user 'smalltown'@'localhost' (using password: YES) in <b>C:\Users\TroLL\Dropbox\www\smalltown\play\php\tables.php</b> on line <b>83</b><br />
+IS YOUR MYSQL WORKING? - WRONG DB CREDENTIALS?error: !isset($pdo).::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[14-04-2016 00:57:07](only debug) error on parse request: eval(<br />
+<b>Warning</b>:  mysqli_connect(): (HY000/1045): Access denied for user 'smalltown'@'localhost' (using password: YES) in <b>C:\Users\TroLL\Dropbox\www\smalltown\play\php\tables.php</b> on line <b>83</b><br />
+IS YOUR MYSQL WORKING? - WRONG DB CREDENTIALS?error: !isset($pdo).)::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[14-04-2016 00:59:01]ajax error = 42Array
+(
+    [0] => 42S02
+    [1] => 1146
+    [2] => Table 'smalltown.smltown_players' doesn't exist
+)
+ in: INSERT INTO smltown_players (id, socialId, email, name, lang, ISO) VALUES (:id, :socialId, :email, :name, :lang, :ISO) ON DUPLICATE KEY UPDATE name=VALUES(name), lang=VALUES(lang), socialId=VALUES(socialId)
+CREATE TABLE IF NOT EXISTS smltown_games( id int(11) UNSIGNED NOT NULL AUTO_INCREMENT, name varchar(255) UNIQUE not null, password varchar(255), type varchar(255) DEFAULT 'mafia-werewolf', status int(11) NOT NULL DEFAULT 0, cards text, night varchar(255), timeStart bigint(20), time bigint(20), dayTime int(11), openVoting int(1), endTurn int(1) DEFAULT 1, players int(11), ISO varchar(255), lastConnection timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP, PRIMARY KEY (id), public int(1) DEFAULT 1)CREATE TABLE IF NOT EXISTS smltown_players( id varchar(255) UNIQUE NOT NULL, email varchar(255), name varchar(255), lang varchar(255), ISO varchar(255), picture varchar(255), type varchar(255), socialId varchar(255) UNIQUE, facebook varchar(255) UNIQUE, gameId int(11), friends text NOT NULL DEFAULT '', reply text NOT NULL DEFAULT '', websocket int(11) DEFAULT 0, lastConnection timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP, PRIMARY KEY (id))CREATE TABLE IF NOT EXISTS smltown_plays( id int(11) UNSIGNED NOT NULL AUTO_INCREMENT, userId varchar(255) NOT NULL, gameId int(11) UNSIGNED NOT NULL, admin int(11) NOT NULL DEFAULT -1, card varchar(255), rulesPHP text, rulesJS text, status int(11), sel int(11), message text, social varchar(255), reply text NOT NULL DEFAULT '', PRIMARY KEY (id))
+ Tables has been created again.::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[14-04-2016 03:34:32]; Error: Uncaught ReferenceError: swipeDiv is not defined
+url: http://localhost/smalltown/play/js/Games.js
+line: 403
+column: 9
+error: ReferenceError: swipeDiv is not defined; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[14-04-2016 03:41:21]; Error: Uncaught ReferenceError: newDiv is not defined
+url: http://localhost/smalltown/play/js/Games.js
+line: 402
+column: 13
+error: ReferenceError: newDiv is not defined; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[14-04-2016 03:50:27]; Error: Uncaught TypeError: _this.swipeGame is not a function
+url: http://localhost/smalltown/play/js/UI.js
+line: 111
+column: 23
+error: TypeError: _this.swipeGame is not a function; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[14-04-2016 03:50:27]; Error: Uncaught TypeError: _this.swipeGame is not a function
+url: http://localhost/smalltown/play/js/UI.js
+line: 111
+column: 23
+error: TypeError: _this.swipeGame is not a function; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[14-04-2016 03:50:27]; Error: Uncaught TypeError: _this.swipeGame is not a function
+url: http://localhost/smalltown/play/js/UI.js
+line: 111
+column: 23
+error: TypeError: _this.swipeGame is not a function; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[14-04-2016 03:50:27]; Error: Uncaught TypeError: _this.swipeGame is not a function
+url: http://localhost/smalltown/play/js/UI.js
+line: 111
+column: 23
+error: TypeError: _this.swipeGame is not a function; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[14-04-2016 03:50:27]; Error: Uncaught TypeError: _this.swipeGame is not a function
+url: http://localhost/smalltown/play/js/UI.js
+line: 111
+column: 23
+error: TypeError: _this.swipeGame is not a function; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[14-04-2016 03:50:27]; Error: Uncaught TypeError: _this.swipeGame is not a function
+url: http://localhost/smalltown/play/js/UI.js
+line: 111
+column: 23
+error: TypeError: _this.swipeGame is not a function; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[14-04-2016 03:50:27]; Error: Uncaught TypeError: _this.swipeGame is not a function
+url: http://localhost/smalltown/play/js/UI.js
+line: 111
+column: 23
+error: TypeError: _this.swipeGame is not a function; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[14-04-2016 03:50:27]; Error: Uncaught TypeError: _this.swipeGame is not a function
+url: http://localhost/smalltown/play/js/UI.js
+line: 111
+column: 23
+error: TypeError: _this.swipeGame is not a function; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[14-04-2016 03:50:27]; Error: Uncaught TypeError: _this.swipeGame is not a function
+url: http://localhost/smalltown/play/js/UI.js
+line: 111
+column: 23
+error: TypeError: _this.swipeGame is not a function; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[14-04-2016 03:50:27]; Error: Uncaught TypeError: _this.swipeGame is not a function
+url: http://localhost/smalltown/play/js/UI.js
+line: 111
+column: 23
+error: TypeError: _this.swipeGame is not a function; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[14-04-2016 03:50:27]; Error: Uncaught TypeError: _this.swipeGame is not a function
+url: http://localhost/smalltown/play/js/UI.js
+line: 111
+column: 23
+error: TypeError: _this.swipeGame is not a function; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[14-04-2016 03:50:27]; Error: Uncaught TypeError: _this.swipeGame is not a function
+url: http://localhost/smalltown/play/js/UI.js
+line: 111
+column: 23
+error: TypeError: _this.swipeGame is not a function; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[14-04-2016 03:50:28]; Error: Uncaught SyntaxError: Unexpected token ILLEGAL
+url: http://localhost/smalltown/play/#game?1
+line: 3
+column: 29
+error: SyntaxError: Unexpected token ILLEGAL; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[14-04-2016 03:50:33]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739","gameId":"1"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[14-04-2016 03:50:33]; Error: Uncaught SyntaxError: Unexpected token ILLEGAL
+url: http://localhost/smalltown/play/#game?1
+line: 3
+column: 29
+error: SyntaxError: Unexpected token ILLEGAL; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[01-05-2016 03:25:44](only debug) websocket error:undefined::  (userId: c6dfefce779a3759;) 
+[01-05-2016 03:25:44](only debug) websocket close:undefined::  (userId: c6dfefce779a3759;) 
+[01-05-2016 03:25:44](only debug) websocket close: undefined. NaN seconds.::  (userId: c6dfefce779a3759;) 
+[01-05-2016 03:25:45]error parsing function on intercept with name: SMLTOWN.Games.swipeGame::  (userId: c6dfefce779a3759;) 
+[01-05-2016 03:26:02]error parsing function on intercept with name: SMLTOWN.Games.swipeGame::  (userId: c6dfefce779a3759;) 
+[01-05-2016 04:03:21](only debug) websocket error:undefined::  (userId: 1c03915592464dca;) 
+[01-05-2016 04:03:21](only debug) websocket close:undefined::  (userId: 1c03915592464dca;) 
+[01-05-2016 04:03:21](only debug) websocket close: undefined. NaN seconds.::  (userId: 1c03915592464dca;) 
+[01-05-2016 04:36:32]; Error: Uncaught TypeError: Cannot call method 'clearCountdowns' of undefined
+url: 
+line: 1
+column: 34
+error: TypeError: Cannot call method 'clearCountdowns' of undefined; ::  (userId: 8a157af8a4609aba;) 
+[01-05-2016 07:34:38](only debug) websocket error:undefined::  (userId: f1c46cdc9bdd40fb;) 
+[01-05-2016 07:34:39](only debug) websocket close:undefined::  (userId: f1c46cdc9bdd40fb;) 
+[01-05-2016 07:34:39](only debug) websocket close: undefined. NaN seconds.::  (userId: f1c46cdc9bdd40fb;) 
+[01-05-2016 09:12:34](only debug) websocket error:undefined::  (userId: 5bff88aef1896496;) 
+[01-05-2016 09:12:34](only debug) websocket close:undefined::  (userId: 5bff88aef1896496;) 
+[01-05-2016 09:12:34](only debug) websocket close: undefined. NaN seconds.::  (userId: 5bff88aef1896496;) 
+[01-05-2016 09:13:08](only debug) websocket close:undefined::  (userId: 5bff88aef1896496;) 
+[01-05-2016 09:13:08](only debug) websocket close: undefined. NaN seconds.::  (userId: 5bff88aef1896496;) 
+[01-05-2016 09:13:08](only debug) websocket error:undefined::  (userId: 5bff88aef1896496;) 
+[01-05-2016 11:38:46](only debug) websocket error:undefined::  (userId: ab6f8df901c8a3a1;) 
+[01-05-2016 11:38:46](only debug) websocket close:undefined::  (userId: ab6f8df901c8a3a1;) 
+[01-05-2016 11:38:46](only debug) websocket close: undefined. NaN seconds.::  (userId: ab6f8df901c8a3a1;) 
+[01-05-2016 11:43:11](only debug) websocket error:undefined::  (userId: e8217cb3d042e9;) 
+[01-05-2016 11:43:11](only debug) websocket close:undefined::  (userId: e8217cb3d042e9;) 
+[01-05-2016 11:43:11](only debug) websocket close: undefined. NaN seconds.::  (userId: e8217cb3d042e9;) 
+[01-05-2016 13:32:35](only debug) websocket error:undefined::  (userId: 36d69d1668f5403a;) 
+[01-05-2016 13:32:35](only debug) websocket close: undefined. NaN seconds.::  (userId: 36d69d1668f5403a;) 
+[01-05-2016 13:32:35](only debug) websocket close:undefined::  (userId: 36d69d1668f5403a;) 
+[01-05-2016 14:47:29](only debug) websocket error:undefined::  (userId: ccb5c95a07c50f34;) 
+[01-05-2016 14:47:29](only debug) websocket close:undefined::  (userId: ccb5c95a07c50f34;) 
+[01-05-2016 14:47:29](only debug) websocket close: undefined. NaN seconds.::  (userId: ccb5c95a07c50f34;) 
+[01-05-2016 14:50:17](only debug) websocket error:undefined::  (userId: c6dfefce779a3759;) 
+[01-05-2016 14:50:23](only debug) websocket close:undefined::  (userId: c6dfefce779a3759;) 
+[01-05-2016 14:50:23](only debug) websocket close: undefined. NaN seconds.::  (userId: c6dfefce779a3759;) 
+[01-05-2016 14:50:29]error parsing function on intercept with name: SMLTOWN.Games.swipeGame::  (userId: c6dfefce779a3759;) 
+[01-05-2016 14:55:56](only debug) websocket close:undefined::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[01-05-2016 14:55:56](only debug) websocket error:undefined::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[01-05-2016 14:55:56](only debug) websocket close: undefined. NaN seconds.::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[01-05-2016 14:55:57](only debug) trying reconnection every 2 min.::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[01-05-2016 14:56:17]; Error: Uncaught TypeError: Cannot read property 'clearCountdowns' of undefined
+url: 
+line: 1
+column: 33
+error: TypeError: Cannot read property 'clearCountdowns' of undefined; ::  (userId: c6dfefce779a3759;) 
+[01-05-2016 15:00:13]; Error: Uncaught TypeError: Cannot read property 'clearCountdowns' of undefined
+url: 
+line: 1
+column: 33
+error: TypeError: Cannot read property 'clearCountdowns' of undefined; ::  (userId: c6dfefce779a3759;) 
+[01-05-2016 15:07:32](only debug) websocket error:undefined::  (userId: c6dfefce779a3759;) 
+[01-05-2016 15:07:32](only debug) websocket close:undefined::  (userId: c6dfefce779a3759;) 
+[01-05-2016 15:07:32](only debug) websocket close: undefined. NaN seconds.::  (userId: c6dfefce779a3759;) 
+[01-05-2016 15:28:53]waiting for: undefined::  (userId: c6dfefce779a3759;) 
+[01-05-2016 15:29:50]waiting for: undefined::  (userId: c6dfefce779a3759;) 
+[01-05-2016 17:11:18](only debug) websocket error:undefined::  (userId: 92aed86857d97a25;) 
+[01-05-2016 17:11:18](only debug) websocket close:undefined::  (userId: 92aed86857d97a25;) 
+[01-05-2016 17:11:18](only debug) websocket close: undefined. NaN seconds.::  (userId: 92aed86857d97a25;) 
+[01-05-2016 17:14:56](only debug) websocket error:undefined::  (userId: b6d4340e15752cb6;) 
+[01-05-2016 17:14:56](only debug) websocket close:undefined::  (userId: b6d4340e15752cb6;) 
+[01-05-2016 17:14:56](only debug) websocket close: undefined. NaN seconds.::  (userId: b6d4340e15752cb6;) 
+[01-05-2016 19:26:23](only debug) websocket error:undefined::  (userId: f6f5b468c9620453;) 
+[01-05-2016 19:26:23](only debug) websocket close:undefined::  (userId: f6f5b468c9620453;) 
+[01-05-2016 19:26:23](only debug) websocket close: undefined. NaN seconds.::  (userId: f6f5b468c9620453;) 
+[13-05-2016 02:51:08](only debug) websocket close:undefined::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:51:08](only debug) websocket error:undefined::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:51:08](only debug) websocket close: undefined. NaN seconds.::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:51:09](only debug) trying reconnection in 2 min.::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:51:23]; Error: Uncaught SyntaxError: Unexpected token ILLEGAL
+url: http://localhost/smalltown/play/#game?1
+line: 3
+column: 29
+error: SyntaxError: Unexpected token ILLEGAL; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:51:28]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:51:28]; Error: Uncaught SyntaxError: Unexpected token ILLEGAL
+url: http://localhost/smalltown/play/#game?1
+line: 3
+column: 29
+error: SyntaxError: Unexpected token ILLEGAL; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:51:33]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:51:33]; Error: Uncaught SyntaxError: Unexpected token ILLEGAL
+url: http://localhost/smalltown/play/#game?1
+line: 3
+column: 29
+error: SyntaxError: Unexpected token ILLEGAL; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:51:38]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:51:38]; Error: Uncaught SyntaxError: Unexpected token ILLEGAL
+url: http://localhost/smalltown/play/#game?1
+line: 3
+column: 29
+error: SyntaxError: Unexpected token ILLEGAL; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:51:43]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:51:43]; Error: Uncaught SyntaxError: Unexpected token ILLEGAL
+url: http://localhost/smalltown/play/#game?1
+line: 3
+column: 29
+error: SyntaxError: Unexpected token ILLEGAL; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:51:48]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:51:48]; Error: Uncaught SyntaxError: Unexpected token ILLEGAL
+url: http://localhost/smalltown/play/#game?1
+line: 3
+column: 29
+error: SyntaxError: Unexpected token ILLEGAL; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:51:53]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:51:53]; Error: Uncaught SyntaxError: Unexpected token ILLEGAL
+url: http://localhost/smalltown/play/#game?1
+line: 3
+column: 29
+error: SyntaxError: Unexpected token ILLEGAL; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:51:58]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:51:59]; Error: Uncaught SyntaxError: Unexpected token ILLEGAL
+url: http://localhost/smalltown/play/#game?1
+line: 3
+column: 29
+error: SyntaxError: Unexpected token ILLEGAL; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:52:03]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:52:04]; Error: Uncaught SyntaxError: Unexpected token ILLEGAL
+url: http://localhost/smalltown/play/#game?1
+line: 3
+column: 29
+error: SyntaxError: Unexpected token ILLEGAL; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:52:08]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:52:09]; Error: Uncaught SyntaxError: Unexpected token ILLEGAL
+url: http://localhost/smalltown/play/#game?1
+line: 3
+column: 29
+error: SyntaxError: Unexpected token ILLEGAL; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:52:13]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:52:14]; Error: Uncaught SyntaxError: Unexpected token ILLEGAL
+url: http://localhost/smalltown/play/#game?1
+line: 3
+column: 29
+error: SyntaxError: Unexpected token ILLEGAL; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:52:18]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:52:19]; Error: Uncaught SyntaxError: Unexpected token ILLEGAL
+url: http://localhost/smalltown/play/#game?1
+line: 3
+column: 29
+error: SyntaxError: Unexpected token ILLEGAL; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:52:23]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:52:24]; Error: Uncaught SyntaxError: Unexpected token ILLEGAL
+url: http://localhost/smalltown/play/#game?1
+line: 3
+column: 29
+error: SyntaxError: Unexpected token ILLEGAL; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:52:28]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:52:29]; Error: Uncaught SyntaxError: Unexpected token ILLEGAL
+url: http://localhost/smalltown/play/#game?1
+line: 3
+column: 29
+error: SyntaxError: Unexpected token ILLEGAL; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:52:33]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:52:34]; Error: Uncaught SyntaxError: Unexpected token ILLEGAL
+url: http://localhost/smalltown/play/#game?1
+line: 3
+column: 29
+error: SyntaxError: Unexpected token ILLEGAL; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:52:39]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:52:39]; Error: Uncaught SyntaxError: Unexpected token ILLEGAL
+url: http://localhost/smalltown/play/#game?1
+line: 3
+column: 29
+error: SyntaxError: Unexpected token ILLEGAL; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:52:44]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:52:44]; Error: Uncaught SyntaxError: Unexpected token ILLEGAL
+url: http://localhost/smalltown/play/#game?1
+line: 3
+column: 29
+error: SyntaxError: Unexpected token ILLEGAL; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:52:49]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:52:49]; Error: Uncaught SyntaxError: Unexpected token ILLEGAL
+url: http://localhost/smalltown/play/#game?1
+line: 3
+column: 29
+error: SyntaxError: Unexpected token ILLEGAL; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:52:54]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:52:54]; Error: Uncaught SyntaxError: Unexpected token ILLEGAL
+url: http://localhost/smalltown/play/#game?1
+line: 3
+column: 29
+error: SyntaxError: Unexpected token ILLEGAL; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:52:59]waiting for: {"action":"addFacebookUser","facebookId":"10153729652474739"}::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 02:52:59]; Error: Uncaught SyntaxError: Unexpected token ILLEGAL
+url: http://localhost/smalltown/play/#game?1
+line: 3
+column: 29
+error: SyntaxError: Unexpected token ILLEGAL; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 03:03:38]; Error: Uncaught TypeError: Cannot set property 'werewolf_classic_seer' of undefined
+url: http://localhost/smalltown/play/js/Events.js
+line: 127
+column: 33
+error: TypeError: Cannot set property 'werewolf_classic_seer' of undefined; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 03:03:39]; Error: Uncaught TypeError: Cannot set property 'werewolf_classic_hunter' of undefined
+url: http://localhost/smalltown/play/js/Events.js
+line: 127
+column: 33
+error: TypeError: Cannot set property 'werewolf_classic_hunter' of undefined; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 03:03:40]; Error: Uncaught TypeError: Cannot set property 'werewolf_classic_angel' of undefined
+url: http://localhost/smalltown/play/js/Events.js
+line: 127
+column: 33
+error: TypeError: Cannot set property 'werewolf_classic_angel' of undefined; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 03:03:41]; Error: Uncaught TypeError: Cannot set property 'werewolf_classic_cupid' of undefined
+url: http://localhost/smalltown/play/js/Events.js
+line: 127
+column: 33
+error: TypeError: Cannot set property 'werewolf_classic_cupid' of undefined; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[13-05-2016 03:03:42]; Error: Uncaught TypeError: Cannot set property 'werewolf_classic_witch' of undefined
+url: http://localhost/smalltown/play/js/Events.js
+line: 127
+column: 33
+error: TypeError: Cannot set property 'werewolf_classic_witch' of undefined; ::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
