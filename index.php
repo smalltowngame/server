@@ -6,9 +6,12 @@ header('smalltown: 1');
 //
 //set cookie lifetime for 10 days (60sec * 60mins * 24hours * 100days)
 ini_set('session.cookie_lifetime', 864000);
-ini_set('session.gc_maxlifetime', 864000);
+ini_set('session.gc_masexlifetime', 864000);
 //maybe you want to precise the save path as well
 //ini_set('session.save_path', "smalltown");
+
+//need to be before html
+session_start();
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -33,8 +36,6 @@ ini_set('session.gc_maxlifetime', 864000);
     };</script>
 
 <?php
-session_start();
-
 //path files 4 plugins
 //$smalltownURL = $_SERVER['HTTP_HOST'];
 $smalltownURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
