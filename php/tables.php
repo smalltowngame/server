@@ -37,7 +37,7 @@ class Tables {
             'socialId' => "varchar(255) UNIQUE",
             'facebook' => "varchar(255) UNIQUE",
             'gameId' => "int(11)",
-            'friends' => "text NOT NULL DEFAULT ''",
+            'friends' => "text NOT NULL",
             'reply' => "text NOT NULL DEFAULT ''",
             'websocket' => "int(11) DEFAULT 0",
             'lastConnection' => "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
