@@ -80,17 +80,19 @@ class Tables {
         //require -> inside this function
         require dirname(__FILE__) . '/../config.php';
         
-        $enlace = mysqli_connect("localhost", $database_user, $database_pass);
-        if (!$enlace) {
+        //$enlace = mysqli_connect("localhost", $database_user, $database_pass);
+        $dbh = new PDO('mysql:host=localhost',$database_user,$database_pass); 
+        if (!$dbh) {
             echo 'IS YOUR MYSQL WORKING? - WRONG DB CREDENTIALS?';
             return;
         }
 
         $sql = 'CREATE DATABASE smalltown';
-        if (mysqli_query($enlace, $sql)) {
+        try{
+            $dbh->exec($sql);
             echo "smalltown data base was created successfully. \n";
-        } else {
-            echo mysql_error() . "\n";
+        }catch(PDOException $e{
+            die("DB ERROR: ". $e->getMessage());
         }
     }
 
