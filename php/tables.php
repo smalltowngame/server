@@ -37,8 +37,8 @@ class Tables {
             'socialId' => "varchar(255) UNIQUE",
             'facebook' => "varchar(255) UNIQUE",
             'gameId' => "int(11)",
-            'friends' => "text NOT NULL",
-            'reply' => "text NOT NULL",
+            'friends' => "text NOT NULL default ''",
+            'reply' => "text NOT NULL default ''",
             'websocket' => "int(11) DEFAULT 0",
             'lastConnection' => "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
             'PRIMARY KEY' => "(id)"
@@ -55,7 +55,7 @@ class Tables {
             'sel' => "int(11)",
             'message' => "text",
             'social' => "varchar(255)",
-            'reply' => "text NOT NULL",
+            'reply' => "text NOT NULL default ''",
             'PRIMARY KEY' => "(id)"
         )
     );
