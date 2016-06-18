@@ -1,4 +1,3 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <?php
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Expose-Headers: smalltown, smltown_name");
@@ -11,6 +10,8 @@ ini_set('session.gc_maxlifetime', 864000);
 //maybe you want to precise the save path as well
 //ini_set('session.save_path', "smalltown");
 ?>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <script>
     var SMLTOWN = {
