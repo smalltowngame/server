@@ -71,7 +71,7 @@ if (!file_exists($inc) || !is_readable($inc)) {
     $myfile = fopen($inc, "w") or die("Unable to open file!");
     $length = fwrite($myfile, '<?php' . PHP_EOL);
 
-    if (0 == length) {
+    if (0 == $length) {
         $error = "warn: config.php file is not writable";
         echo $error;
         file_put_contents("utils/smltown.log", date('[d-m-Y H:i:s]') . " $error \n", FILE_APPEND);
