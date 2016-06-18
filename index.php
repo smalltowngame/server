@@ -1,6 +1,4 @@
 <?php
-// si ves este error: ¡hay 1 espacio en blanco por delante de la etiqueta de apertura!
-
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Expose-Headers: smalltown, smltown_name");
 header('smalltown: 1');
