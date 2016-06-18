@@ -10,7 +10,7 @@ ini_set('session.gc_masexlifetime', 864000);
 //maybe you want to precise the save path as well
 //ini_set('session.save_path', "smalltown");
 
-//need to be before html
+//needs to be before html
 session_start();
 ?>
 
