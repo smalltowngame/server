@@ -1,6 +1,9 @@
 <?php
 
-include_once "config.php";
+if(file_exists('config.php')){
+    include_once "config.php";
+}
+
 if (!isset($websocket_autoload) || !$websocket_autoload) {
     echo -3;
     return;
