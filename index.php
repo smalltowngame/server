@@ -1,6 +1,5 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
 <?php
+//headers first of all!
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Expose-Headers: smalltown, smltown_name");
 header('smalltown: 1');
@@ -15,6 +14,8 @@ ini_set('session.gc_masexlifetime', 864000);
 //needs to be before html
 session_start();
 ?>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <script>
     var SMLTOWN = {
