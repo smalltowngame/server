@@ -92,12 +92,12 @@ class Tables {
         //}
         //
         
+        $sql = 'CREATE DATABASE smalltown';
         if (mysqli_query($enlace, $sql)) {
             echo "smalltown data base was created successfully. \n";
         } else {
             echo mysql_error() . "\n";
         }
-        //$sql = 'CREATE DATABASE smalltown';
         //try{
         //    $dbh->exec($sql);
         //    echo "smalltown data base was created successfully. \n";
