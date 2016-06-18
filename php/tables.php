@@ -80,7 +80,7 @@ class Tables {
         //require -> inside this function
         require dirname(__FILE__) . '/../config.php';
         
-        $enlace = mysqli_connect("localhost", $database_user, $database_pass);
+        $enlace = mysqli_connect("10.42.47.84", $database_user, $database_pass);
         if (!$enlace) {
             echo 'IS YOUR MYSQL WORKING? - WRONG DB CREDENTIALS?';
             return;
