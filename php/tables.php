@@ -91,7 +91,7 @@ class Tables {
         try{
             $dbh->exec($sql);
             echo "smalltown data base was created successfully. \n";
-        }catch(PDOException $e{
+        }catch(PDOException $e){
             die("DB ERROR: ". $e->getMessage());
         }
     }
