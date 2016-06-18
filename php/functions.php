@@ -96,7 +96,8 @@ function addUser($obj = null) {
 
 function getRandomUserId() {
     $id = mt_rand();
-    $count = petition("SELECT count(*) as count FROM smltown_players, smltown_plays WHERE smltown_players.id = '$id' OR smltown_plays.userId = '$id'")[0]->count;
+    $res = petition("SELECT count(*) as count FROM smltown_players, smltown_plays WHERE smltown_players.id = '$id' OR smltown_plays.userId = '$id'");
+    $count = $res[0]->count;
     if ($count > 0) { //repeated id
         return getRandomUserId();
     }
