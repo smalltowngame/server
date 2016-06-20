@@ -1,0 +1,16 @@
+[22-05-2016 00:54:31](only debug) websocket error:undefined::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[22-05-2016 00:54:31](only debug) websocket close:undefined::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[22-05-2016 00:54:31](only debug) websocket close: undefined. NaN seconds.::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[22-05-2016 00:54:31](only debug) trying reconnection in 2 min.::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[22-05-2016 00:56:28]ajax error = <br />
+<b>Warning</b>:  mysqli_connect(): (HY000/1045): Access denied for user 'trollderiu'@'localhost' (using password: YES) in <b>C:\Users\TroLL\Dropbox\www\smalltown\play\php\tables.php</b> on line <b>83</b><br />
+IS YOUR MYSQL WORKING? - WRONG DB CREDENTIALS?error: !isset($pdo).::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[22-05-2016 00:56:30](only debug) error on parse request: eval(<br />
+<b>Warning</b>:  mysqli_connect(): (HY000/1045): Access denied for user 'trollderiu'@'localhost' (using password: YES) in <b>C:\Users\TroLL\Dropbox\www\smalltown\play\php\tables.php</b> on line <b>83</b><br />
+IS YOUR MYSQL WORKING? - WRONG DB CREDENTIALS?error: !isset($pdo).)::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[22-05-2016 01:09:05]ajax error = <br />
+<b>Warning</b>:  mysqli_connect(): (HY000/1045): Access denied for user 'trollderiu'@'localhost' (using password: YES) in <b>C:\Users\TroLL\Dropbox\www\smalltown\play\php\tables.php</b> on line <b>83</b><br />
+IS YOUR MYSQL WORKING? - WRONG DB CREDENTIALS?error: !isset($pdo).::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+[22-05-2016 01:09:09](only debug) error on parse request: eval(<br />
+<b>Warning</b>:  mysqli_connect(): (HY000/1045): Access denied for user 'trollderiu'@'localhost' (using password: YES) in <b>C:\Users\TroLL\Dropbox\www\smalltown\play\php\tables.php</b> on line <b>83</b><br />
+IS YOUR MYSQL WORKING? - WRONG DB CREDENTIALS?error: !isset($pdo).)::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 

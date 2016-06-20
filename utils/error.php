@@ -19,7 +19,8 @@ function error($text) {
     }
     $text .= ")";
 
-    $errorText = date('[d-m-Y H:i:s]') . $text . " \n";
+    //$errorText = date('[d-m-Y H:i:s]') . $text . " \n";
+    $errorText = $text . " \n";
 
     $length = file_put_contents(dirname(__FILE__) . "/smltown.log", $errorText, FILE_APPEND | LOCK_EX);
     
