@@ -112,8 +112,10 @@ function PDOerror($sth, $str = '') {
         echo "\n Tables has been created again.";
         //
     } else if ($sth->errorCode() == '42S22') { //if col error
-        $array = $sth->errorInfo()[2];
-        $col = split("'", $array)[1];
+        $errorInfo = $sth->errorInfo();
+        $array = $errorInfo[2];
+        $split = split("'", $array);
+        $col = $split[1];
         $arrayName = split("\.", $col);
         $name = $arrayName[count($arrayName) - 1];
         include_once 'tables.php';

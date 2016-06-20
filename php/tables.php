@@ -37,8 +37,8 @@ class Tables {
             'socialId' => "varchar(255) UNIQUE",
             'facebook' => "varchar(255) UNIQUE",
             'gameId' => "int(11)",
-            'friends' => "text NOT NULL DEFAULT ''",
-            'reply' => "text NOT NULL DEFAULT ''",
+            'friends' => "text",
+            'reply' => "text",
             'websocket' => "int(11) DEFAULT 0",
             'lastConnection' => "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
             'PRIMARY KEY' => "(id)"
@@ -55,7 +55,7 @@ class Tables {
             'sel' => "int(11)",
             'message' => "text",
             'social' => "varchar(255)",
-            'reply' => "text NOT NULL DEFAULT ''",
+            'reply' => "text",
             'PRIMARY KEY' => "(id)"
         )
     );
@@ -80,18 +80,30 @@ class Tables {
         //require -> inside this function
         require dirname(__FILE__) . '/../config.php';
         
-        $enlace = mysqli_connect("localhost", $database_user, $database_pass);
+        $enlace = mysqli_connect($database_location, $database_user, $database_pass);
         if (!$enlace) {
             echo 'IS YOUR MYSQL WORKING? - WRONG DB CREDENTIALS?';
             return;
         }
-
+        //$dbh = new PDO('mysql:host=localhost',$database_user,$database_pass); 
+        //if (!$dbh) {
+        //    echo 'IS YOUR MYSQL WORKING? - WRONG DB CREDENTIALS?';
+        //    return;
+        //}
+        //
+        
         $sql = 'CREATE DATABASE smalltown';
         if (mysqli_query($enlace, $sql)) {
             echo "smalltown data base was created successfully. \n";
         } else {
             echo mysql_error() . "\n";
         }
+        //try{
+        //    $dbh->exec($sql);
+        //    echo "smalltown data base was created successfully. \n";
+        //}catch(PDOException $e){
+        //    die("DB ERROR: ". $e->getMessage());
+        //}
     }
 
     public function createTables() {
