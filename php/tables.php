@@ -6,7 +6,7 @@ class Tables {
     private $tables = array(
         'smltown_games' => array(
             'id' => "int(11) UNSIGNED NOT NULL AUTO_INCREMENT",
-            'name' => "varchar(255) UNIQUE not null",
+            'name' => "varchar(255) UNIQUE NOT NULL",
             'password' => "varchar(255)",
             //game status
             'type' => "varchar(255) DEFAULT 'mafia-werewolf'",
