@@ -45,7 +45,7 @@
 
     window.smltown_stack = function () {
         console.log(new Error().stack);
-    }
+    };
 
     function sendError(text, f) {
 

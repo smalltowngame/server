@@ -10,7 +10,6 @@ ini_set('session.cookie_lifetime', 864000);
 ini_set('session.gc_masexlifetime', 864000);
 //maybe you want to precise the save path as well
 //ini_set('session.save_path', "smalltown");
-
 //needs to be before html
 session_start();
 ?>
@@ -34,7 +33,8 @@ session_start();
         Update: {},
         config: {},
         Social: {}
-    };</script>
+    };
+</script>
 
 <?php
 //path files 4 plugins
@@ -77,28 +77,28 @@ if (!file_exists($inc) || !is_readable($inc)) {
         echo $error;
         //file_put_contents("utils/smltown.log", date('[d-m-Y H:i:s]') . " $error \n", FILE_APPEND);
         file_put_contents("utils/smltown.log", " $error \n", FILE_APPEND);
-        unlink('config.php');
+        //unlink('config.php');
     }
 
     fwrite($myfile, PHP_EOL);
 
-    $location = getenv("database_location");
+    $location = getenv("MYSQL_LOCATION");
     $database_location = false === $location ? "localhost" : $location;
     fwrite($myfile, '$database_location = "' . $database_location . '";' . PHP_EOL);
 
-    $port = getenv("database_port");
+    $port = getenv("MYSQL_PORT");
     $database_port = false === $port ? "null" : $port;
     fwrite($myfile, '$database_port = "' . $database_port . '";' . PHP_EOL);
 
-    $name = getenv("database_name");
+    $name = getenv("DATA_NAME");
     $database_name = false === $name ? "smalltown" : $name;
     fwrite($myfile, '$database_name = "' . $database_name . '";' . PHP_EOL);
 
-    $user = getenv("database_user");
+    $user = getenv("MYSQL_USERNAME");
     $database_user = false === $user ? "root" : $user;
     fwrite($myfile, '$database_user = "' . $database_user . '";' . PHP_EOL);
 
-    $pass = getenv("database_pass");
+    $pass = getenv("MYSQL_ROOT_PASSWORD");
     $database_pass = false === $pass ? "" : $pass;
     fwrite($myfile, '$database_pass = "' . $database_pass . '";' . PHP_EOL);
 
@@ -257,7 +257,9 @@ echo $script;
                         location.href = "https://play.google.com/store/apps/details?id=town.sml";
                     });
                 }
-            });</script>
+            });
+    </script>
+
     <script type="text/javascript" src="<?php echo $smalltownURL ?>lang/<?php echo $lang ?>.js"></script>      
     <script type="text/javascript" src="<?php echo $staticsURL ?>libs/json2.js"></script>
     <script type="text/javascript" src="<?php echo $staticsURL ?>js/Server.js"></script>
