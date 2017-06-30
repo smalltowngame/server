@@ -20,7 +20,7 @@ SMLTOWN.Load = {
     divLoad: function (url, callback) {
         console.log("divload");
         this.start();
-        
+
         var _this = this;
         var urlArray = url.split("?");
         var urlPage = urlArray[0];
@@ -37,14 +37,6 @@ SMLTOWN.Load = {
                 }
             });
 
-        } else if (urlPage == "gameList") {
-            console.log("loading " + SMLTOWN.path + "gameList.html..");
-            $("#smltown_html").load(SMLTOWN.path + "gameList.html", null, function () {
-                _this.end();
-                if (callback) {
-                    callback();
-                }
-            });
         } else {
             //like facebook mobile request on heroku with url data
             console.log("loading " + SMLTOWN.path + "gameList.html..");
@@ -112,7 +104,7 @@ SMLTOWN.Load = {
     ,
     timeout: null
     ,
-    start: function (time, text) {        
+    start: function (time, text) {
         var $this = this;
         this.loading = true;
         $("#smltown_loader").addClass("smltown_loading");

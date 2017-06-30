@@ -107,6 +107,7 @@ SMLTOWN.Add = {
                 div.on("tap", function() {
                     //TODO flash?
                 });
+                content.find(".smltown_publicIcon").remove();
                 content.append(div);
             }
         }
