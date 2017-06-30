@@ -1,0 +1,255 @@
+#smltown_html{
+    position: relative;
+    overflow: hidden;
+}
+.smltown_delete{
+    font-size: 12px;
+    color: red;
+}
+
+#smltown_connectionCheck{
+    display:none; 
+    color:rgb(100,100,100); 
+    font-size: 12px;
+    margin: 10px;
+}
+
+#smltown_content p{
+    margin: 15px;
+}
+
+#smltown_title:after:empty{
+    content: "Running Games: (not connected)";
+}
+
+#smltown_reload{
+    position: absolute;
+    bottom: 0;
+    border: none;
+    box-shadow: inset 1px 1px black, inset -1px -1px black;
+}
+a{
+    color: blue;
+    text-decoration: underline;
+}
+a:hover{
+    color: purple;
+}
+
+#smltown_gamesWrapper{
+    position: absolute;
+    top: 60px;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    overflow-x: hidden;
+}
+
+#smltown_games .smltown_button{
+    font-weight: bold;
+}
+#smltown_games{
+    min-height: 100%;
+    height: auto !important; /* This line and the next line are not necessary unless you need IE6 support */
+    height: 100%;
+    margin: 0 auto -85px; /* the bottom margin is the negative value of the footer's height */
+}
+
+#smltown_games > div{
+    position: relative;
+    padding: 4px 7px;
+    /*max-width: 550px;*/
+    /*text-shadow: 1px 1px 1px white;*/
+}
+
+#smltown_createGame{
+    margin: 7px;
+    /*font-weight: bold;*/
+}
+
+#smltown_nameGame{
+    width:100%;
+    padding: 0;
+    border: grey solid 1px;
+}
+#smltown_nameGame input{
+    border-width: 0 !important;
+    line-height: 35px;
+}
+#smltown_newGame > div{
+    line-height: normal;
+    max-height: 50px;
+    font-size: 14px;
+    overflow:hidden;
+    padding: 0 10px;
+}
+#smltown_newGame.smltown_disable{
+    color: rgb(150,150,150);
+    background-color: rgb(240,240,240);
+}
+#smltown_newGame:hover{
+    background-color: rgb(220,220,220) !important;
+}
+
+.smltown_game{
+    position: relative;
+}
+.smltown_game .smltown_content{
+    height: 66px;
+    background-color: rgb(200,200,200);
+    border: 5px solid rgb(150,150,150);
+    border-radius: 20px;
+    font-size: 80%;
+    font-weight: bold;
+    z-index: 1;
+    cursor: pointer;
+    box-shadow: inset -1px -1px 0 rgb(230,230,230);
+}
+
+.smltown_fixedGame{
+    /*display: block !important;*/
+}
+.smltown_fixedGame .smltown_content{
+    opacity: 1 !important;
+    -webkit-transform: translateX(0px) !important;
+    -moz-transform: translateX(0px) !important;
+    transform: translateX(0px) !important;
+}
+
+.smltown_game .smltown_content:hover{
+    -webkit-box-shadow: inset 2px 2px 0 rgb(50,50,50);
+    -moz-box-shadow: inset 2px 2px 0 rgb(50,50,50);
+    box-shadow: inset 2px 2px 0 rgb(50,50,50);
+}
+.smltown_game .smltown_content:active{
+    -webkit-box-shadow: -1px -1px 0 white;
+    -moz-box-shadow: -1px -1px 0 white;
+    box-shadow: -1px -1px 0 white;
+}
+
+.smltown_game .smltown_name{
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 16px;
+    display: inline-block;     
+}
+.smltown_game .smltown_playersCount{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.smltown_game .smltown_admin{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.smltown_game .smltown_content *{
+    white-space: nowrap;
+}
+.smltown_game .smltown_content > *{
+    margin: 8px 15px;
+}
+
+.smltown_backGame{
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    line-height: 76px;
+    color: grey;
+    left: 25px;
+    white-space: nowrap;
+    right: 0;
+    overflow: hidden;
+}
+
+.smltown_removeGame{
+    -webkit-transition: 500ms;
+    -moz-transition: 500ms;
+    transition: 500ms;
+    opacity: 0 !important;
+
+    -webkit-transform: translateX(120%) !important;
+    -moz-transform: translateX(120%) !important;
+    transform: translateX(120%) !important;
+}
+
+.smltown_playing .smltown_content{
+    background-color: rgb(190,230,99);
+    border: 5px solid rgb(115,185,0);
+}
+.smltown_playingMessage .smltown_content{
+    background-color: rgb(200,255,70);
+    border: 5px solid rgb(125,200,0);
+}
+.smltown_playingStarted .smltown_content{
+    background-color: rgb(198,170,170);
+    border: 5px solid rgb(150,99,99);
+}
+
+.smltown_gameInfo{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 60%;
+    overflow: hidden;
+    text-align: right;    
+}
+.smltown_gameInfo small{
+    float: right;
+}
+
+.smltown_game .symbols{
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+}
+.smltown_game small{
+    color: rgb(125,125,125);
+    font-weight: normal;
+}
+
+.smltown_game.smltown_local .smltown_content{
+    background-color: rgb(185,190,255) !important;
+    border: 5px solid rgb(0,0,255);    
+}
+
+#smltown_loadingGames{
+    margin-top: inherit !important;
+    text-align: center;
+    color: grey;
+}
+
+
+#smltown_games::after{
+    content: "";
+    display: block;
+    height: 85px;
+    width: 100%;
+    position: relative;
+}
+#smltown_footer{
+    height: 85px;
+    padding: 0 10px;
+}
+
+#smltown_forumLink{
+    display: block;
+    position: relative;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 60px;
+    height: 60px;
+    float:right;
+    cursor: pointer;
+    font-family: sans-serif;
+    text-align: center;
+    font-size: 10px;
+    font-weight: bold;
+}
+#smltown_forumLink p{
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    width: 100%;
+}

@@ -1,0 +1,77 @@
+
+
+
+/*////////////////////////////////*/
+
+.smltown_static .smltown_game{
+    display: inline-block;
+}
+
+/*////////////////////////////////*/
+
+.smltown_static #smltown_header{
+    z-index: 15 !important;
+}
+.smltown_static #smltown_body{
+    width: 100%;
+    display: table;
+    height: 100%; 
+    position: absolute;
+}
+.smltown_static #smltown_list, .smltown_static #smltown_console{
+    display: inline-block;
+}
+
+.smltown_static #smltown_list{
+    bottom: 0;
+}
+
+.smltown_static #smltown_console{
+    border-top: none !important;
+    border-radius: 0 !important;
+    right: 0;
+    top: 56px !important;
+    border-left: 1px solid grey;
+}
+
+.smltown_static #smltown_consoleText{
+    bottom: 0 ! important;
+    height: 100%;
+}
+
+.smltown_static #smltown_chatForm{
+    display:inherit;
+}
+
+.smltown_static #smltown_consoleLog > div{
+    /*bottom: 52px;*/
+}
+
+.smltown_staticMenu #smltown_menu{
+    height: auto !important;
+    top: 56px;
+    bottom: 0;
+    margin-left: auto !important;
+    pointer-events: none;
+
+    -webkit-transform: translateX(0) !important;
+    -moz-transform: translateX(0) !important;
+    -ms-transform: translateX(0) !important;
+    -o-transform: translateX(0) !important;
+    transform: translateX(0) !important;
+}
+
+.smltown_static #smltown_menuContent{
+    width: 280px !important;
+    border-right: 1px solid grey;
+    pointer-events: auto;
+}
+
+.smltown_staticMenu #smltown_menuContent{
+    width: 100%;
+}
+
+.smltown_staticMenu #smltown_console{
+    top: 0 !important;
+    z-index: 15;
+}

@@ -1,0 +1,57 @@
+
+/*0. background*/
+#log{
+    display: block !important;
+    left: 200%;
+    margin-left: -100%;
+    /*background-color: transparent;*/
+
+    -webkit-transition: margin-left 300ms 600ms ease-out
+        , left 0s 1000ms
+        , background-color 300ms;
+    transition: margin-left 200ms 600ms ease-out
+        , left 0s 1000ms
+        , background-color 300ms;
+}
+#filter.smltown_notification #smltown_log{ /*if filter is notification*/
+    background-color: rgb(160,195,60);
+    left: 0;
+    margin-left: 0;
+    transition: left 300ms ease-in;
+    overflow: hidden;
+}
+
+/*1. text*/
+#log .text{
+    position:relative;
+    transition: margin-left 300ms ease-out
+        , left 0s 1000ms
+        , background-color 300ms;
+    margin-left: 100%;
+
+    left: 200%;
+    margin-left: -200%;
+}
+#filter.smltown_notification #smltown_log .text{
+    transition: left 300ms 300ms ease-in;
+    left: 0;
+    margin-left: 0;
+}
+
+/*2. button*/
+#log .smltown_button{
+    position:relative;
+    transition: margin-left 300ms 300ms ease-out
+        , left 0s 1000ms
+        , background-color 300ms;
+    margin-left: 100%;
+
+    left: 200%;
+    margin-left: -200%;
+    
+}
+#filter.smltown_notification #smltown_log .smltown_button{
+    transition: left 300ms 600ms ease-in;
+    left: 0;
+    margin-left: 0;
+}

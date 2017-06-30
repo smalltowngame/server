@@ -1,0 +1,101 @@
+
+
+#smltown_helpFilter{
+    position: absolute;
+    /*over ajax loadings*/
+    z-index:100;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+#smltown_helpFilter.smltown_filter{
+    pointer-events: auto;
+    background-color: rgba(255,255,255,0.5);
+}
+#smltown_helpFilter button{
+    cursor: pointer;
+}
+
+.smltown_helpDiv{
+    position: absolute;
+    background-color: rgba(0,0,0,0.7);
+    color: white;
+    border: 1px solid black;
+    padding: 10px;    
+    max-width: 75%;    
+    font-size: 15px;
+    pointer-events: inherit;
+    /*text-align: justify;*/
+    text-shadow: 1px 1px black;
+    color: rgb(245,255,225);
+}
+.smltown_helpDiv b{
+    color: white;
+    color: rgb(190,255,0);
+}
+.smltown_helpDiv small{
+    display:block;
+    text-align: justify;
+}
+.smltown_helpDiv::before{
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+}
+.smltown_helpDiv.smltown_top::before{
+    top: 0;
+    transform: translateY(-100%);
+    border-bottom: 8px solid black;
+}
+.smltown_helpDiv.smltown_bottom::before{
+    bottom: 0;
+    transform: translateY(100%);
+    border-bottom: 8px solid black;
+}
+.smltown_helpDiv.smltown_left::before{
+    left: 0;
+}
+.smltown_helpDiv.smltown_right::before{
+    right: 0;
+}
+
+.smltown_helpDiv.smltown_center{
+    left: 50%;
+    top: 40%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 70%;
+    /*pointer-events: auto;*/
+}
+.smltown_helpDiv button{    
+    float: right;
+}
+
+.smltown_helpAd{
+    position:absolute;
+    border: 2px red dashed;
+    border-radius: 10px;
+    z-index: 999;
+    padding: 2px;
+    margin-top: -4px;
+    margin-left: -4px;
+    pointer-events: none;
+}
+
+#helpStop{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.7);
+    color: white;
+    z-index: 100;
+    line-height: 50px;
+    font-size: 22px;
+    pointer-events: auto;
+    cursor: pointer;
+    text-align: center;
+}

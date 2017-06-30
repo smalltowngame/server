@@ -1,0 +1,58 @@
+
+body > div{
+    margin: 15px;
+}
+
+#urls{
+    width:100%;
+}
+
+#urls > div{
+    height: 50px;
+    background-color: rgb(200,200,200);
+    margin: 10px 0;
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid grey;
+}
+
+.selected{
+    box-shadow: inset 1px 1px 5px black;
+}
+
+.hide{
+    opacity: 0;
+    -webkit-transition: opacity 0.5s; /* Safari */
+    transition: opacity 0.5s;
+}
+
+.icon{
+    float: right;
+    line-height: 48px;
+    width: 48px;
+    text-align: center;    
+    background-color: rgb(220,220,220);
+    border: 1px solid grey;
+    margin-left: 10px;
+}
+
+.remove:hover{
+    box-shadow: inset 1px 1px 5px black;
+}
+
+.name{
+    line-height: 50px;
+    float: left;
+    margin-left: 5px;
+}
+
+.smltown_errorLog{
+    /*to detect is shown log*/
+    min-height: 1px;
+}
+
+#installLocalServer{
+    margin: 15px 0;
+    color: blue;
+}
+
