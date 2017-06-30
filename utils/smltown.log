@@ -14,3 +14,1015 @@ IS YOUR MYSQL WORKING? - WRONG DB CREDENTIALS?error: !isset($pdo).::  (userId: v
 [22-05-2016 01:09:09](only debug) error on parse request: eval(<br />
 <b>Warning</b>:  mysqli_connect(): (HY000/1045): Access denied for user 'trollderiu'@'localhost' (using password: YES) in <b>C:\Users\TroLL\Dropbox\www\smalltown\play\php\tables.php</b> on line <b>83</b><br />
 IS YOUR MYSQL WORKING? - WRONG DB CREDENTIALS?error: !isset($pdo).)::  (userId: v_q47gvUHXspM4OvdmhLTp9k_HM;) 
+; Error: Uncaught SyntaxError: Unexpected token <
+url: http://localhost/smalltown/play/css/
+line: 1
+column: 1
+error: SyntaxError: Unexpected token <; ::  () 
+; Error: Uncaught TypeError: Cannot read property 'normalize' of undefined
+url: http://localhost/smalltown/play/libs/requirejs/require.js
+line: 5
+column: 7596
+error: TypeError: Cannot read property 'normalize' of undefined; ::  () 
+; Error: Uncaught SyntaxError: Unexpected token .
+url: http://localhost/smalltown/play/libs/emoji/jquery.emojiarea.css
+line: 1
+column: 1
+error: SyntaxError: Unexpected token .; ::  () 
+server connection is not established yet::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught SyntaxError: Unexpected token <
+url: http://localhost/smalltown/play/css/
+line: 1
+column: 1
+error: SyntaxError: Unexpected token <; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught TypeError: Cannot read property 'normalize' of undefined
+url: http://localhost/smalltown/play/libs/requirejs/require.js
+line: 5
+column: 7596
+error: TypeError: Cannot read property 'normalize' of undefined; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught SyntaxError: Unexpected token .
+url: http://localhost/smalltown/play/libs/emoji/jquery.emojiarea.css
+line: 1
+column: 1
+error: SyntaxError: Unexpected token .; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught Error: Script error for "jquery", needed by: http://localhost/smalltown/play/libs/jquery.mobile.events.min.js
+http://requirejs.org/docs/errors.html#scripterror
+url: http://localhost/smalltown/play/libs/requirejs/require.js
+line: 5
+column: 1067
+error: Error: Script error for "jquery", needed by: http://localhost/smalltown/play/libs/jquery.mobile.events.min.js
+http://requirejs.org/docs/errors.html#scripterror; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+server connection is not established yet::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught SyntaxError: Unexpected token .
+url: http://localhost/smalltown/play/libs/emoji/jquery.emojiarea.css
+line: 1
+column: 1
+error: SyntaxError: Unexpected token .; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught Error: Script error for "jquery", needed by: http://localhost/smalltown/play/libs/jquery.mobile.events.min.js
+http://requirejs.org/docs/errors.html#scripterror
+url: http://localhost/smalltown/play/libs/requirejs/require.js
+line: 5
+column: 1067
+error: Error: Script error for "jquery", needed by: http://localhost/smalltown/play/libs/jquery.mobile.events.min.js
+http://requirejs.org/docs/errors.html#scripterror; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught SyntaxError: Unexpected token <
+url: http://localhost/smalltown/play/css/
+line: 1
+column: 1
+error: SyntaxError: Unexpected token <; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught TypeError: Cannot read property 'normalize' of undefined
+url: http://localhost/smalltown/play/libs/requirejs/require.js
+line: 5
+column: 7596
+error: TypeError: Cannot read property 'normalize' of undefined; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+server connection is not established yet::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught SyntaxError: Unexpected token <
+url: http://localhost/smalltown/play/css/
+line: 1
+column: 1
+error: SyntaxError: Unexpected token <; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught SyntaxError: Unexpected token .
+url: http://localhost/smalltown/play/libs/emoji/jquery.emojiarea.css
+line: 1
+column: 1
+error: SyntaxError: Unexpected token .; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught TypeError: Cannot read property 'normalize' of undefined
+url: http://localhost/smalltown/play/libs/requirejs/require.js
+line: 5
+column: 7596
+error: TypeError: Cannot read property 'normalize' of undefined; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught Error: Script error for "jquery", needed by: http://localhost/smalltown/play/libs/jquery.mobile.events.min.js
+http://requirejs.org/docs/errors.html#scripterror
+url: http://localhost/smalltown/play/libs/requirejs/require.js
+line: 5
+column: 1067
+error: Error: Script error for "jquery", needed by: http://localhost/smalltown/play/libs/jquery.mobile.events.min.js
+http://requirejs.org/docs/errors.html#scripterror; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+server connection is not established yet::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught SyntaxError: Unexpected token .
+url: http://localhost/smalltown/play/libs/emoji/jquery.emojiarea.css
+line: 1
+column: 1
+error: SyntaxError: Unexpected token .; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught SyntaxError: Unexpected token <
+url: http://localhost/smalltown/play/css/
+line: 1
+column: 1
+error: SyntaxError: Unexpected token <; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught TypeError: Cannot read property 'normalize' of undefined
+url: http://localhost/smalltown/play/libs/requirejs/require.js
+line: 5
+column: 7596
+error: TypeError: Cannot read property 'normalize' of undefined; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+server connection is not established yet::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught SyntaxError: Unexpected token <
+url: http://localhost/smalltown/play/css/
+line: 1
+column: 1
+error: SyntaxError: Unexpected token <; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught TypeError: Cannot read property 'normalize' of undefined
+url: http://localhost/smalltown/play/libs/requirejs/require.js
+line: 5
+column: 7596
+error: TypeError: Cannot read property 'normalize' of undefined; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught SyntaxError: Unexpected token .
+url: http://localhost/smalltown/play/libs/emoji/jquery.emojiarea.css
+line: 1
+column: 1
+error: SyntaxError: Unexpected token .; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+server connection is not established yet::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught SyntaxError: Unexpected token <
+url: http://localhost/smalltown/play/css/
+line: 1
+column: 1
+error: SyntaxError: Unexpected token <; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught TypeError: Cannot read property 'normalize' of undefined
+url: http://localhost/smalltown/play/libs/requirejs/require.js
+line: 5
+column: 7596
+error: TypeError: Cannot read property 'normalize' of undefined; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught SyntaxError: Unexpected token <
+url: http://localhost/smalltown/play/css/
+line: 1
+column: 1
+error: SyntaxError: Unexpected token <; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught TypeError: Cannot read property 'normalize' of undefined
+url: http://localhost/smalltown/play/libs/requirejs/require.js
+line: 5
+column: 7596
+error: TypeError: Cannot read property 'normalize' of undefined; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+server connection is not established yet::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught SyntaxError: Unexpected token <
+url: http://localhost/smalltown/play/css/
+line: 1
+column: 1
+error: SyntaxError: Unexpected token <; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught TypeError: Cannot read property 'normalize' of undefined
+url: http://localhost/smalltown/play/libs/requirejs/require.js
+line: 5
+column: 7596
+error: TypeError: Cannot read property 'normalize' of undefined; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught Error: Load timeout for modules: http://localhost/smalltown/play/css!css/clean.css_unnormalized2,http://localhost/smalltown/play/css!css/index.css_unnormalized3,http://localhost/smalltown/play/css!css/common.css_unnormalized4,http://localhost/smalltown/play/css!css/game.css_unnormalized5,http://localhost/smalltown/play/css!css/static.css_unnormalized6,http://localhost/smalltown/play/css!css/icons.css_unnormalized7,http://localhost/smalltown/play/css!css/help.css_unnormalized8,http://localhost/smalltown/play/css!social/social.css_unnormalized9
+http://requirejs.org/docs/errors.html#timeout
+url: http://localhost/smalltown/play/libs/requirejs/require.js
+line: 5
+column: 1067
+error: Error: Load timeout for modules: http://localhost/smalltown/play/css!css/clean.css_unnormalized2,http://localhost/smalltown/play/css!css/index.css_unnormalized3,http://localhost/smalltown/play/css!css/common.css_unnormalized4,http://localhost/smalltown/play/css!css/game.css_unnormalized5,http://localhost/smalltown/play/css!css/static.css_unnormalized6,http://localhost/smalltown/play/css!css/icons.css_unnormalized7,http://localhost/smalltown/play/css!css/help.css_unnormalized8,http://localhost/smalltown/play/css!social/social.css_unnormalized9
+http://requirejs.org/docs/errors.html#timeout; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught SyntaxError: Unexpected token <
+url: http://localhost/smalltown/play/css/
+line: 1
+column: 1
+error: SyntaxError: Unexpected token <; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught TypeError: Cannot read property 'normalize' of undefined
+url: http://localhost/smalltown/play/libs/requirejs/require.js
+line: 5
+column: 7596
+error: TypeError: Cannot read property 'normalize' of undefined; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught Error: Load timeout for modules: http://localhost/smalltown/play/css!css/clean.css_unnormalized2,http://localhost/smalltown/play/css!css/index.css_unnormalized3,http://localhost/smalltown/play/css!css/common.css_unnormalized4,http://localhost/smalltown/play/css!css/game.css_unnormalized5,http://localhost/smalltown/play/css!css/static.css_unnormalized6,http://localhost/smalltown/play/css!css/icons.css_unnormalized7,http://localhost/smalltown/play/css!css/help.css_unnormalized8,http://localhost/smalltown/play/css!social/social.css_unnormalized9
+http://requirejs.org/docs/errors.html#timeout
+url: http://localhost/smalltown/play/libs/requirejs/require.js
+line: 5
+column: 1067
+error: Error: Load timeout for modules: http://localhost/smalltown/play/css!css/clean.css_unnormalized2,http://localhost/smalltown/play/css!css/index.css_unnormalized3,http://localhost/smalltown/play/css!css/common.css_unnormalized4,http://localhost/smalltown/play/css!css/game.css_unnormalized5,http://localhost/smalltown/play/css!css/static.css_unnormalized6,http://localhost/smalltown/play/css!css/icons.css_unnormalized7,http://localhost/smalltown/play/css!css/help.css_unnormalized8,http://localhost/smalltown/play/css!social/social.css_unnormalized9
+http://requirejs.org/docs/errors.html#timeout; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught SyntaxError: Unexpected token <
+url: http://localhost/smalltown/play/css/
+line: 1
+column: 1
+error: SyntaxError: Unexpected token <; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught TypeError: Cannot read property 'normalize' of undefined
+url: http://localhost/smalltown/play/libs/requirejs/require.js
+line: 5
+column: 7596
+error: TypeError: Cannot read property 'normalize' of undefined; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+server connection is not established yet::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught Error: Load timeout for modules: http://localhost/smalltown/play/css!css/clean.css_unnormalized2,http://localhost/smalltown/play/css!css/index.css_unnormalized3,http://localhost/smalltown/play/css!css/common.css_unnormalized4,http://localhost/smalltown/play/css!css/game.css_unnormalized5,http://localhost/smalltown/play/css!css/static.css_unnormalized6,http://localhost/smalltown/play/css!css/icons.css_unnormalized7,http://localhost/smalltown/play/css!css/help.css_unnormalized8,http://localhost/smalltown/play/css!social/social.css_unnormalized9
+http://requirejs.org/docs/errors.html#timeout
+url: http://localhost/smalltown/play/libs/requirejs/require.js
+line: 5
+column: 1067
+error: Error: Load timeout for modules: http://localhost/smalltown/play/css!css/clean.css_unnormalized2,http://localhost/smalltown/play/css!css/index.css_unnormalized3,http://localhost/smalltown/play/css!css/common.css_unnormalized4,http://localhost/smalltown/play/css!css/game.css_unnormalized5,http://localhost/smalltown/play/css!css/static.css_unnormalized6,http://localhost/smalltown/play/css!css/icons.css_unnormalized7,http://localhost/smalltown/play/css!css/help.css_unnormalized8,http://localhost/smalltown/play/css!social/social.css_unnormalized9
+http://requirejs.org/docs/errors.html#timeout; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+server connection is not established yet::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+server connection is not established yet::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+server connection is not established yet::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+(only debug) websocket error:undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+(only debug) websocket close:undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+(only debug) websocket close: undefined. NaN seconds.::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+(only debug) trying reconnection in 2 min.::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+(only debug) trying reconnection in 2 min.::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+(only debug) error on parse request: eval(<br />
+<b>Warning</b>:  mysqli_connect(): (HY000/2002): A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+ in <b>C:\xampp2\htdocs\www\smalltown\play\php\tables.php</b> on line <b>83</b><br />
+<br />
+<b>Fatal error</b>:  Maximum execution time of 30 seconds exceeded in <b>C:\xampp2\htdocs\www\smalltown\play\php\tables.php</b> on line <b>83</b><br />
+)::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+ajax error = <br />
+<b>Warning</b>:  mysqli_connect(): (HY000/2002): A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+ in <b>C:\xampp2\htdocs\www\smalltown\play\php\tables.php</b> on line <b>83</b><br />
+<br />
+<b>Fatal error</b>:  Maximum execution time of 30 seconds exceeded in <b>C:\xampp2\htdocs\www\smalltown\play\php\tables.php</b> on line <b>83</b><br />
+::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+(only debug) error on parse request: eval(<br />
+<b>Fatal error</b>:  Maximum execution time of 30 seconds exceeded in <b>C:\xampp2\htdocs\www\smalltown\play\smltown_ajax.php</b> on line <b>9</b><br />
+)::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+ajax error = <br />
+<b>Warning</b>:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [2002] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+' in C:\xampp2\htdocs\www\smalltown\play\php\DB.php:32
+Stack trace:
+#0 C:\xampp2\htdocs\www\smalltown\play\php\DB.php(32): PDO->__construct('mysql:host=sml....', 'trollderiu', ' (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+(only debug) error on parse request: eval(<br />
+<b>Fatal error</b>:  Maximum execution time of 30 seconds exceeded in <b>C:\xampp2\htdocs\www\smalltown\play\smltown_ajax.php</b> on line <b>9</b><br />
+)::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+(only debug) trying reconnection in 2 min.::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+ajax error = 42Array
+(
+    [0] => 42S22
+    [1] => 1054
+    [2] => Unknown column 'ISO' in 'field list'
+)
+ in: INSERT INTO smltown_players (id, socialId, email, name, lang, ISO) VALUES (:id, :socialId, :email, :name, :lang, :ISO) ON DUPLICATE KEY UPDATE name=VALUES(name), lang=VALUES(lang), socialId=VALUES(socialId)<br />
+<b>Notice</b>:  Undefined variable: database_location in <b>C:\xampp2\htdocs\www\smalltown\play\php\tables.php</b> on line <b>83</b><br />
+
+CREATE TABLE IF NOT EXISTS smltown_games( id int(11) UNSIGNED NOT NULL AUTO_INCREMENT, name varchar(255) UNIQUE NOT NULL, password varchar(255), type varchar(255) DEFAULT 'mafia-werewolf', status int(11) NOT NULL DEFAULT 0, cards text, night varchar(255), timeStart bigint(20), time bigint(20), dayTime int(11), openVoting int(1), endTurn int(1) DEFAULT 1, players int(11), ISO varchar(255), lastConnection timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP, PRIMARY KEY (id), public int(1) DEFAULT 1)CREATE TABLE IF NOT EXISTS smltown_players( id varchar(255) UNIQUE NOT NULL, email varchar(255), name varchar(255), lang varchar(255), ISO varchar(255), picture varchar(255), type varchar(255), socialId varchar(255) UNIQUE, facebook varchar(255) UNIQUE, gameId int(11), friends text, reply text, websocket int(11) DEFAULT 0, lastConnection timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP, PRIMARY KEY (id))CREATE TABLE IF NOT EXISTS smltown_plays( id int(11) UNSIGNED NOT NULL AUTO_INCREMENT, userId varchar(255) NOT NULL, gameId int(11) UNSIGNED NOT NULL, admin int(11) NOT NULL DEFAULT -1, card varchar(255), rulesPHP text, rulesJS text, status int(11), sel int(11), message text, social varchar(255), reply text, PRIMARY KEY (id))::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: {"action":"addFacebookUser","facebookId":"294373680732903"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+(only debug) websocket error:undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+(only debug) websocket error:undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+(only debug) websocket close: undefined. NaN seconds.::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+(only debug) websocket close:undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+(only debug) websocket close:undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+(only debug) websocket close: undefined. NaN seconds.::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+(only debug) trying reconnection in 2 min.::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+(only debug) trying reconnection in 2 min.::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught TypeError: Cannot set property 'send' of undefined
+url: http://localhost/smalltown/play/commons/js/Server.js
+line: 264
+column: 27
+error: TypeError: Cannot set property 'send' of undefined; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught SyntaxError: Unexpected token <
+url: http://localhost/smalltown/play/commons/libs/jquery-1.11.0.min.js
+line: 1
+column: 2700
+error: SyntaxError: Unexpected token <; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught SyntaxError: Unexpected token <
+url: http://localhost/smalltown/play/commons/libs/jquery-1.11.0.min.js
+line: 1
+column: 2700
+error: SyntaxError: Unexpected token <; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught SyntaxError: Unexpected token <
+url: http://localhost/smalltown/play/commons/libs/jquery-1.11.0.min.js
+line: 1
+column: 2700
+error: SyntaxError: Unexpected token <; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught SyntaxError: Unexpected token <
+url: http://localhost/smalltown/play/commons/libs/jquery-1.11.0.min.js
+line: 1
+column: 2700
+error: SyntaxError: Unexpected token <; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught SyntaxError: Unexpected token <
+url: http://localhost/smalltown/play/commons/libs/jquery-1.11.0.min.js
+line: 1
+column: 2700
+error: SyntaxError: Unexpected token <; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught SyntaxError: Unexpected token <
+url: http://localhost/smalltown/play/commons/libs/jquery-1.11.0.min.js
+line: 1
+column: 2700
+error: SyntaxError: Unexpected token <; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught SyntaxError: Unexpected token <
+url: http://localhost/smalltown/play/commons/libs/jquery-1.11.0.min.js
+line: 1
+column: 2700
+error: SyntaxError: Unexpected token <; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught SyntaxError: Unexpected token <
+url: http://localhost/smalltown/play/commons/libs/jquery-1.11.0.min.js
+line: 1
+column: 2700
+error: SyntaxError: Unexpected token <; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught SyntaxError: Unexpected token <
+url: http://localhost/smalltown/play/commons/libs/jquery-1.11.0.min.js
+line: 1
+column: 2700
+error: SyntaxError: Unexpected token <; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+(only debug) error on parse request: eval(file not exists = games/mafia-werewolf/cards/.php)::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+(only debug) error on parse request: eval(file not exists = games/mafia-werewolf/cards/.php)::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+(only debug) websocket error:undefined::  () 
+(only debug) websocket close: undefined. NaN seconds.::  () 
+(only debug) websocket close:undefined::  () 
+(only debug) trying reconnection in 2 min.::  () 
+waiting for: {"action":"setName","name":"incognito","gameId":"1","playId":"111","gameType":"mafia-werewolf"}::  (userId: 1996399023;) 
+(only debug) websocket error:undefined::  () 
+(only debug) websocket close:undefined::  () 
+(only debug) websocket close: undefined. NaN seconds.::  () 
+(only debug) trying reconnection in 2 min.::  () 
+waiting for: {"action":"setName","name":"fire","gameId":"1","playId":"112","gameType":"mafia-werewolf"}::  (userId: 1066250929;) 
+; Error: Uncaught ReferenceError: Modernizr is not defined
+url: http://localhost/smalltown/play/commons/js/Events.js
+line: 5
+column: 5
+error: ReferenceError: Modernizr is not defined; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+; Error: Uncaught ReferenceError: Modernizr is not defined
+url: http://localhost/smalltown/play/commons/js/Events.js
+line: 5
+column: 5
+error: ReferenceError: Modernizr is not defined; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+waiting for: undefined::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+(only debug) websocket error:undefined::  () 
+(only debug) websocket close:undefined::  () 
+(only debug) websocket close: undefined. NaN seconds.::  () 
+(only debug) trying reconnection in 2 min.::  () 
+waiting for: {"action":"setName","name":"FIRE INC","gameId":"1","playId":"118","gameType":"mafia-werewolf"}::  (userId: 1294476791;) 
+; Error: TypeError: okCallback is not a function
+url: http://localhost/smalltown/play/commons/js/Message.js
+line: 221
+column: 21
+error: TypeError: okCallback is not a function; ::  (userId: 1066250929;) 
+; Error: TypeError: okCallback is not a function
+url: http://localhost/smalltown/play/commons/js/Message.js
+line: 221
+column: 21
+error: TypeError: okCallback is not a function; ::  (userId: 1294476791;) 
+; Error: Uncaught TypeError: okCallback is not a function
+url: http://localhost/smalltown/play/commons/js/Message.js
+line: 221
+column: 21
+error: TypeError: okCallback is not a function; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 

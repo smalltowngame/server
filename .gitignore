@@ -46,6 +46,7 @@ config.php
 pictures/
 record/
 
-/*.log
+*.log
 
 prueba.html
+/commons/nbproject/private/

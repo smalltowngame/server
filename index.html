@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>        
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+        <!--meta to cache files, but it can't override client options-->
+        <meta http-equiv="Cache-control" content="public">
+
+        <title>Small Town</title>
+
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+
+        <script type="text/javascript" src="commons/libs/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="commons/libs/requirejs/require.js"></script>
+
+        <script type="text/javascript">
+
+            var SMLTOWN = {
+                Games: {},
+                Game: {
+                    info: {},
+                    wakeUpTime: 2000
+                },
+                Action: {},
+                Server: {},
+                user: {},
+                lang: (navigator.language || navigator.userLanguage).split("-")[0],
+                Load: {},
+                Local: {},
+                players: {},
+                temp: {},
+                Update: {},
+                config: {},
+                Social: {}
+            };
+
+        </script>
+
+    </head>
+
+    <!--smalltown is class if not plugin-->
+    <body id="smltown">
+        <div id="smltown_html"></div>
+
+        <!--load async HTML-->
+        <script type="text/javascript">
+
+            //REQUIRE
+            require.config({
+                //            waitSeconds: 0, //prevent timeout by requirejs
+                paths: {
+                    jquery: 'commons/libs/jquery-1.11.0.min', //jquery.mobile.events.min.js calls this (prevent bug)
+                    css: 'commons/libs/requirejs/css.min'
+                }
+            });
+
+            require(["jquery"], function () {
+
+                $.post("settings.php", function (json) {
+                    SMLTOWN.config = {};
+                    try {
+                        SMLTOWN.config = JSON.parse(json);
+                    } catch (e) {
+                        console.log("ERROR");
+                    }
+
+                    SMLTOWN.path = SMLTOWN.config.smalltownURL;
+                    SMLTOWN.path_static = SMLTOWN.config.staticsURL;
+
+                    //                //var url = SMLTOWN.path_static + "/html/loading.html";
+                    //                var url = SMLTOWN.path + "/html/loading.html";
+                    //                console.log("loading url = " + url);
+                    //                var XHRt = new XMLHttpRequest; // new ajax
+                    //                XHRt.onload = function () {
+                    //                    document.querySelector("#smltown").innerHTML = XHRt.response;
+                    //                };
+                    //                XHRt.open("GET", url, false);
+                    //                XHRt.send();
+
+                    require([
+                        //CSS after load starting images
+                        'css!' + SMLTOWN.path_static + 'commons/css/clean.css',
+                        'css!' + SMLTOWN.path_static + 'commons/css/index.css',
+                        'css!' + SMLTOWN.path_static + 'commons/css/common.css',
+                        'css!' + SMLTOWN.path_static + 'commons/css/game.css',
+                        'css!' + SMLTOWN.path_static + 'commons/css/static.css',
+                        'css!' + SMLTOWN.path_static + 'commons/css/icons.css',
+                        'css!' + SMLTOWN.path_static + 'commons/css/help.css',
+                        'css!' + SMLTOWN.path_static + 'commons/social/social.css'
+                        ,
+                        SMLTOWN.path_static + "commons/css/images.js",
+                        SMLTOWN.path_static + "commons/js/Util.js",
+                        SMLTOWN.path_static + "commons/js/UI.js",
+                        SMLTOWN.path_static + "commons/js/Games.js"
+                                ,
+                        SMLTOWN.path + "lang/" + SMLTOWN.lang + ".js",
+                        SMLTOWN.path_static + "commons/libs/json2.js",
+                        SMLTOWN.path_static + "commons/js/Server.js"
+                        ,
+                        SMLTOWN.path_static + "commons/libs/jquery.mobile.events.min.js",     
+                        SMLTOWN.path_static + "commons/libs/modernizr.custom.36644.js", //after mobile.events
+
+                    ], function () {
+
+                        require([
+                            SMLTOWN.path_static + "commons/js/request.js", //before connection //after Server.js!
+                            SMLTOWN.path_static + "commons/libs/smltown_errorLog.js",
+                            SMLTOWN.path_static + "commons/js/Message.js",
+                            SMLTOWN.path_static + "commons/js/Update.js",
+                            SMLTOWN.path_static + "commons/js/Action.js",
+                            SMLTOWN.path_static + "commons/js/Transform.js",
+                            SMLTOWN.path_static + "commons/js/Add.js",
+                            SMLTOWN.path_static + "commons/js/Load.js",
+                            SMLTOWN.path_static + "commons/js/Local.js",
+                            SMLTOWN.path_static + "commons/js/Time.js",
+                            SMLTOWN.path_static + "commons/js/Social.js",
+                            SMLTOWN.path_static + "commons/js/Help.js"
+                                    ,                                                   
+                            SMLTOWN.path_static + "commons/js/Events.js" //after modernizr
+//                                    ,
+//                            SMLTOWN.path_static + "social/facebook.js"
+//                                    ,
+//                            //Emojis
+//                            SMLTOWN.path_static + "libs/emoji/jquery.emojiarea.js",
+//                            SMLTOWN.path_static + "libs/emoji/packs/basic/emojis.js",
+//                            SMLTOWN.path_static + "libs/emoji/jquery.emojiarea.css"
+                        ], function () {
+
+                            //$(document).one("ready", function () {
+                            SMLTOWN.user.userId = SMLTOWN.Util.getCookie("smltown_userId");
+                            if (!SMLTOWN.user.userId) {
+                                localStorage.setItem("tutorial", "todo");
+                            }
+
+                            SMLTOWN.user.name = SMLTOWN.Util.getLocalStorage("smltown_userName");
+                            SMLTOWN.Transform.windowResize();
+                            $("#smltown_footer").append("<i id='smltown_connectionCheck'>This server <span class='allowWebsocket'></span> allows websocket connection.</i>");
+                            SMLTOWN.Server.handleConnection();
+                            //detect android
+                            var ua = navigator.userAgent.toLowerCase();
+                            var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+                            if (!window.Device && isAndroid) {
+                                if (!localStorage.getItem("androidAsked")) {
+                                    SMLTOWN.Message.notify("_androidAppQuestion", function () { //ok callback
+                                        window.location = "https://play.google.com/store/apps/details?id=town.sml";
+                                    }, function () {
+                                        localStorage.setItem("androidAsked", 1);
+                                    });
+                                }
+
+                                //reduce height body
+                                $("#smltown_html").css({
+                                    bottom: "80px"
+                                });
+                                //add AD
+                                var ad = $("<div id='androidAd'></div>");
+                                $("#smltown").append(ad);
+                                ad.click(function () {
+                                    location.href = "https://play.google.com/store/apps/details?id=town.sml";
+                                });
+                            }
+
+                            //                $.emojiarea.path = SMLTOWN.path_static + 'libs/emoji/packs/basic/images';
+                        });
+                    });
+                });
+            });
+
+        </script>
+    </body>
+</html>

@@ -25,6 +25,10 @@ var lang = {
     ,
     playingHere: "estas jugando aquí"
     ,
+    areActive: "Activos ",
+    playersIn: " jugadores en ",
+    games: " partidas."
+    ,
     //GAME TEXTS//////////////////////////////////////////////////////////////
     //
     //MENU
@@ -174,11 +178,11 @@ var lang = {
     ,
     wakeUp: "despierta"
     ,
-    yourTurn: "es tu turno"
+    yourTurn: "es tu turno <p>(puedes mirar tu carta para leer las instrucciones)</p>"
     ,
-    GoodMorning: "Buenos Días! <p>(Cuando el sol llegue al otro extremo de la pantalla el tiempo habrá acabado)</p>"
+    GoodMorning: "Buenos Días! Es momento de discutir a quien deberíamos linchar! <p>(Cuando el sol llegue al otro extremo de la pantalla el tiempo habrá acabado)</p>"
     ,
-    gameWillStart: "La partida empezará pronto, cierra los ojos!"
+    gameWillStart: "La partida empezará cuando todos los jugadores le den al 'OK'. <br> Cierra los ojos!"
     ,
     alive2: "Solo hay 2 jugadores en juego. No puede ocurrir ningun linchamiento durante este día."
     ,
@@ -199,17 +203,17 @@ var lang = {
     warnServer: "advertencia: el servidor está tardando demasiado"
     ,
     //server events from menu
-    openVotingEnabled: "ahora se permiten votaciones durante el día"
+    openVotingEnabled: "En la próxima partida, se permiten votaciones durante el día"
     ,
-    openVotingDisabled: "ya no se permiten votaciones durante el día"
+    openVotingDisabled: "En la próxima partida, ya no se permitirán votaciones durante el día"
     ,
-    adminEndTurnEnabled: "el master puede fiinalizar el turno de día"
+    adminEndTurnEnabled: "En la próxima partida, el master puede fiinalizar el turno de día"
     ,
-    adminEndTurnDisabled: "el master no puede fiinalizar el turno de día"
+    adminEndTurnDisabled: "En la próxima partida, el master no puede fiinalizar el turno de día"
     ,
-    updatedDayTime: "se ha cambiado la duración del día"
+    updatedDayTime: "Para la próxima partida, se ha cambiado la duración del día"
     ,
-    passwordRemoved: "la contraseña del juego desactivada"
+    passwordRemoved: "contraseña del juego desactivada"
     ,
     passwordUpdated: "se ha cambiado la contraseña de la partida"
     ,
@@ -335,7 +339,8 @@ var lang = {
     ,
     gameRestartForPlayersChange: "La partida se ha reiniciado al cambiar el número de jugadores"
     ,
-    someSpectator: "Los jugadores en modo espectador no jugarán la partida"
+    someSpectator: "Los jugadores en modo espectador no jugarán la partida. <br> "
+            + "Si quieres que jueguen todos, deben hacer click en su nombre para unirse!"
     ,
     clipboardCopy: "Copiado al portapapeles"
     ,

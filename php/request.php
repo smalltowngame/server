@@ -256,7 +256,7 @@ trait Request {
 //
         //rewrite header to name game <TODO>
 //    if ("127.0.0.1" == $_SERVER['REMOTE_ADDR']) {
-//        $file = file("index.php");
+//        $file = file("index.html");
 //        $newLines = array();
 //        foreach ($file as $line)
 //            if (preg_match("/^(header\(\'name)/", $line) === 0) {
@@ -265,7 +265,7 @@ trait Request {
 //                $newLines[] = chop("header('name:$userName');");
 //            }
 //        $newFile = implode("\n", $newLines);
-//        file_put_contents("index.php", $newFile);
+//        file_put_contents("index.html", $newFile);
 //    }
     }
 

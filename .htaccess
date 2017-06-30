@@ -7,3 +7,8 @@ Allow from all
 
 #php_value session.cookie_lifetime 864000
 #php_value session.gc_maxlifetime 864000
+
+Header set Access-Control-Allow-Origin "*"
+
+Header set Access-Control-Expose-Headers "smalltown, smltown_name"
+Header set smalltown "1"

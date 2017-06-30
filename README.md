@@ -7,7 +7,7 @@ See it in action on: [sml.town/game](http://sml.town/game)
 
 You cad add this game into your webpage with a simple: 
 
-```$("#divId").load(gameUrl + "index.php");```
+```$("#divId").load(gameUrl + "index.html");```
 
 **Smalltown is not only a php game, it's a framework to make card games.**
 
