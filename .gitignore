@@ -39,7 +39,6 @@ Icon
 
 config
 config.php
-/config.php
 
 /old.*
 
@@ -49,4 +48,4 @@ record/
 *.log
 
 prueba.html
-/commons/nbproject/private/
+/commons_remove/nbproject/private/

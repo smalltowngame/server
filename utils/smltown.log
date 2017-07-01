@@ -1028,3 +1028,7 @@ column: 21
 error: TypeError: okCallback is not a function; ::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
 waiting for: {"action":"messageReceived","stop":0,"gameId":"1","playId":"100","gameType":"mafia-werewolf"}::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
 (only debug) trying reconnection in 2 min.::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+(only debug) trying reconnection in 2 min.::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+(only debug) trying reconnection in 2 min.::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+(only debug) trying reconnection in 2 min.::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 
+(only debug) trying reconnection in 2 min.::  (userId: 3Mk2IeYWQvH9znewyAeSwneMxn4;) 

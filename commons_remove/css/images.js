@@ -5,7 +5,7 @@ var smltown_cssPre = "{background-image:url(" + SMLTOWN.path_static;
 var smltown_cssFin = ")}";
 
 function css(nombre, url) {
-    smltown_css += nombre + smltown_cssPre + "commons/" + url + smltown_cssFin;
+    smltown_css += nombre + smltown_cssPre + "static/" + url + smltown_cssFin;
 }
 
 //BASE
@@ -30,4 +30,4 @@ smltown_style.type = 'text/css';
 smltown_style.innerHTML = smltown_css;
 document.getElementsByTagName('html')[0].appendChild(smltown_style);
 
-console.log("!!!!!!!!!!!!!!!!!!!!")
+console.log("!!!!!!!!!!!!!!!!!!!!");

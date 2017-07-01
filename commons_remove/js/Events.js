@@ -238,6 +238,7 @@ SMLTOWN.Events = {
 
         //input height change
         $("#smltown_chatForm").change(function () {
+            console.log('$("#smltown_chatForm").change');
             SMLTOWN.Transform.chatUpdate();
         });
 

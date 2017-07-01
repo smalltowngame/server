@@ -11,8 +11,8 @@
 
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 
-        <script type="text/javascript" src="commons/libs/jquery-1.11.0.min.js"></script>
-        <script type="text/javascript" src="commons/libs/requirejs/require.js"></script>
+        <script type="text/javascript" src="static/libs/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="static/libs/requirejs/require.js"></script>
 
         <script type="text/javascript">
 
@@ -50,8 +50,8 @@
             require.config({
                 //            waitSeconds: 0, //prevent timeout by requirejs
                 paths: {
-                    jquery: 'commons/libs/jquery-1.11.0.min', //jquery.mobile.events.min.js calls this (prevent bug)
-                    css: 'commons/libs/requirejs/css.min'
+                    jquery: 'static/libs/jquery-1.11.0.min', //jquery.mobile.events.min.js calls this (prevent bug)
+                    css: 'static/libs/requirejs/css.min'
                 }
             });
 
@@ -80,44 +80,44 @@
 
                     require([
                         //CSS after load starting images
-                        'css!' + SMLTOWN.path_static + 'commons/css/clean.css',
-                        'css!' + SMLTOWN.path_static + 'commons/css/index.css',
-                        'css!' + SMLTOWN.path_static + 'commons/css/common.css',
-                        'css!' + SMLTOWN.path_static + 'commons/css/game.css',
-                        'css!' + SMLTOWN.path_static + 'commons/css/static.css',
-                        'css!' + SMLTOWN.path_static + 'commons/css/icons.css',
-                        'css!' + SMLTOWN.path_static + 'commons/css/help.css',
-                        'css!' + SMLTOWN.path_static + 'commons/social/social.css'
+                        'css!' + SMLTOWN.path_static + 'static/css/clean.css',
+                        'css!' + SMLTOWN.path_static + 'static/css/index.css',
+                        'css!' + SMLTOWN.path_static + 'static/css/common.css',
+                        'css!' + SMLTOWN.path_static + 'static/css/game.css',
+                        'css!' + SMLTOWN.path_static + 'static/css/static.css',
+                        'css!' + SMLTOWN.path_static + 'static/css/icons.css',
+                        'css!' + SMLTOWN.path_static + 'static/css/help.css',
+                        'css!' + SMLTOWN.path_static + 'static/social/social.css'
                                 ,
-                        SMLTOWN.path_static + "commons/css/images.js",
-                        SMLTOWN.path_static + "commons/js/Util.js",
-                        SMLTOWN.path_static + "commons/js/UI.js",
-                        SMLTOWN.path_static + "commons/js/Games.js"
+                        SMLTOWN.path_static + "static/css/images.js",
+                        SMLTOWN.path_static + "static/js/Util.js",
+                        SMLTOWN.path_static + "static/js/UI.js",
+                        SMLTOWN.path_static + "static/js/Games.js"
                                 ,
                         SMLTOWN.path + "lang/" + SMLTOWN.lang + ".js",
-                        SMLTOWN.path_static + "commons/libs/json2.js",
-                        SMLTOWN.path_static + "commons/js/Server.js"
+                        SMLTOWN.path_static + "static/libs/json2.js",
+                        SMLTOWN.path_static + "static/js/Server.js"
                                 ,
-                        SMLTOWN.path_static + "commons/libs/jquery.mobile.events.min.js",
-                        SMLTOWN.path_static + "commons/libs/modernizr.custom.36644.js", //after mobile.events
+                        SMLTOWN.path_static + "static/libs/jquery.mobile.events.min.js",
+                        SMLTOWN.path_static + "static/libs/modernizr.custom.36644.js", //after mobile.events
 
                     ], function () {
 
                         require([
-                            SMLTOWN.path_static + "commons/js/request.js", //before connection //after Server.js!
-                            SMLTOWN.path_static + "commons/libs/smltown_errorLog.js",
-                            SMLTOWN.path_static + "commons/js/Message.js",
-                            SMLTOWN.path_static + "commons/js/Update.js",
-                            SMLTOWN.path_static + "commons/js/Action.js",
-                            SMLTOWN.path_static + "commons/js/Transform.js",
-                            SMLTOWN.path_static + "commons/js/Add.js",
-                            SMLTOWN.path_static + "commons/js/Load.js",
-                            SMLTOWN.path_static + "commons/js/Local.js",
-                            SMLTOWN.path_static + "commons/js/Time.js",
-                            SMLTOWN.path_static + "commons/js/Social.js",
-                            SMLTOWN.path_static + "commons/js/Help.js"
+                            SMLTOWN.path_static + "static/js/request.js", //before connection //after Server.js!
+                            SMLTOWN.path_static + "static/libs/smltown_errorLog.js",
+                            SMLTOWN.path_static + "static/js/Message.js",
+                            SMLTOWN.path_static + "static/js/Update.js",
+                            SMLTOWN.path_static + "static/js/Action.js",
+                            SMLTOWN.path_static + "static/js/Transform.js",
+                            SMLTOWN.path_static + "static/js/Add.js",
+                            SMLTOWN.path_static + "static/js/Load.js",
+                            SMLTOWN.path_static + "static/js/Local.js",
+                            SMLTOWN.path_static + "static/js/Time.js",
+                            SMLTOWN.path_static + "static/js/Social.js",
+                            SMLTOWN.path_static + "static/js/Help.js"
                                     ,
-                            SMLTOWN.path_static + "commons/js/Events.js" //after modernizr
+                            SMLTOWN.path_static + "static/js/Events.js" //after modernizr
 //                                    ,
 //                            SMLTOWN.path_static + "social/facebook.js"
 //                                    ,
