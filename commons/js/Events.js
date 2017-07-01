@@ -358,7 +358,7 @@ SMLTOWN.Events = {
 
         div.off("touchstart");
         div.on("touchstart", function (e) { //necessary top != auto
-            e.stopPropagation(); //prevent double tap in comment div in android
+            e.stopPropagation(); //prevent double tap in comment div in android?
 
             position = null; //reset final position to prevent calculations 
             var thisHeight = 0;
@@ -428,7 +428,9 @@ SMLTOWN.Events = {
                     SMLTOWN.Transform.updateHeader();
                 }
 
-            }).one("touchend", function () {
+            }).one("touchend", function (e) {
+                e.stopPropagation(); //prevent double tap in comment div in android?
+                
                 $(this).off("touchmove");
                 if (!moved) {
                     return;
