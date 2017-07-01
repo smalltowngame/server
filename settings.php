@@ -45,7 +45,7 @@ if (!file_exists($inc) || !is_readable($inc)) {
     fwrite($myfile, '$database_location = "' . $database_location . '";' . PHP_EOL);
 
     $port = getenv("MYSQL_PORT");
-    $database_port = false === $port ? "null" : $port;
+    $database_port = false === $port ? "" : $port;
     fwrite($myfile, '$database_port = "' . $database_port . '";' . PHP_EOL);
 
     $name = getenv("DATA_NAME");

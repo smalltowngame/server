@@ -60,13 +60,13 @@ SMLTOWN.Load = {
             return;
         }
         //ONCE        
-        if ("localhost" != document.location.hostname) {
-            //let crate games
-            $("#smltown_createGame").css("display", "inherit");
-            SMLTOWN.Games.gamelistEvents();
-        } else {
-            $("#smltown_title").html("<p>" + SMLTOWN.Message.translate("GameList") + "</p>");
-        }
+//        if ("localhost" != document.location.hostname) { //ONLY :8080
+        //let crate games
+        $("#smltown_createGame").css("display", "inherit");
+        SMLTOWN.Games.gamelistEvents();
+//        } else {
+//            $("#smltown_title").html("<p>" + SMLTOWN.Message.translate("GameList") + "</p>");
+//        }
 
         //show kind of connection
         $("#smltown_connectionCheck").show();

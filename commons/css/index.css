@@ -16,8 +16,13 @@
 
 #smltown_content p{
     margin: 15px;
+    position:absolute;
+    top: 0;
 }
 
+#smltown_title{
+    margin-top: 34px;
+}
 #smltown_title:after:empty{
     content: "Running Games: (not connected)";
 }
@@ -39,6 +44,7 @@ a:hover{
 #smltown_gamesWrapper{
     position: absolute;
     top: 60px;
+    top: 92px;
     bottom: 50px;
     left: 0;
     right: 0;

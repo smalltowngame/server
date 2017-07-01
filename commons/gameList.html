@@ -49,8 +49,8 @@
             }
 
             function ready() {
+                console.log("ready()");
 //                $("#content").append(document.URL);
-//olaa
 
                 $("#changeServer").click(function() {
                     document.href = "index.html";
@@ -69,16 +69,18 @@
             }
 
             function XMLHttpPing(ipBase, i) {
+                console.log("XMLHttpPing()");
                 var gameReq = {};
                 gameReq = new XMLHttpRequest();
                 gameReq.ip = ipBase + i;
-                gameReq.href = "http://" + gameReq.ip + ":8080/smalltown/";
+                gameReq.href = "http://" + gameReq.ip + ":8080/smalltown/"; //with android php server app!
                 gameReq.open('HEAD', gameReq.href + "index.php", true); //async
                 gameReq.send();
                 gameReq.onreadystatechange = function() {
                     if (this.readyState == 4) {
                         if (this.status == 200) {
                             var smalltownHeader = this.getResponseHeader('smalltown');
+                            consoile.log("smalltownHeader: " + smalltownHeader);
                             var url = this.href;
                             if (isNaN(smalltownHeader)) {
                                 url += smalltownHeader + "/";
@@ -91,16 +93,16 @@
                 localGameRequests[i] = gameReq;
             }
 
-            function ImgPing(ipBase, i) {
-                var $this = this;
-                this.ip = ipBase + i;
-                this.href = "http://" + this.ip + ":8080/smalltown";
-                this.img = $("<img src = '" + this.href + "/ping'>");
-                this.img.one("load", function() {
-                    console.log("load")
-                    addLocalGamesRow($this.href, $this.ip, "local");
-                });
-            }
+//            function ImgPing(ipBase, i) {
+//                var $this = this;
+//                this.ip = ipBase + i;
+//                this.href = "http://" + this.ip + ":8080/smalltown";
+//                this.img = $("<img src = '" + this.href + "/ping'>");
+//                this.img.one("load", function() {
+//                    console.log("load")
+//                    addLocalGamesRow($this.href, $this.ip, "local");
+//                });
+//            }
 
             SMLTOWN.Game.stopLocalRequests = function() {
                 for (var key in localGameRequests) {
@@ -108,7 +110,7 @@
                         localGameRequests[key].abort();
                     }
                 }
-            }
+            };
 
             function addLocalGamesRow(href, ip, name) {
                 console.log(href);

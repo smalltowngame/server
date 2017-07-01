@@ -76,11 +76,12 @@ SMLTOWN.Games = {
         var div = $("<div id='" + game.id + "' class='smltown_game smltown_fixedGame'>");
 
         var content = $("<div class='smltown_content'>");
-
-        if (document.location.hostname == "localhost" && !game.name) {
-            div.addClass("smltown_local");
-            game.name = "Local Game";
-        }
+        
+        //ONLY ON :8080! (LET DEBUG)
+//        if (document.location.hostname == "localhost" && !game.name) {
+//            div.addClass("smltown_local");
+//            game.name = "Local Game";
+//        }
 
         var title = $("<div class='smltown_name'>");
         title.text(game.name);
@@ -180,12 +181,12 @@ SMLTOWN.Games = {
             return;
         }
         if ($("#smltown_newGame").hasClass("smltown_disable")) {
-            SMLTOWN.Message.flash("_gameNameExists");
+            SMLTOWN.Message.flash(name + ", _gameNameExists");
             return;
         }
         for (var i = 0; i < this.array; i++) {
             if (name.toLowerCase() == this.array[i].name.toLowerCase()) {
-                SMLTOWN.Message.flash("_gameNameExists");
+                SMLTOWN.Message.flash(name + ", _gameNameExists");
                 return;
             }
         }

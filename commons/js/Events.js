@@ -358,6 +358,7 @@ SMLTOWN.Events = {
 
         div.off("touchstart");
         div.on("touchstart", function (e) { //necessary top != auto
+            e.stopPropagation(); //prevent double tap in comment div in android
 
             position = null; //reset final position to prevent calculations 
             var thisHeight = 0;

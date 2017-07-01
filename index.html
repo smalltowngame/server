@@ -88,7 +88,7 @@
                         'css!' + SMLTOWN.path_static + 'commons/css/icons.css',
                         'css!' + SMLTOWN.path_static + 'commons/css/help.css',
                         'css!' + SMLTOWN.path_static + 'commons/social/social.css'
-                        ,
+                                ,
                         SMLTOWN.path_static + "commons/css/images.js",
                         SMLTOWN.path_static + "commons/js/Util.js",
                         SMLTOWN.path_static + "commons/js/UI.js",
@@ -97,8 +97,8 @@
                         SMLTOWN.path + "lang/" + SMLTOWN.lang + ".js",
                         SMLTOWN.path_static + "commons/libs/json2.js",
                         SMLTOWN.path_static + "commons/js/Server.js"
-                        ,
-                        SMLTOWN.path_static + "commons/libs/jquery.mobile.events.min.js",     
+                                ,
+                        SMLTOWN.path_static + "commons/libs/jquery.mobile.events.min.js",
                         SMLTOWN.path_static + "commons/libs/modernizr.custom.36644.js", //after mobile.events
 
                     ], function () {
@@ -116,7 +116,7 @@
                             SMLTOWN.path_static + "commons/js/Time.js",
                             SMLTOWN.path_static + "commons/js/Social.js",
                             SMLTOWN.path_static + "commons/js/Help.js"
-                                    ,                                                   
+                                    ,
                             SMLTOWN.path_static + "commons/js/Events.js" //after modernizr
 //                                    ,
 //                            SMLTOWN.path_static + "social/facebook.js"
@@ -142,11 +142,11 @@
                             var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
                             if (!window.Device && isAndroid) {
                                 if (!localStorage.getItem("androidAsked")) {
-                                    SMLTOWN.Message.notify("_androidAppQuestion", function () { //ok callback
-                                        window.location = "https://play.google.com/store/apps/details?id=town.sml";
-                                    }, function () {
-                                        localStorage.setItem("androidAsked", 1);
-                                    });
+//                                    SMLTOWN.Message.notify("_androidAppQuestion", function () { //ok callback
+//                                        window.location = "https://play.google.com/store/apps/details?id=town.sml";
+//                                    }, function () {
+//                                        localStorage.setItem("androidAsked", 1);
+//                                    });
                                 }
 
                                 //reduce height body
